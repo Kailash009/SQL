@@ -1,0 +1,91 @@
+Function in Sql Server:-
+-------------------------------------------------
+>> User Defined Function can be implemented by creating scalar function.
+1. Scalar Function:-
+----------------------------------------
+Syntax:-
+-----------------------
+create function functionname(@parameter1,@parameter2,@parameter3)
+returns datatype
+as begin
+<Query Statements>
+return var_name/finalvalue/scalar_Value
+end
+--------------------------------------------------------
+WAP to add two no.  using function.
+-------------------------------------------------------
+
+
+
+List<string> sp=new List<string>
+sp.Add("hockey");
+sp.Add("hockey");
+sp.Add("hockey");
+sp.Add("hockey");
+foreach(string res in sp)
+{
+cw(res);
+}
+---------------------------------
+select getdate()
+SELECT DATEDIFF(year, '2011/08/25', '2015/08/25') AS DateDiff;
+select SYSDATETIME()
+select year('2011/08/25')
+select right(ename,3) from tbl_Employee
+SELECT REPLACE('SQL Tutorial', 'T', 'M');
+
+select * from tbl_Employee
+
+-- Many to Many Relationship
+create table tbl_Course
+(
+cid int primary key identity(1,1),
+cname nvarchar(50)
+)
+
+create table tbl_Student
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+cid int foreign key references tbl_Course(cid)
+)
+select * from tbl_Course
+select * from tbl_Student
+-- waq to show how many students enroll in dot net course
+select s1.sname,c1.cname from tbl_Student s1 inner join tbl_Course c1 on s1.cid=c1.cid and c1.cname='Dot Net'
+--or
+select sname,cname from tbl_Student inner join tbl_Course  on tbl_Student.cid=tbl_course.cid and cname='Dot Net'
+select count(*) from tbl_Employee
+select * from tbl_Employee
+create function addition(@a int,@b int)
+returns int
+as begin
+declare @c int
+set @c=@a+@b
+return @c
+end
+
+select SCOPE_IDENTITY()
+-- Execute a function
+select dbo.addition(20,50) as 'Sum of two Number'
+select * from tbl_Employee
+select age+salary from tbl_Employee
+select cast(salary as nvarchar) + cast(age as nvarchar) from tbl_Employee 
+select CONCAT(ename,city) from tbl_Employee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
