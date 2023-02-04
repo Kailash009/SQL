@@ -1,0 +1,70 @@
+DCL- Data Control Language (Grant,Revoke)
+-----------------------------------------------------------------------
+--To control user access in a DB, related to the security issues.
+--It allows to restricts the user from accessing data in DB.
+1. Grant- It gives user access the previleges to the DB.
+Syntax-
+----------
+Grant<previlege List> on <relationname & viewname> to <user/rolelist>;
+-----------------------------------------------------------------------------------------------------
+Ex-Grant ALL on employee to ABC;
+--------------------------------------------------
+2. Revoke-
+--It is used to cancel previously granted or denied permissions.
+Syntax-
+-------------
+Revoke <previlege List> on <relationname & viewname> from <username>;
+------------------------------------------------------------------------
+Ex- Revoke update on employee from ABC;
+-------------------------------------------------------
+First make one User--
+-------------------------------
+--create login joshi with password='111'
+--create user joshi for login joshi
+use Batch_3PM_SQLServer
+--Grant select on object::emp to joshi (Give Permission)
+--Revoke select on object::emp from joshi (Take out Permission)
+-----------------------------------------------------------------------------
+Grant and Revoke Permission for whole Database-
+------------------------------------------------------
+create login gaurav with password='111'
+create user gaurav for login gaurav
+Grant select,update on database::Batch4PMDotNet  to gaurav
+Revoke update,delete,insert on database :: BatchSQLServer10AMto12PM from VIPIN CASCADE
+--CASCADE is an optional 
+Revoke select on object::emp from VIPIN
+---------------------------------
+>> It stands for Data Control Language.
+>> it is used to provide access or priviledges to the user.
+---------------------------------------------------------------------------------------
+It has the following two commands-
+1. Grant -> To give the permission to the user.
+2. Revoke -> To take out the permission from the user.
+-----------------------------------------------------------------------------------
+create Database Batch6PM
+
+select * from tbl_Employee
+
+
+create login neetu with password='111'
+create user neetu for login neetu
+
+Grant select,update on object::tbl_Employee to neetu
+Revoke select,update on object::tbl_Employee from neetu
+-- Database 
+Grant select,update on database::MultiterMohit  to neetu
+Revoke select,update on database::MultiterMohit  from neetu
+-------------------------------------------------------------------------------------------------------------------
+sp_rename 'tbl_Employee','Employee'
+select * from Employee
+-- Syntax to change Column Name
+sp_rename '<TN>.OldColumnName','New Column Name'
+sp_rename 'Employee.Address','Emp_Address'
+------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
