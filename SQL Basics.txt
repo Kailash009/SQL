@@ -1,0 +1,348 @@
+SQL SERVER:-
+-----------------------------
+>> it is database management tool i.e used to manage our database.
+>> sql server is used to retrieve data,insert,update and perform many operations in fast and efficient manner.
+---------------------------------------------------------------------------------------------------------------------------------------------
+Database Language -
+1. DDL ->(Data Defination Language)
+>> create ,alter,drop,truncate,rename ,comment.
+2. DML -> (Data Manipulation Language)
+>> insert,update,delete.
+3. DCL -> Data Control Language
+grant,revoke.
+4. TCL -> Transaction control Language.
+begin transaction,commit,rollback ,savepoint.
+5. DQL -> Data Query Language
+select
+----------------------------------------------------------------------------------------------------------------
+Database -> Multiple Tables.
+-----------------------------------------
+1. GUI
+2. CUI
+---------------------------------------------------------
+P.K -> which doesn't allow NULL and Duplicate.
+---------------------------------------------------------------------
+CUI:-
+--------------
+Database -
+create database database_name
+-----------------------------------------------
+use databasename
+------------------------------------
+Table-
+create table tablename
+(
+colname1 datatype1,
+colname2 datatype2(size),
+.
+.
+.
+colnameN datatypeN
+)
+--------------------------------------------------------------------------------
+Insert Command-
+----------------------------
+1. Insert into all column.
+insert into tablename values(col1,col2,col3.................colN)
+2. Insert into particular column.
+insert into tablename(col1,col4,col8) values( value1,value4,value8)
+-------------------------------------------------------------------------------------------------------------------
+SELECT:-
+------------------
+1, select all rows and cols
+select * from tablename
+2. select particular row but all cols.
+select * from tbl_Employee where eid=4
+3. select particular col and all rows.
+select ename,salary,post from tbl_Employee
+4. select particular row and col.
+select ename,salary,post from tbl_Employee where eid=3
+----------------------------------------------------------------------------------
+UPDATE:-
+---------------------
+1. update into particular column.
+2. update into all column.
+--------------------------------------------------------------------------
+1. update into particular column.
+update tbl_Employee set post='Clerk' where eid=3
+2. update into all column.
+update tbl_Employee set post='Mrkt',salary=25000 where eid=5
+-------------------------------------------------------------------------------------------
+Operator:-
+1. arithmetic. +,-,*,/
+2. relational. -> > >= < <= <>
+3. logical
+----------------------
+Special Operator -
+--------------------------
+top
+order by
+in
+not in
+between
+not between
+like -> It is used for pattern matching.
+_ -> it read single character.
+select * from tbl_Employee where ename like 'v_j_y'
+% -> it read multiple character.
+a) if you know first character only.
+select * from tbl_Employee where ename like 'a%'
+b) if you know last character only.
+select * from tbl_Employee where ename like '%m'
+c) if you don't know any character.
+select * from tbl_Employee where ename like '%%'
+c) if you don't know first and last character only know middle character.
+select * from tbl_Employee where ename like '%i%'
+------------------------------------------------------------------------------------------------------------------------------------
+Aggregate Functions-
+------------------------------
+1. max()
+2. min()
+3.sum()
+4.avg()
+5.count()
+----------------------------------
+Clauses:- without aggregate function you can' use these clauses.
+--------------------------------------
+1. GroupBy.
+2. Having.
+----------------------------------------------------------------------------------------------------------------------
+create database Batch12PM
+
+use Batch12PM
+
+
+create table tbl_Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(100),
+age int,
+eaddress nvarchar(500),
+salary money,
+post nvarchar(60)
+)
+select * from tbl_Employee
+insert into tbl_Employee(ename,age,eaddress,salary,post) values('prateek',19,'ashok nagar',34000,'SE')
+insert into tbl_Employee(ename,age,eaddress,salary,post) values('vijay',29,'pallav nagar',34000,'SE')
+insert into tbl_Employee(ename,age,eaddress,salary,post) values('rakesh',49,'preet vihar',34000,'SE')
+insert into tbl_Employee(ename,age,eaddress,salary,post) values('shivam',59,'yamuna bank',34000,'SE')
+insert into tbl_Employee(ename,age,eaddress,salary,post) values('arun',69,'kiriti nagar',34000,'SE')
+select * from tbl_Employee
+select ename,salary,post from tbl_Employee where eid=3
+update tbl_Employee set post='Mrkt',salary=25000 where eid=5
+select 10+5 as 'ADD'
+select 10-5 as 'SUB'
+select 10*5 as 'MULT'
+select 10/5 as 'DIV'
+select * from tbl_Employee
+select ename+'            '+post from tbl_Employee
+select * from tbl_Employee where salary<25000 or ename='prateek' 
+select * from tbl_Employee where salary<=25000 and ename='arun' 
+select * from tbl_Employee where ename <> 'rakesh'
+select * from tbl_Employee where not ename='rakesh'
+------------------------------------------------------------------------------
+select  top 3 * from tbl_Employee order by eid desc
+select * from tbl_Employee order by ename asc
+select * from tbl_Employee order by ename desc
+select * from tbl_Employee
+select * from tbl_Employee where ename in('rakesh','vijay','arun')
+select * from tbl_Employee where ename not in('rakesh','vijay','arun')
+select * from tbl_Employee where salary between 10000 and 40000
+select * from tbl_Employee where salary not between 10000 and 40000
+select * from tbl_Employee where ename like 'v_j_y'
+select * from tbl_Employee where ename like 'a%'
+select * from tbl_Employee where ename like '%m'
+select * from tbl_Employee where ename like '%i%'
+select * from tbl_Employee
+select max(salary) as 'Max_Salary' from tbl_Employee
+select min(salary) as 'Min_Salary' from tbl_Employee
+select sum(salary) as 'Total_Salary' from tbl_Employee
+select avg(salary) as 'Avg_Salary' from tbl_Employee
+select count(eid) as 'Total Employee' from tbl_Employee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
