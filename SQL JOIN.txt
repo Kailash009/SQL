@@ -1,0 +1,333 @@
+Clauses:-
+-------------------------
+1. GroupBy
+2. Having  -> it is used to provide condition it always used after group by.
+------------------------------------------------------------------------------------------------------
+SET OPERATORS:-
+-----------------------------------
+>> Table column must be same.
+>> Order of column must be same.
+>> Data type Must be Match.
+----------------------------------------------------------------
+1. Union. -> it doesn't return duplicate value from the table.
+2. Union ALL. -> it  returns duplicate value from the table.
+3. Intersect. -> it returns common record from both the table.
+4. Except. -> table1-table2 -> it returns all records from table1 that doesn't exist in table2.
+-------------------------------------------------------------------------------------------------------------------------------------------
+JOIN:-
+--------------
+Student -
+sid sname    age  saddress         city         
+1    kamlesh 23    ashok nagar     delhi      
+Student -
+Course -
+1 S => Many Course
+1 C => Many Student.
+Many to Many.
+>> Join is used to combine one or more table data.
+Types of Join
+-----------------------
+1. Inner Join
+>> It is used to fetch matching record from mutiple table.
+---------------------------------------------------------------------------------------------------------------------------------
+Foreign Key -> it is used to establish the relationship among multiple tables.
+>> First table P.K work as foreign key in another table.
+---------------------------------------------------------------------
+Points to Remember to create foreign key:-
+a. column name must be same of parent table.
+b. data type must be same of parent table.
+Syntax to create foreign key:-
+-------------------------------------------------------------------------
+column_name datatype foreign key references ParentTableName(Column_Name) 
+cid int foreign key references tbl_Course(cid)  -> example
+----------------------------------------------------------------------------------------------------------------------------
+INNER JOIN SYNTAX:-
+----------------------------------------
+select <List of Column> from table1 inner join table2 on <Condition>
+---------------------------------------------------------------------------------------------------------------
+2. Outer Join:
+>> It is used to get unmatching record from multiple tables.
+a) left Outer.
+>> it returns all records from the left table and matching record from the right table unmatched return NULL.
+select <List of Column> from table1 left outer join table2 on <Condition>
+b) right Outer   
+>> it returns all records from the right table and matching record from the left table unmatched return NULL.
+select <List of Column> from table1 right outer join table2 on <Condition>
+c) full Outer
+>> it returns all records from  both the table and unmatched return NULL.
+select <List of Column> from table1 full outer join table2 on <Condition>
+---------------------------------------------------------------------------------------------------------------------------------------------
+3. cross join   (X)
+6X7
+-- CROSS JOIN
+select * from tbl_Course
+cross join tbl_Student
+---------------------------------------------------------------------------------------
+STORED PROCEDURE:-
+--------------------------------------------
+>> It is a pre-compile database objects.
+>> It reduces network traffic.
+>> It provide database security.
+>> High Performance.
+>> it can return N value.
+>>  We can perform all curd operation using SP.
+-----------------------------------------------------------------------------------------------------------------
+Types of Parameter in SP-
+----------------------------------------
+1. With Parameter.
+2. Without Parameter.
+--------------------------------------------------------
+How to create sp-
+------------------------------
+Syntax- 1. With Parameter.
+-------------------------------------
+create proc/procedure proc_Name
+(
+@parameter1 datatype1,
+@parameter2 datatype2(size),
+.
+.
+.
+@parameterN datatypeN(size)
+)
+as begin
+<Sql Command/Statements>
+end
+-------------------------------------------------------------------------
+Syntax- 2. Without Parameter.
+----------------------------------------------------
+create proc proc_name
+as begin
+<Sql Statements>
+end
+-----------------------------------------------------------
+select * from tbl_Employee
+
+-- GROUP BY
+-- waq to get no. of employee in each department.
+select post,count(eid) as 'Total Employee' from tbl_Employee group by post
+-- waq to sum total salary in each department.
+select post,sum(salary) as 'Total Employee' from tbl_Employee  group by post
+
+-- waq to get total employee in TL department.
+select post,count(eid) as 'Total Employee' from tbl_Employee group by post having post='TL'
+-- waq to get total employee in each deparment where employee is greater than 2.
+select post,count(eid) as 'Total Employee' from tbl_Employee group by post having count(eid)>2
+
+-- SET OPERATORS
+create table tbl_hyd
+(
+bid int,
+bname nvarchar(50),
+blocation nvarchar(50),
+)
+create table tbl_chennai
+(
+bid int,
+bname nvarchar(50),
+blocation nvarchar(50),
+)
+select * from tbl_hyd
+select * from tbl_chennai
+
+
+select * from tbl_hyd
+union
+select * from tbl_chennai
+
+select * from tbl_hyd
+union all
+select * from tbl_chennai
+
+
+select * from tbl_hyd
+intersect
+select * from tbl_chennai
+
+select * from tbl_hyd
+except
+select * from tbl_chennai
+------------------------------------------------------------------------------------------------------
+create table tbl_Course  -- Parent Table
+(
+cid int primary key identity(1,1),
+cname nvarchar(50)
+)
+create table tbl_Student  -- Child Table
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+sage int,
+saddress nvarchar(100),
+sfee money,
+cid int foreign key references tbl_Course(cid)
+--column_name datatype foreign key references ParentTableName(Column_Name)
+)
+
+select * from tbl_Course
+select * from tbl_Student
+
+-- INNER JOIN
+-- WAQ TO GET TOTAL NO. STUDNET ENROLL IN ANGULAR COURSE.
+
+select sname,sage,saddress,sfee,cname from tbl_Course inner join tbl_Student on tbl_Course.cid=tbl_Student.cid and cname='Angular'
+--or
+select s1.sname,s1.sage,s1.saddress,s1.sfee,c1.cname from tbl_Course c1 inner join tbl_Student s1 on c1.cid=s1.cid and cname='Angular'
+
+select s1.sname,s1.sage,s1.saddress,s1.sfee,c1.cname from tbl_Course c1 inner join tbl_Student s1 on c1.cid=s1.cid and cname='Dot Net'
+
+
+select * from tbl_Course left outer join tbl_Student on tbl_Student.cid=tbl_Course.cid
+select * from tbl_Student right outer join tbl_Course on tbl_Student.cid=tbl_Course.cid
+select * from tbl_Student full outer join tbl_Course on tbl_Student.cid=tbl_Course.cid
+
+-- CROSS JOIN
+select * from tbl_Course
+cross join tbl_Student
+-----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
