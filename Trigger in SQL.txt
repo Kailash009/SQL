@@ -1,0 +1,178 @@
+Trigger :-
+-----------------
+>> It is special type of stored procedure that automatically fired when an event has occured.
+>> Fast - Performance.
+Database Events- create,drop,alter,insert,update,delete etc.
+-------------------------------
+----------------------------------------------
+For ex -
+Student -> automatically -> personaldetail.
+---------------------------------------------------------------------------------
+Types of Trigger:-
+-----------------------------
+1. DDL Trigger.-> create,alter,drop.
+2. DML Trigger. -> insert,update,delete.
+3. Logon Trigger. -> at the time of login.
+---------------------------------------------------------------------
+Triggers in SQL Server-
+-------------------------------------------------------
+>> A trigger is a special type of stored procedure or stored program that automatically runs when an event occurs in the database server.
+>> When the event occurs and condition is true,execute the action.
+>> By this we achieve Database Security.
+Types of Triggers-
+---------------------
+1. DML Trigger (Insert,Update,Delete)
+2. DDL Trigger (Create,Alter,Drop)
+3. Logon Trigger
+-------------------------------------------------------------------------
+create table tbl_Employees
+(
+id int primary key,
+name nvarchar(30),
+salary decimal(18,2),
+gender nvarchar(10),
+city nvarchar(40),
+did int
+)
+--------------------------------------------------
+create table tbl_EmployeesAudit
+(
+ID int primary key identity(1,1),
+auditdata nvarchar(100)
+)
+-----------------------------------------------------------
+After/for Trigger-
+--------------------------------
+Create trigger tr_tbl_Employees_forInsert
+on tbl_Employees
+for insert  --- (Action/Event) (After insert)
+as begin 
+declare @ID int
+select @ID=id from inserted  --(it just keep it all data behind the scene)
+insert into tbl_EmployeesAudit 
+values(
+'New Employee with ID='+CAST(@ID as nvarchar(5))+'is added at'+CAST(GETDATE() as nvarchar(60))
+)
+PRINT 'employee added'
+end
+end
+--------------------------------------------------
+create trigger tr_tbl_Employees_ForDelete
+on tbl_Employees
+for delete    -(Action/Event)
+as begin
+declare @ID int
+select @ID=id from deleted -- It keeps a copy of the row you just deleted.
+insert into tbl_EmployeesAudit
+values(
+'Employees with ID='+CAST(@ID as nvarchar(5))+
+'is Deleted at'+CAST(GETDATE() as nvarchar(50))
+)
+end
+delete from tbl_employee where id=4
+-----------------------------------------------------------------
+create trigger tr_tbl_Employees_ForUpdate
+on tbl_Employees
+for update   --(Action/Event)
+as begin 
+declare @NSal decimal,@OSal decimal
+declare @Name nvarchar(50)
+select @NSal=salary,@Name=name from inserted
+select @OSal=salary from deleted
+insert into tbl_EmployeesAudit
+values(
+'The Salary of '+@Name+
+'was changed to '+CAST(@NSal as nvarchar(30))+' from'+
+CAST(@OSal as nvarchar(30))
+)
+end
+update tbl_employee set salary=43434 where id=5
+'inserted'-> It maintains the new data after the update action.
+'deleted' -> It maintains the old data before the update action.
+>> 'inserted' table contains the updated data and 'deleted' table contains the old data.
+----------------------------------------------------------------------------------------------
+-- TRIGGER
+select * from Employee
+
+create table tbl_empInfo
+(
+info_id int primary key identity(1,1),
+msg nvarchar(100)
+)
+select * from Employee
+select * from tbl_empInfo
+
+alter trigger tr_empinsert
+on Employee
+for insert   -- After Timing 
+as begin
+declare @id int
+select @id=eid from Employee inserted
+insert into tbl_empInfo(msg)values
+('The Employee Added at'+cast(@id as nvarchar(20))+'the date time is'+cast(getdate() as nvarchar(40)))
+print('Employee Added SuccessFully')
+end
+select * from Employee
+select * from tbl_empInfo
+insert into Employee values('rajesh',23,'preet vihar','979879',7786)
+
+create trigger tr_tbl_Employees_ForDelete
+on Employee
+for delete    --(Action/Event)
+as begin
+declare @ID int
+select @ID=eid from deleted -- It keeps a copy of the row you just deleted.
+insert into tbl_empInfo
+values(
+'Employees with ID='+CAST(@ID as nvarchar(5))+
+'is Deleted at'+CAST(GETDATE() as nvarchar(50))
+)
+end
+
+select * from Employee
+select * from tbl_empInfo
+delete from Employee where eid=2
+create trigger tr_tbl_Employees_ForUpdate
+on Employee
+for update   --(Action/Event)
+as begin 
+declare @NSal decimal,@OSal decimal
+declare @Name nvarchar(50)
+select @NSal=salary,@Name=ename from inserted
+select @OSal=salary from deleted
+insert into tbl_empInfo
+values(
+'The Salary of '+@Name+
+'was changed to '+CAST(@NSal as nvarchar(30))+' from'+
+CAST(@OSal as nvarchar(30))
+)
+end
+select * from Employee
+select * from tbl_empInfo
+update Employee set salary=1122333 where eid=4
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
