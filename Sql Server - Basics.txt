@@ -1,0 +1,131 @@
+Data  -> Any raw material facts and figure is known as Data. 
+Information -> Processed data is known as Information.
+---------------------------------------------------------------------------------------------
+File -> 
+------------------
+>> File is used for keeping the record.
+---------------------------------------------------------------------
+DrawBacks:-
+---------------------------
+1. Security.
+2. Less amount of Data.
+3. Data Accessibility is very slow / Fetch.
+------------------------------------------------------------------------
+Database Management Tool:-
+----------------------------------------------
+Ms-Access,Ms-Excel,MySql,SqlServer,Oracle,PostGreSql,Db2,sybase,Sqlite,Mongo DB etc.
+----------------------------------------------------------------------------------------------------------------------------------
+Database Management System(DBMS):-
+----------------------------------------------------------------------
+>> it is software tool by which you can manage our data.
+---------------------------------------------------------------------------------------------------------------
+SQL Server:-
+------------------------
+>> It stands for "Structured + Query + Language".
+>> It is a database language.
+>> It is a platform dependent langugage. (It installed only windows O.S.)
+>> It is relational database mangement tool/system (RDBMS), in which you retrive your data very frequently and efficient manner.
+>> it provide both CUI (Command User Interface) and GUI (Graphical User Interface) based interface.
+>> it is not a case-sensitive.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+How to install Sql Server -
+-----------------------------------------
+1.  Install Sql Server -   https://www.microsoft.com/en-in/sql-server/sql-server-downloads   (Express)
+2. SSMS -> Sql Server Management Studio.  -> https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
+----------------------------------------------------------------------------------------------------------
+Sql server-
+1. Server Type  
+	a) Database Engine
+	b) Reporting Services.
+	c) Integration Services.
+	d) Analysis Services.
+-------------------------------------------------------------------------------------------------------
+2. ServerName  -> when you install sql server then it provide you local server in your computer in which you run your SQL Query.
+3. Authentication. 
+>> There are two types of Authentication in SQL Server -
+	a)  Windows Authentication. 
+>> it works like an Admin.
+>> it doesn't require UserName and Password.
+>> It works to perform 'Authorization'.
+------------------------------------------------------------------------------------------------------------------------------------------
+	b)  Sql Server Authentication.
+>> It works like a Normal User.
+>> It require UserName and Password.
+>> It works to perform 'Authentication.'
+------------------------------------------------------------------
+Authentication -> To check the identity of a User whether the user is valid or not. 
+UserName
+Password
+Authorization -> To give the access or priviledges to the User.
+--------------------------------------------------------------------------------------------------------------------
+Table -
+Operators -
+Special Operators
+Aggregate Function
+Clauses in Sql
+Stored Procedure
+Functions
+Triggers
+Indexes
+Views
+Join in Sql
+Ranking functions
+Set Operators.
+Relationship between tables.
+PL/Sql -> if , while.
+case. and many more.
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
