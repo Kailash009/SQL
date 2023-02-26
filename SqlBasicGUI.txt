@@ -1,0 +1,119 @@
+SQL:-
+----------------------
+Database Language:-
+--------------------------------------
+There are different types of database languages which are as follows:-
+1. DDL (Data Definatiion Language) 
+>> CREATE,ALTER,DROP,TRUNCATE,RENAME,COMMENT.
+2. DML (Data Manipulation Language)
+>> INSERT,UPDATE,DELETE
+3. DCL. (Data Control Language)
+>> GRANT, REVOKE.
+4. TCL (Transaction Control Language)
+>> BEGIN TRANSACTION,COMMIT,ROLLBACK,SAVEPOINT.
+5. DQL (Data Query Language)
+>> SELECT.
+-----------------------------------------------------------------------------------------------------------------
+SQL ->
+--------------------
+Database -> It is a collection of table. / it is a collection of interrelated data.
+-----------------------------------------------------------------------------------------------------------
+Table -> It consist of rows and columns.
+----------------
+Database Terminology:-
+-----------------------------------------------
+Table -> Relation.
+Rows -> Tuple.
+Columns -> Attributes.
+Degree -> No. of Columns.
+Cardinality -> No. of Rows.
+------------------------------------------------------------------------------------------
+SQL Server -> 
+a) GUI  -> Database -> table -> CRUD.
+C -> CREATE
+R -> READ
+U -> UPDATE
+D -> DELETE
+----------------------------------------------------------------
+b) CUI  -> Command -> More Preference.
+---------------------------------------------------------------------------
+System Databases:-
+-------------------------------------
+a) Master.
+b) Model.
+c) MSDB.
+d) TempDB.
+--------------------------------------------
+decimal(18,2)
+123456757657.45
+---------------------------------
+Primary Key -
+----------------------------
+>> It doesn't allow NULL and Duplicate Value.
+-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
