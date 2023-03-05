@@ -1,0 +1,170 @@
+Database Language:-
+-------------------------------
+a) DML -> Data Manipulation Langugage 
+Insert,update,delete.
+b) DDL -> Data Defination Language.
+>> create, alter,drop ,truncate,rename,comment.
+c) DCL -> Data control Language.
+>> grant,revoke,
+d) TCL -> Transaction Control Language.
+>> begin transaction,save point,rollback,commit.
+e) DQL -> Data Query Language
+>> select.
+--------------------------------------------------------------------------------------------------------
+CUI :-
+----------------
+1. Create a Database.
+command to create database -
+ create database database_name
+Select your database
+>> use database_name
+-------------------------------------
+2. Command to Create Table:-
+--------------------------------------------
+create table table_name
+(
+colname1 datatype1,
+colname2 datatype2(size),
+.
+.
+.
+.
+colnameN datatypeN(size)
+)
+----------------------------------------------------------------------------------------------------------------------------------------
+identity(seed,inc) -> It is used to perform autoincrement in column.
+seed -> start value.
+inc -> how many inc you want.
+---------------------------------------------------------------------
+Insert:-
+----------------
+a) Insert into ALL column.
+b) Insert into specific Column.
+------------------------------------------------------------
+a) Insert into ALL column.
+insert into tablename values(value1,value2,value3,value4,value5)
+------------------------------------------------------------------------------------------------------
+b) Insert into specific Column.
+insert into tablename(col1,col4,col7)values(val1,val4,val7)
+--------------------------------------------------------------------------------------------------
+Select Command:-
+-----------------------------
+a) Select  all rows and columns.
+b)  select specific rows and all column.
+c) select specific colmns and all rows.
+d) select specific row and column.
+--------------------------------------------------------------------
+create database RohitDB6PM
+use RohitDB6PM
+
+create table tbl_Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+age int,
+mobileno nvarchar(20),
+eaddress nvarchar(50),
+salary int
+)
+select * from tbl_Employee
+
+insert into tbl_Employee(ename,age,mobileno,eaddress,salary) values('baseem',23,'898979','New Ashok Nagar',87868)
+insert into tbl_Employee(ename,age,mobileno,eaddress,salary) values('raju',24,'798979','Preet Vihar',37868)
+insert into tbl_Employee(ename,age,mobileno,eaddress,salary) values('kunal',25,'398979','Rohnai',34868)
+insert into tbl_Employee(ename,age,mobileno,eaddress,salary) values('maneesh',26,'498979','Greater Noida',8037868)
+insert into tbl_Employee(ename,age,mobileno,eaddress,salary) values('chandra',28,'598979','Pratap Nagar',37868)
+
+select * from tbl_Employee
+-- Select  all rows and columns.
+select * from tbl_Employee
+--select specific rows and all column.
+select * from tbl_Employee where eid=4
+-- select specific colmns and all rows.
+select ename,mobileno,salary from tbl_Employee
+--select specific row and column.
+select ename,mobileno,salary from tbl_Employee where eid=3
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
