@@ -1,0 +1,280 @@
+CUI:- (Command User Interface)
+------------------------------------------------------
+Command to Create Database -
+--------------------------------------
+create database database_Name
+---------------------------------------------
+Now Select your Database
+---------------------------------------
+use DatabaseName
+------------------------------------
+Command To create Tables:-
+----------------------------------------
+create table tablename
+(
+colname1 datatype,
+colname2 datatype(size),
+.
+.
+.
+.
+colnameN datatype(size)
+)
+------------------------------------------
+identity(seed,inc)
+----------------------------
+>> it is used to automatically increment a particular.
+seed -> start value.
+inc -> how many inc you want.
+-------------------------------------------------------------
+identity(101,3)
+----------------------------------------------
+Insert :-
+---------------
+1. Insert into all Column.
+2. Insert into Specific Column.
+---------------------------------------------------
+1. Insert into all Column:-
+insert into tablename values(value1,value2,value3......valueN)
+-----------------------------------------------------------------------------
+2. Insert into Specific Column:-
+insert into tablename(col1,col3,col5) values(val1,val3,val5)
+--------------------------------------------------------------------------------
+Command to See Records of Table:-
+----------------------------------------------------------
+Select:-
+-------------------
+1. Select all rows and columns.
+2. select specific row but all column.
+3. select all row but specific column.
+4. select specific row and specific column.
+------------------------------------------------------------------
+1. Select all rows and columns.
+Select * from TableName
+select * from tbl_Employee
+2. select specific row but all column.
+select * from tablename where colname=condition.
+3. select all row but specific column.
+select col1,col4,col6 from tablename
+select ename,salary,mobileno from tbl_Employee
+4. select specific row and specific column.
+select col1,col4,col6 where colname=value
+select ename,salary,mobileno from tbl_Employee where eid=3
+-------------------------------------------------------------------------------------------------------
+Update:-
+-----------------
+1. Update single Column.
+update tablename set colname='New value' where colname='OLDValue'
+update tbl_Employee set ename='VIJAY SINGH' where eid=2
+-----------------------------------------------------------------------------------------------------
+2. Update multiple Column.
+update tablename set colname1='New value1',colname2=Newvalue2,colname3=newvalue3 where colname='OLDValue'
+update tbl_Employee set ename='Kunal',age=10,eaddress='New Ashok Nagar',salary=11222333,mobileno='33939394',post='SQL' where eid=4
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Delete:-
+------------------
+1. Delete all Records.
+2. Delete Specific Record.
+----------------------------------------------
+1. Delete all Record-
+delete from tablename
+
+2. Delete Specific Record-
+delete from tablename where colname=value
+delete from tbl_Employee where eid=4
+--------------------------------------------------------------------------
+Drop Command:-
+---------------------------
+1. Drop Table:-
+drop table table_name
+2. Drop Database:-
+drop database database_Name
+drop database Batch5PM
+---------------------------------------------------
+Assignment Question:-
+--------------------------------------
+1. Difference between delete,drop and truncate.
+---------------------------------------------------------------------
+create database Batch5PM
+use Batch5PM
+create table tbl_Employee
+(
+eid int primary key identity(1,1),
+ename varchar(50),
+age int,
+eaddress nvarchar(50),
+salary int,
+mobileno nvarchar(50),
+post nvarchar(50)
+)
+select * from tbl_Employee
+-- Insert into Specific Column.
+insert into tbl_Employee(ename,age,eaddress,salary,mobileno,post) values('Rohit',19,'Noida sec-67',87863,'90776868','SE')
+insert into tbl_Employee(ename,age,eaddress,salary,mobileno,post) values('VIjay',29,'Noida sec-17',67863,'20776868','TL')
+insert into tbl_Employee(ename,age,eaddress,salary,mobileno,post) values('Shipi',20,'Noida sec-37',47863,'30776868','PO')
+insert into tbl_Employee(ename,age,eaddress,salary,mobileno,post) values('Kamlesh',34,'Noida sec-57',27863,'40776868','Analyst')
+insert into tbl_Employee(ename,age,eaddress,salary,mobileno,post) values('Subham',29,'Noida sec-567',17863,'50776868','SEO')
+select * from tbl_Employee
+select * from tbl_Employee where ename='Rohit'
+select ename,salary,mobileno from tbl_Employee
+select ename,salary,mobileno from tbl_Employee where eid=3
+update tbl_Employee set ename='VIJAY SINGH' where eid=2
+update tbl_Employee set ename='Kunal',age=10,eaddress='New Ashok Nagar',salary=11222333,mobileno='33939394',post='SQL' where eid=4
+delete from tbl_Employee where eid=4
+delete from tbl_Employee
+drop table tbl_Employee
+drop database Batch5PM
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
