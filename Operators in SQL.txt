@@ -1,0 +1,257 @@
+Operators in SQL:-
+---------------------------------------------
+1. Arithmetic Operator:-
+----------------------------------------
++ , - , * , / 
+-----------------------------------------
+As Keyword -> To provide Temporarily column name.
+---------------------------------------------------------------------------------------
+2. Relational Operator -
+>  >=  <    <=           <>
+----------------------------------------------
+3. Logical Operator 
+and -> Both condition must be true.
+or -> Either one of the condition is true then result is true else false.
+not -> if condition is true then it returns false and vice-versa.
+---------------------------------------------------------------------------------------------------
+Special Operator:-
+-------------------------------
+Between
+not Between
+Top
+Order by
+-----------------------------------------------------------------------------------
+>>  It is used to perform ascending or descending order.
+Like
+>> It is used to perform searching.
+>> It is also used for Pattern Matching.
+-----------------------------------------------------------------------
+_  (underscore) -> it gets single element.
+% (Percentage) -> it is for miltiple elements
+-- if you know the first character only
+select * from tbl_Employee where ename like 's%'
+-- if you know the last character only
+select * from tbl_Employee where ename like '%m'
+-- if you don't know first and last character.
+select * from tbl_Employee where ename like '%h%'
+----------------------------------------------------------------------
+Aggregate Function:-
+----------------------------------------
+1. max()
+2. min()
+3. sum()
+4. avg()
+5. count()
+-----------------------------------------------------------
+Clauses in Sql Server:-
+--------------------------------------
+1. Where.  --> Done.
+2. Order By  -->> Done.
+3. GroupBy  --> Pending
+4. Having.  --> Pending.
+-------------------------------------------
+create database Batch5PM
+use Batch5PM
+
+create table tbl_Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+age int,
+mobileno nvarchar(30),
+post nvarchar(50),
+)
+select * from tbl_Employee
+alter table tbl_Employee add pincode int
+alter table tbl_Employee drop column pincode
+
+select 10+3 as 'Addition'
+select 10-3 as 'Subtraction'
+select 10*3 as 'Multiplication'
+select 10/3 as 'Divide'
+
+select ename + '  ' +post as 'Name and Post' from tbl_Employee
+
+select * from tbl_Employee
+select * from tbl_Employee where salary>40000
+select * from tbl_Employee where salary<40000
+select * from tbl_Employee where ename <> 'ram'
+
+-- waq to get all the employee whose name is subham and salary is 12000.
+select * from tbl_Employee where ename='subham' and salary=12000
+-- waq to get all the employee whose name is subham or salary is 56000.
+select * from tbl_Employee where ename='subham' or salary=56000
+-- waq to get all the employee details whose salary is less than 50000 and greater than 20000.
+select * from tbl_Employee where salary<50000 and salary>20000
+select * from tbl_Employee where salary<50000 or salary>20000
+select * from tbl_Employee where not salary=670000
+
+-- waq to get all the employee whose salary is between 30000 and 60000.
+select * from tbl_Employee where salary between 30000 and 60000
+-- waq to get all the employee whose salary is not between 30000 and 60000.
+select * from tbl_Employee where salary not between 30000 and 60000
+
+-- waq to get all top 4 records of employee
+select top 4 * from tbl_Employee
+
+-- waq to get all top 4 Latest records of employee
+select top 4 * from tbl_Employee order by eid desc
+
+-- waq to show employee name in ascending order
+select * from tbl_Employee order by ename asc  -- no need to write asc it takes by default asc.
+
+-- waq to show employee name in descending order
+select * from tbl_Employee order by ename desc
+
+select * from tbl_Employee where ename like 'h_i_h_'
+
+-- if you know the first character only
+select * from tbl_Employee where ename like 's%'
+
+-- if you know the last character only
+select * from tbl_Employee where ename like '%m'
+
+-- if you don't know first and last character.
+select * from tbl_Employee where ename like '%h%'
+
+-- AGGREGRATE FUNCTION
+select max(salary) as 'Max_Salary' from tbl_Employee
+select min(salary) as 'Min_Salary' from tbl_Employee
+select avg(salary) as 'Avg_Salary' from tbl_Employee
+select sum(salary) as 'Sum_Salary' from tbl_Employee
+select count(eid) as 'Total Employee' from tbl_Employee
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
