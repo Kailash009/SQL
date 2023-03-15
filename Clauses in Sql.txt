@@ -1,0 +1,280 @@
+Clauses in Sql Server:-
+--------------------------------------
+1. Where.  --> Done.
+2. Order By  -->> Done.
+3. GroupBy  -->  Done
+4. Having.  --> Done
+-------------------------------------------
+3. Group by - It is used to group one or more record in a table.
+4. Having - it is used to provide condition with group by.
+Note :- Group by and Having it always used with aggregate function(max,min,sum,avg,count).
+----------------------------------------------------------------------------------------------------------------------------
+Constraints in SQL:-
+-------------------------------
+>> it is used to provide condition in a particular column.
+>> It restrict a column to insert unnecessary values.
+---------------------------------------------------------------------------------------
+There are six types of constraints in SQL which are as follows:
+1. Not NULL.
+2. Unique.
+3. Check.
+4. Default.
+5. Primary Key.  ->> Done.  ->>>> Not Null  + Unique
+6. Foreign Key. -> Pending. -> Later I will discuss.
+--------------------------------------------------------------------------------------------------
+1. Not NULL. -->> (To make any column mandatory)
+------------------------------------------------------------------------------
+>>  you can't leave particular column blank.
+>> It also accept duplicate value.
+------------------------------------------------------
+Cannot insert the value NULL into column 'bid', table 'Batch5PM.dbo.test1'; column does not allow nulls. INSERT fails.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Unique.
+------------------
+>> it doesn't accept duplicate value.
+>> it accept only one Null Value.
+>> unique can be used in multiple column.
+--------------------------------------------------------------------
+Msg 2627, Level 14, State 1, Line 27
+Violation of UNIQUE KEY constraint 'UQ__test2__DB101ED88E02836C'. Cannot insert duplicate key in object 'dbo.test2'. The duplicate key value is (rohit).
+------------------------------------------------------------------------------------------------------
+3. Check.
+-----------------------------
+>> it is used to check some specific condition in a column.
+-----------------------------------------------------------------------------
+can't insert salary more than 10K.
+----------------------------------------------------------
+The INSERT statement conflicted with the CHECK constraint "CK__test3__salary__4E88ABD4". The conflict occurred in database "Batch5PM", table "dbo.test3", column 'salary'.
+-----------------------------------------------------------------------------------------
+4. Default:-
+----------------------------
+>> when you don't want to enter record manullay set those column as default when this column accept same value. Like if 1000000 employee belongs to same city.
+-------------------------------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+-- waq to get total no. of employee in each department.
+select post,count(eid) as 'Total_Employee' from tbl_Employee group by post
+
+-- waq to get sum of salary in each department.
+select post,sum(salary) as 'Sum_Salary',count(eid) as 'Total_Employee' from tbl_Employee group by post
+
+-- waq to get total no. of employee whose department is greater than 2.
+select post,count(eid) as 'Total_Employee' from tbl_Employee group by post having count(eid)>2
+create table test1
+(
+bid int not null,
+blocation nvarchar(50) not null
+)
+select * from test1
+insert into test1 values(null,null)
+
+create table test2
+(
+bid int unique,
+blocation nvarchar(50) unique
+)
+select * from test2
+insert into test2 values(null,null)
+
+--
+create table test3
+(
+eid int unique,
+salary nvarchar(50) check(salary<=10000)
+)
+
+select * from test3
+insert into test3 values(103,9999)
+create table test4
+(
+eid int unique,
+city nvarchar(50) default 'Banglore'
+)
+select * from test4
+insert into test4(eid)values(101)
+insert into test4(eid)values(102)
+insert into test4(eid)values(103)
+insert into test4(eid)values(104)
+insert into test4(eid)values(105)
+insert into test4(eid)values(106)
+insert into test4(eid)values(107)
+insert into test4(eid)values(108)
+
+create table test5
+(
+eid int primary key,
+age int
+)
+select * from test5
+insert into test5 values(null,10)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
