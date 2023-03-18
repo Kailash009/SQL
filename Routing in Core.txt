@@ -1,0 +1,103 @@
+Routing in Dot Net Core:-
+---------------------------------------------
+There are two types of routing in dot net core:
+1. Conventional Based Routing.
+		a) app.usemvcwithdefaultroute()  -> It provide fixed to default route... It browse only Home/Index. you can't provide any other route.
+builder.Services.AddMvc(options =>
+{
+    options.EnableEndpointRouting = false;
+});
+
+app.UseMvcWithDefaultRoute();
+---------------------------------------------------------------------------------------
+		b) app.MapControllerRoute()  ->  In this,you can create your own Route.
+		c) app.useMvc();
+app.UseMvc(routes =>
+{
+    routes.MapRoute(
+        name: "default",
+        template: "{controller=Home}/{action=About}/{id?}");
+});
+
+--------------------------------------------------------------------------------------------------------------------------------------
+Syntax :-  Creating Multiple Routes in Dot Net Core:-
+-----------------------------------------------------------------------------
+app.MapControllerRoute(    // Conventional Routing
+    name: "joshi",
+    pattern: "joshi/",
+    defaults: new { controller = "Home", action = "Contact" });
+
+app.MapControllerRoute(    // Conventional Routing
+    name: "default",
+    pattern: "{controller=Home}/{action=About}/{id?}");
+
+app.MapControllerRoute(    // Conventional Routing
+    name: "products",
+    pattern: "products/pankaj/{controller=Product}/{action=Index}/{id?}");
+
+app.Run();
+-------------------------------------------------------------------------------------------------------------------------------------
+2. Attribute Routing.
+>> Route attribute is used to defined attribute based routing.
+>> you can provide this route attribute in the following two ways:-
+a) Controller Level.
+b) Action Method Level.
+---------------------------------------------------------------------------------------------------
+namespace RoutingCore.Controllers
+{
+    [Route("Home")]
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+        [Route("pankaj")]
+        [Route("~/")]
+        [Route("index")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [Route("About")]
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        [Route("Ashish")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+------------------------------------------------------------------------
+using Microsoft.AspNetCore.Mvc;
+
+namespace RoutingCore.Controllers
+{
+    [Route("Product")]
+    public class ProductController : Controller
+    {
+        [Route("myproducts")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
