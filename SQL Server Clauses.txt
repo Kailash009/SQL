@@ -1,0 +1,194 @@
+SQL:-
+------------------
+Clauses in Sql Server:-
+-------------------------------------------
+There are four types of clause in Sql server which are as follows-
+1. Where. -> Done.
+2. Order By. -> Done.
+3. Group By.
+4. Having.
+-------------------------------------------------------------------------------------------------------
+Note :-  Group by and having used with Aggregate function.
+--------------------------------------------------------------------------------------
+Aggregate Function:-
+--------------------------------
+1. max()  -> It retreive max value from the table.
+2. min() ->  It retreive min value from the table.
+3. sum()  -> It retreive sum value from the table.
+4. avg() -> It retreive avg value from the table.
+5. count() -> It retreive total no. of record in a table.
+---------------------------------------------------------------------------------------------
+Group By:-
+-----------------------------
+Having -> it is used to provide condition with group By.
+--------------------------------------------------------------------------------------
+Constraints in Sql Server:-
+--------------------------------------------
+>> It is used to restrict a particular column to provide unnecessary values.
+There are six type of constraint in Sql server which are as follows:-
+1. not null.
+>> you can't leave this field empty/blank.
+>> you can't allow null value inside it.
+>> it accept duplicate value.
+Error : Cannot insert the value NULL into column 'eid', table 'Batch11AM.dbo.test1'; column does not allow nulls. INSERT fails.
+
+create table test1
+(
+eid int not null,
+ename nvarchar(50) not null
+)
+select * from test1
+insert into test1 values(null,null)
+-----------------------------------------------------------------------------------------------------------------------
+2. unique.
+>> it doesn't accept null and duplicate value.
+>> it accept only one NULL value.
+Error:  Violation of UNIQUE KEY constraint 'UQ__test2__0E8FC1F073328C71'. Cannot insert duplicate key in object 'dbo.test2'. The duplicate key value is (ram).
+create table test2
+(
+eid int unique,
+ename nvarchar(50) unique
+)
+select * from test2
+insert into test2 values(null,'ramesh')
+-------------------------------------------------------------------------------------------------------
+3. check.
+-- you can't insert more than 10000 values in a column.
+Error:- The INSERT statement conflicted with the CHECK constraint "CK__test3__salary__4D94879B". The conflict occurred in database "Batch11AM", table "dbo.test3", column 'salary'.
+create table test3
+(
+eid int unique,
+salary int check(salary<=10000)
+)
+
+select * from test3
+insert into test3 values(103,10001)
+-----------------------------------------------------------------------------------------------
+4. default.
+
+create table test4
+(
+eid int unique,
+city nvarchar(50) default 'NOIDA'  
+)
+select * from test4
+insert into test4 (eid) values(101)
+insert into test4 (eid) values(102)
+insert into test4 (eid) values(103)
+insert into test4 (eid) values(104)
+insert into test4 (eid) values(105)
+insert into test4 (eid) values(106)
+insert into test4 (eid) values(107)
+insert into test4 (eid) values(108)
+-----------------------------------------------------------------------------------
+5. primary key.  --->> Done.
+6. foreign key.  --->> Will dicuss Later.
+--------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+select max(salary) as 'Max_Salary' from tbl_Employee
+select min(salary) as 'Min_Salary' from tbl_Employee
+select sum(salary) as 'Total Salary' from tbl_Employee
+select avg(salary) as 'Avg_Salary' from tbl_Employee
+select count(eid) 'Total Employee' from tbl_Employee
+
+-- WAQ TO GET TOTAL NO. OF EMPLOYEE IN EACH DEPARTMENT and find total salary of each department wise.
+select post,count(post) as 'Total Employee',sum(salary) as 'Sum_Salary' from tbl_Employee group by post order by post desc
+
+-- WAQ TO GET TOTAL SALARY OF EACH DEPARTMENT.
+select post,SUM(salary) as 'Total Salary' from tbl_Employee group by post
+
+
+-- WAQ TO GET TOTAL NO. OF EMPLOYEE IN EACH DEPARTMENT WHERE TOTAL EMPLOYEE IS GREATER THAN 2.
+select post,count(eid) as 'Total Employee' from tbl_Employee group by post having count(eid)>2
+
+
+create table test1
+(
+eid int not null,
+ename nvarchar(50) not null
+)
+select * from test1
+insert into test1 values(null,null)
+
+
+create table test2
+(
+eid int unique,
+ename nvarchar(50) unique
+)
+select * from test2
+insert into test2 values(null,'ramesh')
+
+
+create table test3
+(
+eid int unique,
+salary int check(salary<=10000)
+)
+
+select * from test3
+insert into test3 values(103,10001)
+
+create table test4
+(
+eid int unique,
+city nvarchar(50) default 'NOIDA'  
+)
+select * from test4
+insert into test4 (eid) values(101)
+insert into test4 (eid) values(102)
+insert into test4 (eid) values(103)
+insert into test4 (eid) values(104)
+insert into test4 (eid) values(105)
+insert into test4 (eid) values(106)
+insert into test4 (eid) values(107)
+insert into test4 (eid) values(108)
+update test4 set city='DELHI' 
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
