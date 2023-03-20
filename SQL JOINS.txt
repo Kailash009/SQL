@@ -1,0 +1,192 @@
+Set Operators:-
+-------------------------------
+>> It is used to perform operation on more than one table.
+Rules:-
+-----------------------------------
+1. No. of Column should be same of both the table..
+2. Order of column must be same of both the table.
+3. Data type should be same of both the table.
+------------------------------------------------------------------------------
+1. Union. -> it doesn't return duplicate value from the table.
+2. UnionAll. -> it returns duplicate value from the table.
+3. Intersect. -> It returns common record from both the table.
+4. Except. ->  it returns all records from table1 which doesn't exist in table2.
+---------------------------------------------------------------------------------------------------------
+select * from tbl_EMployee
+
+create table tbl_hyd
+(
+bid int,
+bname nvarchar(50)
+)
+create table tbl_chennai
+(
+bid int,
+bname nvarchar(50)
+)
+insert into tbl_hyd values(101,'SBI')
+insert into tbl_hyd values(102,'PNB')
+insert into tbl_hyd values(103,'UCO')
+insert into tbl_hyd values(104,'Kotak')
+insert into tbl_hyd values(105,'AXIS')
+
+insert into tbl_chennai values(106,'SBI')
+insert into tbl_chennai values(107,'PNB')
+insert into tbl_chennai values(101,'SBI')
+insert into tbl_chennai values(109,'Kotak')
+insert into tbl_chennai values(105,'AXIS')
+
+select * from tbl_hyd
+select * from tbl_chennai
+
+-- UNION
+
+select * from tbl_hyd
+union
+select * from tbl_chennai
+
+-- UNIONALL
+select * from tbl_hyd
+union all
+select * from tbl_chennai
+
+-- INTERSECT
+select * from tbl_hyd
+intersect
+select * from tbl_chennai
+
+-- EXCEPT
+select * from tbl_hyd
+except
+select * from tbl_chennai
+----------------------------------------
+JOIN IN SQL SERVER:-
+-----------------------------------------
+>> To combine more than one table.
+--------------------------------------------------
+Relationship Between Tables:-
+-------------------------------------------
+1. One to One.
+2. One to Many or Many to One.
+3. Many to Many.
+-------------------------------------------------------------
+Student
+Course
+Personal Details  -> One to One.
+Student -  PaymentDetails  
+One to Many or Many to One
+-------------------------------
+1S  => Many Course
+1C => Many Student.
+------------------------------------------
+Student
+------------------------------------
+sid(P.K) sname age     address    mobileno    course
+101   rahul  19       ljkjl	  34343   python,django,dot net
+101
+------------------------------------------------------------------------------------------------------------------------------------------
+Types of Join:-
+-------------------------
+1. ANSI (American National Standard Institution) FORMAT (NEW STYLE Format.)
+	a) Inner Join.
+>> It returns matching record from multiple table.
+Syntax of Inner Join:-
+------------------------------------------------------------------------------------------------------------------
+select <ListofColumn> from table1 inner join or join table2 on   <Joining Condition>
+-----------------------------------------------------------------------------------------------------------------
+	b) Outer Join.  -> i) Left     ii)  Right   iii)  Full.    --------->>>>>>> Pending.
+	c) Cross join
+	d) Natural Join.
+-----------------------------------------------------------------------------------
+2. NON-  ANSI FORMAT  (OLD STYLE)
+	a) Equi Join
+	b) Non-Equi.
+	c) Self Join.
+--------------------------------------------------------------------------------
+Rules to create Foreign Key:-
+---------------------------------------------------
+>> F.K (First table P.K treated as F.K in another Table.)
+1. Parent table column name must be same of the child table.
+2. Parent table datatype must be same of the child table.
+-------------------------------------------------------------------------------------------------
+-- RELATIONSHIP BETWEEN TABLES.
+
+create table tbl_course    -->> Parent Table/ Master Table
+(
+cid int primary key identity(1,1),  --->> P.K
+cname nvarchar(50)
+)
+
+create table tbl_Student
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+age int,
+saddress nvarchar(50),
+mobileno nvarchar(20),
+cid int foreign key references tbl_course(cid)  -- Syntax to Create Foreign Key.
+)
+select * from tbl_course
+select * from tbl_Student
+
+-- INNER JOIN
+--select <ListofColumn> from table1 inner join table2 on   <Joining Condition>
+
+-- WAQ TO GET ALL THE STUDENT WHO ENROLLED IN PYTHON COURSE.
+select sname,age,mobileno,cname from tbl_Student inner join tbl_course on tbl_Student.cid=tbl_course.cid and cname='java'
+--or
+select s1.sname,s1.age,s1.mobileno,c1.cname from tbl_Student s1 inner join tbl_course c1 on s1.cid=c1.cid and cname='python'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
