@@ -1,0 +1,124 @@
+1. ANSI (American National Standard Institution) FORMAT (NEW STYLE Format.)
+	a) Inner Join.  -->>> Done
+>> It returns matching record from multiple table.
+Syntax of Inner Join:-
+------------------------------------------------------------------------------------------------------------------
+select <ListofColumn> from table1 inner join or join table2 on   <Joining Condition>
+-----------------------------------------------------------------------------------------------------------------
+	b) Outer Join.  -> i) Left     ii)  Right   iii)  Full.
+>> It returns both matching and unmatching record from the table.
+1. Left Outer Join ->> It returns all the records from the Left table,matching record from the right table,and Unmatched return NULL.
+Syntax:-
+-------------------
+select <List of Column> from table1 left outer join table2 on <Joining Condition>
+-------------------------------------------------------------------------------------------------------------
+2) Right Outer Join:-
+>> It returns all the records from the right table,matching record from the left table,and unmatched return NULL.
+Syntax:-
+-------------------
+select <List of Column> from table1 right outer join table2 on <Joining Condition>
+---------------------------------------------------------------------------------------------------------------------------------------
+3) Full Outer Join:-
+------------------------------
+>> It returns all the records from both the table and wherever it find unmatched return Null.
+Syntax:-
+-------------------
+select <List of Column> from table1 full outer join table2 on <Joining Condition>
+-------------------------------------------------------------------------------------------------------------------------
+c) Cross join
+>> MXN
+>> Multiply more than one table.
+------------------------------------------------------
+Syntax:-
+-------------------
+select <List of Column> from table1 cross join table2
+-----------------------------------------------------------------------------------------------------------------
+d) Natural Join. 
+>> It is not supported in Sql Server,but if you want to support it then we use the concept of "Equi Join". (Oracle.)
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+2. NON-  ANSI FORMAT  (OLD STYLE Format)
+	a) Equi Join.
+>> In equi join we use (=) Operator.
+>> we Can't we > >= < <= <>  etc.
+	b) Non-Equi.
+>> Other than = Operator.
+>> Here we use > >=   <  <=  <> 
+----------------------------------------------------------------------
+	c) Self Join.
+>> Joining a table itself.
+-----------------------------------------------------------------------------------------
+select * from tbl_course  -- Left
+select * from tbl_Student  -- Right
+
+--select <List of Column> from table1 left outer join table2 on <Joining Condition>
+select * from tbl_course left outer join tbl_Student on tbl_course.cid=tbl_student.cid
+select * from tbl_Student right outer join tbl_course on tbl_course.cid=tbl_student.cid
+select * from tbl_course full outer join tbl_Student on tbl_course.cid=tbl_student.cid
+
+
+select * from tbl_course  -- Left
+select * from tbl_Student  -- Right  -- 48
+
+select * from tbl_course cross join tbl_Student
+
+-- waq to get total no. of student enroll in java course.
+select s1.sname,s1.age,s1.mobileno,c1.cname from tbl_Student s1,tbl_course c1 where s1.cid=c1.cid and c1.cname='java'
+select * from tbl_Student  -- Right 
+select * from tbl_course  -- Left
+select s1.sname,s1.age,s1.mobileno,c1.cname from tbl_Student s1,tbl_course c1 where s1.cid<c1.cid  -- 4<1  4<2   4<5
+--- SELF JOIN
+-- WAQ TO GET ALL THE EMPLOYEE DETAILS WHOSE SALARY IS SAME AS THE SALARY OF SHYAM IS GETTING.
+select * from tbl_Employee
+select * from tbl_Employee where salary=670000.00  --- SALARY IS NOT GIVEN.
+select * from tbl_Employee where ename='shyam'  -- you will get shayam salary.
+-- SELF JOIN.....
+select e1.ename,e1.salary from tbl_Employee e1,tbl_Employee e2 where e1.salary=e2.salary and e2.ename='shyam'
+-- or
+select e2.ename,e2.salary from tbl_Employee e1,tbl_Employee e2 where e1.salary=e2.salary and e1.ename='shyam'
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
