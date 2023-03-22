@@ -1,0 +1,205 @@
+TCL -- (Transaction Control Language):-
+-----------------------------------------------------------
+Transaction :-
+---------------------------
+>> To Perform Some Operation.
+----------------------------------------------------------
+We have following commands in TCL which are as follows:-
+1. Begin Transaction.   -- Done
+2. Commit.  --->>> If you commit any transaction you can't rollback.  ->> Done.
+3. Rollback.  ->> Done.
+4. SavePoint.
+-----------------------------------------------------------------------------------------
+Note :- > if you perform any DML (Data Manipulation Language) Operation (insert,update,delete) all the operations are executed permanently.
+it save all record into your database. you can't rollback these types of operations.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+syntax to rollback:-
+--------------------------------
+begin transaction rollback
+-------------------------------------------
+Working with Multiple Transaction:-
+-------------------------------------------------------------------------------
+SavePoint -> It creats a temporarily area where it save your transaction.
+Syntax:-
+-----------------
+save transaction <PointerName>  -> Create save Pointer
+----------------------------------------------------------------------------------------------------------
+begin transaction rollback transaction <PointerName>  -> Run Save Pointer
+---------------------------------------------------------------------------------------------------------
+Rename :- >>>  To change Columnname and Table name.
+---------------------------------------------------------------------------------------------------------
+Syntax to Change Column Name:-
+-------------------------------------------------------
+sp_rename '<TN>.<oldcolumnName>',<'New Column Name'>
+------------------------------------------------------------------------------------
+Ex-
+----------------
+sp_rename 'tbl_bank.bankname','NAME'
+------------------------------------------------------------------------------------
+Syntax to Change Table Name:-
+--------------------------------------------------
+sp_rename '<OldTableName>',<'New Table Name'>
+----------------------------------------------------------------------------
+sp_rename 'tbl_bank','BANK'
+-----------------------------------------------------------------
+create table tbl_bank
+(
+bankid int,
+bankname nvarchar(50),
+depositmoney int
+)
+-- DML  ---   (Permanently -- we can't Rollback)
+insert into tbl_bank values(101,'SBI',4000)
+update tbl_bank set bankname='PNB' where bankid=101
+delete from tbl_bank
+begin transaction rollback
+begin transaction
+insert into tbl_bank values(101,'SBI',4000)
+commit
+select * from tbl_bank
+begin transaction rollback
+begin transaction
+update tbl_bank set bankname='PNB' where bankid=101
+commit
+begin transaction
+delete from tbl_bank
+commit
+select * from tbl_bank
+select * from tbl_bank
+begin transaction rollback 
+begin transaction
+delete from tbl_bank where bankid=101
+delete from tbl_bank where bankid=105
+delete from tbl_bank where bankid=103
+save transaction rohit
+delete from tbl_bank where bankid=104
+delete from tbl_bank where bankid=102
+begin transaction rollback transaction rohit
+select * from tbl_bank
+-- change column Name
+sp_rename 'tbl_bank.bankname','NAME'
+sp_rename 'tbl_bank','BANK'
+select * from BANK
+----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
