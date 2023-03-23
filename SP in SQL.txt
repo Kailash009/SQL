@@ -1,0 +1,209 @@
+Stored Procedure:-
+------------------------------------
+>> SP is a pre-compile database objects.
+>> Performance of SP is very high.
+>> It provide security to our database.
+>> It reduces network traffic.
+>> It has parameterized or non-parameterized.
+----------------------------------------------------------------------------------
+It has two category:-
+1. With Parameter.
+2. Without Parameter.
+--------------------------------------------------------------
+1. With Parameter
+>> In this Procedure we pass parameter.
+--------------------------------------------------------------
+Syntax:-
+------------------
+create procedure/proc  proc_Name
+(
+@parameter1 datatype,
+@parameter2 datatype(size),
+@parameter3 datatype(size),
+.
+.
+.
+@parameterN datatype
+)
+as begin
+<Query Statements>
+end
+-----------------------------------------------------------------------------------
+Execute/Run SP:-
+-----------------------------------------
+exec/execute procedure_Name
+------------------------------------------
+C -> Create -> Insert
+R -> Read -> Select
+------------------------------------------------
+2. Without Parameter.
+-----------------------------------------------------
+>> A procedure in which we don't pass any parameter.
+Syntax:-
+-----------------
+create proc proc_Name
+as begin
+<Query Statements>
+end
+-----------------------------------------------------------
+Assignment Task:-
+------------------------------
+Create a Single Procedure to perform all these five Operations.
+1. Create a Table - Customer  -> cid ,cname,age,address,mobileno,salary
+Now Create Procedure which are as given below:-
+>> Create a single procedure that perform insert,Update,delete,selectall and selectByID of Customer Record into the table.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+create procedure sp_Employee
+(
+@name nvarchar(50),
+@age int,
+@mobile nvarchar(20),
+@post nvarchar(50),
+@salary decimal(23,3)
+)
+as begin
+insert into tbl_Employee(ename,age,mobileno,post,salary) values(@name,@age,@mobile,@post,@salary)
+end
+exec sp_Employee 'puspendra',23,'89778979','SE',676868
+-- CRUD-
+---------------------
+-- Update
+create proc sp_emp_update
+(
+@eid int,
+@name nvarchar(50),
+@age int,
+@mobile nvarchar(20),
+@post nvarchar(50),
+@salary decimal(20,2)
+)
+as begin
+update tbl_Employee set ename=@name,age=@age,mobileno=@mobile,post=@post,salary=@salary where eid=@eid
+end
+
+Select * from tbl_Employee
+exec sp_emp_update 4,'HRISHI SINGH',49,'11222','SE',12000
+
+-- DELETE
+create proc sp_del_emp
+(
+@eid int
+)
+as begin
+delete from tbl_Employee where eid=@eid
+end
+
+Select * from tbl_Employee
+exec sp_del_emp 2
+
+-- SELECT ALL
+create proc sp_getempall
+as begin
+select * from tbl_Employee
+end
+
+exec sp_getempall
+
+
+-- SELECT BY ID.
+-- create a procedure to show particular record on the basis of ID.
+alter proc sp_getempbyid
+(
+@eid int
+)
+as begin
+if Not Exists(select * from tbl_Employee where eid=@eid)  -- PATCHES
+print('Employee Not Found in this ID')
+else
+select * from tbl_Employee where eid=@eid
+end
+
+exec sp_getempall
+exec sp_getempbyid 70
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
