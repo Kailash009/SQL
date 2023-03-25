@@ -1,0 +1,201 @@
+Relationship between Tables? why we need it??
+--------------------------------------------------------------------
+1. one to one
+2. one to many
+3. many to many relationship
+----------------------------------------------------------------
+Need  ->>> when one table doesn't provide complete information then we maintain other information into second table.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Student :-
+--------------------
+sid(P.K) sname age   saddress        fee   course
+1     ram     19       new ashok  8k     python
+2     ram     19      new ashok    12K   Dot Net  ->> Wrong
+----------------------------------------------------------------------------------------
+Course  - Student
+1 C -> Many Student
+1 S -> Many Course.
+---------------------------------------------
+Student - PersonalDetail  -> One to one.
+-----------------------------------------------------------
+Student -> PaymentDetails -> One to Many
+---------------------------------------------------------------------
+JOIN  IN SQL SERVER:-
+---------------------------------------------------
+Retreiving Methods:-
+-------------------------------
+1. Selection  ->  To retrieve data from single table based on condition .(With Condition) (Rowwise)
+2. Projection -> To retrieve data from single table based on without condition.(With Condition) (Column wise)
+3. JOIN -> To retrive data from more than one table then we use the concept of Join.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Types of JOIN:-
+-----------------------------------
+Join can be categorized into two parts:-
+1. ANSI (American National Standard Institution) Format.   (New Style Format)
+>> With On Condition.
+	a) Inner Join.
+	b) Outer Join.  -> i) Left Outer    ii) Right Outer   iii) Full Outer.
+	c) Cross Join.
+	d) Natural Join.
+---------------------------------------------------------------------------------------------------------------
+2. Non-ANSI Format. (OLD Style Format)
+>> Without On Condition.   (Where)
+	a) Equi-Join.
+	b) Non-Equi Jion.
+	c) Self-Join.
+----------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee where eid=3   -- Selection  (Row Wise)
+select ename,age,eaddress from tbl_Employee -- Projection (Column Wise)
+-----------------------------------------------------------------------------------------------------------
+How to Make Foreign Key:-
+----------------------------------------
+Rules to create Foreign Key:-
+----------------------------------------
+1. Parent Table Column name must be same in Child Table.
+2. Data type Must be same of Parent and Child Table.
+Syntax:-
+----------------
+cid int foreign key references tbl_Course(cid)  -> F.K.
+------------------------------------------------------------------------
+F.K -> Parent Table P.K work as a F.K in Second table.
+-----------------------------------------------------------------------------
+Course
+Student
+----------------------------------
+a) Inner Join:-
+---------------------------------
+>> It retreive matching records from multiple tables.
+--------------------------------------------------------------------------------
+Syntax:-
+--------------------
+select  <List_of_Column> from  <TN1> inner join OR JOIN <TN2> on  <JOINING CONDITION>
+----------------------------------------------------------------------------------------------------------------------------------
+-- WAQ TO FETCH ALL THE STUDENTS WHO ENROLLED IN JAVA COURSE.
+SELECT sname,sage,sfee,cname from tbl_Student inner join tbl_Course on tbl_Student.cid=tbl_Course.cid and cname='java'
+----------------------------------------------------------------------------------------------------------------------------------------
+2. Outer Join:-
+----------------------------------
+>> It retreive matching and unmatching record from both the table.
+------------------------------------------------------------------------------------------------------
+a) Left Outer Join:-
+>> It returns all record the left table,matching record from the right table and unmatched return NULL.
+Syntax:-
+-----------------
+select <List of Column> from table1 left outer join table2 on <Joining Condition>
+b) Right Outer.
+>> It returns all record the right table,matching record from the left table and unmatched return NULL.
+select <List of Column> from table1 right outer join table2 on <Joining Condition>
+c) Full Outer.
+>> It returns all record from both the table and whereever find unmatched return NULL.
+select <List of Column> from table1 full outer join table2 on <Joining Condition>
+-----------------------------------------------------------------------------------------------------------------------------
+c) Cross Join.
+>> It is the product of Two or more table. (M*N)
+select <List of Column> from table1 cross join table2 
+-----------------------------------------------------------------------------------------------------------------
+d) Natural Join.
+>> It is not supported in Sql Server but if you want to support it then you the concept of Equi-Join.
+>> In Sql Server 'Equi join' is equal to Natural join.
+>> Natural Join direct support in Oracle.
+----------------------------------------------------------------------------------------------------------------------------------------
+2. Non-ANSI Format. (OLD Style Format)   --->>> PENDING
+>> Without On Condition.   (Where)
+	a) Equi-Join.
+	b) Non-Equi Jion.
+	c) Self-Join.
+------------------------------------------------------------------------------------------------------------------------------------
+create table tbl_Course   -- Parent Table
+(
+cid int primary key identity(1,1),
+cname nvarchar(50)
+)
+create table tbl_Student   -- Child Table.
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+sage int,
+saddress nvarchar(50),
+sfee decimal(22,2),
+cid int foreign key references tbl_Course(cid)
+)
+select * from tbl_Course
+select * from tbl_Student
+-- WAQ TO FETCH ALL THE STUDENTS WHO ENROLLED IN JAVA COURSE.
+--select  <List_of_Column> from  <TN1> inner join OR JOIN <TN2> on  <JOINING CONDITION>
+SELECT sname,sage,sfee,cname from tbl_Student inner join tbl_Course on tbl_Student.cid=tbl_Course.cid and cname='java'
+--or
+SELECT s1.sname,s1.sage,s1.sfee,c1.cname from tbl_Student s1 inner join tbl_Course c1 on s1.cid=c1.cid and cname='sql'
+--select <List of Column> from table1 -(Left table) left outer join table2 (Right Table) on <Joining Condition>
+-- Left Outer JOin
+select * from tbl_Course left outer join tbl_Student on tbl_Student.cid=tbl_Course.cid
+-- Right Outer Join
+select * from tbl_Student right outer join tbl_Course on tbl_Student.cid=tbl_Course.cid
+-- Full Outer Join
+select * from tbl_Course full outer join tbl_Student on tbl_Student.cid=tbl_Course.cid
+
+select * from tbl_Course  -- 6
+select * from tbl_Student  -- 7   6*7 => 42 Rows
+-- cross join
+select * from tbl_Course cross join tbl_Student
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
