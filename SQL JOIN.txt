@@ -1,190 +1,236 @@
-Clauses:-
--------------------------
-1. GroupBy
-2. Having  -> it is used to provide condition it always used after group by.
-------------------------------------------------------------------------------------------------------
-SET OPERATORS:-
------------------------------------
->> Table column must be same.
->> Order of column must be same.
->> Data type Must be Match.
-----------------------------------------------------------------
-1. Union. -> it doesn't return duplicate value from the table.
-2. Union ALL. -> it  returns duplicate value from the table.
-3. Intersect. -> it returns common record from both the table.
-4. Except. -> table1-table2 -> it returns all records from table1 that doesn't exist in table2.
--------------------------------------------------------------------------------------------------------------------------------------------
-JOIN:-
---------------
-Student -
-sid sname    age  saddress         city         
-1    kamlesh 23    ashok nagar     delhi      
-Student -
-Course -
-1 S => Many Course
-1 C => Many Student.
-Many to Many.
->> Join is used to combine one or more table data.
-Types of Join
------------------------
-1. Inner Join
->> It is used to fetch matching record from mutiple table.
----------------------------------------------------------------------------------------------------------------------------------
-Foreign Key -> it is used to establish the relationship among multiple tables.
->> First table P.K work as foreign key in another table.
----------------------------------------------------------------------
-Points to Remember to create foreign key:-
-a. column name must be same of parent table.
-b. data type must be same of parent table.
-Syntax to create foreign key:-
--------------------------------------------------------------------------
-column_name datatype foreign key references ParentTableName(Column_Name) 
-cid int foreign key references tbl_Course(cid)  -> example
-----------------------------------------------------------------------------------------------------------------------------
-INNER JOIN SYNTAX:-
-----------------------------------------
-select <List of Column> from table1 inner join table2 on <Condition>
----------------------------------------------------------------------------------------------------------------
-2. Outer Join:
->> It is used to get unmatching record from multiple tables.
-a) left Outer.
->> it returns all records from the left table and matching record from the right table unmatched return NULL.
-select <List of Column> from table1 left outer join table2 on <Condition>
-b) right Outer   
->> it returns all records from the right table and matching record from the left table unmatched return NULL.
-select <List of Column> from table1 right outer join table2 on <Condition>
-c) full Outer
->> it returns all records from  both the table and unmatched return NULL.
-select <List of Column> from table1 full outer join table2 on <Condition>
----------------------------------------------------------------------------------------------------------------------------------------------
-3. cross join   (X)
-6X7
--- CROSS JOIN
-select * from tbl_Course
-cross join tbl_Student
----------------------------------------------------------------------------------------
-STORED PROCEDURE:-
---------------------------------------------
->> It is a pre-compile database objects.
->> It reduces network traffic.
->> It provide database security.
->> High Performance.
->> it can return N value.
->>  We can perform all curd operation using SP.
------------------------------------------------------------------------------------------------------------------
-Types of Parameter in SP-
-----------------------------------------
-1. With Parameter.
-2. Without Parameter.
---------------------------------------------------------
-How to create sp-
-------------------------------
-Syntax- 1. With Parameter.
+b) Non-ANSI (Old Style Format):- (Where)
+---------------------------------------------------
+a) Equi Join.
+>> It is used = operator.
+>> In equi join we can't use these operators  >,<,<=,>=,<>
+>> It returns Matching Rows from the table.
+Syntax:-
+-------------------
+select  <column-List> from table1 t1,table2 t2 where <Condition>
+--------------------------------------------------------------------------------------------------------------------
+b) Non-Equi Join.
+>> Other than = sign.
+>> In it, we use following operators  -   > >= < <=
+------------------------------------------------------------------------------------------------------------------
+c) Self Join.
+>> Joining a table itself.
+>> No. of alias to create duplicate of single table.
+-------------------------------------------------------------------------------------------------------------------
+select * from tbl_course
+select * from tbl_student
+-- WAQ TO GET ALL THE STUDENT WHO ENROLLES IN JAVA COURSE.
+select s1.sname,s1.sage,s1.saddress,s1.sfee,c1.cname from tbl_Student s1,tbl_Course c1 where s1.cid=c1.cid and c1.cname='Java'
+--or
+select tbl_Student.sname,tbl_Student.sage,tbl_Student.saddress,tbl_Student.sfee,tbl_Course.cname from tbl_Student,tbl_Course where tbl_Student.cid=tbl_Course.cid and tbl_Course.cname='Java'
+
+-- Non-Equi
+select s1.sname,s1.sage,s1.sfee,c1.cname from tbl_Student s1,tbl_Course c1 where s1.cid<c1.cid  -- 3<1 -> False  3<4
+
+-- WAQ TO GET Total NO. OF EMPLOYEE WHOSE SALARY IS SAME AS "RAJENDRA" IS GETTING.
+select * from tbl_Employee where salary=45000   -- if you know the salary -->>> but SALARY IS NOT GIVEN.
+select * from tbl_Employee where ename='rajendra'  -- it shows only rajendra record.
+select e1.ename,e1.salary from tbl_Employee e1,tbl_Employee e2 where e1.salary=e2.salary and e2.ename='rajendra'  -- SELF JOIN
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SET OPERATOR:-
 -------------------------------------
-create proc/procedure proc_Name
-(
-@parameter1 datatype1,
-@parameter2 datatype2(size),
-.
-.
-.
-@parameterN datatypeN(size)
-)
-as begin
-<Sql Command/Statements>
-end
+>> It is used to combine two or more tables.
+Before going to perform set operator in your table we need to follow following condition which are as follows:
+	a) No. of column should be same of both the table.
+	b) Order of column should be same.
+	c) Data type must be same.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Types of Set Operator:-
+-------------------------------------------------------------
+1. Union.    ->>> Without duplicate. (It can't give duplicate value.)
+Syntax:-
+-------------------------------------------
+select * from <TN1>
+union
+select * from <TN2>
+-------------------------------------------
+2. UnionALL. -> With Duplicate. (it give duplicate value.)
+Syntax:-
+-----------------
+select * from <TN1>
+union all
+select * from <TN2>
+----------------------------------
+3. Intersect.  ->> It returns common record from multiple tables.
+Syntax:-
+-----------------
+select * from <TN1>
+intersect
+select * from <TN2>
+-------------------------------------------------
+4. Except.
+>> It returns all the records from table1 which doesn't match with table2.
+------------------------------------------------------------------------------------------------------------------
+Syntax:-
+-----------------
+select * from <TN1>
+except
+select * from <TN2>
+-----------------------------------------------------------------------------------------
+Rename:-
+------------------------
+>> Rename command is used to rename table name as well as column name.
+How to change column name:-
+------------------------------------------------
+Syntax:-
+----------------------
+sp_rename <'TN.OldColumnName'>,'New Column Name'
+----------------------------------------------------------------------------------------
+Ex:-
+------------
+sp_rename 'tbl_chennai.bname','BRANCH_NAME'
+-----------------------------------------------------------------------------------
+How to change Table Name:-
+-----------------------------------------
+Syntax:-
+---------------
+sp_rename <'OldTableName'>,'<NewTableName>'
 -------------------------------------------------------------------------
-Syntax- 2. Without Parameter.
-----------------------------------------------------
-create proc proc_name
-as begin
-<Sql Statements>
-end
------------------------------------------------------------
-select * from tbl_Employee
-
--- GROUP BY
--- waq to get no. of employee in each department.
-select post,count(eid) as 'Total Employee' from tbl_Employee group by post
--- waq to sum total salary in each department.
-select post,sum(salary) as 'Total Employee' from tbl_Employee  group by post
-
--- waq to get total employee in TL department.
-select post,count(eid) as 'Total Employee' from tbl_Employee group by post having post='TL'
--- waq to get total employee in each deparment where employee is greater than 2.
-select post,count(eid) as 'Total Employee' from tbl_Employee group by post having count(eid)>2
-
--- SET OPERATORS
+Ex:-
+-------------
+sp_rename 'tbl_chennai','chennai'
+------------------------------------------------------------
+How to add New Column:-
+--------------------------------------------
+alter -> To add New column.
+Syntax:-
+-------------------
+alter table tablename add column_Name datatype(size)
+----------------------------------------------------------------------------------
+For ex:-
+-----------------
+alter table chennai add pincode int
+------------------------------------------------------------------------
+How to delete Particular column:-
+-----------------------------------------------------
+Syntax:-
+------------------
+alter table table_name drop column <Column_Name>
+For Ex:-
+---------------
+alter table chennai drop column pincode
+----------------------------------------------------------------------------------------
 create table tbl_hyd
 (
-bid int,
+bid  int,
 bname nvarchar(50),
-blocation nvarchar(50),
+city nvarchar(50)
 )
 create table tbl_chennai
 (
-bid int,
+bid  int,
 bname nvarchar(50),
-blocation nvarchar(50),
+city nvarchar(50)
 )
 select * from tbl_hyd
 select * from tbl_chennai
-
-
+-- UNION   ------ WIHTOUT DUPLICATE
 select * from tbl_hyd
-union
+UNION
 select * from tbl_chennai
-
+-- UNION ALL   ------ WITH DUPLICATE
 select * from tbl_hyd
-union all
+UNION All
 select * from tbl_chennai
-
-
+-- INTERSECT   ------ COMMON RECORDS
 select * from tbl_hyd
 intersect
 select * from tbl_chennai
-
+-- EXCEPT   ------ COMMON RECORDS
 select * from tbl_hyd
 except
 select * from tbl_chennai
-------------------------------------------------------------------------------------------------------
-create table tbl_Course  -- Parent Table
-(
-cid int primary key identity(1,1),
-cname nvarchar(50)
-)
-create table tbl_Student  -- Child Table
-(
-sid int primary key identity(1,1),
-sname nvarchar(50),
-sage int,
-saddress nvarchar(100),
-sfee money,
-cid int foreign key references tbl_Course(cid)
---column_name datatype foreign key references ParentTableName(Column_Name)
-)
+select * from tbl_chennai
+except
+select * from tbl_hyd
+-- Rename
+select * from chennai
+sp_rename 'tbl_chennai.bname','BRANCH_NAME'
+sp_rename 'tbl_chennai','chennai'
+alter table chennai add pincode int
+alter table chennai drop column pincode
+-----------------------------------------------------------------------------------------------------------------------------
+Comment in Sql server:-
+-----------------------------------
+>> To understand query.
+>> Comment can't executed/Run.
+1. Single Line Comment. -> Comment on a single line.     --   (Two times hyphen)
+--sp_rename 'tbl_chennai','chennai'
+------------------------------------------------------------------------------------------------------------------
+2. MultiLine Comment -> To comment multiple line. 
+/*
+--
+--
+*/
+-----------------------
+/*
+alter table chennai add pincode int
 
-select * from tbl_Course
-select * from tbl_Student
-
--- INNER JOIN
--- WAQ TO GET TOTAL NO. STUDNET ENROLL IN ANGULAR COURSE.
-
-select sname,sage,saddress,sfee,cname from tbl_Course inner join tbl_Student on tbl_Course.cid=tbl_Student.cid and cname='Angular'
---or
-select s1.sname,s1.sage,s1.saddress,s1.sfee,c1.cname from tbl_Course c1 inner join tbl_Student s1 on c1.cid=s1.cid and cname='Angular'
-
-select s1.sname,s1.sage,s1.saddress,s1.sfee,c1.cname from tbl_Course c1 inner join tbl_Student s1 on c1.cid=s1.cid and cname='Dot Net'
+alter table chennai drop column pincode
+*/
+-------------------------------------------------------------------------------------------------------
+TCL --- Transaction Control Language:- Pending.
+--------------------------------------------------------------------------
 
 
-select * from tbl_Course left outer join tbl_Student on tbl_Student.cid=tbl_Course.cid
-select * from tbl_Student right outer join tbl_Course on tbl_Student.cid=tbl_Course.cid
-select * from tbl_Student full outer join tbl_Course on tbl_Student.cid=tbl_Course.cid
 
--- CROSS JOIN
-select * from tbl_Course
-cross join tbl_Student
------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
