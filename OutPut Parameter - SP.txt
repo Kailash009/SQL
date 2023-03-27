@@ -1,0 +1,44 @@
+Stored Procedure:-
+--------------------------------
+1. Without Parameter.
+2. With Parameter.
+	a) Input Parameter
+	b) Out/Output Parameter.
+--------------------------------
+Output Parameter:-
+--------------------------------
+>> It doesn't return any value.
+>> In Output parameter procedure return a value.
+>> The OUTPUT parameter is used when you want to return some value from the stored procedure. 
+---------------------------------------------------------------------------------------------
+waq to find the PF and PT of an Employee on the basis of ID.
+PF => 10% of BS.
+PT => 20 % of BS.
+-----------------------------------------------------------------------------------------------
+select * from tbl_Employee -- 
+alter proc sp_Gross
+(
+@eid int,  -- Input Parameter
+@pf int out,  -- Output Parameter
+@pt int out,  -- Output Parameter
+@gs decimal(23,4) out
+)
+as begin
+declare @bs decimal(28,2)
+select @bs=salary from tbl_Employee where eid=@eid
+set @pf=@bs*0.1
+set @pt=@bs*0.2
+set @gs=@bs+@pf+@pt
+end
+
+-- Execution Steps of Out Parameter.
+--1. Create Bind Variable.
+--2. Execute Bind Variable into your Procedure.
+--3. Print Bind Variable.
+select * from tbl_Employee
+declare @bpf decimal(23,2),@bpt decimal(20,2),@bgs decimal(20,3)   -- Create bind Variable
+exec sp_Gross 1,@bpf out,@bpt out,@bgs out  -- Add
+print('Provident Fund='+cast(@bpf as nvarchar(30)))
+print('Professional Tax='+cast(@bpt as nvarchar(40)))
+print('Gross Salary='+cast(@bgs as nvarchar(40)))
+-- Assignment Task  -> What is Out Parameter in Stored Procedure
