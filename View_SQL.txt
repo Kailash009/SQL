@@ -1,0 +1,110 @@
+USE [Batch5PM]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Gross]    Script Date: 28-Mar-23 5:15:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER proc [dbo].[sp_Gross]
+(
+@eid int,  -- Input Parameter
+@name nvarchar(50) out,
+@pf int out,  -- Output Parameter
+@pt int out,  -- Output Parameter
+@gs decimal(23,4) out
+)
+as begin
+declare @bs decimal(28,2)
+select @bs=salary,@name=ename from tbl_Employee where eid=@eid
+set @pf=@bs*0.1
+set @pt=@bs*0.2
+set @gs=@bs+@pf+@pt
+end
+
+select * from tbl_Employee
+declare @bpf decimal(20,2),@bpt decimal(20,2),@bgs decimal(20,2),@bname nvarchar(40)
+exec sp_Gross 1,@bname out,@bpf out,@bpt out,@bgs out
+print(@bpf)
+print(@bpt)
+print(@bgs)
+print(@bname)
+-------------------------------------------------------------------------------------------------------------------------------------
+Views in Sql Server:-
+------------------------------------------
+>> A view is a virtual/temporary table based on the result set execute sql statements.
+>> A view execution time is faster than table.
+------------------------------------------------------------------------------------------------------------------------------------
+Types of Views:-
+---------------------------
+1. Simple View.
+>> When you want to get data from single table.
+>> It is also known as 'Updatable View'.
+----------------------------------------------------------------
+Syntax:-
+-----------------------
+Create view view_name as select * from <TN>
+--------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+create view vw_emp as select * from tbl_Employee
+
+select * from vw_emp
+insert into vw_emp values('rohit',19,'676868','DBA',786868)
+update vw_emp set ename='rohit singh' where eid=12
+delete from vw_emp where eid=5
+2. Complex View.
+>> When we want to retreive data from multiple tables.
+>> It is also known as 'Non-Updatable'.
+-------------------------------------------------------------------------------------------
+Syntax:-
+--------------------
+create view view_name as select * from TN1 union  select * from TN2
+------------------------------------------------------------------------------------------
+Update or insert of view or function 'vw_Bank' failed because it contains a derived or constant field.
+-- COMPLEX VIEW:-
+----------------------------
+select * from tbl_hyd
+select * from tbl_chennai
+create view vw_Bank as select * from tbl_hyd union select * from tbl_chennai
+
+-- Non-Updatable View
+insert into vw_Bank values(334,'SBI')
+update vw_Bank set bname='kotak' where bid=105
+delete from vw_Bank
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
