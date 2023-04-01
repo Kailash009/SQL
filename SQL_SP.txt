@@ -1,0 +1,240 @@
+TCL --- Transaction Control Language:-
+----------------------------------------------------------------------
+Transaction ->>> To Perform some action.
+Insert ->
+update -> 
+Delete -> 
+---------------------------------------------------------------------
+In TCL we have Following Commands:-
+1. Begin Transaction.
+2. Commit.
+3. Rollback.
+4. SavePoint.
+---------------------------------------------------------------------
+Note :- All DML (Data Manipulation Language) Operations (insert,update,delete) are auto commit,which permanently executed in your system. we can't rollback these types of transaction.
+----------------------------------------------------------------------
+3. Rollback.
+begin transaction rollback
+---------------------------------------------
+1. Begin Transaction.
+Begin Transaction
+<Query Statements>
+---------------------------------------------
+2. Commit.  ->> Once you commit your transaction, you can't rollback.
+-----------------------------------------------------------------------------------------------------
+Working with Multiple Statements:-
+------------------------------------------------
+4. SavePoint:-
+----------------------------------------
+>> It save your transaction in temporary area,which you dont' want to commit.
+begin transaction
+<Query Statements>
+save transaction <PointerName>
+<QueryStatements> 
+------------------------------------------------------------
+select * from tbl_Employee
+create table tbl_Demo
+(
+did int, 
+dname nvarchar(50),
+dcity nvarchar(50)
+)
+select * from tbl_Demo
+-- DML (Auto Commit)  --- you can't rollback
+insert into tbl_Demo values(101,'Rajeev','Noida')
+update tbl_Demo set dname='Pankaj' where did=101
+delete from tbl_demo
+begin transaction rollback
+
+-- Begin Transaction
+select * from tbl_Demo
+begin transaction
+insert into tbl_demo values(101,'Rajeev','Noida')
+commit  --- you can't rollback.
+
+begin transaction rollback
+
+begin transaction
+update tbl_Demo set dname='Pankaj' where did=101
+commit
+
+select * from tbl_Demo
+begin transaction rollback
+
+begin transaction
+delete from tbl_demo
+commit
+
+select * from tbl_Demo
+begin transaction rollback
+---------------------------------------
+select * from tbl_Employee
+begin transaction 
+delete from tbl_Employee
+
+begin transaction rollback
+
+begin transaction 
+delete from tbl_Employee where eid=2
+delete from tbl_Employee where eid=3
+delete from tbl_Employee where eid=4
+delete from tbl_Employee where eid=5
+delete from tbl_Employee where eid=6
+save transaction p1  -->> conditionally only which transaction you need to rollback.
+delete from tbl_Employee where eid=1
+delete from tbl_Employee where eid=7
+delete from tbl_Employee where eid=9
+delete from tbl_Employee where eid=10
+
+select * from tbl_Employee
+begin transaction rollback transaction p1
+--------------------------------------------------------------------------------------------------------------------------------
+STORED PROCEDURE:-
+-------------------------------------------------
+>> It is a pre-compile database objects.
+>> It provide security to our database.
+>> It enhance the performance of our database.
+>> It reduces the network traffic.
+>> SP have both input and output parameter.
+-------------------------------------------------------------------------------------------
+Type of Parameter in SP:-
+---------------------------------------
+There are two types of Parameter in SP:-
+1. Input/In Parameter.
+2. Output/out Parameter.
+---------------------------------------------------------
+1. Input/In Parameter:-
+--------------------------------------
+In it we have two types of Parameter:-
+a) Without Parameter.
+b) With Parameter.
+----------------------------------------------------------
+a) Without Parameter:-
+-------------------------------------
+>> A procedure in which we don't pass any parameter.
+-----------------------------------------------------------------------------
+Syntax:-
+---------------
+alter/create procedure/proc proc_name
+as begin
+<Query Statements>
+end
+--------------------------------------------------------------------
+How to Execute Procedure:-
+------------------------------------------
+exec/execute  procedurename
+-----------------------------------------
+select * from tbl_Employee
+
+create procedure sp_getallemp
+as begin 
+select * from tbl_Employee
+end
+---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
