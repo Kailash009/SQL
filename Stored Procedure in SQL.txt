@@ -1,0 +1,359 @@
+STORED PROCEDURE:-
+-------------------------------------------------
+>> It is a pre-compile database objects.
+>> It provide security to our database.
+>> It enhance the performance of our database.
+>> It reduces the network traffic.
+>> SP have both input and output parameter.
+-------------------------------------------------------------------------------------------
+Type of Parameter in SP:-
+---------------------------------------
+There are two types of Parameter in SP:-
+1. Input/In Parameter.
+2. Output/out Parameter.
+---------------------------------------------------------
+1. Input/In Parameter:-
+--------------------------------------
+In it we have two types of Parameter:-
+a) Without Parameter.
+b) With Parameter.  ->> Input/OutPut.
+----------------------------------------------------------
+a) Without Parameter:-
+-------------------------------------
+>> A procedure in which we don't pass any parameter.
+-----------------------------------------------------------------------------
+Syntax:-
+---------------
+alter/create procedure/proc proc_name
+as begin
+<Query Statements>
+end
+--------------------------------------------------------------------
+How to Execute Procedure:-
+------------------------------------------
+exec/execute  procedurename
+-----------------------------------------
+select * from tbl_Employee
+
+wap to show all employee:-
+----------------------------------------
+create procedure sp_getallemp
+as begin 
+select * from tbl_Employee
+end
+---------------------------------------------------------
+2. With Parameter:-
+----------------------------------
+a) Input/In Parameter.
+b) Output/Out Parameter.
+------------------------------------
+a) Input Parameter:-
+-------------------------------
+Syntax:-
+------------
+create proc/procedure proc_name
+(
+@parameter1 datatype,
+@parameter2 datatype(size),
+@parameter3 datatype(size)
+.
+.
+.
+.
+@parameterN datatypeN
+)
+as begin
+<Query Statements>
+end
+----------------------------------------------------------------------------------------------------------
+wap to perform insert operation.
+------------------------------------------------------
+select * from tbl_Employee
+create procedure sp_getallemp
+as begin
+select * from tbl_Employee
+end
+exec sp_getallemp
+
+create procedure sp_insertemp
+(
+@name nvarchar(50),
+@age int,
+@address nvarchar(100),
+@post nvarchar(50),
+@salary money
+)
+as begin
+insert into tbl_Employee(ename,age,eaddress,post,salary) values(@name,@age,@address,@post,@salary)
+end
+
+exec sp_getallemp
+exec sp_insertemp 'rajesh',15,'tilak nagar','TL',78668
+-- wap to perform update operation.
+create proc sp_updateemp
+(
+@id int,
+@name nvarchar(50),
+@age int,
+@address nvarchar(50),
+@post nvarchar(30),
+@salary money
+)
+as begin
+update tbl_Employee set ename=@name,age=@age,eaddress=@address,post=@post,salary=@salary where eid=@id
+end
+
+exec sp_getallemp
+exec sp_updateemp 5,'Ratan Tata',14,'Preet Vihar','Mrkt',78683
+
+-- wap to delete a record of particular employee
+create proc sp_delemp
+(
+@id int
+)
+as begin
+delete from tbl_Employee where eid=@id
+end
+
+exec sp_getallemp
+exec sp_delemp 2
+--wap to search particular employee.
+create proc sp_getsingleemp
+(
+@id int
+)
+as begin
+select * from tbl_Employee where eid=@id
+end
+exec sp_getallemp
+exec sp_getsingleemp 8
+=========================================================
+Create a Single Procedure to Perform all these Operations:-
+1. Insert Employee.
+2. Update Employee.
+3. Delete Employee.
+4. Show All Employee
+5. Show Single Employee.
+------------------------------------------------------------------------------------------------
+Example:-
+------------------------
+create proc sp_Employee
+(
+@status nvarchar(50)=null,
+@eid int=0,
+@name nvarchar(50)=null,
+@age int=0,
+@address nvarchar(50)=null,
+@post nvarchar(50)=null,
+@salary money=0
+)
+as begin
+if @status='Insert'
+begin
+insert into tbl_Employee(ename,age,eaddress,post,salary) values(@name,@age,@address,@post,@salary)
+select 1 as Result
+end
+else if @status='ShowAll'
+begin
+select * from tbl_Employee
+end
+else if @status='Update'
+begin
+update tbl_Employee set ename=@name,age=@age,eaddress=@address,post=@post,salary=@salary where eid=@eid
+select 1 as Result
+end
+else if @status='Delete'
+begin
+delete from tbl_Employee where eid=@eid
+select 1 as Result
+end
+else if @status='Select_Single'
+begin
+select * from tbl_Employee where eid=@eid
+end
+end
+--Test/Run you Procedure
+exec sp_Employee 'ShowAll'
+exec sp_Employee 'Insert',0,'Rajan',19,'Anand Vihar','MRkt',89893
+exec sp_Employee 'Update',8,'RAVI MISHRA',78,'GOA','PO',900293
+exec sp_Employee 'Delete',4
+exec sp_Employee 'Select_Single',10
+-------------------------------------------------------------------------------------------------------------------------------------------
+2. Output Parameter:-
+------------------------------------------
+>> Out Parameter doesn't return any value to the procedure.
+>> When we want to return value from the procedure then we use the concept of Out Parameter.
+-------------------------------------------------------------------------------------------------------------------------------------------
+1. Create a Procedure that calculate PF and PT of an employee on the basis of Eid(Input).
+PF -> Out  -> 10% of bs
+PT -> Out ->  20% of bs
+----------------------------------------------
+bs+PF+PT
+3400+3400+6800 => 44,200
+PF -> 3400
+PT -> 6800
+-----------------------------------------------------
+How to Execute Output Parameter:-
+-----------------------------------------------------
+Step-1: Create Bind Variable.
+declare @bpf datatype,@bpt datatype
+Step-2: Execute/Add Bind Variable into your Procedure.
+exec proc_name inputparameter,output parameter,output parameter
+exec sp_Calc 1,@bpf out,@bpt out
+Step-3: Print these Bind Variable.
+----------------------------------------------------------------------------------------------
+sp_getallemp
+-- OUT Parameter
+alter procedure sp_Calc
+(
+@eid int,  -- Input Parameter
+@pf money out, -- Output Parameter
+@pt money out,  -- Output Parameter
+@gross money out
+)
+as begin
+declare @salary money
+select @salary=salary from tbl_Employee where eid=@eid
+set @pf=@salary*0.1
+set @pt=@salary*0.2
+set @gross=@salary+@pf+@pt
+end
+
+-- Execute/Run Out Parameter
+declare @bpf money,@bpt money,@bgross money
+exec sp_Calc 5,@bpf out,@bpt out,@bgross out
+print('Provident Fund='+cast(@bpf as nvarchar(50)))
+print('Professional Tax='+cast(@bpt as nvarchar(50)))
+print('Gross Salary='+cast(@bgross as nvarchar(50)))
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
