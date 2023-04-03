@@ -1,0 +1,66 @@
+--------------------------------------
+Nested Query in SQL:-
+---------------------------------------
+>> A Query with in Query is called nested Query.
+>> When we want to retreive data from table using simple query then we are unable to fetch the resultant output then we require nested Query.
+-- WAQ TO GET THE FIRST HIGHEST SALARY OF AN EMPLOYEE.
+-------------------------------------------------------------------------------------------------------
+Syntax:-
+-------------------
+Select * from TN where=(select * from TN where=(select * from TN)))
+Outer Query                                      Inner Query
+---------------------------------------------------------------------------------------------------------
+As the per the execution process it can be divided into two parts:-
+1. Non-Corelated Query.
+	>> Inner Query will executed first,then outer query will execute.
+	>> Outer Query result depends upon inner Query.
+---------------------------------------------------------------------------------------------------------
+2. Co-related Query.
+	>> Outer Query will executed first, then inner query will execute.
+	>> Inner Query result depends upon Outer Query.
+--------------------------------------------------------------------------------------------------------
+1. Non-Corelated Query:-
+-------------------------------------------------
+It can be divided into two subQuery which are as follows:	
+	a) Simple/Single SubQuery.
+ >> It retreive single record from the table.
+-- WAQ TO GET ALL THE INFORMATION OF EMPLOYEE WHO IS GETTING THE HIGHEST SALARY.
+	b) Multiple Rows SubQuery.
+>> It retreive multiple record from the table.
+-- WAQ TO GET ALL THE EMPLOYEE WHOSE DEPARTMENT IS SAME AS RAM AND SUBHAM.
+--------------------------------------------------------------------------------------------------------------------------------------------
+SELECT * FROM tbl_EMployee
+
+select max(salary) from tbl_Employee
+select * from tbl_Employee where salary=786868.00  -- Salary is Not Given
+-- Non-Corelated Query  / Single Sub Query
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee)   --- Inner Query
+-- Outer Query     +  Inner Query 
+-- Non-Corelated Query  / Multiple Row Sub Query
+select * from tbl_Employee
+-- WAQ TO GET ALL THE EMPLOYEE WHOSE DEPARTMENT IS SAME AS RAM AND SUBHAM.
+SELECT * from tbl_Employee where ename='ram' or ename='subham'
+select * from tbl_Employee where post in(select post from tbl_Employee where ename='ram' or ename='subham')
+-- or
+select * from tbl_Employee where post in(select post from tbl_Employee where ename in('ram','subham'))
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Co-related Query.  --->>> Pending.
+-----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
