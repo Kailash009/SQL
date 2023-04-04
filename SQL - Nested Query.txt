@@ -1,0 +1,172 @@
+Nested Query:-
+--------------------------------
+It can be of two types:-
+1. Non-Corelated. -> Inner Query executed first,after that outer query will execute.
+2. Co-related. -> Outer Query executed first, and then inner Query will execute.
+-----------------------------------------------------------------------------------------------------------
+Non-Corelated VS Corelated:-
+-------------------------------------------------------------
+Non-Corelated:-
+----------------------------------
+Find the Nth Highest Salary of an Employee.
+--------------------------------------------------------------------------
+1.   First Highest Salary of an Employee.
+select * from tbl_Employee
+-- Non-Corelated
+--First Highest Salary  (N=1)
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee)
+-- Second Highest Salary (N=2)
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee))
+-- Third Highest Salary (N=3)
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee)))
+-------------------------------------------------------------------------
+Highest->>> No. of Sub-Query ->  
+N=1  -> (N+1) => 2
+N=2 -> (N+1) => 3
+N=3 -> (N+1) => 4
+N=16 -> (N+1) => 17 -> Query gets too Longer.
+Non-Corelated Query execution time is not Good.
+---------------------------------------------------------------------------------------------
+Co-related Query (Find Nth Highest Salary of an Employee)
+---------------------------------------------------------------------------------------------
+>> Outer Query executed first and then inner query will execute.
+--------------------------------------------------------------------------------------------
+Syntax:-
+-----------------------
+Select * from tableName TNAlias1
+where N-1=(select count(colname) from tablename TNAlias2 where TNAlias2.Colname(>/<)TNAlias1.Colname)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+> -> Highest Salary
+< -> Lowest Salary
+-------------------------------------------------------------
+select * from tbl_Employee
+-- Non-Corelated
+--First Highest Salary  (N=1)
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee)
+-- Second Highest Salary (N=2)
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee)) --676868<786868
+-- Third Highest Salary (N=3)
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee)))
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Corelated Query 
+--Select * from tableName TNAlias1
+--where N-1=(select count(colname) from tablename TNAlias2 where TNAlias2.Colname(>/<)TNAlias1.Colname)
+-- First Highest Salary of an Employee.   N=1
+select * from tbl_Employee
+select * from tbl_Employee e1 where 0=(select count(salary) from tbl_Employee e2 where e2.salary>e1.salary)
+-- Second Highest Salary of an Employee.   N=2
+select * from tbl_Employee e1 where 1=(select count(salary) from tbl_Employee e2 where e2.salary>e1.salary)
+-- Third Highest Salary N=3
+select * from tbl_Employee e1 where 2=(select count(salary) from tbl_Employee e2 where e2.salary>e1.salary)
+--First Lowest 1,2,3
+select * from tbl_Employee e1 where 0=(select count(salary) from tbl_Employee e2 where e2.salary<e1.salary)
+-- Second Lowest Salary of an Employee.   N=2
+select * from tbl_Employee e1 where 1=(select count(salary) from tbl_Employee e2 where e2.salary<e1.salary)
+-- Third Lowest Salary N=3
+select * from tbl_Employee e1 where 2=(select count(salary) from tbl_Employee e2 where e2.salary<e1.salary)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DCL:-
+------------------------
+>> It stands for Data Control Language.
+>> With DCL commands we can give or take the permission of the user to access a particular table or access whole database.
+>> With DCL Commands we can also specify what are the operations a user can perform onto the table like insert,update, etc.
+-------------------
+Types of Commands in DCL:-
+--------------------------------------------------------------------------------------
+1. Grant.
+>> To Give the permission to the specified user.
+2. Revoke.
+>> To take out the permission to the specified user.
+-------------------------------------------------------------------------------------
+Types of Authentication:-
+---------------------------------------------------------------------
+1. Windows Authentication.  (ADMIN)
+>> It doesn't require username and password.
+>> It works like an Admin.
+>> You can access any databases and tables.
+---------------------------------------------------------------------
+2. Sql Server Authentication. (USER)
+>> It require username and password.
+>> It works like a normal user.
+>> you can't access any databases and tables.
+---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
