@@ -1,0 +1,84 @@
+DCL:-
+--------------
+Data Control Language:-
+--------------------------------------------------------------------
+In DCL we have two commands-
+1. Grant -> To give the permission to the user.
+2. Revoke -> To take out the permission to the user.
+---------------------------------------------------------------------
+step1 -> Create Login.
+Syntax:- create login login_name with password='do your password'
+Ex - create login rohit with password='111'
+step2 -> Create User.
+Syntax - create user User_Name for login Login_Name 
+Ex- create user rohit for login rohit 
+---------------------------------------------------------------------------------------------
+Grant:- Give permission to Rohit for a particular table.
+Syntax:- Grant <Priviledge_List> on object::tablename to UserName
+Ex: -  grant select,update on object::tbl_chennai to rohit
+----------------------------------------------------------------------------------------------
+Revoke : Take out the permission from Rohit for a particular table.
+Syntax: revoke <priviledge_List> on object::tablename from UserName
+Ex: -revoke select,update on object::tbl_chennai from rohit
+revoke select,update on object::tbl_bank from rohit
+-----------------------------------------------------------------------------------------------------
+Give or Take the Permission to the whole Database:-
+---------------------------------------------------------------------------
+Grant:-
+---------------
+Syntax:- grant <priviledge_List> on database::database_Name from User_Name
+Ex: -       grant select,update on database::Batch5PM to rohit
+--------------------------------------------------------------------------------------------------------------
+Revoke:-
+-----------------
+Syntax:-  revoke <priviledge_List> on database::database_Name to User_Name
+Ex:-         revoke select,update on database::Batch5PM from rohit
+-------------------------------------------------------------------------------------------------------------
+create login rohit with password='111'
+create user rohit for login rohit 
+grant select,update on object::tbl_chennai to rohit
+grant select,update on object::tbl_bank to rohit
+revoke select,update on object::tbl_chennai from rohit
+revoke select,update on object::tbl_bank from rohit
+grant select,update on database::Batch5PM to rohit
+revoke select,update on database::Batch5PM from rohit
+--------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
