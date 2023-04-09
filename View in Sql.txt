@@ -1,0 +1,109 @@
+Views in Sql Server:-
+--------------------------------------
+>> Views is a virtual table/Temporarily based on the result set to execute a Sql Statements.
+>> It provides security to our actual table.
+>> The performance of View is more faster than normal table.
+>> In Views we used 'Select' command.
+------------------------------------------------------------------------------------------------------------------------
+Types of  Views:-
+---------------------------------------
+There are two types of views in sql server which are as follows-
+1. Simple View.
+>> To retrieve data only from single base table.
+>> It is also known as 'Updatable View'. (we can perform other operations like insert,update,delete)
+---------------------------------------------------------------------------------------------------------------------------------------------
+2. Complex View.
+>> To retrieve data from multiple base tables.
+>> It is also known as 'Non-Updatable View'. (We can't perform any other operations like insert,update,delete)
+----------------------------------------------------------------------------------------------------------------------------------------------
+Command to create Simple View:-
+-------------------------------------------------------
+Syntax:-
+----------------------------
+create view view_name as select * from <TN>
+------------------------------------------------------------------------------
+select * from tbl_Employee
+
+--- Simple View
+create view vw_Emp as select * from tbl_Employee
+
+select * from vw_Emp
+-- Updatable View / Simple View
+insert into vw_Emp(ename,age,eaddress,post,salary) values('vimal',12,'Rajni Nagar','SE',34343)
+update vw_Emp set ename='kamlesh Singh' where eid=7
+delete from vw_Emp where eid=9
+-----------------------------------------------------------------------------------------------------------------------------
+2. Non-updatable View / Complex View:-
+--------------------------------------------------------
+create view viewname as select * from tablename1 setOperator/Join select * from tablename2
+------------------------------------------------------------------------------------------------------------------------------------
+-- COMPLEX VIEW.
+create table tbl_chennai
+(
+bid int,
+bname nvarchar(50),
+city nvarchar(50)
+)
+select * from tbl_hyd
+select * from tbl_chennai
+insert into tbl_chennai values(106,'Kotak','Kanpur')
+--create view viewname as select * from tablename1 setOperator/Join select * from tablename2
+create view vw_complexemp as select * from tbl_hyd union select * from tbl_chennai
+select * from vw_complexemp
+-- Non-Updatable View
+insert into vw_complexemp values(110,'Axis','Goa')
+--Update or insert of view or function 'vw_complexemp' failed because it contains a derived or constant field. you can't perform
+-- insert operation this is complex view/Non-Updatable View.
+update vw_complexemp set bname='Axis' where bid=103
+--Update or insert of view or function 'vw_complexemp' failed because it contains a derived or constant field
+delete from vw_complexemp where bid=101
+--View 'vw_complexemp' is not updatable because the definition contains a UNION operator.
+==============================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
