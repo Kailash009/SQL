@@ -1,0 +1,138 @@
+Functions in SQL Server:-
+---------------------------------------------
+>> Functions are the building block in sql.
+>> Function is used for resuability in a program.
+>> we can create a function only once and we can call that function multiple times.
+--------------------------------------------------------------------------------------------------------------------
+Types of Function in SQL:-
+---------------------------------------------------
+There are two types of user defined function in sql server which are as follows:-
+1. Scaler Valued Function.
+2. Table Valued Function.
+------------------------------------------------------------------------------------------------------------------------------------------
+1. Scaler Valued Function:-
+>> Whenever a function return only single value then it is known as Scaler Valued Function.
+Syntax:-
+---------------------
+create function function_name(@parameter1 datatype1,@parameter2 datatype2,..............)
+returns datatype
+as begin
+<Query Statements>
+return FinalValue
+end
+------------------------------------------------------------------------------------------------------------------------------------------
+>> Create a Scaler Valued function to find the sum of two number.
+>> Create a Scalar Valued function and calculate the gross salary of an Employee based on the following condition
+da=10% of bs  -> 5600
+ta=20% of bs -> 11200
+hra=5% of bs -> 2800
+gs=bs+da+ta+hra  -> 75,600
+-----------------------------------------------------
+2. Table Valued Function.
+>> A function which returns whole table.
+>> A function which return multiple records from the table.
+>> In table valued function no need to begin and end keyword.
+-----------------------------------------------------------------------------------------
+Syntax:-
+---------------
+create function function_name(@parameter1 datatype)
+returns table
+as
+return <Query Statements>
+-------------------------------------------------------------------------------------
+create a table valued function accept department name and find the total no. of employee of this department.
+--------------------------------------------------------------------------------------------------------------------------------------------
+create function calc_sum(@a int,@b int)
+returns int
+as begin
+declare @c int
+set @c=@a+@b
+return @c
+end
+
+select dbo.calc_sum(10,40) as 'Addition'
+select dbo.calc_sum(100,899)
+
+select * from tbl_EMployee
+alter function calc_grossalary(@id int)
+returns money
+as begin
+declare @bs money,@da money,@ta money,@hra money,@gs money
+select @bs=salary from tbl_Employee where eid=@id
+set @da=@bs*0.1
+set @ta=@bs*0.2
+set @hra=@bs*0.05
+set @gs=@bs+@da+@ta+@hra
+return @gs
+end
+select * from tbl_Employee
+select dbo.calc_grossalary(7) as 'TOTAL_GROSS_SALARY'
+
+-- Table Valued Function
+--create function function_name(@parameter1 datatype)
+--returns table
+--as
+--return <Query Statements>
+create function gettotalemployee(@deptname nvarchar(50))
+returns table
+as
+return select * from tbl_Employee where post=@deptname
+
+select * from dbo.gettotalemployee('SE')
+select * from dbo.gettotalemployee('TL')
+select * from dbo.gettotalemployee('DBA')
+-- Assignment of Scalar Valued Function
+--create a function that accept five input and find its avg
+-- create a function calculate the area of rectangle.
+-- create a function calculate the area of circle.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
