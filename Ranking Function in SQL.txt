@@ -1,0 +1,61 @@
+Ranking Function in Sql Server:-
+----------------------------------------------------------
+>> To assign rank in row wise or group of row wise.
+>> In Rank function we use two operators - partitionby (optional) (Group of row wise) ,   order by (Mandatory)
+------------------------------------------------------------------------------------------------------------------------
+There are three types of Ranking functions are as-
+1. Row_Number(). -> It assign different rank having same salary.
+2. Rank(). ->  it assign same rank having same salary, but it skips next rank.
+3. Dense_Rank().  -> (Best) -> it assign same rank having same salary and doesn't skip the rank.
+Syntax:-
+----------------------
+RankingFunction() over(PartitionBy <ColumnName> order by column Name)<asc/desc>
+-----------------------------------------------------------------------------------------------------------------------------------------
+Rank using Row Wise:-              waq to find rank salary wise.
+------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+--RankingFunction() over(PartitionBy <ColumnName> order by column Name)<asc/desc>
+select ename,salary,row_number() over(order by salary desc) as Ranks from tbl_Employee
+select ename,salary,rank() over(order by salary desc) as Ranks from tbl_Employee
+select ename,salary,dense_rank() over(order by salary desc) as Ranks from tbl_Employee
+----------------------------------------------------------------------------------------------------------------------------------------------
+Rank using Group of Row Wise:-      waq to find rank group wise.
+-------------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+--RankingFunction() over(PartitionBy <ColumnName> order by column Name)<asc/desc>
+select ename,salary,row_number() over(order by salary desc) as Ranks from tbl_Employee
+select ename,salary,rank() over(order by salary desc) as Ranks from tbl_Employee
+select ename,salary,dense_rank() over(order by salary desc) as Ranks from tbl_Employee
+--------------------------------------------------------------------------------------------------
+-- GROUP OF ROW WISE:-
+select ename,salary,deptno,row_number() over(partition by deptno order by salary desc) as Ranks from tbl_Employee
+select ename,salary,deptno,rank() over(partition by deptno order by salary desc) as Ranks from tbl_Employee
+select ename,salary,deptno,dense_rank() over(partition by deptno order by salary desc) as Ranks from tbl_Employee
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
