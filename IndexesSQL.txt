@@ -1,0 +1,56 @@
+Indexes in Sql Server:-
+--------------------------------------
+>> It is used for fast searching purpose.
+>> With the help indexes your table or any other objects searching performance increased.
+----------------------------------------------------------------------------------------------------------------------
+Indexes in SQL-Server
+------------------------------
+>>Indexes are used by queries to find data from table quicky. Indexes are used on both tables and views.
+>>Indexes on a table or a view, are similar to the index we find in a book.
+>>In a similar way, indexes can help the query to find the data quickly.
+>>if there is no index to help the query,then query engine checks every row of table from start to end.This is called as 'Table Scan'. Table Scan is bad for performance,Especially when the table is very large.
+Types of Indexes-
+----------------------------
+a) Clustered Indexes. -- P.K.
+>>It determines the physical order of data in a table. For this reason, a table can have only one clustered index.
+execute sp_helpindex table_name --  see clustered index in your table.
+For Ex- 
+--A clustered index is similar to telephone directory, where data is arranged by first name.
+--A Table can have only one clustered index. However, one clustered index can have multiple columns. Similar, to telephone directory is arranged by first name and last name. 
+----------------------------------------------------------------------------------------------------
+create table tbl_joshi
+(
+id int primary key,
+name nvarchar(50),
+gender nvarchar(10),
+city nvarchar(30),
+salary decimal check (salary>0)
+)
+select * from tbl_joshi
+execute sp_helpindex tbl_joshi  -- clustered index created automatically and arrange id in ascending order.
+-------------------------------------------------
+How to create Explicitly Clustered index-
+--------------------------------------------------
+create clustered index in_tbljoshi_demo
+on tbl_joshi (salary asc,gender desc) 
+----------------------------------------------------------------------------------
+b) Non-Clustered Indexes.
+-------------------------------------------------------------------------------------
+--This index is similar to the index in textbook, where data is stored at one place and index is stored in another place.
+--The index have pointers to the storage location.
+--Since, Non-clustured index are stored seperately, a table can have more than one Non-Clustured Index.
+--In the index itself, data is stored in ascending or descending order of the index key.
+-----------------------------------------------------------------------------------------------
+create nonclustered index in_tbl_joshi4 on tbl_joshi(salary asc)
+create nonclustered index in_tbl_joshi44 on tbl_joshi(city desc)
+drop index tbl_joshi.in_tbl_joshi44
+---------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- P.K  -> Clustered Index.  -> There is only one clustured index in a table.
+
+sp_helpindex tbl_Employee
+create clustered index in_emp on tbl_Employee(eid desc) 
+drop index tbl_Employee.in_emp
+create nonclustered index in_empsalary on tbl_Employee(salary desc)
+create nonclustered index in_empage on tbl_Employee(age asc)
+----------------------------------------------------------------------------------------------
