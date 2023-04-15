@@ -1,0 +1,207 @@
+Aggregate Functions:-
+-------------------------------------
+1. max()
+2. min()
+3. sum()
+4. avg()
+5. count()
+-----------------------------------------------------------------------
+Clauses in Sql Server:-
+----------------------------------
+>> Clauses can be used with Aggregate function.
+1. Group BY.
+2. Having.
+-------------------------------------------------------------------
+select * from tbl_Employee
+select max(salary) as 'Max_Salary' from tbl_Employee
+select min(salary) as 'Min_Salary' from tbl_Employee
+select sum(salary) as 'Total Salary' from tbl_Employee
+select avg(salary) as 'Avg_Salary' from tbl_Employee
+select count(salary) as 'Total Employee' from tbl_Employee
+-- waq to get no. of employee in each department.
+select post,count(*) as 'Total Number of Employee' from tbl_employee group by post
+-- waq to get total no. of salary in each department.
+select post,sum(salary) as 'Total Salary' from tbl_employee group by post
+-- waq to get total no. of employee and total salary in each department
+select post,sum(salary) as 'Total Salary',count(*) as 'Total Employee' from tbl_employee group by post
+-- wap to get total no. of employee in each department where employee is greater than 2.
+select post,count(*) as 'Total_Employee' from tbl_Employee group by post having count(eid)>2
+==============================================================================================
+Trigger:-
+-------------------
+>> It is special type of Stored procedure, that automatically fired/executed when an event has occured.
+>> Performance high.
+Event -> DML(insert,update,delete) , DDL(create,drop) and many more.
+Trigger Timing-
+----------------------------
+after / for
+before
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Student  ---    1 Lakh.
+tbl_StudentInfo -> when new student insert , in tbl_studentinfo automatically insert a record with id and datetime.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+-----------------
+create trigger trigger_Name
+on 
+tableName
+for insert     ----->> After
+as begin
+<Query Statements>
+end
+------------------------------------------------------------------------------
+select * from tbl_Student
+create table Student
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+age int,
+fee decimal(22,3)
+)
+create table tbl_studentinfo
+(
+id int primary key identity(1,1),
+msg nvarchar(100)
+)
+/*create trigger trigger_Name
+on 
+tableName
+for insert     ----->> After
+as begin
+<Query Statements>
+end
+*/
+alter trigger tg_Student
+on
+Student
+for insert   -- After      
+as begin
+declare @id int
+select @id=sid from Student inserted  -- It keeps your id behind the scene.
+insert into tbl_studentinfo(msg)values('The Student Added with ID'+cast(@id as nvarchar(50))+'with following'+cast(getdate() as nvarchar(50)))	
+print('Student Added SuccessFully')
+end
+
+select * from Student
+select * from tbl_studentinfo
+insert into Student values('Rajeev',21,1599.34)
+-----------------------------------------------------------------------------------------------------------------------------------------
+Dot Net Framework ->> OLD.
+---------------------------------------------------------------------------
+>>  Asp.net WebForms.  -> Slow.
+>> Asp.net MVC   -> 
+--------------------------------------------------------------------------------------------------
+Dot Net Core:-
+-------------------------------
+>> Open Source and Cross Platform.
+>> It is used to developed various kind of application. -> webapplication,IOT,ML,Desktop,Mobile etc.
+>> It dot net core we use Roslyn compiler which is very faster than normal dot net framework application.
+>> Type: Console Type.
+>> Here we use Middleware.
+>> To make ConnectionString we write json code.
+>> No WebForms.
+>> In dot net core we have inbuilt dependency injection.
+--------------------------------------------------------------------------------------------- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
