@@ -1,0 +1,80 @@
+Functions in Sql Server:-
+-------------------------------------------
+>> Functions are the basic building block of code.
+>> Re-usablity./Readablity/Maintainablity.
+>> add(),sub(),mult(),div().
+>> Create a Function only one time, and you can call it multiple times.
+>> Function must return a value.
+>> we can't call procedure inside function.
+>> we can call a function using 'Select' keyword.
+>> Functions only have Input Parameter.
+-----------------------------------------------------------------------------------------------------
+There are two types of Functions in sql server:-
+1.  Built-In Function. -> A function which is defined by the system.
+	Mathmatical, Aggregation function,datetime,string functions etc.
+2.  User Defined Function. -> Here we focus on User Defined Function.
+	a) Scalar Valued Function.
+>> This function always return a single value only.
+Syntax:-
+----------------
+create function function_Name(@paramete1 datatype,@paramter2 datatype.............)
+returns datatype/variablename/parametername
+as begin
+<Query Statements>
+return finalValue;
+end
+---------------------------------------------------------------------------
+	b) Table Valued Function.
+>> This function always return a whole table.
+------------------------------------------------------------------------------------------------------------------
+>> waq to create scalar valued function to find the sum of two number.
+-- Assignment
+-- Create a Function to find the average of Five Number.
+-- Create a Function to Find the area of rectangle.
+-- Create a Function to Find the area of Circle.
+-- Create a Function to Find the sum to five number.
+Functions in Sql Server:-
+-------------------------------------------
+>> Functions are the basic building block of code.
+>> Re-usablity./Readablity/Maintainablity.
+>> add(),sub(),mult(),div().
+>> Create a Function only one time, and you can call it multiple times.
+>> Function must return a value.
+>> we can't call procedure inside function.
+>> we can call a function using 'Select' keyword.
+>> Functions only have Input Parameter.
+-----------------------------------------------------------------------------------------------------
+There are two types of Functions in sql server:-
+1.  Built-In Function. -> A function which is defined by the system.
+	Mathmatical, Aggregation function,datetime,string functions etc.
+2.  User Defined Function. -> Here we focus on User Defined Function.
+	a) Scalar Valued Function.
+>> This function always return a single value only.
+Syntax:-
+----------------
+create function function_Name(@paramete1 datatype,@paramter2 datatype.............)
+returns datatype/variablename/parametername
+as begin
+<Query Statements>
+return finalValue;
+end
+---------------------------------------------------------------------------
+	b) Table Valued Function.
+>> This function always return a whole table.
+------------------------------------------------------------------------------------------------------------------
+>> waq to create scalar valued function to find the sum of two number.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
