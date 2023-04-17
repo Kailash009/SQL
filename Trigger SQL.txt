@@ -1,0 +1,85 @@
+TRIGGER:-
+-------------------------------------
+>> It is special type of stored procedure,that automatically fired when an event has occured.
+Database Events -> Create,alter,insert,update,delete and many more.
+-------------------------------------------------------------------------------------------------------------------------------------------
+Student  -> just after when one student record inserted after that one entry automatically insert into personaldetail table.
+Personal Detail  -> do not provide any record manually.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Trigger Timing -
+---------------------------
+a) Before 
+b) After/for
+---------------------------
+Syntax:-
+----------------
+create trigger trigger_Name
+on TableName
+for inserted    ---- after timing
+as begin
+<Query Statements>
+end
+---------------------------------------------------------
+create table Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+age int,
+eaddress nvarchar(50),
+esalary decimal(20,2)
+)
+select * from Employee   --- Main Table.
+create table tbl_emp_info
+(
+id int primary key identity(1,1),
+msg nvarchar(400)
+)
+
+alter trigger tg_EmployeeInsert
+on Employee
+for insert   ---- After Timing.
+as begin
+declare @id int
+select @id=eid from Employee inserted  -- It keeps the data behind the scene
+insert into tbl_emp_info(msg)values('The New Employee has been Added with Employee ID'+cast(@id as nvarchar(50))+'is Joined'+cast(getdate() as nvarchar(50)))
+print('The New Employee Added')
+end
+select * from Employee
+select * from tbl_emp_info
+insert  into Employee values('Arun',21,'Pratap Nagar',54000.23)
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
