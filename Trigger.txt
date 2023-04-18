@@ -1,0 +1,55 @@
+Trigger:-
+------------------------
+Update :-
+-----------------------
+select * from Employee
+select * from tbl_emp_info
+
+alter trigger tg_EmployeeUpdate
+on Employee
+for update
+as begin
+declare @OSal money,@NSal money
+declare @Name nvarchar(50)
+select @Name=ename,@NSal=esalary from inserted   -- It keeps your data behind the scene
+select @OSal=esalary from deleted
+insert into tbl_emp_info(msg) values('The Employee'+@Name+'salary has been changed from'+cast(@OSal as nvarchar)+'to'+cast(@NSal as nvarchar))
+print('Employee Salary Updated!!')
+end
+
+select * from Employee
+select * from tbl_emp_info
+update Employee set esalary=55000 where eid=6
+
+--- Delete Trigger
+alter trigger tg_EmployeeDelete
+on Employee
+for delete
+as begin
+declare @Eid int
+select @Eid=eid from deleted
+insert into tbl_emp_info(msg)values('The Employee with ID'+cast(@EID as nvarchar)+'is deleted at'+cast(GETDATE() as nvarchar))
+print('Employee Deleted SuccessFully')
+end
+select * from Employee
+select * from tbl_emp_info
+delete from Employee where eid=6
+----------------------------------------------------------------------------------------------------------------------
+Database BackUP and Recovery:- Done
+--------------------------------------------------------------------------------------
+T - SQL -> Begin Transaction, Commit,Rollback,SavePoint.
+Aggregate,Ranking , Scalar Function
+---------------------------------------------------------------------------------------
+PL/SQL:-
+---------------------------
+
+
+
+
+
+
+
+
+
+
+
