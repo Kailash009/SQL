@@ -1,0 +1,208 @@
+Functions:-
+------------------------
+1. Scalar Valued Function.  -> It returns only single value.
+2. Table Valued Function -> 
+>> It returns multiple records from the table.
+>> It returns more than one value from the table not only single value.
+>> It returns whole table.
+>> Begin and End is not required.
+Syntax:-
+----------------
+create function function_name(@parameter1 datatype(size))
+returns table
+as 
+return <Query Statements>
+----------------------------------------------------------------------------------------------------------------------------
+For Ex:- waq to get Total no. of employee working in each department. (IT) (HR)
+-----------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- Table Valued Functions
+--create function function_name(@parameter1 datatype(size))
+--returns table
+--as 
+--return <Query Statements>
+create function getemployee(@deptname nvarchar(50))
+returns table
+as
+return (select * from tbl_Employee where post=@deptname)
+
+-- Exec -> select statement is used to execute a function.
+
+select * from getemployee('SE')
+-----------------------------------------------------------------------------
+Scalar Valued Function:-
+---------------------------------------
+create function function_Name(@paramete1 datatype,@paramter2 datatype.............)
+returns datatype/variablename/parametername
+as begin
+<Query Statements>
+return finalValue;
+end
+--------------------------------------------------------
+Create a Scalar valued function and calculate the gross salary of an employee based on the following condition:
+BS -> 34000
+DA -> 10%  -> 3400
+TA -> 15%  -> 5100
+HRA -> 5% ->  1700
+GS => BS+DA+TA+HRA  ->  44,200
+---------------------------------------------------------------
+-- create function function_Name(@paramete1 datatype,@paramter2 datatype.............)
+--returns datatype/variablename/parametername
+--as begin
+--<Query Statements>
+--return finalValue;
+--end
+create function sub(@a int,@b int)
+returns int
+as begin
+declare @sb int
+set @sb=@a-@b
+return @sb
+end
+select dbo.sub(34,56)
+select * from tbl_Employee
+
+--Create a Scalar valued function and calculate the gross salary of an employee based on the following condition:
+alter function calc_grossSalary(@eid int)
+returns money
+as begin
+declare @bs money,@da money,@ta money,@hra money,@gs money
+select @bs=salary from tbl_Employee where eid=@eid
+set @da=@bs*0.1
+set @ta=@bs*0.15
+set @hra=@bs*0.05
+set @gs=@bs+@da+@ta+@hra
+return @gs
+end
+select dbo.calc_grossSalary(1) as 'TotalGrossSalary'
+--------------------------------------------------------------------------------------------------------------------------------
+Ranking Functions in Sql Server:-
+-----------------------------------------------------
+>> It is used to assign ranks on row wise or group of row wise.
+>> In ranking function we use two important clauses - order by (Mandatory) ,  partition by - (Optional (It will work only to find group wise rank))
+----------------------------------------------------------------------------------------
+There are three types of Ranking Function in sql server which are as follows:-
+1. Row_Number().
+>> If two employee having same salary, they are providing different ranks.
+2. Rank().
+>> If two or more than employee having same salary it assign same rank to that employee but the problem it skip the next rank for another employee.
+3. Dense_Rank().
+>> If two or more than employee having same salary it assign same rank to that employee but it doesn't skip the next rank for another employee.
+-------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+------------------
+select <colname> RankingFunction() over(order by asc/desc) from TableName
+---------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- RANKING FUNCTIONS
+--select <colname> RankingFunction() over(order by asc/desc) from TableName
+SELECT ename,salary,Row_Number() over(order by salary desc) as 'Rank' from tbl_Employee
+select ename,salary, rank() over(order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary, DENSE_RANK() over(order by salary desc) as 'Ranks' from tbl_Employee
+
+-- GROUP OF ROW WISE -> PARTITION BY
+--select <colname> RankingFunction() over(partition by deptno order by asc/desc) from TableName
+select ename,salary,deptno,ROW_NUMBER() over(partition by deptno order by salary desc) as 'Rank' from tbl_Employee
+select ename,salary,deptno, RANK() over(partition by deptno order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,deptno, DENSE_RANK() over(partition by deptno order by salary desc) as 'Ranks' from tbl_Employee
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Nested Query:-  Pending
+---------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

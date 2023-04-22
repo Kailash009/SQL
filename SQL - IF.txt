@@ -1,0 +1,182 @@
+IF - Statements:-
+--------------------------------
+1. if
+2. if-else
+3. if-else-if
+----------------------
+1. if :-
+>> This statement is used to check only single condition.
+Syntax:-
+-------------------
+if(condition)
+begin
+statement;    -> if the condition is false then nothing will print.
+end
+-------------------------------------------------------------------------------------------------------
+For example:-
+--------------------------
+declare @a int,@b int
+set @a=5
+set @b=10
+if(@a<@b)
+begin
+print(@a)
+end
+-----------------------------------------------------
+2. if-else:-
+-------------------
+This statement is used to test the condition and take one of the two possible action.
+Syntax:-
+-----------------
+if(condition)
+begin
+statement1
+end
+else
+statement2
+--------------------------------------------------------
+For Example:-
+------------------------
+declare @a int,@b int
+set @a=5
+set @b=10
+if(@a>@b)
+begin
+print(@a)
+end
+else
+print(@b)
+----------------------------------------------------------
+if-else-if:-
+-----------------
+>> This statement is used to provide multiple condition in a program.
+Syntax:-
+--------------------------
+if(condition1)
+begin
+statement1
+end
+else if (condition2)
+begin
+statement2
+end
+else if (condition3)
+begin
+statement3
+end
+else
+begin
+statement4;
+end
+-------------------------------------------------------------------------------------
+wap to find the greatest among three no.
+declare @a int,@b int,@c int
+set @a=50
+set @b=100
+set @c=15
+if(@a>@b and @a>@c)
+begin
+print(cast(@a as nvarchar)+' is a Greatest Number')
+end
+else if(@b>@a and @b>@c)
+begin
+print(cast(@b as nvarchar)+' is a Greatest Number')
+end
+else
+begin
+print(cast(@c as nvarchar)+' is a Greatest Number')
+end
+---------------------------------------------------------------------------------------------
+Assignment Question:-
+------------------------------------
+1. wap to input two no. and find the smallest no. among them.
+2. wap to input three no. and find the smallest no. among them.
+3. wap to input a year and check its leap year or not.
+4. wap to input a no. and check its even or odd.
+5. wap to input a no. and check its positive no. or negative.
+6. wap to input a character and check input character is a Vowel or Consonant.
+7. wap to input five subject marks and find the total marks and Percentage and find the following Grade -
+100%-90%  ->> Excellent.
+90%-80%  ->>   Very Good.
+80%-70%  ->>   Good.
+70%-60%  ->>    Fair .
+60%-50%  ->>   Average
+<50%         ->>    FAIL
+-------------------------------------------------------------------------
+8. wap to make calulator program.
++  -> Addition.
+-  -> Subtract
+* -> Multiply.
+/ -> Divide.
+------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
