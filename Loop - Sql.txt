@@ -1,0 +1,157 @@
+100%-90%  ->> Excellent.
+90%-80%  ->>   Very Good.
+80%-70%  ->>   Good.
+70%-60%  ->>    Fair .
+60%-50%  ->>   Average
+<50%         ->>    FAIL
+----------------------------------------------------------------------
+declare @percentage int,@eng int,@hindi int,@math int, @Science int,@IT int,@total_marks int
+set @eng=40
+set @hindi=50
+set @Math=30
+set @science=80
+set @IT=70
+set @total_marks=@eng+@hindi+@math+@Science+@IT
+set @percentage=@total_marks/5
+print('Total marks='+cast(@total_marks as nvarchar(50)))
+print('Percentage='+cast(@percentage as nvarchar(50)))
+if(@percentage>=90 and @percentage<=100)
+begin
+print('Excellent')
+end
+else if (@percentage>=80 and @percentage<=90)
+begin
+print('Very Good')
+end
+else if(@percentage>=70 and @percentage<=80)
+begin
+print('Good')
+end
+else if(@percentage>=60 and @percentage<=70)
+begin
+print('Fair')
+end
+else if(@percentage>=50 and @percentage<=60)
+begin
+print('Average')
+end
+else
+begin
+print('Fail')
+end
+--------------------------------------------------------------------------------------------------
+Loop:-
+--------------
+>> while loop generally used in Sql Server.
+while:-
+---------------
+while(condition)
+as begin
+<Query Statements>
+Inc/Dec
+end
+-------------------------------------------------------
+>> wap to print 1 to 10 numbers
+declare @a int
+set @a=1
+while(@a<=10)
+begin
+print(@a)
+set @a=@a+1
+end
+-------------------------------------------------------------
+declare @a int,@sm int
+declare @avg float
+set @sm=0
+set @a=1
+while(@a<=10) -- 1<=10 2<=10 3<=10 4<=10 5<=10
+begin
+set @sm=@sm+@a -- sm=1 sm=3 sm=6  sm=10 sm=15
+print(@a) --1 2 3 4 5
+set @a=@a+1 --2 3 4 5 6
+end
+print('Sum='+cast(@sm as varchar))
+set @avg=cast(@sm as float)/10
+print('Average='+cast(@avg as varchar))
+---------------------------------------------------------------------------------------------------
+wap to check whether character is vowel or constant.
+declare @ch char
+set @ch='o'
+if(@ch='a' or @ch='e' or @ch='i' or @ch='o' or @ch='u')
+begin
+print('Character is Vowel')
+end
+else
+begin
+print('Character is Consonant')
+end
+----------------------------------------------------------------------------------------------------------
+Assignment Question:-
+-------------------------------------
+1. wap to check no. is prime or not.
+2. wap to check no. is armstrong or not.
+3. wap to print even no. only between 1 to 100.
+4. wap to print odd no. only between 1 to 100.
+5. wap to print welcome to sql 13 times.
+6. wap to print the number from 35 to 1.
+7. wap to print the table.
+8. wap to print the sum of even no. only between 1 to 20.
+-------------------------------------------------------------------------------------------- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
