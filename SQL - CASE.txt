@@ -1,0 +1,29 @@
+Case in SQL:-
+----------------------------------------
+>> It is used to provide condition in a program.
+-----------------------------------------------------------------------------
+Syntax:-
+-----------------------
+case 
+when condition1 then statement1
+when condition1 then statement2
+when condition1 then statement3
+when condition1 then statement4
+else
+when condition1 then statement4
+end
+--------------------------------------------------------------------------------------
+SELECT * from tbl_Employee
+select * from sys.databases
+select * from tbl_Employee
+
+select ename,salary,
+case
+when salary>20000 then 'Salary is greater than 20000'
+when salary>30000 then 'Salary is greater than 30000'
+when salary<20000 then 'Salary is less than 20000'
+when salary>2000 then 'Salary is greater than 2000'
+else 'Salary is Less than 2000'
+end as 'Salary_DESC'
+from tbl_Employee
+-------------------------------------------------------------------------------------------
