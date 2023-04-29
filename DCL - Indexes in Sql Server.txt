@@ -1,0 +1,172 @@
+DCL :-  PENDING
+-------------------------------------
+>> It stands for Data Control Language.
+There are two commands used inside DCL:-
+a) Grant. -> To give the permission to the User.
+b) Revoke. -> To take out the Permission From the User.
+--------------------------------------------------------------------------------------
+a) Grant:-
+--------------------
+Syntax:-
+---------------------
+Grant <Priviledge_List> on object::tablename to User
+-------------------------------------------------------------------------------------------
+b) Revoke:-
+----------------------------
+Revoke <Priviledge_List> on object::tablename from User
+-----------------------------------------------------------------------------------------------
+Steps to Perform Grant and Revoke in Sql Server:-
+------------------------------------------------------------------------------
+1. Create Login.
+Syntax:-
+-------------------
+create login login_name with password='give_password'
+2. Create User.
+create user usernmae for login login_name
+-----------------------------------------------------------------------------------------
+How to give Permission to the whole Database:-
+-------------------------------------------------------------------------
+grant <Priviledge_List> on database::databaseName to User
+---------------------------------------------------------------------------------------------
+revoke <Priviledge_List> on database::DatabaseName from User
+----------------------------------------------------------------------------------------------
+Indexes in Sql Server:-
+------------------------------------
+>> To find/retrieve data from table quickly.
+>> Without indexing it scan whole table.
+>> Indexing improve table searching performance.
+-------------------------------------------------------------------------------------
+There are two types of indexing:-
+-----------------------------------------------------
+1. Clustured Index.
+>> There is only one clustured index in a table.
+>> When we create P.K of any column then that particular column automatically become clustured index. 
+Command to create Manually Clustured Index:-
+-----------------------------------------------------------------------------------
+create clustered index index_name on tableName(colname asc/desc )
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Non-Clustured Index.
+>> There is more than one non-clustered index in a table.
+------------------------------------------------------------------------------------------
+create nonclustered index index_name on tableName(colname asc/desc)
+---------------------------------------------------------------------------------------------------------------
+create login MyLogin with password='111'
+create user somota for login MyLogin
+-----------------------------------------------------
+select * from tbl_Employee
+-- GRANT
+--Grant <Priviledge_List> on object::tablename to User
+grant select,update on object::tbl_Employee to somota
+--Revoke <Priviledge_List> on object::tablename from User
+revoke select,update on object::tbl_Employee from somota
+------------------------------------------------------------------------
+-- Give Permission to whole Database-
+grant select,update on database::Batch11AM to somota
+-- Take Out Permission to whole Database -
+revoke select,update on database::Batch11AM from somota
+---------------------------------------------------------------------------
+--Indexing in Sql SERVER
+select * from tbl_Employee
+create clustered index in_Salary on tbl_Employee(salary desc)
+execute sp_helpindex tbl_Employee
+create table demo
+(
+id int,
+ename nvarchar(50),
+age int,
+salary money
+)
+select * from demo
+execute sp_helpindex demo
+create clustered index in_demo_age on demo(age desc)-- only one clustered index can be there in a single table.
+create nonclustered index in_Demo_age on demo(age desc)
+create nonclustered index in_Demo_name on demo(ename asc)
+execute sp_helpindex demo
+-- TRIGGER -- PENDING
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
