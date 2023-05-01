@@ -1,0 +1,56 @@
+Data -> Raw Material facts and figure.
+Information -> Processed Data is known as Information.
+---------------------------------------------------------------------------------------------------------------
+How to maintain our Data:-
+-------------------------------------------------------
+In Traditional way,   
+File -> it is used for keeping a Record.
+----------------------------------------
+Problems with Files:-
+-----------------------------------------
+1. Data Storage. -> Limited amount of Data.
+2. Security Issue.
+3. Retreiving/Searching Records.
+---------------------------------------------------------------------------------------
+Applications:-
+-----------------------------
+There are two types of Application in the market -
+a) Front-End Application. -> html,css,js,jquery,bootstrap,angular, react and many more,
+b) Back-End Application. -> java,dot net, php, python and many more and also database.
+----------------------------------------------------------------------------------------------------------------------------------------------
+DBMS -> Database Management System.
+------------------------------------------------------------------------
+We have so many DBMS tool by which we can maintain our data very effective and efficient manner. Some of the tools are as Follows -
+Ms-Access,MYSQL,SQL SERVER,Oracle,PostGreSQL,SQLite,MongoDB,Sybase,DB2 and many more.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+DBMS ->> it is a software application i.e. used to manage or mantain our database System.
+---------------------------------------------------------------------------------------------------------------------------------------------
+SQL SERVER:-
+--------------------------------------
+1. How to install SQL SERVER ->>>  It is responsible to run/execute you SQL Query.
+https://www.microsoft.com/en-in/sql-server/sql-server-downloads    ->>>> Express.
+2. Install SSMS (SQL SERVER MANAGEMENT STUDIO).
+>> It provide an interface in which you can write SQL Queries.
+https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL SERVER:-
+-------------------------------------
+>> SQL SERVER IS A RDBMS(REALTIONAL DATABASE MANAGEMENT SYSTEM) tool, by which you can perform several database operations Like - Creating Table,Inserting Table,Update,Delete,Retrieve,Drop and many more.
+>> SQL Server is not a case - sensitive.
+>> Sql server is a platform dependent language.(It installed only Windows O.S.)
+>> Sql server is the product of Microsoft.
+>> Sql server provide both GUI (Graphical User Interface) and CUI (Command User Interface) based Interface.
+GUI -> Without Query.
+CUI -> With Query.
+-----------------------------------------------------------------------------------------------------------------------------------
+Benefits to Learn Sql Server -> Database developer, Sql Developer, Backend Developer
+-----------------------------------------------------------------------------------------------------------------------------------
+Topic -> Sql Server, Basic-Advance Excel / Python /  PowerBI (Demading) / Tableu 
+Data Analytics.
+Data Enginner.
+Data Scientist.
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
