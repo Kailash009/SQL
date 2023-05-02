@@ -1,0 +1,89 @@
+Database Language:-
+---------------------------------------------------------
+There are five types of languages in Sql Server which are as follows-
+1. DDL (Data Defination Language)
+	>> create,alter,drop,truncate,rename,comment. 
+2. DML (Data Manipulation Language)
+	>> insert,update,delete.
+3. DCL (Data Control Language)
+	>> Grant, Revoke.
+4. TCL (Transaction Control Language)
+	>> Begin Transaction, Rollback,SavePoint, Commit.
+5. DQL (Data Query Language)
+	>> Select.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Database Terminology:-
+----------------------------------------------
+Database -> It is a collection of interrealed data / collection of table.
+Table -> Relation. -> It consist of Rows and Column.
+Rows -> Tuple.
+Column -> Attributes.
+Degree -> NO. of Columns.
+Cardinality -> No. of Rows.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+In Sql server we can work with both GUI and CUI based env.
+---------------------------------------------------------------------------------------------------
+using GUI  how to perform  insert,update,delete and creating table and database.
+---------------------------------------------------------------------------------------------------------------------------------------
+1. Create Database.
+2. Create Table  -> insert,update,delete,select.
+----------------------------------------------------------------------
+Eid -> it must be unique.
+Primary Key -  Not Duplicate + Not NuLL
+------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
