@@ -1,0 +1,234 @@
+Update:-
+---------------------
+a) Update a single column.
+Syntax:-
+update tablename set colname='New Value' where colName=oldValue
+-----------------------------------------------------------------------------------------------------------
+b) Update into multiple columns.
+Syntax:-
+update tablename set colname1='New Value1',colname2=newvalue2,colname3=newvalue3 where colName=oldValue
+------------------------------------------------------
+Delete:-
+----------------------
+a) Delete specific record.
+b) Delete all Record.
+------------------------------------------------------------
+a) Delete specific record.
+delete from tablename where colname=value
+---------------------------------------------------------------------------------------------------------
+b) Delete all Record.
+delete from tablename
+--------------------------------------------------------------------
+Delete Vs Truncate:-
+-----------------------------------------
+>> Delete is under DML command.
+>> Truncate is under DDL command.
+>> In Delete we can delete a specific record.
+>> In truncate we can't delete specific record.
+>> In Delete we can use where clause.
+>> In Truncate where clause is not allowed.
+-------------------------------------------------------------------------------------------
+DROP:-
+-----------------
+>> Drop comes under DDL command.
+>> Drop deleted whole schema(Structure) of table as well as Database.
+-----------------------------------------------------------------------------------------------------------
+Command to Drop Table:-
+-------------------------------------------------
+drop table tableName
+drop table tbl_Employee
+-----------------------------------------
+Command to Drop Database:-
+--------------------------------------------------
+drop database databaseName
+drop database Batch5PMSunil
+-------------------------------------------------
+Operators in SQL:-
+--------------------------------------
+>> it specifies that which operation is need to be performed.
+---------------------------------------------------------------------------------------------
+1. Arithmetic Operator
++ , - ,*,/
+How to give temporarily column Name:-
+>> To perform temporarily column name we use as keyword.
+--------------------------------------------------------------------------------------------------
+2. Relational Operator
+>
+>=
+<
+<=
+<> or !=
+------------------------------------------------------
+3. Logical Operator -> whenever you want to provide multiple condition in a single query.
+a) AND -> Both condition must be True.
+b) OR -> Either one of the condition is True then result is True otherwise False.
+c) NOT -> Condition True then result False and vice-versa.
+---------------------------------------------------------------------------------------------------------------------------------------------------- 
+select * from tbl_Employee
+--update tablename set colname='New Value' where colName=oldValue
+-- waq to update employee name from piyush  to piyush Mishra
+update tbl_Employee set ename='Piyush Mishra' where eid=3
+-- waq to update the employee details as follows bablu singh,18,343434,PA,89000
+update tbl_Employee set ename='Bablu Singh',age=18,mobileno='343434',post='CA',salary=89000 where eid=4
+delete from tbl_Employee where eid=4
+select * from tbl_Employee
+truncate table tbl_Employee
+---------------------------------------------------------------------------------------
+select * from tbl_Employee
+drop table tbl_Employee
+drop database Batch5PMSunil
+-------------------------------------------------------------------
+-- Operators in SQL:-
+select 10+5 as 'Addition'
+select 10-5 as 'Subtraction'
+select 10*5 as 'Multiplication'
+select 10/5 as 'Division'
+
+create database Batch5PMSunil
+use Batch5PMSunil
+create table tbl_Employee
+(
+eid int primary key identity(101,2),
+ename nvarchar(50),
+age int,
+mobileno nvarchar(19),
+post nvarchar(50),
+salary money
+)
+select * from tbl_Employee
+
+select age+salary from tbl_Employee
+-- waq to get all the employee details whose salary is less than 40000.
+select * from tbl_Employee where salary<40000
+select * from tbl_Employee where salary>45000
+select * from tbl_Employee where salary>=45000
+select * from tbl_Employee where salary<=45000
+select * from tbl_Employee
+-- waq to get the employee details whose salary is not 45000.
+select * from tbl_Employee where salary <> 45000
+select * from tbl_Employee where salary != 45000
+-- waq to get the employee details whose name is sunil and post is SE
+select * from tbl_Employee where ename='sunil' and post='SE'
+-- waq to get the employee details whose name is sunil and post is TL
+select * from tbl_Employee where ename='sunil' or post='TL'
+-- waq to get the employee details whose name is not kunal.
+select * from tbl_Employee where not ename='kunal' 
+==================================================================
+Assignment Task:-
+---------------------------------
+Special Operator  -
+-----------------------------------------
+in 
+not in
+between
+not between
+top
+order by
+Like
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
