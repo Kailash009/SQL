@@ -1,47 +1,157 @@
+TRIGGER IN SQL SERVER:-
+---------------------------------------------------
 Trigger:-
-------------------------
-Update :-
------------------------
-select * from Employee
-select * from tbl_emp_info
-
-alter trigger tg_EmployeeUpdate
-on Employee
+>> Trigger is a special kind of stored procedure,that automatically executed/fired when an event has occured.
+Database Events -> create,drop,insert,update,delete etc.
+--------------------------------------------------------------------------------------------------------------
+Trigger Timing:-
+-----------------------------------
+1. Before
+2. After/for
+-----------------------------------
+For Example:-
+----------------------------------
+Student -> 
+PersonalDetails -> when we insert a record into student table,just after in personaldetail record has been inserted/or table fired automatically. (I don't want to Manually insert a record into Personal Detail Table).
+------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax - 
+---------------------
+create trigger triggerName
+on tableName
+for insert   --- Timing -> After Timing
+as begin
+<Query Statements>
+end
+-----------------------------------------------------------------------------------------
+Syntax:- (Update)
+------------------
+create trigger triggerName
+on TableName
 for update
 as begin
-declare @OSal money,@NSal money
-declare @Name nvarchar(50)
-select @Name=ename,@NSal=esalary from inserted   -- It keeps your data behind the scene
-select @OSal=esalary from deleted
-insert into tbl_emp_info(msg) values('The Employee'+@Name+'salary has been changed from'+cast(@OSal as nvarchar)+'to'+cast(@NSal as nvarchar))
-print('Employee Salary Updated!!')
+<Query Statements>
 end
-
-select * from Employee
-select * from tbl_emp_info
-update Employee set esalary=55000 where eid=6
-
---- Delete Trigger
-alter trigger tg_EmployeeDelete
-on Employee
+-------------------------------------------
+Syntax (Deleted)
+create trigger triggerName
+on TableName
 for delete
 as begin
-declare @Eid int
-select @Eid=eid from deleted
-insert into tbl_emp_info(msg)values('The Employee with ID'+cast(@EID as nvarchar)+'is deleted at'+cast(GETDATE() as nvarchar))
-print('Employee Deleted SuccessFully')
+<Query Statements>
 end
-select * from Employee
-select * from tbl_emp_info
-delete from Employee where eid=6
-----------------------------------------------------------------------------------------------------------------------
-Database BackUP and Recovery:- Done
---------------------------------------------------------------------------------------
-T - SQL -> Begin Transaction, Commit,Rollback,SavePoint.
-Aggregate,Ranking , Scalar Function
----------------------------------------------------------------------------------------
-PL/SQL:-
----------------------------
+--------------------------------------------------------
+create table Student
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+sage int,
+saddress nvarchar(50),
+sfee money,
+mobileno nvarchar(20)
+)
+create table tbl_msg
+(
+msgid int primary key identity(1,1),
+msg nvarchar(400)
+)
+
+alter trigger tg_insert_Student
+on Student
+for insert  -- After Timing
+as begin
+declare @sid int
+select @sid=sid from inserted  --It keeps your data behind the scene
+insert into tbl_msg values('The Student is added with ID'+cast(@sid as nvarchar(20))+'at the Following'+cast(GETDATE() as nvarchar(50)))
+print('Student Added SuccessFully!!')
+end
+
+select * from Student
+select * from tbl_msg
+insert into Student values('Deepak',19,'New Ashok Nagar',3400.23,'989087834')
+select * from Student
+select * from tbl_msg
+alter trigger tg_update_student
+on Student
+for update -- After Timing
+as begin
+declare @sid int,@sname nvarchar(50)
+declare @osfee money,@nsfee money
+select @sid=sid,@sname=sname from inserted
+select @osfee=sfee from deleted
+select @nsfee=sfee from inserted
+insert into tbl_msg values('The Student with Id'+cast(@sid as nvarchar(50))+'and its name is'+@sname+'fees has been changed from'+cast(@osfee as nvarchar(50))+'to'+cast(@nsfee as nvarchar(50)))
+print('Student Record has been Updated')
+end
+
+update Student set sfee=42000.14 where sid=2
+select * from Student
+select * from tbl_msg
+create trigger tg_delete_student
+on Student
+for delete
+as begin
+declare @sid int
+select @sid=sid from deleted
+insert into tbl_msg values('The Student has been Deleted with ID'+cast(@sid as nvarchar(40)))
+print('The Student has been Deleted SuccessFully')
+end
+-----------------------------------------------------------------------------
+select * from Student
+select * from tbl_msg
+delete from Student where sid=2
+-------------------------------------------------------------------------
+PL/SQL :- Pending
+------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
