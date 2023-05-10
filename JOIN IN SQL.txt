@@ -1,0 +1,177 @@
+Clauses in SQL SERVER:-
+-------------------------------------------------
+1. Order BY -- done
+2. GROUP BY.
+3. Having
+4. WHere. -- Done
+----------------------------------
+Aggregate Functions:-
+-----------------------------------------
+>> without aggregate functions we can't work with group by and having.
+max()
+min()
+sum()
+avg()
+count()
+-----------------------------------------------------------------------
+GROUP BY :-
+-----------------------------------
+Having -> it is used to provide condition in a query.
+Note -> after group by only having is used.
+---------------------------------------------------------------------------------------------------
+Relationship between tables:-
+--------------------------------------------------------
+>> we are unable to get the complete information from a single table then we need to get data from multiple tables , then we need to establish the relationship between these tables.
+--------------------------------------------------------------------------------------------------------------------------
+For Example:-
+--------------------------------------
+Student (100)  ----   Course (5)   -> Many to Many.       
+1 S => Many Course
+1 C => Many Student.
+-------------------------------------
+sid    sname   age   address city   mobileno   coursename
+-------------------------------------------------------------------------------------------
+1       vijay    19        ashok   delhi  898989     sql
+2       vijay     20       ashok  delhi    89898      data analytics  -- Wrong. -> Data Duplicacy exist.
+--------------------------------------------------------------------------------------------------------------------------------------------
+Types of Relationship:-
+----------------------------------------
+1. One to One.
+Student   ----   PersonalDetails
+2. One to Many or Many to One.
+Student  - PaymentDetails
+1 S => Many Payment.
+3. Many to Many.  -> Student - Course.
+---------------------------------------------------------------------------------------------------------------------------
+JOINS IN SQL SERVER:-  PENDING
+------------------------------------------------------------------
+1. Selection -> Select the data row wise.
+select * from tbl_Employee where eid=101
+2. Projection -> select the data column wise.
+select ename,post,salary from tbl_Employee
+3. Join -> To retrieve data from more than one tables. 
+There are two types of Join in Sql server -
+	1) ANSI FORMAT. (American National Standard Institution). -> (New Style Format.)
+		a) Inner JOIN
+		b) Outer JOIN
+			i) Left Outer  ii) Right Outer iii) Full Outer
+		c) Cross JOIN
+		d) Natural JOIN.	
+	2) NON-ANSI FORMAT. (Old Style Format)
+		a) Equi-Join
+		b) Non-Equi Join.
+		c) Self Join.
+=======================================================================================
+select * from tbl_Employee
+select max(salary) as 'MAX_Salary' from tbl_Employee
+select min(salary) as 'Min_Salary' from tbl_Employee
+select sum(salary) as 'Total Salary' from tbl_Employee
+select avg(salary) as 'Avg Salary' from tbl_Employee
+select count(salary) as 'Total No. of Employee' from tbl_Employee
+select * from tbl_Employee
+-- WAQ TO GET TOTAL NUMBER OF EMPLOYEE IN EACH DEPARTMENT.
+select post,count(ename) as 'Total Number of Employee' from tbl_Employee group by post
+-- WAQ TO GET TOTAL Sum OF Salary IN EACH DEPARTMENT.
+select post,sum(salary) as 'Total Number of Salary' from tbl_Employee group by post
+---- WAQ TO GET TOTAL Sum OF Salary and total number of employee IN EACH DEPARTMENT.
+select post,sum(salary) as 'Total Salary',count(eid) as 'Total Employee' from tbl_Employee group by post
+-- WAQ TO GET TOTAL NUMBER OF EMPLOYEE IN EACH DEPARTMENT where department is greater than 2.
+select post,count(ename) as 'Total Number of Employee' from tbl_Employee group by post having count(eid)>=2  
+select * from tbl_Employee where eid=101
+select ename,post,salary from tbl_Employee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
