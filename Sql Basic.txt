@@ -1,35 +1,226 @@
+Data -> raw material facts and figure.
+Information -> Processed data is known as information.
+-----------------------------------------------------------------------------------------------------------
+File -> File is used for keeping a record.
+--------------------------------------------------------------------------------------------------
+DBMS :-
+-------------------------------
+>> It stands for Database Management System.
+>> It is a database management tool by which we can maintain or manage our database very effective and efficient manner.
+Some of the DBMS tools are as follows:-
+Ms-Access,MySQL, MS-SQL SERVER, ORACLE, MONGODB,SYBASE,DB2,POSTGRESQL,SQLITE  etc.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL SERVER:-
+------------------------------------
+>>  Sql stands for Structured Query Language.
+>>  SQL is a RDBMS.(Relational Database Management System).
+>>  Sql is used to fetch,retrieve,maintain,insert,update and all database related operations performing very effective manner.
+>>  Sql is not a case sensitive.
+>> Sql is a platform dependent language. (It installed only windows O.S.)
+>> It provide both GUI and CUI feature.
+----------------------------------------------------------------
+Database Terminology:-
+-----------------------------------------
+Database -> It is a collection of Table.
+Table -> Relation. -> it consist of Rows and columns.
+Rows -> Tuple.
+Columns -> Attributes.
+Degree -> No. of Columns.  -> 6
+Cardinality ->  No. of Rows. -> 4
+-------------------------------------------------------------------------------------------
 Database Language:-
----------------------------------------------------------
-There are five types of languages in Sql Server which are as follows-
+---------------------------------------
+There are five types of language in database -
 1. DDL (Data Defination Language)
 	>> create,alter,drop,truncate,rename,comment. 
 2. DML (Data Manipulation Language)
 	>> insert,update,delete.
 3. DCL (Data Control Language)
-	>> Grant, Revoke.
+	>> Grant , Revoke.
 4. TCL (Transaction Control Language)
-	>> Begin Transaction, Rollback,SavePoint, Commit.
+	>> Begin Transaciton, RollBack, Commit, SavePoint.
 5. DQL (Data Query Language)
 	>> Select.
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Database Terminology:-
-----------------------------------------------
-Database -> It is a collection of interrealed data / collection of table.
-Table -> Relation. -> It consist of Rows and Column.
-Rows -> Tuple.
-Column -> Attributes.
-Degree -> NO. of Columns.
-Cardinality -> No. of Rows.
+-----------------------------------------------------------------------------------------------------------------
+Authentication in Sql Server:-
+-------------------------------------------------
+Authentication -> To identify the identity of a user.
+Authorization -> To give the access or prividleges to the user.
+-------------------------------------------------------------------------------------------------------------
+There are two types of Authentication in Sql Server -
+1. Windows Authentication -> No Need of UserName and Password. It works Like an Admin.
+2. Sql Server Authentication -> It require UserName and Password. It works Like a Normal User.
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-In Sql server we can work with both GUI and CUI based env.
----------------------------------------------------------------------------------------------------
-using GUI  how to perform  insert,update,delete and creating table and database.
----------------------------------------------------------------------------------------------------------------------------------------
-1. Create Database.
-2. Create Table  -> insert,update,delete,select.
-----------------------------------------------------------------------
-Eid -> it must be unique.
-Primary Key -  Not Duplicate + Not NuLL
+To work in Sql Server we need to follow these steps -
+1. Create a Database -- using GUI
+2. Create a Table.
+3. Insert,update,Delete operations performed on these tables.
+---------------------------------------------------------------------------------------------------------------------
+Primary Key -
+------------------------
+>> P.K. is a key i.e. uniquely identify of a table.
+>> It doesn't allow NULL and Duplicate value.
+------------------------------------------------------------------------------------------------------------
+CUI -
+--------------------
+Built-In Database / System Database :-
+-------------------------------------------------------------
+1. master.
+2. model.
+3. msdb.
+4. temdb.
+--------------------------------
+1. Command to create Database.
+	>> create database databaseName
+-------------------------------------------------------
+2. Command to Select your Database-
+	>> use DatabaseName
+-----------------------------------------------------------
+3. Command to create table -
+create table tableName
+(
+colName1 datatype1,
+colName2 datatype2(size),
+colName3 datatype3(size),
+.
+.
+.
+.
+.
+colNameN datatypeN
+)
+--------------------------------------------------------------
+identity(seed,inc)
+seed -> starting value.
+inc -> how many inc you want.
+------------------------------------------------------------
+Command to Insert a Record -
+	a) Insert into all Column.
+	b) Insert into specific Column.
+---------------------------------------------------------------
+a) Insert into all Column.
+insert into tablename values(value1,value2,value3.......valueN)
+b) Insert into specific Column.
+insert into tablename(col1,col4,col6,col8) values(value1,value4,value6, value8)
+---------------------------------------------------------------------------------------------------------------------------
+Command to Select a Record:-
+-------------------------------------------------------
+a) Show all Rows and Columns.
+b) Show Specific row but all column.
+c) Show Specific column but all rows.
+d) Show Specific row and column.
+-----------------------------------------------------------------
+a) Show all Rows and Columns.
+ Select * from TableName
+------------------------------------------------------------
+b) Show Specific row but all column.
+  Select * from tableName where colname=value
+select * from tbl_Employee where eid=107
+-----------------------------------------------------------------------------------
+c) Show Specific column but all rows.
+select col1,col4,col6 from tableName
+select ename,address,salary,post from tbl_Employee
+--------------------------------------------------------------------------------------
+d) Show Specific row and column.
+select col1,col4,col6 from tableName where colname=value
+select ename,salary,post from tbl_Employee where eid=105
+-------------------------------------------------------------------------------------
+UPDATE :-
+--------------------------
+a) Update Single Record.
+b) Update Multiple Record.
+--------------------------------------------------------------------------
+a) Update Single Record.
+update tableName set colName=Newvalue1 where colName=OldValue.
+update tbl_Employee set ename='SUBHAM SINGH' where eid=105
+-----------------------------------------------------------------------------------------------------------------
+b) Update Multiple Record.
+update tableName set colName1=Newvalue1,colName2=Newvalue2,colName3=newValue3 where colName=OldValue.
+update tbl_Employee set ename='Ranbir Mishra',age=17,address='Yamuna Bank',salary=23000.45,post='CO' where eid=109
+-------------------------------------------------------------------------------------------------------------------------------------------
+DELETE vs Truncate vs Drop:-
+--------------------------------------------------------
+a) Delete specific Record.
+b) Delete all Record.
+----------------------------------------------------
+a) Delete specific Record.
+delete from tablename where colname=value.
+delete from tbl_Employee where eid=107
+----------------------------------------------------------------------------
+b) Delete all Record.
+delete from tableName
+--------------------------------------------------------------------------
+Truncate -  DDL / where condition is not allowed.
+truncate table tableName
+Delete - DML / where condition is allowed.
+--------------------------------------------------------------------------
+DROP -
+>> DDL 
+>> it delete the whole structure or whole schema.
+>> Drop can delete whole table schema/database schema
+-------------------------------------------------------------------------------------------------------
+Drop Table:-
+---------------------------
+drop table tableName
+-----------------------------------------
+Drop Database:-
+--------------------------------------------
+drop database DatabaseName
+-------------------------------------------------
+Rename :-
+-------------------
+>> Table and Database both you can rename
+Table Rename :-
+------------------------------
+sp_rename oldTableName,NewtableName
+sp_rename 'tbl_Employee','Employee' 
+-----------------------------------------------------------------
+Database Rename:-
+---------------------------------------
+alter database olddatabaseName modify name=new Databasename
+ALTER DATABASE Batch12PMWKD MODIFY NAME = Batch12PM
+--------------------------------------------------------------------------------------------------------------
+create database Batch12PM
+use Batch12PM
+create table tbl_Employee
+(
+eid int primary key identity(101,2),
+ename nvarchar(50),
+age int,
+address nvarchar(100),
+salary decimal(22,2),
+post nvarchar(50)
+)
+select * from tbl_Employee
+--insert into tablename(col1,col4,col6,col8) values(value1,value4,value6, value8)
+insert into tbl_Employee(ename,age,address,salary,post) values('sanjeev',12,'new ashok nagar',2345.67,'SE')
+insert into tbl_Employee(ename,age,address,salary,post) values('rajeev',22,'preet viahar',2345.27,'TL')
+insert into tbl_Employee(ename,age,address,salary,post) values('subham',23,'yamuna vihar',1345.27,'PO')
+insert into tbl_Employee(ename,age,address,salary,post) values('vikas',19,'pratrap viahar',4345.27,'HR')
+insert into tbl_Employee(ename,age,address,salary,post) values('ranbir',34,'jay viahar',6345.27,'MRKT')
+insert into tbl_Employee(ename,age,address,salary,post) values('ajay',21,'rajeev viahar',7345.27,'CA')
+
+select * from tbl_Employee  -- Col - 6   Row - 6
+select * from tbl_Employee where eid=107
+select ename,address,salary,post from tbl_Employee
+select ename,salary,post from tbl_Employee where eid=105
+
+--update tableName set colName=Newvalue1 where colName=OldValue.
+select * from tbl_Employee
+update tbl_Employee set ename='SUBHAM SINGH' where eid=105
+--update tableName set colName1=Newvalue1,colName2=Newvalue2,colName3=newValue3 where colName=OldValue.
+update tbl_Employee set ename='Ranbir Mishra',age=17,address='Yamuna Bank',salary=23000.45,post='CO' where eid=109
+delete from tbl_Employee where eid=107
+truncate table tbl_Employee
+drop table tbl_Employee
+drop database Batch12PM
+select * from tbl_Employee
+sp_rename 'tbl_Employee','Employee' 
+ALTER DATABASE Batch12PMWKD MODIFY NAME = Batch12PM
+-----------------------------------------------------------------------------------------------------------
+Operators in Sql Server:- Pending
+-----------------------------------------------------------------------
+1. Arithmetic Operator.
 ------------------------------------------------------------------------
 
 
@@ -77,6 +268,187 @@ Primary Key -  Not Duplicate + Not NuLL
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
