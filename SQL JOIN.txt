@@ -1,321 +1,153 @@
-b) Non-ANSI (Old Style Format):- (Where)
----------------------------------------------------
-a) Equi Join.
->> It is used = operator.
->> In equi join we can't use these operators  >,<,<=,>=,<>
->> It returns Matching Rows from the table.
-Syntax:-
--------------------
-select  <column-List> from table1 t1,table2 t2 where <Condition>
---------------------------------------------------------------------------------------------------------------------
-b) Non-Equi Join.
->> Other than = sign.
->> In it, we use following operators  -   > >= < <=
-------------------------------------------------------------------------------------------------------------------
-c) Self Join.
->> Joining a table itself.
->> No. of alias to create duplicate of single table.
--------------------------------------------------------------------------------------------------------------------
-select * from tbl_course
-select * from tbl_student
--- WAQ TO GET ALL THE STUDENT WHO ENROLLES IN JAVA COURSE.
-select s1.sname,s1.sage,s1.saddress,s1.sfee,c1.cname from tbl_Student s1,tbl_Course c1 where s1.cid=c1.cid and c1.cname='Java'
---or
-select tbl_Student.sname,tbl_Student.sage,tbl_Student.saddress,tbl_Student.sfee,tbl_Course.cname from tbl_Student,tbl_Course where tbl_Student.cid=tbl_Course.cid and tbl_Course.cname='Java'
-
--- Non-Equi
-select s1.sname,s1.sage,s1.sfee,c1.cname from tbl_Student s1,tbl_Course c1 where s1.cid<c1.cid  -- 3<1 -> False  3<4
-
--- WAQ TO GET Total NO. OF EMPLOYEE WHOSE SALARY IS SAME AS "RAJENDRA" IS GETTING.
-select * from tbl_Employee where salary=45000   -- if you know the salary -->>> but SALARY IS NOT GIVEN.
-select * from tbl_Employee where ename='rajendra'  -- it shows only rajendra record.
-select e1.ename,e1.salary from tbl_Employee e1,tbl_Employee e2 where e1.salary=e2.salary and e2.ename='rajendra'  -- SELF JOIN
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SET OPERATOR:-
--------------------------------------
->> It is used to combine two or more tables.
-Before going to perform set operator in your table we need to follow following condition which are as follows:
-	a) No. of column should be same of both the table.
-	b) Order of column should be same.
-	c) Data type must be same.
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Types of Set Operator:-
--------------------------------------------------------------
-1. Union.    ->>> Without duplicate. (It can't give duplicate value.)
-Syntax:-
--------------------------------------------
-select * from <TN1>
-union
-select * from <TN2>
--------------------------------------------
-2. UnionALL. -> With Duplicate. (it give duplicate value.)
-Syntax:-
------------------
-select * from <TN1>
-union all
-select * from <TN2>
-----------------------------------
-3. Intersect.  ->> It returns common record from multiple tables.
-Syntax:-
------------------
-select * from <TN1>
-intersect
-select * from <TN2>
--------------------------------------------------
-4. Except.
->> It returns all the records from table1 which doesn't match with table2.
-------------------------------------------------------------------------------------------------------------------
-Syntax:-
------------------
-select * from <TN1>
-except
-select * from <TN2>
+Types of JOIN -
+----------------------------
+1. Inner Join.
+2. Outer Join. 
+	a) Left    b) Right  c) Full
+3. Cross Join.
+4. Natural Join.
+5. Self Join.
 -----------------------------------------------------------------------------------------
-Rename:-
-------------------------
->> Rename command is used to rename table name as well as column name.
-How to change column name:-
-------------------------------------------------
+1. Inner Join:-
+----------------------------
+>> It is used to fetch only common/matching records from the table.
 Syntax:-
-----------------------
-sp_rename <'TN.OldColumnName'>,'New Column Name'
-----------------------------------------------------------------------------------------
-Ex:-
-------------
-sp_rename 'tbl_chennai.bname','BRANCH_NAME'
------------------------------------------------------------------------------------
-How to change Table Name:-
------------------------------------------
+---------------------
+select <Colname_List> from tablename1 inner join or join tableName2 on <Joining_Condition>
+----------------------------------------------------------------------------------------------------------------------------------------
+2. Outer Join 
+>> It returns matching and unmatching records from the table.
+a) Left Outer Join.
+>> It returns all records from the left table,matching record from the right table and unmatched return NULL.
 Syntax:-
----------------
-sp_rename <'OldTableName'>,'<NewTableName>'
--------------------------------------------------------------------------
-Ex:-
--------------
-sp_rename 'tbl_chennai','chennai'
-------------------------------------------------------------
-How to add New Column:-
---------------------------------------------
-alter -> To add New column.
-Syntax:-
--------------------
-alter table tablename add column_Name datatype(size)
-----------------------------------------------------------------------------------
-For ex:-
 -----------------
-alter table chennai add pincode int
-------------------------------------------------------------------------
-How to delete Particular column:-
------------------------------------------------------
+select * from tablename1 left outer join tableName2 on <Joining_Condition>
+------------------------------------------------------------------------------------------------------------------------------------------------------
+b) Right Outer Join.
+>> It returns all records from the right table,matching record from the left table and unmatched return NULL.
 Syntax:-
-------------------
-alter table table_name drop column <Column_Name>
-For Ex:-
----------------
-alter table chennai drop column pincode
-----------------------------------------------------------------------------------------
+-----------------
+select * from tablename1 right outer join tableName2 on <Joining_Condition>
+c) Full Outer Join.
+>> It returns all records from the left table and right table whereever it find unmatched return NULL.
+Syntax:-
+-----------------
+select * from tablename1 full outer join tableName2 on <Joining_Condition>
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Cross Join.
+>> M*N
+Syntax:-
+-----------------
+select * from tablename1 cross  join tableName2 
+-----------------------------------------------------------------------------------------------------------------------
+4. Natural Join.
+>> It doesn't support in sql server.
+>> It support in Oracle.
+------------------------------------------------------------------------------------------------
+5. Self Join.
+>> Joining a table itself is called self-join.
+>> no requirement of two table.
+>> No. of alias. with the help of alias we create duplicate tables.
+------------------------------------------------------------------------------------------------
+SET OPERATORS:-
+---------------------------------------------
+>> It is used to perform operation on multiple Tables.
+Follow some condition to implement set operator in your query-
+	a) No. of column must be same of both the table.
+	b) Order of column must be same of both the table. 	 
+	c) Data type must be match of both the table.
+-------------------------------------------------------------------------------------------------------
+There are four types of set operator :-
+1. UNION.  ->> It doesn't return duplicate record from the table.
+2. UNION ALL. ->> It return duplicate record from the table.
+3. INTERSECT. -> It return common record from the table.
+4. EXCEPT. -> It return all the record from table1 that doesn't exist in table2. (table1-table2)
+	It return all the record from table2 that doesn't exist in table1. (table2-table1)
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+alter - 
+----------------
+a)  To add New Column.
+alter table tablename add columname datatype(size)
+---------------------------------------------------------------------------------------
+b) To Delete Unwanted Column.
+alter table tablename drop column column_Name
+-------------------------------------------------------------------------------------
+c) ALTER TABLE - RENAME COLUMN
+sp_rename 'TableName.OLDColumnName','NEW COLUMN NAME'
+d)ALTER TABLE - ALTER/MODIFY DATATYPE
+ALTER TABLE table_name ALTER COLUMN column_name datatype;
+-------------------------------------------------------------------------------------------------------------
+select * from tbl_Course
+select * from tbl_Student
+-- WAQ to get how many students enrolled in python course.
+--select <Colname_List> from tablename1 inner join or join tableName2 on <Joining_Condition>
+select sname,saddress,sfee,cname from tbl_Course inner join tbl_Student on tbl_Course.cid=tbl_Student.cid and cname='python'
+--or
+select s1.sname,s1.saddress,s1.sfee,c1.cname from tbl_Course c1 inner join tbl_Student s1 on c1.cid=s1.cid
+-- OUTER JOIN
+select * from tbl_Course -- 7
+select * from tbl_Student -- 9 7*9 = 63 ROWS
+-- LEFT OUTER JOIN
+select * from tbl_Course left outer join tbl_Student on tbl_Course.cid=tbl_Student.cid
+-- RIGHT OUTER JOIN
+select * from tbl_Student right outer join tbl_Course on tbl_Course.cid=tbl_Student.cid
+-- FULL OUTER JOIN
+select * from tbl_Student full outer join tbl_Course on tbl_Course.cid=tbl_Student.cid
+select * from tbl_Course full outer join tbl_Student on tbl_Course.cid=tbl_Student.cid
+
+--CROSS JOIN
+select * from tbl_Course cross join tbl_Student
+
+select * from tbl_Employee
+-- WAQ TO GET TOTAL NO. OF EMPLOYEE WHO ARE GETTING THE SAME SALARY AS THE EMPLOYEE SANJEEV IS GETTING.
+select * from tbl_Employee where salary=2345.67 -- SALARY IS NOT GIVEN HERE....
+select * from tbl_Employee where ename='sanjeev' 
+select e1.ename,e1.post,e1.salary from tbl_Employee e1,tbl_Employee e2 where e1.salary=e2.salary and e2.ename='sanjeev'
+--select * from tbl_Employee where salary=(select salary from tbl_Employee where ename='sanjeev') -- SubQuery
+-----------------------------------------------------
+-- SET OPERATORS
 create table tbl_hyd
 (
-bid  int,
+bid int,
 bname nvarchar(50),
 city nvarchar(50)
 )
 create table tbl_chennai
 (
-bid  int,
+bid int,
 bname nvarchar(50),
 city nvarchar(50)
 )
-select * from tbl_hyd
 select * from tbl_chennai
--- UNION   ------ WIHTOUT DUPLICATE
 select * from tbl_hyd
-UNION
+
 select * from tbl_chennai
--- UNION ALL   ------ WITH DUPLICATE
+union
 select * from tbl_hyd
-UNION All
+
 select * from tbl_chennai
--- INTERSECT   ------ COMMON RECORDS
+union all
 select * from tbl_hyd
+
+select * from tbl_chennai
 intersect
-select * from tbl_chennai
--- EXCEPT   ------ COMMON RECORDS
 select * from tbl_hyd
-except
-select * from tbl_chennai
+
 select * from tbl_chennai
 except
 select * from tbl_hyd
--- Rename
-select * from chennai
-sp_rename 'tbl_chennai.bname','BRANCH_NAME'
-sp_rename 'tbl_chennai','chennai'
-alter table chennai add pincode int
-alter table chennai drop column pincode
------------------------------------------------------------------------------------------------------------------------------
-Comment in Sql server:-
------------------------------------
->> To understand query.
->> Comment can't executed/Run.
-1. Single Line Comment. -> Comment on a single line.     --   (Two times hyphen)
---sp_rename 'tbl_chennai','chennai'
-------------------------------------------------------------------------------------------------------------------
-2. MultiLine Comment -> To comment multiple line. 
-/*
---
---
-*/
------------------------
-/*
-alter table chennai add pincode int
-
-alter table chennai drop column pincode
-*/
--------------------------------------------------------------------------------------------------------
-TCL --- Transaction Control Language:- Pending.
---------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-------------------------------------------------------
+select * from tbl_Employee
+--alter table tablename add columname datatype(size)
+alter table tbl_Employee add pincode int
+alter table tbl_Employee drop column pincode
+--ALTER TABLE table_name RENAME COLUMN old_name to new_name;
+sp_rename 'tbl_Employee.ename','Employee_Name'
+-- ALTER TABLE table_name ALTER COLUMN column_name datatype;
+alter table tbl_Employee alter column post nvarchar(200)
+select * from tbl_Employee
+========================================================================
+Stored Procedure - Pending.
+--------------------------------------------------------------------------------------------------
 
 
 
