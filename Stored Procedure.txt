@@ -1,0 +1,265 @@
+Stored Procedure -
+---------------------------------------------
+>> SP is a pre- compile database objects.
+>> SP increases the performance of our database.
+>> SP reduce the network traffiic.
+>> SP doesn't use return keyword.
+>> SP provide security to our database.
+-------------------------------------------------------------------------------------------
+Types of ways to create SP -
+-------------------------------------------------
+1. Without Parameter.
+2. With Parameter.
+-------------------------------------------------
+1. Without Parameter.
+>> In this type of SP we don't pass any parameter.
+Syntax:-
+-----------------------
+create/alter proc/procedure proc_Name
+as begin
+<Query Statements>
+end
+--------------------------------------------
+Execute/Run SP:-
+------------------------------------
+exec/execute ProcedureName
+--------------------------------------
+2. With Parameter -> wap to perform insert operation.
+-----------------------------------------------------------------------------------
+Syntax:-
+--------------------
+create procedure proc_Name
+(
+@parameterName1 datatype1,
+@parameterName2 datatype2(size),
+@parameterName3 datatype3(size),
+.
+.
+@parameterNameN datatypeN(size),
+)
+as begin
+<Query Statements>
+end
+-----------------------------------------------------------------------
+SP :-
+-----------
+1. To show all Employee. --D
+2. To insert a new Employee. --D
+3. Update existing Employee.
+4. Delete Employee.
+5. Search specific Employee.
+-----------------------------------------------------------------------------
+3. Update existing Employee.
+create procedure proc_Name
+(
+@parameterName1 datatype1,
+@parameterName2 datatype2(size),
+@parameterName3 datatype3(size),
+.
+.
+@parameterNameN datatypeN(size),
+)
+as begin
+update tablename set @parametername1=value1,@parametername2=value2 where  @parametername3=value3
+end
+------------------------------------------
+select * from tbl_Employee
+-- WithOut Parameter -- To show all employee record.
+create proc sp_getallemp
+as begin
+select * from tbl_Employee
+end
+-- RUN
+exec sp_getallemp
+
+-- Perform insert operation using SP.  -- WITH Parameter
+create proc sp_insertemp
+(
+@name nvarchar(50),
+@age int,
+@address nvarchar(50),
+@salary money,
+@post nvarchar(50)
+)
+as begin
+insert into tbl_Employee(Employee_Name,age,address,salary,post)values(@name,@age,@address,@salary,@post)
+end
+
+exec sp_getallemp
+exec sp_insertemp 'Sandeep',12,'Rajiv Chawk',43094,'TL'
+
+-- UPDATE
+alter proc sp_updateemp
+(
+@eid int,
+@name nvarchar(50),
+@age int,
+@address nvarchar(50),
+@salary money,
+@post nvarchar(50)
+)
+as begin
+update tbl_Employee set Employee_Name=@name,age=@age,address=@address,salary=@salary,post=@post where eid=@eid
+end
+
+exec sp_getallemp
+exec sp_updateemp 107,'vikash singh',23,'MAYUR VIHAR',10002.34,'Accountant'
+
+-- Delete specific Employee
+create proc sp_delemp
+(
+@eid int 
+)
+as begin
+delete from tbl_Employee where eid=@eid
+end
+
+exec sp_getallemp
+exec sp_delemp 103
+
+create proc sp_getemp
+(
+@eid int
+)
+as begin
+select * from tbl_Employee where eid=@eid
+end
+exec sp_getemp 119
+----------------------------------------------------------------------------------------------------------------
+Create a Single Procedure that perform all CRUD Operations.
+----------------------------------------------------------------------------------------------------
+alter proc sp_Employee
+(
+@action nvarchar(50)=null,
+@eid int=0,
+@name nvarchar(50)=null,
+@age int=0,
+@address nvarchar(100)=null,
+@salary money=0,
+@post nvarchar(50)=null
+)
+as begin
+if(@action='Create')
+begin
+insert into tbl_Employee(Employee_Name,age,address,salary,post)values(@name,@age,@address,@salary,@post)
+select 1 as Success
+end
+else if(@action='Show')
+begin
+select * from tbl_Employee
+end
+else if(@action='Update')
+begin
+update tbl_Employee set Employee_Name=@name,age=@age,address=@address,salary=@salary,post=@post where eid=@eid
+select 1 as Success
+end
+else if(@action='Delete')
+begin
+delete from tbl_Employee where eid=@eid
+select 1 as Success
+end
+else if(@action='Show_Single')
+begin
+select * from tbl_Employee where eid=@eid
+end
+else if(@action='DeleteAll')
+begin
+delete from tbl_Employee
+end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- RUN/EXECUTE/TEST
+exec sp_Employee 'show' -- SELECT ALL
+exec sp_Employee 'Create',0,'Rajveer',19,'Mathura',3403.12,'Clerk' -- Create
+exec sp_Employee 'Update',111,'AJAY PRATAP SINGH',90,'PATNA',4053.21,'MANAGER' -- UPDATE
+exec sp_Employee 'Delete',121 -- DELETE
+exec sp_Employee 'Show_Single',107 -- Select Single
+exec sp_Employee 'DeleteAll'
+-----------------------------------------------------------------------------------------------------------------------------------
+Functions in Sql Server -  PENDING
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
