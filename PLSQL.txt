@@ -1,96 +1,100 @@
-PL/SQL:-
-----------------------
->> It stands for Procedural/Structured Query Language.
->> It is used to perform logic in your query using if-else and loops.
------------------------------------------------------------------------------------------------------------------
-Variable:-
---------------------------
->> It is a memory location i.e. used to store a value.
->> In SQL to create a variable we use 'declare' keyword.
->> In Sql variable name must contain @ Symbol.
->> If you want to store any value into a variable then we use set keyword.
---------------------------------------------------------------------------------------------------------------
-How to check the type of a variable in SQL:-
----------------------------------------------------------------
-declare @a int,@b nvarchar(500)
-set @a=10
-set @b='Rohit'
-SELECT sql_variant_property(@a,'BaseType') as BaseType
-SELECT sql_variant_property(@b,'BaseType') as BaseType
-----------------------------------------------------------------------------------------
-For Example:-
-----------------------------
+PL/SQL :- 
+-----------------------
+>> It stands for Procedural Language/Structured Query Language.
+>> It is the concept in which we create variables,conditional statements and looping concepts.
+------------------------------------------------------------------------------------------------------------------------------------------
+1. How to create variable:-
+>> To create a variable in PL/SQL we use 'declare' keyword.
+>> Variable name must be associated with @ symbol.
+Declaration of Variable:-
+----------------------------------------
+Syntax:-
+--------------------
+declare @variablename datatype.
+---------------------------------------------------
+2. How to assign value in Variable:-
+--------------------------------------------------
+>> we use 'set' Keyword to assign a value into a variable.
+Syntax:-
+---------------------
+set @variablename=Value
+----------------------------------------------
+3. How to Display variable value.
+---------------------------------------------------------
+>> print() is used to display the ouput/variable value.
+--------------------------------------------------------------------------
+Type casting in sql :-
+>> For typecasting we use cast() method.
+---------------------------------------------------------------------------
 declare @a int
 set @a=100
-print('a='+cast(@a as nvarchar))
----------------------------------------------------------------------------------------
-wap to find the sum of two number.
---------------------------------------------------------
-declare @a int,@b int,@res int
-set @a=100
-set @b=500
-set @res=@a+@b
-print('The Sum of '+cast(@a as nvarchar)+' and '+cast(@b as varchar)+' is = '+cast(@res as nvarchar))
-----------------------------------------------------------------------------------------------------------------------------------------------
-Operator:-
--------------------------------------------------------------------------------------
-1. Arithmetic Operator -> + - * , / % 
-2. Relational Operator
-> 
->=
-<
-<=
-==
-!=
-3. Logical Operator
-AND
-OR 
-NOT
--------------------------------------------------------------------------------------
-
-
-
-Assignment Question of Variable and Operator:-
+print('a='+cast(@a as varchar))
 --------------------------------------------------------------------------
-1. wap to find the sum,sub,mult,div,rem of three no.
-2. wap to find the average of five number.
-3. wap to find the area,perimeter and diagonal of rectangle.
-4. wap to find the area and circumference of circle.
-5. wap to find the SI (Simple Interest).
-----------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Operators:-
+------------------------------
+1. Arithmetic Operator :-
++
+-
+*
+/
+---------------------------------------
+For ex -> wap to find sum,sub,mult,div.
+--wap to find sum,sub,mult,div.
+declare @a int,@b int
+declare @sm int,@sb int,@mt int,@div int
+set @a=100
+set @b=200
+set @sm=@a+@b
+set @sb=@a-@b
+set @mt=@a*@b
+set @div=@b/@a
+print('a='+cast(@a as varchar))
+print('b='+cast(@b as varchar))
+print('Sum='+cast(@sm as varchar))
+print('Sub='+cast(@sb as varchar))
+print('Mult='+cast(@mt as varchar))
+print('DIV='+cast(@div as varchar))
+------------------------------------------------------------
+2. Relational
+@a=10,@b=20
+>   @a > @b  ->False
+>=  @a > = @b -> False
+<     @a < @b  -> True
+<=    @a < = @b  -> True
+==    @a == @b  -> False
+!=     @a! = @b  -> True
+---------------------------------------------------------------
+3. Logical -> and , or , not.
+---------------------------------------------------------------
+4.  Assignment Operator.
+=
++=
+-=
+*=
+/=
+a=5
+a+=3  or a=a+3
+a-=3   or a=a-3
+a*=3   or a=a*3
+a/=3   or a=a/3
+------------------------------------------------------------
+declare @a int,@sb int,@mt int,@div int
+set @a=5
+set @sb=5
+set @mt=5
+set @div=10
+set @a+=3 --- or @a=@a+3
+set @sb-=3 -- sb=sb-3 5-3=2
+set @mt*=3 -- or mt=mt*3 -- 5*3
+set @div/=3 -- div=div/3 -- 10/3 -> 3
+print('Sum='+cast(@a as varchar)) -- 8
+print('Sub='+cast(@sb as varchar)) -- 2
+print('Mult='+cast(@mt as varchar)) -- 15
+print('Div='+cast(@div as varchar)) -- 3
+----------------------------------------------------------------------
+Assignment Task :-
+----------------------------------
+1. wap to find the swap in two no using third variable.
+Input :   a=5 ,b=10
+Output : a=10,b=5
+2. wap to find the swap in two no without using third variable.
