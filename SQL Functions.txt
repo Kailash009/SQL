@@ -1,126 +1,90 @@
-Views:-
-------------------
->> A view is virtual/temporary table based on the result set to execute an sql statements.
->> view is faster performance as compare to table.
->> in view we use select statement only.
-------------------------------------------------------------------------------------------------------------
-Create a view:-
-----------------------------
-create view viewname as select * from <TN>
---------------------------------------------------------------------
-select * from tbl_Employee
-Insert into tbl_Employee (ename,age,eaddress,post,salary)values('raj',12,'fdsf','SE',343)
-create view vw_emp as select * from tbl_Employee
-
-select * from vw_emp
--- Insert
-Insert into vw_emp (ename,age,eaddress,post,salary)values('raj',12,'fdsf','SE',343)
--- Update
-update vw_emp set ename='arun chandra' where eid=2
--- Delete
-delete from vw_emp where eid=3
-----------------------------------------------------------------
-Functions:-
-------------------------
->> Function is block of statement.
-----------------------------------------------------------------
+Functions in SQL Server:-
+-------------------------------------------------
+Here we we focus on User Defined Function -
+There are two types of user Defined Function -
+a) Scalar Valued function. 
+>> It returns only single value.
 Syntax:-
----------------
-create function function_name(@parameter1,@parameter2,......@parameterN)
-returns datatype
+-----------------
+create/alter function function_Name(@Parameter1 datatype1,@Parameter Datatype2)
+returns <datatype>
 as begin
-<Query Statement/Logic>
-return FinalValue
+<Query Statements>
+return final_value
 end
---------------------
-How to execute/run a function:-
-----------------------------------------------
-select dbo.function_name()
------------------------------------------------------------------------------------------------------------------------------------------------------
-wap to create a Function and perform sum of two number.
--- Functions.
-create function calc_addition(@a int,@b int)
+------------------------------
+How to run/Execute a function.
+select functionName()
+------------------------------------------------------------------------
+-- waf to add two number.
+create function Addition(@a int,@b int)
 returns int
 as begin
 declare @c int
 set @c=@a+@b
 return @c
 end
-select dbo.calc_addition(10,40) as 'Addition'
+select dbo.Addition(10,90) as 'SumofTwoNumber'
+-------------------------------------------------------------------------------------------
+Create a Scalar valued Function and Find the Gross Salary salary of an Employee having following condition -
+	da=10% of bs  -> 1200
+	ta=15% of bs  -> 1800
+	hra =5%   -> 600
+	PF=24% of bs
+	gs=bs+da+ta+hra - PF  
+----------------------------------------------------------------------------------------
+1. v=u+at
+----------------------------------------------------
+b) Table Valued function.
+>> It returns whole table or multiple values.
+>> Begin and End is not required.
+create function function_name(@parameter datatype)
+returns table
+as 
+return <Query Statements>
+--Execute
+select * from <FunctionName>
+-----------------------------------------------------------------------------------------------------------------
+-- WAF to provide post as input and returns no. of employee working in this post.
+-----------------------------------------------------------------------------------------------------------------
 select * from tbl_Employee
----------------------------------------------------------------------
-Create a function that calucalates the gross salary of an employee.
-Gs=> Da+Ta+HRA+PF
---------------------------------------  bs-- 67000
-da=10% of bs -> 6700
-ta= 15% of bs -> 10050
-hra=5% of bs -> 3350
-pf =8% of bs -> 5360  -> 92460
--------------------------------------------
-select * from tbl_Employee
-Insert into tbl_Employee (ename,age,eaddress,post,salary)values('raj',12,'fdsf','SE',343)
-create view vw_emp as select * from tbl_Employee
-
-select * from vw_emp
--- Insert
-Insert into vw_emp (ename,age,eaddress,post,salary)values('raj',12,'fdsf','SE',343)
--- Update
-update vw_emp set ename='arun chandra' where eid=2
--- Delete
-delete from vw_emp where eid=3
-----------------------------------------------------------------
--- Functions.
-create function calc_addition(@a int,@b int)
+select getdate()
+select ASCII('a')
+------------------------------------------------------
+-- User Defined Function
+create function Addition(@a int,@b int)
 returns int
 as begin
 declare @c int
 set @c=@a+@b
 return @c
 end
-select dbo.calc_addition(10,40) as 'Addition'
-select * from tbl_Employee
 
-alter function gross_salary(@eid int)
-returns int
+select dbo.Addition(10,90) as 'SumofTwoNumber'
+
+-- WAF to find the average of five numbers.
+select * from tbl_Employee
+-- Create a Scalar valued Function and Find the Gross Salary salary of an Employee.
+alter function Calc_Gross_Salary(@eid int)  -- Function Defination
+returns money
 as begin
-declare @bs int,@da int,@ta int,@hra int,@pf int,@gs int
+declare @bs money,@da money,@ta money,@hra money,@gs money
 select @bs=salary from tbl_Employee where eid=@eid
-set @da=0.1*@bs
-set @ta=0.15*@bs
-set @hra=0.05*@bs
-set @pf=0.08*@bs
-set @gs=@bs+@da+@ta+@hra+@pf
+set @da=@bs*0.1
+set @ta=@bs*0.15
+set @hra=@bs*0.05
+set @gs=@bs+@da+@ta+@hra
 return @gs
 end
+select dbo.Calc_Gross_Salary(127) as 'Gross_Salary'
 
-select dbo.gross_salary(1)  'Total Gross Salary'
+select * from tbl_Employee
+alter function calc_Employeerecord(@post nvarchar(50))
+returns table
+as 
+return (select Employee_Name,address,post from tbl_Employee where post=@post)
 
-select salary from tbl_Employee where eid=1
-
-select ename,eid,
-(((salary*'10')/'100')+
-((salary*'15')/'100')+
-((salary*'5')/'100')+
-((salary*'8')/'100')+
-salary) as 'Groce Salary',
-((salary*'10')/'100') as 'DA',
-((salary*'15')/'100') as 'TA',
-((salary*'5')/'100') as 'HRA',
-((salary*'8')/'100') as 'PF'
-from tbl_Employee
-WHERE salary > '50000'
-order by eid
-------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
+select * from dbo.calc_Employeerecord('TL')
 
 
 
