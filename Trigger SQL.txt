@@ -1,53 +1,81 @@
-TRIGGER:-
--------------------------------------
->> It is special type of stored procedure,that automatically fired when an event has occured.
-Database Events -> Create,alter,insert,update,delete and many more.
+Trigger:-
+------------------------------
+>> It is a special type of Stored procedure or stored program that automatically gets executed when an event has occured.
+>> It provide security to our database.
+Data Base Events :-  Create,alter,insert,update,delete and so on.
+---------------------------------------------------------------------------------------------------------------------
+Student  ->>>  900000 -> if one record insert in student table, just after in personaldetail one msg automatically inserted.
+PersonalDetail ->> Don't need to insert record Manually in this table.
 -------------------------------------------------------------------------------------------------------------------------------------------
-Student  -> just after when one student record inserted after that one entry automatically insert into personaldetail table.
-Personal Detail  -> do not provide any record manually.
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-Trigger Timing -
----------------------------
-a) Before 
-b) After/for
----------------------------
 Syntax:-
-----------------
-create trigger trigger_Name
-on TableName
-for inserted    ---- after timing
+-----------------
+create trigger <tg_Name> on tablename for insert/update/delete  as begin <Query Statements>  end
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+create table student
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+sage int,
+saddress nvarchar(50),
+smobileno nvarchar(50),
+sfee int
+)
+create table tbl_personal_info
+(
+pid int primary key identity(1,1),
+pmsg nvarchar(300)
+)
+-- INSERT TRIGGER OPERATION
+create trigger tg_insert
+on student
+for insert   --- After Timing
 as begin
-<Query Statements>
+declare @sid int
+select @sid=sid from inserted  -- It keeps this data behind the scene.
+insert into tbl_personal_info (pmsg) values('The Student with ID'+cast(@sid as nvarchar(40))+'has been added at the following'+cast(getdate() as nvarchar(100)))
+print('The Student is added SuccessFully!!')
 end
----------------------------------------------------------
-create table Employee
-(
-eid int primary key identity(1,1),
-ename nvarchar(50),
-age int,
-eaddress nvarchar(50),
-esalary decimal(20,2)
-)
-select * from Employee   --- Main Table.
-create table tbl_emp_info
-(
-id int primary key identity(1,1),
-msg nvarchar(400)
-)
 
-alter trigger tg_EmployeeInsert
-on Employee
-for insert   ---- After Timing.
+insert into student (sname,sage,saddress,smobileno,sfee) values('ram',19,'new ashok','9088983',12000)
+
+-- Update TRIGGER OPERATION
+create trigger tg_update_student
+on student
+for update  -- After Update
 as begin
-declare @id int
-select @id=eid from Employee inserted  -- It keeps the data behind the scene
-insert into tbl_emp_info(msg)values('The New Employee has been Added with Employee ID'+cast(@id as nvarchar(50))+'is Joined'+cast(getdate() as nvarchar(50)))
-print('The New Employee Added')
+declare @NFee int,@OFee int
+declare @Name nvarchar(100)
+select @Name=sname,@NFee=sfee from inserted -- it keeps the data behind the scene.(after update operation)
+select @OFee=sfee from deleted -- It keeps the data before the update operation. 
+insert into tbl_personal_info(pmsg) values('The Student '+@Name+'fees has been changed from'+cast(@OFee as nvarchar(50))+'to'+cast(@Nfee as nvarchar(50)))
+print('The Student Fee has been Updated!!')
 end
-select * from Employee
-select * from tbl_emp_info
-insert  into Employee values('Arun',21,'Pratap Nagar',54000.23)
----------------------------------------------------------------------------------------------------------------------------------
+
+update student set sfee=33000 where sfee=12000
+
+-- Delete TRIGGER OPERATION
+create trigger tg_delete
+on student
+for delete
+as begin
+declare @sid int
+select @sid=sid from deleted
+insert into tbl_personal_info(pmsg) values('The Student with ID '+cast(@sid as nvarchar(50))+'has been delete successfully at '+cast(GETDATE() as nvarchar(100)))
+print('The Student has been Deleted SuccessFully!!')
+end
+
+select * from student  
+select * from tbl_personal_info
+delete from student where sid=1
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 
 
