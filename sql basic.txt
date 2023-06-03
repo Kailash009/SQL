@@ -1,0 +1,234 @@
+Database Language:-
+---------------------------------------------
+There are five types of database Language:-
+a) DDL (Data Defination Language)
+	>> create,drop,truncate,alter,rename,comment. (- -)
+b) DML (Data Manipulation Language)
+	>> insert,update,delete
+c) DCL (Data Control Language)
+	>> Grant , Revoke.
+d) TCL (Transaction Control Language)
+	>> Begin Transaction ,   Commit,  Rollback  , SavePoint.
+e) DQL (Data Query Language)
+	>> SELECT.
+-------------------------------------------------------------------------------------------------------------------------
+Insert Record in Table:-
+-----------------------------------------
+There are two ways to insert a record into table:-
+a) Insert into all Column.
+Syntax:-
+-------------------
+insert into tablename values(value1,value2,value3........valueN)
+b) Insert into specific Column.
+Syntax:-
+------------------
+insert into tablename(col1,col4,col8) values(value1,value4,value8)
+-- insert into specific column
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('pawan',19,'patel nagar','SE',78303)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('rajeev',12,'subhas nagar','TL',78303)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('arun',13,'ravindra nagar','Mrtk',78303)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('sahil',15,'azad nagar','PO',78303)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('mainta',18,'rashim nagar','HR',78303)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- insert into specific column
+set identity_insert tbl_Employee on;
+insert into tbl_Employee(eid,ename,age,eaddress,post,salary) values(893,'mainta',18,'rashim nagar','HR',78303)
+set identity_insert tbl_Employee off;
+-------------------------------------------------------------------------------------------------------------------
+SELECT:-
+-------------------------------
+a) Select all rows and columns.
+Syntax:-
+select * from tablename
+select * from tbl_Employee
+---------------------------------------------
+b) Select specific row and all column.
+Syntax:-
+select * from tablename where colname=value
+select * from tbl_Employee where eid=107
+c) Select all rows and specific column.
+select col1,col4,col6 from tablename
+select ename,post,salary from tbl_Employee
+d) Select specific row and specific column.
+select col1,col3,col5 from tablename where colname=value
+select ename,salary from tbl_Employee where eid=109
+---------------------------------------------------------------------------------------------------------
+UPDATE:-
+----------------------
+a) Update specific/Single column.
+Syntax:-
+------------------------
+update tablename set colname='New Value' where colname='OLD Value'
+update tbl_Employee set ename='MANITA SINGH' where eid=109
+-----------------------------------------------------------------------------------------------------------------------
+b) Update all/Multiple Column.
+----------------------------------------------------------------------
+update tablename set colname1='New Value1',colname2='New Value2',colname3='New Value3' where colname='OLD Value'
+update tbl_Employee set ename='RAHUL',age=23,eaddress='rahim nagar',post='Clerk',salary=12300 where eid=893
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DELETE:-
+---------------------------
+a) Delete specific record.
+Syntax:-
+--------------------
+delete from tablename where colname='value'
+delete from tbl_Employee where eid=103
+-------------------------------------------------------------------------------------------
+b) Delete all record.
+delete from tablename
+---------------------------------------------------------------------
+Difference between delete,truncate and drop:-
+---------------------------------------------------------------------
+delete (DML)-> you can delete specific record as well as all record. couldn't delete the schema of a table.
+truncate -> you can't delete specific record from the table. truncate delete all the records from the table but couldn't delete the schema of a table. (DDL)
+>> where condition is not allowed in truncate.
+Syntax:-
+--------------------
+truncate table table_Name
+truncate table tbl_Employee
+----------------------------------------------
+drop -> drop delete the whole record as well as schema of a table. (DDL)
+Syntax:-
+------------------------
+drop table tablename
+---------------------------------
+drop -> it is also used to delete the schema of whole database.
+Syntax:-
+--------------------
+drop database databaseName
+drop database Batch10AMWE
+----------------------------------------------
+select * from tbl_Employee
+-- insert into specific column
+set identity_insert tbl_Employee on;
+insert into tbl_Employee(eid,ename,age,eaddress,post,salary) values(893,'mainta',18,'rashim nagar','HR',78303)
+set identity_insert tbl_Employee off;
+select * from tbl_Employee
+select * from tbl_Employee where eid=107
+select ename,post,salary from tbl_Employee
+select ename,salary from tbl_Employee where eid=109
+
+select * from tbl_Employee
+-- waq to change employeename to manita to manita singh
+update tbl_Employee set ename='MANITA SINGH' where eid=109
+
+update tbl_Employee set ename='RAHUL',age=23,eaddress='rahim nagar',post='Clerk',salary=12300 where eid=893
+
+delete from tbl_Employee where eid=103
+
+delete from tbl_Employee
+
+--select * from tbl_Employee
+truncate table tbl_Employee
+
+drop table tbl_Employee
+drop database Batch10AMWE
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
