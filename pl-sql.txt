@@ -1,0 +1,227 @@
+IF Statement PL/SQL:-
+-------------------------------------
+1. IF:-
+--------------------
+>> If statement is used to check only single condition.
+>> if the condition is false then nothing will print.
+Syntax:-
+if(condition)
+    statement
+-----------------------------------
+-- wap to check number is equal to 100.
+declare @a int
+set @a=200
+if(@a=100)
+begin
+print('Number is Equal to 100')
+end
+---------------------------------------------------------------
+2. if-else:-
+>> This statement is used to check the condition and take one of the two possible action.
+Syntax:-
+if(condition)
+statement1
+else
+statement2
+-----------------------------------------------------------------------
+wap to check no. is equal to 100 or not.
+declare @a int
+set @a=800
+if(@a=100)
+begin
+print('Number is Equal to 100')
+end
+else
+begin
+print('Number is not Equal to 100')
+end
+-----------------------------------------------------------------------------
+wap to check in two no. which one is greater or not.
+------------------------------------------------------------------------------
+declare @a int,@b int
+set @a=800
+set @b=500
+if(@a>@b)
+begin
+print(cast(@a as nvarchar(100))+ ' is Greater')
+end
+else
+begin
+print(cast(@b as nvarchar(100))+ ' is Greater')
+end
+----------------------------------------------------------------------------
+wap to check character is vowel or consonant.
+declare @ch char
+set @ch='o'
+if(@ch='a' or @ch='e' or @ch='i' or @ch='o' or @ch='u')
+begin
+print('Character is Vowel')
+end
+else
+begin
+print('Character is Consonant')
+end
+---------------------------------------------------------------------------------
+wap to check no. is even or odd.
+declare @a int
+set @a=84
+if(@a%2=0)
+begin
+print('Number is Even')
+end
+else
+begin
+print('Number is ODD')
+end
+------------------------------------------------------------------------------------------
+if-else-if
+-----------------
+>> it is used to provide multiple condition in a program.
+Syntax:-
+---------------------
+if(condition1)
+statement1
+else if (condition2)
+statement2
+else if (condition3)
+statement3
+else if (condition4)
+statement4
+else
+statement5
+------------------------------------------------------
+wap to find the greatest in three no.
+-----------------------------------------------------
+declare @a int,@b int,@c int
+set @a=1000
+set @b=2000
+set @c=300
+if(@a>@b and @a>@c)
+begin
+print('A is Greatest')
+end
+else if(@b>@a and @b>@c)
+begin
+print('B is Greatest')
+end
+else
+begin 
+print('C is Greatest')
+end
+---------------------------------------------------------------
+Assignment:-
+-------------------------
+1. wap to input 5 subject marks and find its total and percentage and according to the percentage find the following Grade-
+	100%-90% -> S
+	 90%-80% -> A
+	 80%-70% -> B
+	 70%-60% -> C
+	 60%-50% -> D
+	< 50%       -> F
+2. wap to find year is Leap or not.
+3. wap to find smallest in two no.
+4. wap to find smallest in three no.
+5. wap to check no. is positive or negative.
+-----------------------------------------------------------------------------------------------------------
+Loop in PL/SQL  --> PENDING.
+-------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
