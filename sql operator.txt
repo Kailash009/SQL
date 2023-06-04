@@ -1,0 +1,185 @@
+Operators in Sql:-
+-------------------------------
+1. Arithmetic Operator-
+-------------------------------------------
++ , - , * , /  ,  %
+------------------------------------------
+Temporarily column name => We use as keyword to provide this.
+2. Relational Operator:-
+----------------------------------------------
+> , >= , <  , <= , <>
+10>=10  -> True.
+10>10   ->  False.
+------------------------------------------------
+3. Logical Operator.  -> it is used to provide multiple condition in a query.
+and -> both condition must be true.
+or   -> Either one of the condition is true then the result will be true.
+not -> IF condition is true then output is False, and vice-versa.
+-----------------------------------------------------------------------------------------------------
+Special Operator:-
+-------------------------------------
+1. in.
+2. not in.
+3. between.
+4. not between.
+5. order by.
+>> It is used to perform your query in ascending or descending order.
+asc  -> no need to write.
+desc -> you have to write.
+-------------------------------------------------
+6. top.
+7. Like.
+>> It is used for pattern matching.
+it uses two symbols -
+	a) _ (Underscore) -> It read single character at a time.
+	b)  % (Percentage) -> It read all character at a time.
+		i) if you know  the first character.
+	-- waq to get the employee details whose name start from s.
+	select * from tbl_Employee where ename like 's%'
+		ii) if you kown the last character.
+	-- waq to get the employee details whose name end from h.
+	select * from tbl_Employee where ename like '%h'
+
+		iii) if you don't know the first and last character.	
+	-- waq to get the employee details whose name contains a.
+	select * from tbl_Employee where ename like '%a%'
+--------------------------------------------------------------------------------------------------------------------- 
+create database Batch10AMWE
+use Batch10AMWE
+create table tbl_Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+age int,
+eaddress nvarchar(50),
+post nvarchar(50),
+salary money
+)
+select * from tbl_Employee
+select 10+3 as 'Addition'
+select 10-3 as 'Subtraction'
+select 10*4 as 'Multiplication'
+select 10/3 as 'Divide'
+select 10%4 as 'Remainder'
+select ename+' = '+post as 'EmpName+POST' from tbl_Employee
+select * from tbl_Employee
+-- Relational Operator
+-- waq to get all the employee whose salary is less than 20000.
+select * from tbl_Employee where salary<20000
+-- waq to get all the employee whose salary is greater than 20000.
+select * from tbl_Employee where salary>20000
+-- waq to get all the employee whose salary is greater than or equal to 21000.
+select * from tbl_Employee where salary>=21000
+-- waq to get all the employee whose salary is not equal to 45000.
+select * from tbl_Employee where salary <> 45000
+--Logical Operator
+-- waq to get all the employee whose name is Ram and post is SE.
+select * from tbl_Employee where ename='RAM' and post='SE'
+-- waq to get all the employee whose name is Ram and post is Clerk.
+select * from tbl_Employee where ename='RAM' or post='Clerk'
+-- waq to get all the employee whose name is not shivam and not kunal.
+select * from tbl_Employee where not ename='shivam' and not ename='Kunal'
+-- IN
+-- waq to get all the employee whose name is shivam,kunal or Nagendra.
+select * from tbl_Employee where ename='shivam' or ename='kunal' or ename='Nagendra'
+-- or
+select * from tbl_Employee where ename in('shivam','kunal','Nagendra')
+
+-- waq to get all the employee whose name is not shivam,kunal or Nagendra.
+select * from tbl_Employee where ename not in('shivam','kunal','Nagendra')
+
+-- waq to get all the employee whose salary is between 30000 to 50000.
+select * from tbl_Employee where salary between 30000 and 50000
+-- waq to get all the employee whose salary is not between 30000 to 50000.
+select * from tbl_Employee where salary not between 30000 and 50000
+-- waq to get all the employee whose age is between 30 to 50.
+select * from tbl_Employee where age between 30 and 50
+
+
+-- waq to get all the employee name is ascending order.
+select * from tbl_Employee order by ename  -- No need to write asc.
+-- waq to get all the employee name is descending order.
+select * from tbl_Employee order by ename desc
+
+-- waq to get top 3 record of an employee.
+select top 3 * from tbl_Employee
+-- waq to get top 3 latest record of an employee.
+select top 3 * from tbl_Employee order by eid desc
+
+select * from tbl_Employee
+-- waq to get the employee details whose name is r_m.
+select * from tbl_Employee where ename like 'r_m'
+
+-- waq to get the employee details whose name start from s.
+select * from tbl_Employee where ename like 's%'
+
+-- waq to get the employee details whose name end from h.
+select * from tbl_Employee where ename like '%h'
+
+-- waq to get the employee details whose name contains a.
+select * from tbl_Employee where ename like '%a%'
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
