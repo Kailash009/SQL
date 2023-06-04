@@ -1,0 +1,113 @@
+Loop in PL/SQL:-
+--------------------------------------
+>>  while loop is most preferable loop in pl/sql.
+>>  In while loop condition will be checked first after that statement will be executed.
+Syntax:-
+-------------------
+while(condition)
+       statements
+        inc/dec
+--------------------------------------------------------------
+1. wap to print 1 to 10 number.
+declare @a int
+set @a=1
+while(@a<=10) -- 1<=10 2<=10 3<=10 4<=10 11<=10 -- False
+begin
+print(@a) --1 2 3 4
+set @a=@a+1 -- 2 3 4 5
+end
+2. wap to print 10 to 1 number.
+declare @a int
+set @a=10
+while(@a>=1)  
+begin
+print(@a) 
+set @a=@a-1 
+end
+-------------------------------------
+3. wap to print 1 to 10 number and finds its sum and average.
+1+2+3+.....10 => n=10 ->  55
+sum=55
+avg = 5.5
+----------------------------------------------------------------------------
+declare @a int,@sm int
+declare @avg decimal(18,3)
+set @a=1
+set @sm=0
+while(@a<=10) -- 1<=10   2<=10 3<=10 4<=10
+begin
+print(@a) --1 2 3
+set @sm=@sm+@a -- sm=0+1 =1 sm=1+2=3 sm=3+3=6 sm=6+4 =10
+set @a=@a+1 --a=2 a=3 4 5
+end
+set @avg=cast(@sm as decimal)/10
+print('Total Sum='+cast(@sm as varchar))
+print('Total Average='+cast(@avg as varchar))
+--------------------------------------------------------------------------------
+wap to print happy birthday 12 times.
+declare @a int
+set @a=1
+while(@a<=12)
+begin
+print('Happy BirthDay')
+set @a=@a+1
+end
+------------------------------------------------------------------------
+wap to find the factorial of a given number.
+5! => 5*4*3*2*1 => 120
+4! => 4*3*2*1 => 24
+--------------------------------------------------------------------
+declare @a int,@f int,@t int
+set @a=5
+set @f=1
+set @t=@a -- t=5
+while(@a>0) --5>0 4>0 3>0 2>0 1>0 0>0 - False
+begin
+set @f=@f*@a --f=1*5=5 f=5*4=> 20 f=20*3-> 60 f=60*2=> 120 f=120*1 => 120
+set @a=@a-1 -- a=4 a=3 a=2 a=1 a=0
+end
+print('The Factorial of '+cast(@t as varchar)+' is = '+cast(@f as varchar))
+--------------------------------------------------------------------------------------------------------
+Assignment Task - Doubt Class - Join
+wap to print even number between 1 to 30.
+wap to print odd number between 1 to 30.
+-------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
