@@ -1,0 +1,166 @@
+b) Output Parameter:-
+-------------------------------------------
+>> When we want to return value from the Stored procedure then we use the concept of output parameter.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+1. Declaring Bind Variable.
+2. Adding/Executing Bind Variable.
+3. Print Bind Variable.
+--------------------------------------------------------------------------------
+waq to input eid and find the PF and PT on the following condition.
+	PF = 10%
+	PT(Professional Tax) = 20%
+----------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+create proc sp_Emp
+(
+@eid int,
+@pf money out, -- Output Parameter
+@pt money out
+)
+as begin
+declare @sal money
+select @sal=salary from tbl_Employee where eid=@eid
+set @pf=@sal*0.1
+set @pt=@sal*0.2
+end
+-----------------------------------------------------------------------------------------
+declare @bpf money,@bpt money
+exec sp_Emp 101,@bpf out,@bpt out
+print('Provident Fund='+cast(@bpf as varchar))
+print('Professional Tax='+cast(@bpt as varchar))
+---------------------------------------------------------------------------------------------
+Views:-
+----------------
+>> View is a temporarily memory in which you can retreive data in a fast manner.
+>> View is a virtual table.
+>> View only used select statement.
+----------------------------------------------------------------------------------------------------------------------------
+Types of Views:-
+-------------------------
+a) Simple View. (Updatable View).
+b) Complex View. (Non-Updatable View).
+-------------------------------------------------------------------
+a) Simple View:-
+------------------------------
+>> When we want to fetch data from single base table.
+>> All crud operations are performed in simple view.
+Syntax:-
+--------------------
+create view view_Name as select * from <Table Name>
+----------------------------------------------------------------------------------------------------------
+b) Complex View.
+----------------------------------------------------------
+>> When we want to fetch data from multiple base table. 
+>> It is also known as 'Non-Updatable' View.
+------------------------------------------------------------------------------------------------------------
+Syntax:-
+--------------------------
+create view view_name as select * from <TN1>
+union
+create view view_name as select * from <TN2>
+--------------------------------------------------------------------------------------------------------------
+-- Simple View
+create view vw_emp as select * from tbl_Employee
+
+select * from tbl_Employee
+select * from vw_emp
+-- Updatable View./ Simple View
+insert into vw_emp(ename,age,mobileno,post,salary) values('raj',12,'778033','Mrt',87874)
+update vw_emp set ename='ram chandra' where eid=101
+delete from vw_emp where eid=119
+-------------------------------------------------------------
+-- Complex View (Non-Updatable)
+select * from tbl_hyd
+select * from tbl_chennai
+create view vw_complex as 
+select * from tbl_hyd
+union
+select * from tbl_chennai
+
+select * from vw_complex
+
+-- Complex View / Non-Updatable
+insert into vw_complex values(345,'PNB','Mathura')
+update vw_complex set bname='Kotak' where bid=108
+delete from vw_complex
+-----------------------------------------------------------------------------------------------------------------------------------
+Ranking Function:-
+------------------------------------------
+>> It is used to provide Rank on each row wise and group of row wise.
+>> In Ranking Function we use two Clauses -
+	a) Order By. -> Mandatory Clause - (Row wise or Group of row wise)
+	b) Partition By. -> It is not an Mandatory Clause, it only used when we work on group of row wise.
+There are three types of ranking function which are as follows:-
+a) Row Number(). 
+b) Rank().
+c) Dense Rank().
+-------------------------------------------------------------------------------------------------------------------------
+Here we demonstrate an example to assign rank on a salary basis ----- PENDING.
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
