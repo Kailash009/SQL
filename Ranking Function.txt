@@ -1,0 +1,121 @@
+Ranking Function:-
+------------------------------------------
+>> It is used to provide Rank on each row wise and group of row wise.
+>> In Ranking Function we use two Clauses -
+	a) Order By. -> Mandatory Clause - (Row wise or Group of row wise)
+	b) Partition By. -> It is not an Mandatory Clause, it only used when we work on group of row wise.
+There are three types of ranking function which are as follows:-
+a) Row Number(). 
+b) Rank().
+c) Dense Rank().
+---------------------------------------------
+Here we demonstrate an example to assign rank on a salary basis.
+---------------------------------------------------------------------------------------------------
+Syntax:-
+--------------------------
+RankingFunction() over(partition by<colname> order by <colname>)
+-------------------------------------------------------------------------------------------------------------
+a) Row_Number().  -> if two employee having same salary it assign different ranks.
+b) Rank().  ->  if two employee having same salary it assign same rank but it skip rank to the next employee.
+c) Dense_Rank(). -> if two employee having same salary it assign same rank and it doesn't skip rank to the next employee.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Group of Row Wise:- (partition By)  or Order By
+-------------------------------------------------------------------------
+select * from tbl_Employee
+-- ROW WISE 
+--RankingFunction() over(partition by<colname> order by <colname>)
+select ename,salary,row_number() over(order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,rank() over(order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,dense_rank() over(order by salary desc) as 'Ranks' from tbl_Employee
+
+-- GROUP OF ROW WISE:
+select ename,salary,did,row_number() over(partition by did order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,did,rank() over(partition by did order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,did,dense_rank() over(partition by did order by salary desc) as 'Ranks' from tbl_Employee
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Nested Queries:-
+-------------------------------
+>> whenever we want to retrieve the data from the query and it is not possible through simple query then we use the concept of
+Nested query.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+select * from TN where col=(select * from TN where col=(select * from TN where col=(select * from TN where col=value)))
+(Outer Query)                                                                                    (Inner Query)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+On the basis of execution process it can be classified into the following two types:-
+-----------------------------------------------------------------------------------------------------------------------------
+a) Non-Corelated.
+>> First Inner Query will Execute later on Outer Query will execute.
+>> Outer Query Result is depend upon Inner Query.
+	It can be divided into the following two categories:-
+		a) Single Row SubQuery.
+>> It retrieve single record from the table.
+		b) Multiple Rows SubQuery.
+>> It retrieve multiple record from the table.
+---------------------------------------------------------------------------------------------------------------------------
+b) Co-related
+>> First Outer Query will Execute later on Inner Query will execute.
+>> Inner Query Result is depend upon Outer Query.
+---------------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- ROW WISE 
+--RankingFunction() over(partition by<colname> order by <colname>)
+select ename,salary,row_number() over(order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,rank() over(order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,dense_rank() over(order by salary desc) as 'Ranks' from tbl_Employee
+
+-- GROUP OF ROW WISE:
+select ename,salary,did,row_number() over(partition by did order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,did,rank() over(partition by did order by salary desc) as 'Ranks' from tbl_Employee
+select ename,salary,did,dense_rank() over(partition by did order by salary desc) as 'Ranks' from tbl_Employee
+---------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
