@@ -1,0 +1,147 @@
+Nested Queries:-
+-------------------------------
+a) Non-Corelated.
+>> First Inner Query will Execute later on Outer Query will execute.
+>> Outer Query Result is depend upon Inner Query.
+	It can be divided into the following two categories:-
+		a) Single Row SubQuery.
+>> It retrieve single record from the table.
+-- WAQ TO GET HIGHEST SALARY OF AN EMPLOYEE.
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee)
+--Outer Query	                                        -- Inner Query
+		b) Multiple Rows SubQuery.
+>> It retrieve multiple record from the table.
+-- WAQ TO GET ALL THE EMPLOYEE DETAILS WHOSE DEPARTMENT IS SAME AS SHYAM, SUNIL AND HIMESH.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+b) Co-related
+>> First Outer Query will Execute later on Inner Query will execute.
+>> Inner Query Result is depend upon Outer Query.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Comparison Between Non-Corelated and Corelated SubQuery:-
+--------------------------------------------------------------------------------------------------------------
+Non-Corelated:-  78 -> 79 subquery
+----------------------------
+N=1 First Highest salary -> NO. of SubQuery -> N+1 ->  2
+N=2 Second Highest  -> N+1 -> 3
+N=3 Third Highest ->N+1 -> 4
+--------------------------------------------------------
+n=23 -> n+1 => 24 SubQuery.
+--------------------------------------------------------
+2. Corelated Query:-
+---------------------------------
+Syntax:-
+----------------------
+select * from <TN> tablenamealias1
+where N-1=(select count(colname) from <TN> tablenamenamealias2
+where tablenamealias2.colname(>/<)tablenamealias1.colname)
+-------------------------------------------------------------------------------------------------------------
+> -> Highest Salary
+< -> Lowest Salary
+--------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee)
+--Outer Query	                                        -- Inner Query
+
+-- MULtiple Row SubQuery
+select * from tbl_Employee where post='SE' or post='TL' or post='Mrkt'  -- Deparament name is not Given.
+
+select * from tbl_Employee where post in(select post from tbl_Employee where ename='shyam' or ename='sunil' or ename='himesh')
+-- or
+select * from tbl_Employee where post in(select post from tbl_Employee where ename in('shyam','sunil','himesh'))
+--------------------------------------------------------------------------------------------------------
+-- Non-Corelated Query
+-- 1st Highest Salary of an Employee N = 1 => no. of SubQuery 2 
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee)
+-- 2nd Highest Salary of an Employee  = 3
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee)) --45003<90834
+-- 3rd Highest Salary of an Employee N+1 => 4
+select * from tbl_Employee where salary=(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee where salary<(select max(salary) from tbl_Employee))) 
+
+-- Corelated SubQuery:-
+-----------------------------------
+--select * from <TN> tablenamealias1
+--where N-1=(select count(colname) from <TN> tablenamenamealias2
+--where tablenamealias2.colname(>/<)tablenamealias1.colname)
+-- 1st Highest Salary -->> N=1
+select * from tbl_Employee e1
+where 0=(select count(salary) from tbl_Employee e2
+where e2.salary>e1.salary)
+
+-- 2nd Highest Salary -->> N=2
+select * from tbl_Employee e1
+where 1=(select count(salary) from tbl_Employee e2
+where e2.salary>e1.salary)
+
+-- 3rd Highest Salary -->> N=3
+select * from tbl_Employee e1
+where 2=(select count(salary) from tbl_Employee e2
+where e2.salary>e1.salary)
+---------------------------------------------------------------------------------------------------------------------
+DCL :-  Pending
+-------------------------------------------------------------
+>> It stands for Data Control Language.
+In DCL we have following commands:-
+	a) Grant. -> To give permission to the user.
+	b) Revoke. -> To take out the permission from the User.
+----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
