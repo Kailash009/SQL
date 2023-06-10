@@ -1,0 +1,197 @@
+DBMS :-
+---------------------
+>> It stands for Database Management System.
+>> SOme of the following tools are as follows -
+MySql,SqlServer,Oracle,PostGreSql,Mongo DB, SqlIte,NoSql,Db2, Sybase etc..
+--------------------------------------------------------------------------------------------------------------------------------
+1. Sql Developer.
+2. DBA.
+------------------------------------------------------
+SQL SERVER:-
+---------------------------------------------
+>> It stands for Structured Query Language.
+>> Sql is a platform dependent language. (It installed only windows os.)
+>> It is the product of Microsoft.
+>> It can be used both GUI (Graphical User interface) and CUI (Command user interface) features.
+>> Sql is a RDBMS (Relational Database Management System) tool , by which we can perform various operations like insert ,update,delete,truncate and many more very effiecent manner.
+>> Sql is not a case sensitive language.
+----------------------------------------------------------------------------------------------------------------------------------------------
+Database Language:-
+---------------------------------------------------
+1. DDL (Database Defination Language)
+	>> create,alter,drop,truncate,rename,comment.
+2. DML (Data Manipulation Language)
+	>> insert,update,delete.
+3. DCL (Data Control Language)
+	>> Grant,Revoke.
+4. TCL (Transaction Control Language)
+	>> Begin Transaction,commit,rollback,Savepoint.
+5. DQL (Data Query Language)
+	>> Select.
+---------------------------------------------------------------------------------------------------------------------
+Database Terminlogy:-
+-----------------------------------------------
+1. Database. -> Collection of Table.
+2. Table / Relation -> it consist of rows and columns.
+3. Rows -> Tuple.
+4. Columns -> Attributes.
+-------------------------------------------------------------------------------
+How to install Sql server:-
+-----------------------------------------
+1. SQL Server.  -> To execute your Query.
+https://www.microsoft.com/en-in/sql-server/sql-server-downloads  -> Express
+2. SSMS.(Sql Server Management Studio) -> It provide a platform where you write your query.
+https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+GUI - 
+--------------
+1. Create Database
+2. Create Table. -->>> "insert,update,delete,select."
+----------------------------------------------------------------------------------------
+Primary Key:-
+-------------------------------
+>> It is uniquely  identify of a table.
+>> P.K doesn't allow Null and Duplicate Value.
+--------------------------------------------------------------------------
+eid  -> P.K.
+------------------------
+null -> you can't leave this field empty.
+----------------------------------------------------------------------------------------
+Using CUI Perform various operations -
+1. Create Database.
+2. Create Table.
+3. Insert,Update, Delete, Select.
+---------------------------------------------------------------------------------------------
+Command to create Database:-
+-------------------------------------------------------------------------
+create database databaseName
+-------------------------------------------------------------------------
+Command to select your Database:-
+--------------------------------------------------------
+use DatabaseName
+------------------------------------------------------
+Command to create Table:-
+-------------------------------------------------
+create table tableName
+(
+colName1 datatype1,
+colName2 datatype(size),
+.
+.
+.
+colNameN datatypeN(size)
+)
+----------------------------------------------------------------------------------------------------
+Set Auto inc value in a column:-
+--------------------------------------------------------------
+identity(seed,inc)
+seed -> start value.
+inc -> how many inc you want.
+-------------------------------------------------------
+identity(1,1) -> 1 2 3 4 5 6 ...
+identity(101,2) -> 101,103,105,107,109.
+------------------------------------------------------------------
+Command to Insert:-
+---------------------------------------
+a) Insert into specific Column.
+insert into tablename(col1,col4,col6) values(value1,value4,value6)
+b) Insert into all Column.
+insert into tablename values(value1,value2,value3,value4....)
+-------------------------------------------------------------------------------------------------------------------------------
+create database BatchSonam
+use BatchSonam
+create table tbl_Employee
+(
+eid int primary key identity(1,2),
+ename nvarchar(50),
+age int,
+eaddress nvarchar(50),
+post nvarchar(50),
+salary money
+)
+select * from tbl_Employee
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('Subham',29,'pratap nagar','TL',44030.23)
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
