@@ -1,0 +1,326 @@
+SELECT:-
+-------------------------
+1. select all rows and columns.
+Syntax:-
+-----------------------------
+select * from tablename
+----------------------------------------------
+2. select specific row and all column.
+Syntax:-
+--------------------
+select * from tablename where colname=value
+------------------------------------------------------------------------------------
+3. select speciific column and all rows.
+Syntax:-
+-------------------------
+select col1,col5,col7 from tablename
+-----------------------------------------------------------------
+4. select specific column and row.
+Syntax:-
+select col1,col4,col8 from tablename where colname=value
+--------------------------------------------------------------------------------------------
+Update:-
+----------------------------
+a) Update into specific column.
+b) Update into all column.
+-----------------------------------------------------------------------
+a) Update into specific column.
+update tablename set colname1= new value1 where colname1=oldvalue
+----------------------------------------------------------------------------------------------------------------------------
+b) Update into all column.
+update tablename set colname1= new value1,colname2=newvalue2,colname3=newvalue3 where colname1=oldvalue
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DELETE :- (DML)
+----------------------
+a) Delete all record.
+delete from tablename
+b) Delete specific record.
+delete from tablename where colname=value
+--------------------------------------------------------------------------------------------------
+DELETE / Truncate / drop
+--------------------------------------------------------------
+truncate :-
+----------------------
+>> DDL.
+>> truncate remove all the records from the table but it can't delete specific record.(where is not allowed)
+>> truncate can't delete table schema.
+Syntax:-
+truncate table tablename
+-------------------------------------------------
+DROP :-
+---------------------
+>> DDL
+>> drop delete table records as well as table schema.
+Drop:-
+----------------------------
+drop table tableName
+-------------------------------------
+Drop - Database -
+---------------------------------
+drop database DatabaseName
+---------------------------------------------------------
+Operator:-
+----------------------------
+1. Arithmetic Operator.
++, - , * , /
+2. Relational Operator.
+>
+>=
+<
+<=
+<>
+3. Logical Operator-
+and -> both condition must be true.
+or -> Either one of the condition is true then the result is true.
+not -> if condition is true then result is false and vice-versa.
+------------------------------------------------------------------------------------------------------------
+Special Operator:-
+-------------------------------------
+1. in.
+2. not in.
+3. between.
+4. not between.
+5. order by.
+>> It is used to perform your query in ascending or descending order.
+asc  -> no need to write.
+desc -> you have to write.
+6. top. -> it retrieve top records from the table.
+7. Like. -> it is used for pattern matching/searching.
+it has two symbols -
+	Underscore  _  -> It read one character at a time.
+	Percentage  % -> It read all character once.
+a) if you know the first character.
+
+b) if you know the last character.
+c) if you don't know first and last character.
+---------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('arun',23,'mayur vihar','TL',34594)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('yogesh',12,'rojouri garden','tl',14594)
+
+select * from tbl_Employee
+select * from tbl_Employee where eid=3
+select ename,eaddress,post from tbl_Employee
+select ename,post,salary from tbl_Employee where eid=7
+--update tablename set colname1= new value1 where colname1=oldvalue
+update tbl_Employee set ename='arun mishra' where eid=5
+update tbl_Employee set ename='subham yadav',age=11,eaddress='MAYUR CHAWK',post='PO',salary=11122 where eid=7
+delete from tbl_Employee where eid=7
+select * from tbl_Employee
+truncate table tbl_Employee 
+drop table tbl_Employee
+drop database Batchsonam
+------------------------------------------------------------------------
+use Batch10AMWE
+select * from tbl_Employee
+delete from tbl_employee
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('ravi',12,'ashok nagar','SE',34000)
+dbcc checkident('tbl_Employee',reseed,0) --> Reset your identity from 0.
+
+select 10+5 as 'Addition'
+select 10-5 as 'Subtraction'
+select 10*5 as 'Multiplication'
+select 10/5 as 'Divide'
+select * from tbl_Employee
+select ename+ '= ' +post as 'Name+Post' from tbl_Employee
+
+select * from tbl_Employee
+
+-- waq to get all the employee whose salary is greater than 20000.
+select * from tbl_Employee where salary>20000
+select * from tbl_Employee where salary<20000
+
+-- waq to get all the employee except kamlesh.
+select * from tbl_Employee where ename <> 'kamlesh'
+
+-- waq to get all the employee whose name is sumit and post is Clerk
+select * from tbl_Employee where ename='sumit' and post='Clerk'
+
+-- waq to get all the employee whose name is sumit or post is SE
+select * from tbl_Employee where ename='sumit' or post='SE'
+-- waq to get all the employee except kamlesh.
+select * from tbl_Employee where not ename='kamlesh'
+
+-- waq to get all employee whose name is pawan,rajan and yogita.
+select * from tbl_Employee where ename='pawan' or ename='rajan' or ename='yogita'
+--or
+select * from tbl_Employee where ename in('pawan','rajan','yogita')
+select * from tbl_Employee where ename not in('pawan','rajan','yogita')
+
+-- waq to get all the employees whose salary is between 10000 to 30000.
+select * from tbl_Employee where salary between 10000 and 30000
+-- waq to get all the employees whose salary is not between 10000 to 30000.
+select * from tbl_Employee where salary not between 10000 and 30000
+
+-- waq to get all the employee records in ascending order.
+select * from tbl_Employee order by ename asc
+-- waq to get all the employee records in descending order.
+select * from tbl_Employee order by ename desc
+
+-- waq to get top 3 record from the table.
+select top 3 * from tbl_Employee
+
+-- waq to get top 3 latest record from the table.
+select top 3 * from tbl_Employee order by eid desc
+
+select * from tbl_Employee where ename like 's_m_t'
+
+-- waq to get all the employee details whose name start from p.
+select * from tbl_Employee where ename like 'p%'
+
+-- waq to get all the employee details whose name ends from i.
+select * from tbl_Employee where ename like '%i'
+
+-- waq to get all the employee details whose name contains a.
+select * from tbl_Employee where ename like '%a%'
+------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
