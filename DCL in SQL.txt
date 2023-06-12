@@ -1,0 +1,83 @@
+DCL :-  
+-------------------------------------------------------------
+>> It stands for Data Control Language.
+In DCL we have following commands:-
+	a) Grant. -> To give permission to the user.
+Syntax:-
+---------------------
+Grant <Priviledge_List> on tablename to username.
+--------------------------------------------------------------------------------------------------------------
+	b) Revoke. -> To take out the permission from the User.
+Syntax:-
+---------------------
+Revoke <Priviledge_List> on tablename from username.
+--------------------------------------------------------------------------------------------------------------
+Authentication-
+---------------------------
+a) Windows Authentication. (Work like an Admin) ->(No need to give username and password).
+b) Sql server Authenticaion. (Work like as Normal User) -> (need to give username and password).
+-----------------------------------------------------------------------------------------------------------------------------------------------
+1.) Give or Take permission on a particular table.
+create login sunil with password='111' -- Create Login
+create user sunilpal for login sunil
+ -- Grant
+ grant select,update on object::tbl_Employee to sunilpal
+
+-- Revoke
+revoke select,update on object::tbl_Employee from sunilpal
+---------------------------------------------------------------------------------------------
+2) Give or Take permission on a whole database -
+--------------------------------------------------------------------------------
+-- Grant and Revoke in SQL Server....
+create login sunil with password='111' -- Create Login
+create user sunilpal for login sunil  -- Create User
+-- Whole Database
+-- Grant
+grant select,update on database::Batch5PMSunil to sunilpal
+-- Revoke
+revoke select,update on database :: Batch5PmSunil from sunilpal
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
