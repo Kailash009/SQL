@@ -1,0 +1,49 @@
+Indexes in Sql server:-
+-----------------------------------------------
+>> It is used to retrieve your data from the table in fast manner.
+>> It improves the searching performance of a table.
+-------------------------------------------------------------------------------------------------
+>> without index it scan your whole table i.e. known Table Scan.
+>> Table Scan has not good performance.
+a b c d e   .......   z 
+p - search
+-----------------------------------------------------------------------------------------------------
+Types of Index in Sql server:-
+--------------------------------------------------
+There are two types of index in sql server which are as follows-
+1. Clustured Index.
+>> There is only one clustured index in a table.
+>> When you make any column as primary key,then that column automatically become clustered index.
+For Example:- Arranging contact list in our mobile.
+>> P.K. -> Clustured Index.
+Command to see Clustured/Non-Clustered Index in table:
+--------------------------------------------------------------------------------------
+sp_helpindex tableName
+----------------------------------------------------
+Explicilty Create Clustured Index:-
+---------------------------------------------------
+create clustered index index_Name on tablename(colname asc/desc)
+---------------------------------------------------------------------------------------------------------------------
+2. Non-Clustured Index.
+>> There is more than one non-clustered index in a table.
+For Example:- Index at one place and data at another place.(Like in our book index at one place and content in another place).
+Syntax:-
+--------------------------
+create nonclustered index index_Name on tablename(colname asc/desc)
+------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+sp_helpindex tbl_Employee
+-- create clustered index index_Name on tablename(colname asc/desc)
+create clustered index in_name on tbl_Employee(ename desc)
+
+-- Non-Clustered Index
+-- create nonclustered index index_Name on tablename(colname asc/desc)
+create nonclustered index in_post on tbl_Employee(post asc,salary desc)
+create nonclustered index in_age on tbl_Employee(age desc)
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
