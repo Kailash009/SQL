@@ -1,0 +1,86 @@
+Trigger:-
+-------------------------------
+>> Trigger is special type of stored procedure that automatically fired/executed when an event has occured.
+>> It provide security to our database.
+-------------------------------------------------------------------------------------------------------------------------
+Student -> just after when we insert a new student its personal details table automatically insert a record.
+Personal Details -> I don't want to insert record manually in Personal Detail.
+---------------------
+Trigger Timing -> Before / After or for
+-------------------------------------------------------------------------------------------
+Types of Trigger:-
+1. DDL Trigger. -> create, alter , drop etc.
+2. DML Trigger. -> insert,update,delete.
+---------------------------------------------------------------------------------------------
+tbl_Emp ->
+tbl_Empinfo ->
+-------------------------------------------------------------------------------------------
+Syntax (Insert):-
+---------------------------------------
+create trigger tg_name
+on tablename
+for insert      --> After Timing
+as begin
+<Query Statements>
+end
+-----------------------------------------------------------------------------------------
+create table tbl_Emp
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+eage int,
+eaddress nvarchar(45),
+salary money,
+post nvarchar(30)
+)
+create table tbl_msginfo
+(
+id int primary key identity(1,1),
+msg nvarchar(200)
+)
+
+select * from tbl_Emp
+select * from tbl_msginfo
+
+--create trigger tg_name
+--on tablename
+--for insert
+--as begin
+--<Query Statements>
+--end
+
+create trigger tg_insertemp
+on tbl_Emp
+for insert   -- After Timing
+as begin
+declare @eid int
+select @eid=eid from inserted  ---> It keeps a copy behind the scene
+insert into tbl_msginfo(msg) values('The Employee with ID'+cast(@eid as nvarchar(40))+'is added at the Following'+cast(GETDATE() as nvarchar(50)))
+print('The Employee has been added SuccessFully!!')
+end
+
+dbcc checkident('tbl_msginfo',reseed,0)
+select * from tbl_Emp
+select * from tbl_msginfo
+
+insert into tbl_Emp(ename,eage,eaddress,salary,post) values('preksha',12,'patel nagar',34000,'SE')
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
