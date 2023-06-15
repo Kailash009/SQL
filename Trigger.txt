@@ -1,119 +1,79 @@
-TRIGGER IN SQL SERVER:-
----------------------------------------------------
 Trigger:-
->> Trigger is a special kind of stored procedure,that automatically executed/fired when an event has occured.
-Database Events -> create,drop,insert,update,delete etc.
---------------------------------------------------------------------------------------------------------------
-Trigger Timing:-
------------------------------------
-1. Before
-2. After/for
------------------------------------
-For Example:-
-----------------------------------
-Student -> 
-PersonalDetails -> when we insert a record into student table,just after in personaldetail record has been inserted/or table fired automatically. (I don't want to Manually insert a record into Personal Detail Table).
-------------------------------------------------------------------------------------------------------------------------------------------------
-Syntax - 
----------------------
+-------------------------
+Insert -> Done.
+---------------------------
+DML Trigger - Delete 
+--------------------------------------------
 create trigger triggerName
 on tableName
-for insert   --- Timing -> After Timing
+for delete
 as begin
 <Query Statements>
 end
------------------------------------------------------------------------------------------
-Syntax:- (Update)
-------------------
+---------------------------------------------
+create trigger tg_deleteemp
+on tbl_Emp
+for delete  -- After Timing.
+as begin
+declare @eid int
+select @eid=eid from deleted
+insert into tbl_msginfo(msg)values('The Employee with ID'+cast(@eid as nvarchar(40))+'has been Deleted SuccessFully at following'+cast(GETDATE() as nvarchar(50)))
+print('Employee Deleted SuccessFully!')
+end
+
+delete from tbl_Emp where eid=1
+select * from tbl_Emp
+select * from tbl_msginfo
+--------------------------------------------------------------------------------
+DML TRIGGER - UPDATE
+--------------------------------------------
 create trigger triggerName
-on TableName
+on tableName
 for update
 as begin
 <Query Statements>
 end
--------------------------------------------
-Syntax (Deleted)
-create trigger triggerName
-on TableName
-for delete
+---------------------------------------------------
+create trigger tg_deleteemp
+on tbl_Emp
+for delete  -- After Timing.
 as begin
-<Query Statements>
-end
---------------------------------------------------------
-create table Student
-(
-sid int primary key identity(1,1),
-sname nvarchar(50),
-sage int,
-saddress nvarchar(50),
-sfee money,
-mobileno nvarchar(20)
-)
-create table tbl_msg
-(
-msgid int primary key identity(1,1),
-msg nvarchar(400)
-)
-
-alter trigger tg_insert_Student
-on Student
-for insert  -- After Timing
-as begin
-declare @sid int
-select @sid=sid from inserted  --It keeps your data behind the scene
-insert into tbl_msg values('The Student is added with ID'+cast(@sid as nvarchar(20))+'at the Following'+cast(GETDATE() as nvarchar(50)))
-print('Student Added SuccessFully!!')
+declare @eid int
+select @eid=eid from deleted
+insert into tbl_msginfo(msg)values('The Employee with ID'+cast(@eid as nvarchar(40))+'has been Deleted SuccessFully at following'+cast(GETDATE() as nvarchar(50)))
+print('Employee Deleted SuccessFully!')
 end
 
-select * from Student
-select * from tbl_msg
-insert into Student values('Deepak',19,'New Ashok Nagar',3400.23,'989087834')
-select * from Student
-select * from tbl_msg
-alter trigger tg_update_student
-on Student
-for update -- After Timing
+insert into tbl_Emp(ename,eage,eaddress,salary,post) values('chandra prakash',12,'New Ashok',12000,'SE')
+delete from tbl_Emp where eid=1
+select * from tbl_Emp
+select * from tbl_msginfo
+
+
+-- create a trigger that change the salary of an employee 12000 to 20000.
+create trigger tg_updateemp
+on tbl_Emp
+for update  -- After Timing.
 as begin
-declare @sid int,@sname nvarchar(50)
-declare @osfee money,@nsfee money
-select @sid=sid,@sname=sname from inserted
-select @osfee=sfee from deleted
-select @nsfee=sfee from inserted
-insert into tbl_msg values('The Student with Id'+cast(@sid as nvarchar(50))+'and its name is'+@sname+'fees has been changed from'+cast(@osfee as nvarchar(50))+'to'+cast(@nsfee as nvarchar(50)))
-print('Student Record has been Updated')
+declare @Name nvarchar(50)
+declare @OSal money,@NSal money
+select @OSal=salary from deleted
+select @Name=ename,@NSal=salary from inserted
+insert into tbl_msginfo(msg)values('The Employee'+@Name+'salary has been changed from'+cast(@OSal as nvarchar(50))+'to'+cast(@NSal as nvarchar(50))+'at the following'+cast(GETDATE() as nvarchar(50)))
+print('Employee Updated SuccessFully!!')
 end
-
-update Student set sfee=42000.14 where sid=2
-select * from Student
-select * from tbl_msg
-create trigger tg_delete_student
-on Student
-for delete
-as begin
-declare @sid int
-select @sid=sid from deleted
-insert into tbl_msg values('The Student has been Deleted with ID'+cast(@sid as nvarchar(40)))
-print('The Student has been Deleted SuccessFully')
-end
------------------------------------------------------------------------------
-select * from Student
-select * from tbl_msg
-delete from Student where sid=2
--------------------------------------------------------------------------
-PL/SQL :- Pending
-------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
+select * from tbl_Emp
+select * from tbl_msginfo
+update tbl_Emp set salary=20000 where eid=2
+-------------------------------------------------------------------------------------------------------------------------------------------
+Database BackUp and Recovery -- Pending
+PL/SQL  ->  Pending.
+------------------------------------------------------------------------------------------------------------------------------------------
+Assignment:-
+---------------------------------------------
+Table -> Department -> did(P.K)autoinc , dname  -> 5 Department
+Table -> Employee -> eid(P.K)auto_inc , ename,age,eaddress,salary, post,did(F.K)  -> 10 Employee
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
