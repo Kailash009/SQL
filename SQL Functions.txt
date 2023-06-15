@@ -1,119 +1,85 @@
-Functions in SQL Server:-
--------------------------------------------------
-Here we we focus on User Defined Function -
-There are two types of user Defined Function -
-a) Scalar Valued function. 
->> It returns only single value.
+Functions in SQL SERVER:-
+----------------------------------------------------
+There are two types of Function in sql server:-
+--------------------------------------------------------------------
+1. Library Function/Built-in Function.
+select GETDATE()
+select LEN('hrishi'),trim,upper,lower etc.
+--------------------------------------------------------------------
+2. User Defined Function.
+	Here we focus on User Defined Function:-
+		a) Scalar Valued Function. 
+	>> A Function which returns single row only.
 Syntax:-
------------------
-create/alter function function_Name(@Parameter1 datatype1,@Parameter Datatype2)
-returns <datatype>
+--------------------
+create function function_Name(@parameter1 datatype1,@parameter2 datatype2)
+returns datatype/variablename
 as begin
 <Query Statements>
-return final_value
+return FinalValue
 end
-------------------------------
-How to run/Execute a function.
-select functionName()
-------------------------------------------------------------------------
--- waf to add two number.
-create function Addition(@a int,@b int)
-returns int
-as begin
-declare @c int
-set @c=@a+@b
-return @c
-end
-select dbo.Addition(10,90) as 'SumofTwoNumber'
--------------------------------------------------------------------------------------------
-Create a Scalar valued Function and Find the Gross Salary salary of an Employee having following condition -
-	da=10% of bs  -> 1200
-	ta=15% of bs  -> 1800
-	hra =5%   -> 600
-	PF=24% of bs
-	gs=bs+da+ta+hra - PF  
-----------------------------------------------------------------------------------------
-1. v=u+at
 ----------------------------------------------------
-b) Table Valued function.
->> It returns whole table or multiple values.
->> Begin and End is not required.
-create function function_name(@parameter datatype)
-returns table
-as 
-return <Query Statements>
---Execute
-select * from <FunctionName>
------------------------------------------------------------------------------------------------------------------
--- WAF to provide post as input and returns no. of employee working in this post.
------------------------------------------------------------------------------------------------------------------
-select * from tbl_Employee
-select getdate()
-select ASCII('a')
-------------------------------------------------------
--- User Defined Function
-create function Addition(@a int,@b int)
+How to Run Function:-
+------------------------------------
+select FunctionName
+--------------------------------------------------------------------------------------------------------------------------------
+-- waq to find the sum of two number.
+create function addition(@a int,@b int) -- Function Defination
 returns int
 as begin
-declare @c int
-set @c=@a+@b
-return @c
+declare @sum int
+set @sum=@a+@b
+return @sum
 end
 
-select dbo.Addition(10,90) as 'SumofTwoNumber'
-
--- WAF to find the average of five numbers.
-select * from tbl_Employee
--- Create a Scalar valued Function and Find the Gross Salary salary of an Employee.
-alter function Calc_Gross_Salary(@eid int)  -- Function Defination
-returns money
+select dbo.addition(10,40) as 'Sum of Two Number' -- Function Calling
+----------------------------------------------------------------------------------------------------------------------------
+Assignment:-
+---------------------------
+>> create a scalar valued function and find the average of five number.
+>> create a scalar valued function and find the area of rectangle.
+--------------------------------------------------------------------------------------------------------
+		b) Table Valued Function.
+	>> A Function which return whole table or multiple record from the table.
+Syntax:-
+---------------------
+Create function functionName(@parameter1 datatype)
+returns table
+as
+return<Query Statements>
+-----------------------------------------------
+Syntax to execute Table valued function:-
+select * from <FunctionName>
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+-- waq to find the sum of two number.
+create function addition(@a int,@b int) -- Function Defination
+returns int
 as begin
-declare @bs money,@da money,@ta money,@hra money,@gs money
-select @bs=salary from tbl_Employee where eid=@eid
-set @da=@bs*0.1
-set @ta=@bs*0.15
-set @hra=@bs*0.05
-set @gs=@bs+@da+@ta+@hra
-return @gs
+declare @sum int
+set @sum=@a+@b
+return @sum
 end
-select dbo.Calc_Gross_Salary(127) as 'Gross_Salary'
+
+select dbo.addition(10,40) as 'Sum of Two Number' -- Function Calling
+
 
 select * from tbl_Employee
-alter function calc_Employeerecord(@post nvarchar(50))
+-- create a table valued function input as post and returns no. employee working in this post
+create function findEmployee(@post nvarchar(50))  -- Function Defination
 returns table
 as 
-return (select Employee_Name,address,post from tbl_Employee where post=@post)
+return(select * from tbl_Employee where post=@post)
 
-select * from dbo.calc_Employeerecord('TL')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- Execute
+select * from dbo.findEmployee('SE')  -- Function Calling
+--------------------------------------------------------------------------------------------------------------------------------------------------
+TCL -(Transaction Control Language)  -- Pending
+---------------------------------------------------------------------------
+1. Begin transaction.
+2. Commit.
+3. RollBack.
+4. SavePoint.
+-----------------------------------------------------------------------------
 
 
 
