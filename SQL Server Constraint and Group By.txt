@@ -1,0 +1,263 @@
+Constraints in SQL server:-
+------------------------------------------------
+>> with the help of constraint we provide condition on a particular column.
+>> Constraint is condition that provide to restrict a column to provide any value.
+------------------------------------------------------------------------------------------------------------------------------------
+Types of Constraint:-
+------------------------------------------------------------
+1. not null.
+>> we can't provide null value into that column.
+>> we can provide duplicate value.
+create table tbl_test1
+(
+tid int not null,
+tname nvarchar(50) not null
+)
+select * from tbl_test1
+insert into tbl_test1 values(null,'kamlesh') -- can't insert null here...
+Error:-
+Cannot insert the value NULL into column 'tid', table 'Batch10AMWE.dbo.tbl_test1'; column does not allow nulls. INSERT fails.
+--------------------------------------------------------------------------------------------------------------
+2. unique.
+>> It doesn't allow duplicate value.
+>> it allows only one NULL value.
+create table tbl_test2
+(
+tid int unique,
+tname nvarchar(50) unique
+)
+select * from tbl_test2
+insert into tbl_test2 values(102,'rajesh')  -- can't insert duplicate value here..
+-----------------------------------------------------------------------------
+3. check.
+>> it provide a condition on a column.
+--CHECK -> salary can't be more than 10000.
+create table tbl_test3
+(
+tid int unique,
+tsalary int check(tsalary<=10000)
+)
+select * from tbl_test3
+insert into tbl_test3 values(104,10001) -- can't accept more than 10000 salary.
+4. default.
+>> with the default constraint we can default on a particular column.
+>> we don't insert a value manually. it automatically take default value.
+-- 100 employee belongs to the same city.
+5. primary key. ->  unique + not null
+>> P.K doesn't allow null and duplicate value.
+>> It is uniquely identity of a table.
+create table test5
+(
+tid int primary key,
+tname nvarchar(50)
+)
+select * from test5
+insert into test5 values(null,'pawan') -- p.k can't allow null.
+insert into test5 values(101,'pawan') -- p.k can't allow duplicate.
+------------------------------------------------------------------------------
+6. Foreign key. --- Pending (will discuss in JOIN)
+>> F.K is used to establish the relationship among tables.
+>> First Table P.K work as a F.K in another table.
+-------------------------------------------------------------------------------
+Aggregate Functions:-
+---------------------------------------
+1. Max()
+2. Min()
+3. Sum()
+4. Avg()
+5. Count()
+--------------------------------------
+Clauses in Sql Server-
+-------------------------------------
+1. order by. -> Done.
+2. where.  -> Done.
+====================================
+3. Group by  -> it find group of record.
+4. Having. -> it provide condition with group by.
+Note: - Group by and Having it can't be used without aggregate function.
+Note: -> you can use 'where' before group by whereas after 'group by' only Having will be used to provide condition.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+create table tbl_test1
+(
+tid int not null,
+tname nvarchar(50) not null
+)
+select * from tbl_test1
+insert into tbl_test1 values(null,'kamlesh') -- can't insert null here...
+
+create table tbl_test2
+(
+tid int unique,
+tname nvarchar(50) unique
+)
+select * from tbl_test2
+insert into tbl_test2 values(102,'rajesh')  -- can't insert duplicate value here..
+
+
+--CHECK -> salary can't be more than 10000.
+create table tbl_test3
+(
+tid int unique,
+tsalary int check(tsalary<=10000)
+)
+select * from tbl_test3
+insert into tbl_test3 values(104,10001) -- can't accept more than 10000 salary.
+
+--Default  -- 100 employee belongs to the same city.
+create table tbl_test4
+(
+tid int unique,
+tcity nvarchar(100) default 'NOIDA'
+)
+select * from tbl_test4
+insert into tbl_test4(tid) values(101)
+insert into tbl_test4(tid) values(102)
+insert into tbl_test4(tid) values(103)
+insert into tbl_test4(tid) values(104)
+insert into tbl_test4(tid) values(105)
+insert into tbl_test4(tid) values(106)
+insert into tbl_test4(tid) values(107)
+
+create table test5
+(
+tid int primary key,
+tname nvarchar(50)
+)
+select * from test5
+insert into test5 values(null,'pawan') -- p.k can't allow null.
+insert into test5 values(101,'pawan') -- p.k can't allow duplicate.
+insert into test5 values(102,'pawan')
+
+-- Aggregate Functions
+select * from tbl_Employee
+select max(salary) as 'Max_Salary' from tbl_Employee
+select min(salary) as 'Min_Salary' from tbl_Employee
+select sum(salary) as 'Total_Salary' from tbl_Employee
+select avg(salary) as 'AVg_Salary' from tbl_Employee
+select count(*) as 'Total Employee' from tbl_Employee
+--------------------------------------------------------------
+select * from tbl_Employee
+-- waq to get total number of employee in each department.
+select post,count(eid) as 'Total no. of Employee' from tbl_Employee group by post
+-- waq to get total salary of an employee in each department.
+select post,sum(salary) as 'total Salary' from tbl_Employee group by post
+-- waq to get total max of an employee in each department.
+select post,max(salary) as 'Max Salary' from tbl_Employee group by post
+-- waq to get total number of employee and total salary in each department.
+select post,count(eid) as 'Total Employee',sum(salary) as 'Total Salary' from tbl_Employee group by post
+-- waq to get total number of employee in each department where employee is greater than 2.
+select post,count(*) as 'Total Employee' from tbl_Employee group by post having count(eid)>2
+------------------------------------------------------------------------------------------------------------------------------------------------
+Revision Sql:-
+---------------------------
+How to Install Sql Server -
+---------------------------------------------
+https://www.microsoft.com/en-in/sql-server/sql-server-downloads  -- Express.
+-----------------------------------------------------------------------------------------------------
+How to Install SSMS(Sql server Management Studio)
+https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+In Sql you can work with both GUI (Graphical User Interface) and CUI (Command User Interface) based
+Database. -> It is a collection of table.
+Table -> it consist of rows and column.
+---------------------------------------------------------
+GUI -> how to perform create database,table,insert,update,delete,select.
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
