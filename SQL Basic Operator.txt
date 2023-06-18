@@ -1,0 +1,369 @@
+Dot net Framework -> not open source and not cross platform.(OlderVersion) 
+>> It host only IIS (Internet Information Server)
+--------------------------------------------------------------------------------------------------------------------
+DOT NET CORE:-
+------------------------------------
+>> dot net core is the new version of dot net framework.
+>> dot net core is an open source and cross platform(win,linux,mac).
+>> dot net core support built-in dependency injection.
+>> dot net core has high performance.
+>> dot net core support the concept of Middleware.
+>> dot net has rosyln compiler.
+>> dot net used kestrel webserver , you can deploy your website on different web server -  IIS, Apache, Tomcat, Nginx.
+>> Dot net core is an N-Tier application.
+>> dot net core is based on MVC Pattern.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MVC Architecture:-
+------------------------------------------------------------------
+Model -> Business Entities. -> All database related operation performed in this layer.
+View ->  Presentation Layer.  -> html,css, js.... -> it is the UI for the user..
+Controller -> Business Logic Layer. -> all main logic write in this layer.
+>> controller interact both model and view.
+>> controller is main layer of mvc.
+>> controller is the heart of mvc.
+------------------------------------------------------------------------
+SQL SERVER:- (Microsoft).
+----------------------------------------------
+>> It stands for Structured Query Language.
+>> It is a Platform dependent tool. (it install only windows os.)
+>> sql server is a rdbms(Relational Database Management System) tool,by which we can retrieve,insert,update,delete and performed various operations in it.
+>> sql server used both GUI and CUI based interface.
+------------------------------------------------------------------------------------------------------------------------
+how to perform insert,update,delete,select,create using GUI:-
+---------------------------------------------------------------------------------------------------------------
+Authentication:-
+-----------------------------
+1. Windows Authentication. 
+>> It doesn't require username and password.
+>> It works like an Admin.
+-----------------------------------------------------------------------------------------------------
+2. Sql server Authentication.
+>> It require username and password.
+>> It works like a Normal User.
+---------------------------------------------------------------------------------
+P.K:-
+--------------
+>> It is uniquely identity of a table.
+>> It doesn't allow NULL and Duplicate value.
+---------------------------------------------------------------------------------
+CUI:-
+-------------------
+1. Command to create database.
+create database databaseName
+2. command to select your database.
+use databasename
+3. Command to create table:-
+create table tablename
+(
+colname1 datatype1,
+colname2 datatype2(size),
+.
+.
+.
+colnameN datatypeN
+)
+------------------------------------------------------------
+identity(seed,inc)
+seed -> Starting value.
+inc -> how many inc you want
+identity(1,2) -> 1,3,5,7...
+identity(101,2) -> 101,103..
+--------------------------------------------------
+command to insert record:-
+---------------------------------------------
+a) Insert into all Column.
+insert into tablename values(value1,value2,value3.......valueN)
+--------------------------------------------------------------------------------------------------------------
+b) Insert into specific Column.
+insert into tablename(col1,col4,col6) values(value1,value4,value6)
+-------------------------------------------------------------------------------------------------------------
+Command to show records:-
+---------------------------------------------------
+1) See all rows and all columns.
+Syntax:-
+----------------
+select * from tableName
+---------------------------------------------
+2) See specific row and all column.
+select * from tablename where col=value
+----------------------------------------------------------------------
+3) See specific column and all rows.
+select col1,col4,col6 from tablename
+-----------------------------------------------------------------
+4) See specific row and specific column.
+select col1,col4,col6 from tablename where col=value
+---------------------------------------------------------------------------------------------
+UPDATE:-
+------------------------
+1. Update specific column.
+Syntax:-
+---------------------
+update tablename set colname='new Value' where colname='OldValue'
+-----------------------------------------------------------------------------------------------------------
+2. Update multiple Column.
+-----------------------------------------
+update tablename set colname1='new Value1',colname2='new Value2',colname3='new Value3' where colname='OldValue'
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DELETE:-
+-----------------------
+1) Delete all rows.
+delete from tablename
+2) Delete specific row.
+delete from tablename where colname=value
+------------------------------------------------------------------------
+Truncate:-
+-----------------------
+>> In truncate you can't delete specific record.
+>> where is not allowed.
+----------------------------------------------------------------------
+Syntax:
+--------------------
+truncate table tableName
+-------------------------------------------------
+Drop:-
+------------------
+>> drop delete whole table schema and database schema.
+-----------------------------------------------------------------------------------------------------
+Syntax:-
+-------------------
+To drop table:-
+-------------------------------
+drop table tableName 
+To drop database:-
+-------------------------------- 
+drop database databaseName
+----------------------------------------------------
+SQL Operators:-
+-----------------------------
+1. Arithmetic. -> + , - ,*, / , %
+2. Relational. -> < <= > >=  <> 
+3. Logical.   ->  and or not
+4. Special Operator.
+	a) in / not in / between / not between 
+-------------------------------------------------------------------------------
+create login sushil with password='123'
+create user sushil for login sushil
+---------------------------------------------------------
+create database BatchSushil
+use BatchSushil
+create table tbl_Employee
+(
+eid int primary key identity(1,2),
+ename nvarchar(50),
+age int,
+eaddress nvarchar(50),
+post nvarchar(50),
+salary decimal(24,2)
+)
+select * from tbl_Employee
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('sushil',23,'New Ashok','TL',89404)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('ajay',24,'preet vihar','SE',29404)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('rahul',25,'yamuna bank','Mrkt',19404)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('vinod',26,'tilak nagar','Peon',21404)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('pankal',28,'patel nagar','Clerk',3104)
+insert into tbl_Employee(ename,age,eaddress,post,salary) values('abhi',27,'uttam nagar','SE',4231)
+
+select * from tbl_Employee  -- rows -6 cols -6
+select * from tbl_Employee where eid=5
+select ename,eaddress,post from tbl_Employee
+select ename,eaddress,post from tbl_Employee where ename='rahul'
+
+select * from tbl_Employee
+update tbl_Employee set ename='vinod singh' where eid=7
+update tbl_Employee set ename='PANKAJ MISHRA',age=12,eaddress='NOIDA SEC-78',post='Manager',salary=11222 where eid=9
+delete from tbl_Employee where eid=7
+select * from tbl_Employee
+truncate table tbl_employee 
+drop table tbl_Employee
+drop database BatchSushil
+----------------------------------------------------------------------
+select 10+5 as 'Addition'
+select 10-5 as 'Subtaction'
+select 10*5 as 'Multplication'
+select 10/5 as 'Division'
+select 10%5 as 'Remainder'
+
+select * from tbl_Employee
+select ename+'='+post as 'EMP+POST' from tbl_Employee 
+-- Relational Operator.
+-- waq to get all the employee whose salary is less than 20000.
+select * from tbl_Employee where salary<20000
+-- waq to get all the employee whose name is not ajay.
+select * from tbl_Employee where ename <> 'ajay'
+
+-- waq to get the employee details whose name is rahul and post is Mrkt.
+select * from tbl_Employee where ename='rahul' and post='Mrkt'
+-- waq to get the employee details whose name is rahul and post is SE.
+select * from tbl_Employee where ename='rahul' or post='SE'
+-- waq to get the employee details whose name is rahul and post is SE.
+select * from tbl_Employee where not ename='rahul' and not post='SE'
+
+-- waq to get the employee details whose name is sushil,vinod,pankaj.
+select * from tbl_Employee where ename in('sushil','vinod','pankal')
+select * from tbl_Employee where ename not in('sushil','vinod','pankal')
+-- waq to get the employee details whose salary is between 10000 to 30000.
+select * from tbl_Employee where salary between 10000 and 30000
+select * from tbl_Employee where salary not between 10000 and 30000
+order by / top / Like.  --->> PENDING
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
