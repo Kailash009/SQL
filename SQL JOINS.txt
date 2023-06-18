@@ -1,172 +1,142 @@
-Set Operators:-
--------------------------------
->> It is used to perform operation on more than one table.
-Rules:-
------------------------------------
-1. No. of Column should be same of both the table..
-2. Order of column must be same of both the table.
-3. Data type should be same of both the table.
+Relationship between Tables:-
 ------------------------------------------------------------------------------
-1. Union. -> it doesn't return duplicate value from the table.
-2. UnionAll. -> it returns duplicate value from the table.
-3. Intersect. -> It returns common record from both the table.
-4. Except. ->  it returns all records from table1 which doesn't exist in table2.
----------------------------------------------------------------------------------------------------------
-select * from tbl_EMployee
-
-create table tbl_hyd
-(
-bid int,
-bname nvarchar(50)
-)
-create table tbl_chennai
-(
-bid int,
-bname nvarchar(50)
-)
-insert into tbl_hyd values(101,'SBI')
-insert into tbl_hyd values(102,'PNB')
-insert into tbl_hyd values(103,'UCO')
-insert into tbl_hyd values(104,'Kotak')
-insert into tbl_hyd values(105,'AXIS')
-
-insert into tbl_chennai values(106,'SBI')
-insert into tbl_chennai values(107,'PNB')
-insert into tbl_chennai values(101,'SBI')
-insert into tbl_chennai values(109,'Kotak')
-insert into tbl_chennai values(105,'AXIS')
-
-select * from tbl_hyd
-select * from tbl_chennai
-
--- UNION
-
-select * from tbl_hyd
-union
-select * from tbl_chennai
-
--- UNIONALL
-select * from tbl_hyd
-union all
-select * from tbl_chennai
-
--- INTERSECT
-select * from tbl_hyd
-intersect
-select * from tbl_chennai
-
--- EXCEPT
-select * from tbl_hyd
-except
-select * from tbl_chennai
-----------------------------------------
-JOIN IN SQL SERVER:-
------------------------------------------
->> To combine more than one table.
---------------------------------------------------
-Relationship Between Tables:-
--------------------------------------------
-1. One to One.
-2. One to Many or Many to One.
-3. Many to Many.
--------------------------------------------------------------
+1. One to One.  -> Student   -- PersonalDetail
+2. One to Many or Many to One. -> Student -> PaymentDetails
+3. Many to Many.  -> Student - Course
+1 S => Many Course.
+1C => Many Student
+------------------------------------------------------------------------------------
+Why we need Relationship among tables:-
+-------------------------------------------------------------------------------------
+>> When one table doesn't provide complete information then we need to fetch record among multiple tables.
+For Example:-
+-----------------------------
+Student - Course
+----------------------------
 Student
+--------------------
+sid sname age mobileno fee course
+-----------------------------------------------------------
+1    ram    19    987979   1299    python
+2    ram  19      "              4500 DOt net  ---> we are unable to maintain multiple courses of Ram then we need to create another separate table of course in which we maintain course information.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 Course
-Personal Details  -> One to One.
-Student -  PaymentDetails  
-One to Many or Many to One
--------------------------------
-1S  => Many Course
-1C => Many Student.
-------------------------------------------
+--------------------
+cid(P.K) cname
+---------------------
+1        python
+2        sql
+3       dot net
 Student
-------------------------------------
-sid(P.K) sname age     address    mobileno    course
-101   rahul  19       ljkjl	  34343   python,django,dot net
-101
-------------------------------------------------------------------------------------------------------------------------------------------
-Types of Join:-
--------------------------
-1. ANSI (American National Standard Institution) FORMAT (NEW STYLE Format.)
+---------------
+sid (P.K) sname age mobileno sfee cid --- (F.K.)
+--------------------------------------------------------------------------------------------
+1              ram      18       3434  2439  2
+-------------------------------------------------------------------------------------------
+JOINS IN SQL SERVER:-
+------------------------------------------------------
+>> It is used to combine record from more than one table.
+------------------------------------------------------------------------------------------
+Types of JOIN:-
+--------------------------------
+There are two types of Join in Sql Server:-
+--------------------------------------------------------------------
+a) ANSI Format. (American National Standard Information)  -> New Style Format. -> (with on condition).
 	a) Inner Join.
->> It returns matching record from multiple table.
-Syntax of Inner Join:-
-------------------------------------------------------------------------------------------------------------------
-select <ListofColumn> from table1 inner join or join table2 on   <Joining Condition>
------------------------------------------------------------------------------------------------------------------
-	b) Outer Join.  -> i) Left     ii)  Right   iii)  Full.    --------->>>>>>> Pending.
-	c) Cross join
+	b) Outer Join.  => i) Left Outer.  ii) Right Outer.  iii) Full Outer. 
+	c) Cross Join.
 	d) Natural Join.
------------------------------------------------------------------------------------
-2. NON-  ANSI FORMAT  (OLD STYLE)
-	a) Equi Join
-	b) Non-Equi.
-	c) Self Join.
---------------------------------------------------------------------------------
-Rules to create Foreign Key:-
----------------------------------------------------
->> F.K (First table P.K treated as F.K in another Table.)
-1. Parent table column name must be same of the child table.
-2. Parent table datatype must be same of the child table.
--------------------------------------------------------------------------------------------------
--- RELATIONSHIP BETWEEN TABLES.
-
-create table tbl_course    -->> Parent Table/ Master Table
+b) Non-ANSI Format. -> OLD Style Format. (with where condition).
+	i) Equi - Join.
+	ii) Non-Equi Join.
+	iii) Self Join.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+a) ANSI Format. (American National Standard Information)  -> New Style Format. -> (with on condition).
+	a) Inner Join.
+>> It retrieve only matching records from the table.
+Syntax:-
+---------------------
+select <List of Column> from table1 inner join table2 on <Joining_Condition>
+-------------------------------------------------------------------------------------------------------------------------------------	
+	b) Outer Join.  => i) Left Outer.  ii) Right Outer.  iii) Full Outer. 
+>> Outer join retrieve matching and unmatching records from multiple tables.
+i) Left Outer -> It returns all records from left table,matching record from the right table,whereever find unmatched return NULL.
+Syntax:-
+-------------------------
+select * from TN1 left outer join TN2 on <Joining Condition>
+ii) Right Outer -> It returns all records from right table,matching record from the left table,whereever find unmatched return NULL.
+Syntax:-
+-------------------------
+select * from TN1 right outer join TN2 on <Joining Condition>
+iii) Full Outer -> It returns all records from both the table,whereever find unmatched return NULL.
+Syntax:-
+-------------------------
+select * from TN1 full outer join TN2 on <Joining Condition>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	c) Cross Join.
+>> It find product. (m*n)
+Syntax:-
+-------------------
+select * from TN1 cross join TN2
+--------------------------------------------------------------------------------------
+	d) Natural Join. 
+>> It is not supported in Sql server, it supported in Oracle.
+>> But if you want to support natural join in Sql then you should know about Equi-Join.
+>> Here, Equi-Join is similar to Natural Join.
+------------------------------------------------------------------------------------------------------------------------------------------------
+create database BatchPawan
+use BatchPawan
+-- Relationship among tables.
+-- Course
+create table tbl_Course  -- Parent Table.
 (
-cid int primary key identity(1,1),  --->> P.K
+cid int primary key identity(1,1),
 cname nvarchar(50)
 )
-
-create table tbl_Student
+-- Student
+create table tbl_Student  -- Child Table
 (
 sid int primary key identity(1,1),
 sname nvarchar(50),
 age int,
-saddress nvarchar(50),
-mobileno nvarchar(20),
-cid int foreign key references tbl_course(cid)  -- Syntax to Create Foreign Key.
+mobileno nvarchar(50),
+sfee money,
+cid int foreign key references tbl_Course(cid)  -- Syntax to create Foreign key.
 )
-select * from tbl_course
+select * from tbl_Course 
 select * from tbl_Student
+-- INNER JOIN (Only fetch Matching Records.)
+-- waq to get total no. of students enrolled in sql course.
+--select <List of Column> from table1 inner join table2 on <Joining_Condition>
+select sname,mobileno,sfee,cname from tbl_Student inner join tbl_Course on tbl_Student.cid=tbl_Course.cid and cname='sql'
+-- or
+select s1.sname,s1.age,s1.mobileno,s1.sfee,c1.cname from tbl_Student s1 inner join tbl_Course c1 on s1.cid=c1.cid and c1.cname='sql' 
 
--- INNER JOIN
---select <ListofColumn> from table1 inner join table2 on   <Joining Condition>
+-- OUTER JOIN
+--------------------------
+--select * from TN1 left outer join TN2 on <Joining Condition>
+-- LEFT OUTER JOIN
+select * from tbl_Course left outer join tbl_Student on tbl_Course.cid=tbl_Student.cid
 
--- WAQ TO GET ALL THE STUDENT WHO ENROLLED IN PYTHON COURSE.
-select sname,age,mobileno,cname from tbl_Student inner join tbl_course on tbl_Student.cid=tbl_course.cid and cname='java'
---or
-select s1.sname,s1.age,s1.mobileno,c1.cname from tbl_Student s1 inner join tbl_course c1 on s1.cid=c1.cid and cname='python'
+-- RIGHT OUTER JOIN
+select * from tbl_Student right outer join tbl_Course on tbl_Student.cid=tbl_Course.cid
 
-
-
-
-
-
-
-
-
-
-
-
-
+-- FULL OUTER JOIN
+select * from tbl_Course full outer join tbl_Student on tbl_Course.cid=tbl_Student.cid
+select * from tbl_Student full outer join tbl_Course on tbl_Course.cid=tbl_Student.cid
 
 
+select * from tbl_Student  -- 11 rows
+select * from tbl_Course --  8 rows  cross join 11*8 = 88 rows
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--select * from TN1 cross join TN2
+select * from tbl_Student cross join tbl_Course
+------------------------------------------------------------------------------------------------------------------------------------------------
+b) Non-ANSI Format. -> OLD Style Format. (with where condition).  --- PENDING
+	i) Equi - Join.
+	ii) Non-Equi Join.
+	iii) Self Join.
+---------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
