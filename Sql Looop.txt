@@ -1,0 +1,92 @@
+SQL Loop:-   
+-------------------
+>> it is used to perform repetition on a statement.
+----------------------------------------------------------------------------------
+>> wap to print Hello sql 10 times.
+declare @a int
+set @a=1
+while(@a<=10) -- 1<=10 --2<=10 3<=10 10<=10  11<=10 -> False
+begin
+print('Hello SQL')
+set @a=@a+1  -- a=2 a=3
+end
+----------------------------------------------------------------------
+>> wap to print 1 to 10 number
+declare @a int
+set @a=1
+while(@a<=10) -- 1<=10 --2<=10 3<=10 10<=10  11<=10 -> False
+begin
+print(@a)
+set @a=@a+1  -- a=2 a=3
+end
+----------------------------------------------
+wap to print 10 to 1 number.
+----------------------------------------------
+declare @a int
+set @a=10
+while (@a >=1)
+begin
+print(@a)
+set @a =@a-1
+end
+-------------------------------------------------------------
+wap to print even no. between 1 to 30.
+--------------------------------------------------------------
+declare @a int
+set @a=2
+while (@a<=30)
+begin
+print(@a)
+set @a =@a+2
+end
+-----------------------------------------------------------------
+wap to print odd no. between 1 to 30.
+declare @a int
+set @a=1
+while (@a<=30)
+begin
+print(@a)
+set @a =@a+2
+end
+--------------------------------------------------------
+Assignment:-
+-----------------------
+wap to find the sum of 1 to 10 number.
+ans => 1+2+3+..+10 =>  55 ans
+---------------------------------------------------------
+Pending:-
+-----------------
+1. Database Back and Recovery.
+2. case.
+3. CTE
+------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
