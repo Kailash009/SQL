@@ -1,0 +1,150 @@
+Non-ANSI Format(Old Style Format):- With Where condition
+------------------------------------------------------------------------------------------------------
+1. Equi Join.
+>> In equi join we use (=) operator.
+>> we can' t use these operators > <  >= <= <>
+---------------------------------------------------------------------------------------
+Syntax:-
+------------------
+select <colnamelist> from tablename1 tablenamealias,tablename2 aliasname where <Condition>
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-- waq to get how many students enrolled in python course.
+select s1.sname,s1.age,s1.sfee,c1.cname from tbl_Student s1,tbl_Course c1 where s1.cid=c1.cid and c1.cname='python'
+---------------------------------------------------------------
+2. Non-Equi Join.
+>> Other than = sign.
+>> Here we use > <= < >= <> 
+>> can't use = sign.
+Syntax:-
+------------------
+select <colnamelist> from tablename1 tablenamealias,tablename2 aliasname where <Condition>
+---------------------------------------------------------------
+3. Self Join.
+---------------------------------------------------------------
+>> Self join is a join where we join table itself.
+>> In self join we create no. of aliases.
+>> As we create alias of any table it produce duplicate of the current table.
+----------------------------------------------------------------------------------------------------------------------------
+-- waq to get all the employee details who are getting the same salary as subham is getting.
+select * from tbl_Course
+select * from tbl_Student
+select  s1.sname,s1.age,s1.sfee,c1.cname from tbl_Student s1,tbl_Course c1 where s1.cid<=c1.cid 
+
+create table tbl_Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+eage int,
+eaddress nvarchar(50),
+esalary money,
+epost nvarchar(50)
+)
+select * from tbl_Employee
+select * from tbl_Employee where esalary=34000  -- Salary is not given
+select * from tbl_Employee where ename='subham' -- It retrieve only subham record.
+select e1.ename,e1.eage,e1.esalary from tbl_Employee e1,tbl_Employee e2 where e1.esalary=e2.esalary and e2.ename='subham'
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SET OPERATORS IN SQL SERVER:-
+-------------------------------------------------------------------------------------
+>> It is used to combine one or more tables record together.
+--------------------------------------------------------------------------------------
+Before going to perform set operator in your query we need to follow the following condition:-
+1. Column name should be same of both the table.
+2. Order of column must be same of both the table.
+3. Data type must be match of both the table.
+--------------------------------------------------------------------------------------------------------------------------------
+Types of Set Operators:-
+----------------------------------------
+1. Union.  ->> It doesn't retreive duplicate records from both the table.
+2. UnionAll. ->> It retreive  duplicate records from both the table.
+3. Intersect.
+4. Except.
+---------------------------------------------------------------------------------------
+select * from tbl_Course
+select * from tbl_Student
+select  s1.sname,s1.age,s1.sfee,c1.cname from tbl_Student s1,tbl_Course c1 where s1.cid<=c1.cid 
+
+create table tbl_Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+eage int,
+eaddress nvarchar(50),
+esalary money,
+epost nvarchar(50)
+)
+select * from tbl_Employee
+select * from tbl_Employee where esalary=34000  -- Salary is not given
+select * from tbl_Employee where ename='subham' -- It retrieve only subham record.
+select e1.ename,e1.eage,e1.esalary from tbl_Employee e1,tbl_Employee e2 where e1.esalary=e2.esalary and e2.ename='subham'
+---------------------------------------------
+-- SET OPERATORS:-
+---------------------------------------------
+create table tbl_hyd
+(
+bid int,
+bname nvarchar(50),
+bcity nvarchar(50)
+)
+create table tbl_chennai
+(
+bid int,
+bname nvarchar(50),
+bcity nvarchar(50)
+)
+select * from tbl_hyd
+select * from tbl_chennai
+=================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

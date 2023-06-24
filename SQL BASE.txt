@@ -1,0 +1,201 @@
+order by / top / Like. 
+--------------------------------------------------------------
+order by -> it is used to perform your query in ascending or descending order.
+asc -> Optional
+desc -> Mandatory.
+-----------------------------------------------------------------------------------------------------------------------
+top ->
+---------------
+>> It retruns top record from the table.
+----------------------------------------------------------------
+Like:-
+------------------
+>> it is used to perform searching.
+---------------------------------------------------------
+_   (Underscore) -> it read one character at a time.
+% (Percentage) -> it read multiple character at a time.
+---------------------------------------------------------------------------------------
+select * from tbl_Employee
+select * from tbl_Employee order by ename asc
+select * from tbl_Employee order by ename desc
+select top 3 * from tbl_Employee  -- top 3 record
+select top 3 * from tbl_Employee order by eid desc  -- top 3 latest record
+
+select * from tbl_Employee where ename like 'a_a_' 
+
+-- If you know the first character.
+-- waq to get all the employee whose name start with a
+select * from tbl_Employee where ename like 'a%'
+
+-- If you know the last character.
+-- waq to get all the employee whose name end with l
+select * from tbl_Employee where ename like '%l'
+
+-- If you don't know the first and last character.
+-- waq to get all the employee whose name contains with i
+select * from tbl_Employee where ename like '%i%'
+------------------------------------------------------------------------------------------------
+Relationship in sql server:-
+----------------------------------------
+1. One to one. -> student  - personaldetails
+2. one to many or many to one. -> student -> paymentdetails.
+3. many to many. -> student - course
+1 s - Many couse
+1 c -> Many Student
+-------------------------------------
+Join in Sql server:-
+-----------------------------------
+It is used to combine two or more table data together.
+Types of Join:-
+------------------------
+1. Inner.
+>> it is used to retrieve only matching records from the table.
+Syntax:-
+-----------------
+select * from tableName1 inner join tablename2 on <condition>
+select * from tbl_Employee
+select * from tbl_Employee order by ename asc
+select * from tbl_Employee order by ename desc
+select top 3 * from tbl_Employee  -- top 3 record
+select top 3 * from tbl_Employee order by eid desc  -- top 3 latest record
+
+select * from tbl_Employee where ename like 'a_a_' 
+
+-- If you know the first character.
+-- waq to get all the employee whose name start with a
+select * from tbl_Employee where ename like 'a%'
+
+-- If you know the last character.
+-- waq to get all the employee whose name end with l
+select * from tbl_Employee where ename like '%l'
+
+-- If you don't know the first and last character.
+-- waq to get all the employee whose name contains with i
+select * from tbl_Employee where ename like '%i%'
+
+create table tbl_course -- Parent Table
+(
+cid int primary key identity(1,1),
+cname nvarchar(50)
+)
+create table tbl_Student --Child Table
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+sage int,
+saddress nvarchar(50),
+sfee money,
+cid int foreign key references tbl_Course(cid)
+)
+select * from tbl_course
+select * from tbl_Student
+--select * from tableName1 inner join tablename2 on <condition>
+-- waq to get total no. of student enrolled in dot net course.
+select sname,cname from tbl_course inner join tbl_Student on tbl_course.cid=tbl_Student.cid and tbl_course.cname='dotnet'
+-- or
+select s1.sname,c1.cname from tbl_course c1 inner join tbl_Student s1 on c1.cid=s1.cid and c1.cname='dotnet'
+-------------------------------------------------------------------------------------------------------
+2. Outer. a) Left  b) Right  c) Full
+>> it is used to retrieve matching and unmatching record from the table.
+------------------------------------------------------------------------------------------------------------
+a) Left Outer.
+>> It return all record from the left table,matching record from the right table and unmatched return Null.
+Syntax:-
+------------------
+select * from tablename1 left outer join tablename2 on <joining conditoin>
+b) Right Outer.
+>> It return all record from the right table,matching record from the left table and unmatched return Null.
+select * from tablename1 right outer join tablename2 on <joining conditoin>
+c) Full Outer.
+>> It return all record from both the table and unmatched return Null.
+select * from tablename1 full outer join tablename2 on <joining conditoin>
+-- Outer JOIN
+select * from tbl_course c1 left outer join tbl_Student s1 on c1.cid=s1.cid 
+select * from tbl_Student c1 right outer join tbl_course s1 on c1.cid=s1.cid 
+select * from tbl_course c1 full outer join tbl_Student s1 on c1.cid=s1.cid 
+select * from tbl_student c1 full outer join tbl_course s1 on c1.cid=s1.cid 
+---------------------------------------------------------------------------------------------------------------------------------------------
+3. Cross.
+>> it is used to find product.(m*n).
+select * from tbl_course -- 8 rows
+select * from tbl_Student -- 6 rows 8*6 => 48
+select * from tbl_Student cross join tbl_course
+--------------------------------------------------------------
+4. self.
+---------------------------------
+>> Joining a table iteself.
+>> creating no. of alias of a table it produce duplicate copy of the table.
+----------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- waq to get all the employee who are getting the same salary as sushil is getting.
+select * from tbl_Employee where salary=23000 -- Salary is not given.
+select * from tbl_Employee where ename='sushil'
+select e1.ename,e1.age,e1.salary from tbl_Employee e1,tbl_Employee e2 where e1.salary=e2.salary and e2.ename='sushil'
+--------------------------------------------------------
+STORED PROCEDURE: - PENDING
+----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
