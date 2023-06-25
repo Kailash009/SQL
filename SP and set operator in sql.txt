@@ -1,0 +1,379 @@
+SET OPERATORS:-
+----------------------------------------------
+Types of Set Operators:-
+----------------------------------------
+1. Union.  ->> It doesn't retreive duplicate records from both the table.
+Syntax:-
+---------------------
+select * from tablename1 union select * from tablename2
+-------------------------------------------------------------------------------------
+2. UnionAll. ->> It retreive  duplicate records from both the table.
+Syntax:-
+---------------------
+select * from tablename1 union all select * from tablename2
+---------------------------------------------------------------------------------------------
+3. Intersect.
+>> it returns common records from both the table.
+Syntax:-
+---------------------
+select * from tablename1 intersect select * from tablename2
+-------------------------------------------------------------------------------------
+4. Except.
+-------------------------
+>> It returns all the records from table1 that doesn't exist in table2.
+---------------------------------------------------------------------------------------------------------
+Syntax:-
+---------------------
+select * from tablename1 except select * from tablename2
+------------------------------------------------------------------------------------------
+select * from tbl_chennai
+select * from tbl_hyd
+
+select * from tbl_chennai union select * from tbl_hyd
+
+select * from tbl_chennai 
+union all 
+select * from tbl_hyd
+
+select * from tbl_chennai 
+intersect
+select * from tbl_hyd
+
+select * from tbl_chennai 
+except
+select * from tbl_hyd
+
+select * from tbl_hyd 
+except
+select * from tbl_chennai
+-------------------------------------------------------------------------
+STORED PROCEDURE:-
+----------------------------------------------------
+>> It is pre-compile database objects.
+>> The performance of sp is very high.
+>> It provide security to our databases.
+>> it reduces network traffic.
+>> Sp doesn't return any value.
+>> Sp have input and output parameter.
+>> It prevent SQL Injection.
+-----------------------------------------------------------------------------------
+Types of Parameter in SP:-
+-----------------------------------------------
+There are two types of parameter we passed in SP which are as follows:-
+a) Input Parameter.
+	i) Without Parameter.
+	ii) With Parameter.
+b) Output Parameter.
+------------------------------------------------------------------------------------------------------------
+a) Input Parameter.
+	i) Without Parameter. -> In this SP we don't pass any type of parameter.
+Syntax:-
+------------------
+create/alter proc/procedure procedurename
+as begin
+<Query Statements>
+end
+-----------------------------------------------------------------------------------------------------------
+Syntax to execute/run procedure:-
+-----------------------------------------------------
+exec/execute procedureName
+-----------------------------------------------------
+select * from tbl_Employee
+
+create procedure sp_allemp
+as begin
+select * from tbl_Employee
+end
+-- RUN PROCEDURE
+exec sp_allemp
+------------------------------------------------------------------------------------------------
+Procedure:-
+------------------------
+1. Get all Employee.
+2. Insert an Employee.
+3. Update an employee.
+4. Delete an Employee.
+5. Get Specific Employee.
+------------------------------------------------------
+a) Input Parameter.
+	i) With Parameter.
+Syntax:- (insert)
+-----------------------------
+create proc/procedure procedureName
+(
+@parametername1 datatype1,
+@parametername2 datatype2(size),
+.
+.
+.
+.
+@parameternameN datatypeN,
+)
+as begin
+insert into tablename(col1,col3,col4,col6) values(@parameter1,@paramete3,@parameter4,@parameter6)
+end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+create procedure sp_allemp
+as begin
+select * from tbl_Employee
+end
+
+-- RUN PROCEDURE
+exec sp_allemp
+
+
+-- Input Parameter  (with Parameter)
+create proc sp_insertemp
+(
+@name nvarchar(50),
+@age int,
+@address nvarchar(60),
+@salary money,
+@post nvarchar(50)
+)
+as begin
+insert into tbl_Employee(ename,eage,eaddress,esalary,epost) values(@name,@age,@address,@salary,@post)
+end
+
+-- EXECUTE PROCEDURE
+exec sp_insertemp 'Raj',23,'Ambedkar nagar',24005,'Manager'
+exec sp_allemp
+------------------------------------------------------------------------------------------------
+Syntax:- (update)
+-----------------------------
+create proc/procedure procedureName
+(
+@parametername1 datatype1,
+@parametername2 datatype2(size),
+.
+.
+.
+.
+@parameternameN datatypeN,
+)
+as begin
+update tablename set col1=@parameter1,col2=@parameter2 where col=@oldparametervalue
+end
+---------------------------------------------------------------------------------------------------------------------------------------------------
+4. Delete an Employee.
+Syntax:- (delete)
+-----------------------------
+create proc/procedure procedureName
+(
+@parametername1 datatype1,
+@parametername2 datatype2(size),
+.
+.
+.
+.
+@parameternameN datatypeN,
+)
+as begin
+delete from tablename where colname=@parameter
+end
+-----------------------------------------------------------------------------------
+5. Get Specific Employee.
+Syntax:- (select_single)
+-----------------------------
+create proc/procedure procedureName
+(
+@parametername1 datatype1,
+@parametername2 datatype2(size),
+.
+.
+.
+.
+@parameternameN datatypeN,
+)
+as begin
+select * from tablename where colname=@parameter
+end
+-----------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+create procedure sp_allemp
+as begin
+select * from tbl_Employee
+end
+
+-- RUN PROCEDURE
+exec sp_allemp
+
+
+-- Input Parameter  (with Parameter)
+create proc sp_insertemp
+(
+@name nvarchar(50),
+@age int,
+@address nvarchar(60),
+@salary money,
+@post nvarchar(50)
+)
+as begin
+insert into tbl_Employee(ename,eage,eaddress,esalary,epost) values(@name,@age,@address,@salary,@post)
+end
+
+-- EXECUTE PROCEDURE
+exec sp_insertemp 'Raj',23,'Ambedkar nagar',24005,'Manager'
+exec sp_allemp
+
+create proc sp_updateemp
+(
+@eid int,
+@name nvarchar(50),
+@age int,
+@address nvarchar(50),
+@salary money,
+@post nvarchar(50)
+)
+as begin
+update tbl_Employee set ename=@name,eage=@age,eaddress=@address,esalary=@salary,epost=@post where eid=@eid
+end
+
+exec sp_allemp
+exec sp_updateemp 5,'PIYUSH MISHRA',34,'NODIA',45433,'CLERK'
+
+create proc sp_deleteemp
+(
+@eid int
+)
+as begin
+delete from tbl_Employee where eid=@eid
+end
+
+exec sp_allemp
+exec sp_deleteemp 7
+create proc sp_selectemp
+(
+@eid int
+)
+as begin
+select * from tbl_Employee where eid=@eid
+end
+
+exec sp_allemp
+exec sp_selectemp 8
+=================================================================
+Assignment Task:-
+---------------------------------
+Create a Single Procedure that perform all these task -
+----------------------------------------------------------------------------------------
+1. Show All employee
+2. Insert an Employee.
+3. Update an Employee.
+4. Delete an Employee.
+5. Select Specific Employee.
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,381 @@
+STORED PROCEDURE:-
+-------------------------------------------------
+>> It is a pre-compile database objects.
+>> SP doesn't return any value.
+>> It improve the performance of our database.
+>> it helps to reduce network traffic.
+>> it prevent SQL injection.
+--------------------------------------------------------------------------------------------
+Operations:-
+--------------------------
+1. Show All Employee.
+2. Insert an employee.
+3. update an employee.
+4. delete an employee.
+5. select a specific employee.
+------------------------------------------------------
+Types of Parameter in SP:-
+---------------------------------------------
+1. Without Parameter.
+>> In it, we don't pass any type of parameter.
+Syntax:-
+------------------
+create/alter proc/procedure proc_Name
+as begin
+<Query Statements>
+end
+----------------------------------------------------------------
+Command to Run Procedure:-
+----------------------------------------------------
+execute/exec proc_Name
+------------------------------------------------
+2. With Parameter.
+>> It it, we pass parameter.
+Syntax:-(Insert)
+-------------------------------------
+create/alter proc/procedure proc_Name
+(
+@parameter1 datatype,
+@parameter2 datatype(size),
+.
+.
+.
+.
+@parameterN datatypeN,
+)
+as begin
+insert into tablename(col1,col4,col6) values(@parameter1,@parameter4,@parameter6)
+end
+--------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-(update)
+-------------------------------------
+create/alter proc/procedure proc_Name
+(
+@parameter1 datatype,
+@parameter2 datatype(size),
+.
+.
+.
+.
+@parameterN datatypeN,
+)
+as begin
+update tablename set colname=@parameter where colname='@oldparametervalue'
+end
+-------------------------------------
+Syntax:-(delete)
+-------------------------------------
+create/alter proc/procedure proc_Name
+(
+@parameter1 datatype,
+@parameter2 datatype(size),
+.
+.
+.
+.
+@parameterN datatypeN,
+)
+as begin
+delete from tablename where colname=@parameterName
+end
+-------------------------------------------------------------------------------------------------
+Syntax:-(select_Single Employee)
+------------------------------------------------------
+create/alter proc/procedure proc_Name
+(
+@parameter1 datatype,
+@parameter2 datatype(size),
+.
+.
+.
+.
+@parameterN datatypeN,
+)
+as begin
+select * from tablename where colname=@parameterName
+end
+--------------------------------------------------------------------------
+alter procedure sp_allemp
+as begin
+select * from tbl_Employee
+end
+
+-- Run procedure
+exec sp_allemp
+----------------------------------------------------------------
+alter proc sp_insertemp
+(
+@name nvarchar(50),
+@age int,
+@address nvarchar(50),
+@post nvarchar(50),
+@salary money
+)
+as begin
+insert into tbl_Employee(ename,age,eaddress,post,salary) values(@name,@age,@address,@post,@salary)
+end
+
+-- exec
+exec sp_allemp
+exec sp_insertemp 'raj kishore',41,'yanuma nagar','mrkt',34222 
+
+create proc sp_updateemp
+(
+@eid int,
+@name nvarchar(50),
+@age int,
+@address nvarchar(50),
+@post nvarchar(50),
+@salary money
+)
+as begin
+update tbl_Employee set ename=@name,age=@age,eaddress=@address,post=@post,salary=@salary where eid=@eid
+end
+
+exec sp_updateemp 5,'RAHUL MISHRA',23,'NOIDA SEC-34','PO',3402
+
+
+create proc sp_delemp
+(
+@eid int
+)
+as begin
+delete from tbl_Employee where eid=@eid
+end
+exec sp_allemp
+exec sp_delemp 2007
+
+create proc sp_selectemp
+(
+@eid int
+)
+as begin
+select * from tbl_Employee where eid=@eid
+end
+
+exec sp_allemp
+exec sp_selectemp 3
+-----------------------------------------------------------------------------------------------
+Ques) create a single procedure that perform all these operations- 
+1. insert an employee.
+2. show all employee.
+3. update employee.
+4. delete employee.
+5. select single employee.
+--------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+alter procedure sp_Employee
+(
+@status nvarchar(50)=null,
+@eid int=0,
+@name nvarchar(50)=null,
+@age int=0,
+@address nvarchar(50)=null,
+@post nvarchar(50)=null,
+@salary money=0
+)
+as begin
+if(@status='Create')
+begin
+insert into tbl_Employee(ename,age,eaddress,post,salary) values(@name,@age,@address,@post,@salary)
+select 1 as result
+end
+else if(@status='Update')
+begin
+update tbl_Employee set ename=@name,age=@age,eaddress=@address,post=@post,salary=@salary where eid=@eid
+select 1 as result
+end
+else if(@status='Delete')
+begin
+delete from tbl_Employee where eid=@eid
+select 1 as result
+end
+else if(@status='SelectALL')
+begin
+select * from tbl_Employee
+end
+else if(@status='Select_Single')
+begin
+select * from tbl_Employee where eid=@eid
+end
+else
+begin
+print('No Status Match!!')
+end
+end
+
+-- Test/Run your Procedure
+exec sp_Employee 'SelectALL'
+exec sp_Employee 'Select_Single',7
+exec sp_Employee 'Create',0,'ravi',23,'hari nagar','SE',34343
+exec sp_Employee 'Update',3,'ajay singh',56,'ramesh nagar','mrkt',39893
+exec sp_Employee 'Delete',11
+exec sp_Employee 'De'
+-------------------------------------------------------------------------------------------------------------------------
+Functions:-
+-----------------------
+>> function return a value.
+In Sql we can create two types of user defined function which are as follows:-
+1. Scalar Valued.
+>> A function which return only single value.
+Syntax:-
+------------------
+create/alter function function_Name(@paramete1 datatype,@parameter datatype(size))
+returns variablename/datatypename
+as begin
+<Query Statements>
+return final_Value
+end
+----------------------------------------------
+-- create a gross salary of an employee on the following basis - 
+bs - 23000
+da - 10% of bs  -> 2300
+ta - 20% of bs  -> 4600
+hra - 8% of bs --> 1840
+gs = bs+da+ta+hra ->  31,740
+------------------------------------------------
+2. TableValued.
+>> A function which return whole table or multiple values.
+>> Begin and End is not required.
+-------------------------------------------------------------------------------------------
+syntax:-
+------------------
+create function functionname(@parameter datatype)
+returns table
+as
+<Query Statements>
+----------------------------------------------------------------------------
+-- waq to create table function valued function that accept department name as input and find total no. of employee in each department.
+-- waq to create function that find sum of two number
+select LEN('suresh')  -- System defined function.
+create function addition(@a int,@b int)
+returns int
+as begin
+declare @c int
+set @c=@a+@b
+return @c
+end
+
+-- How to Run Function
+select dbo.addition(232,56) as 'Sum of Two Number'
+select * from tbl_Employee
+
+
+create function calc_grosssalary(@eid int)
+returns money
+as begin
+declare @bs money,@da money,@ta money,@hra money,@gs money
+select @bs=salary from tbl_Employee where eid=@eid
+set @da=@bs*0.1
+set @ta=@bs*0.2
+set @hra=@bs*0.08
+set @gs=@bs+@da+@ta+@hra
+return @gs
+end
+
+select dbo.calc_grosssalary(1) as 'Total Gross Salary'
+select * from tbl_Employee
+-- waq to create table function valued function that accept post name as input and 
+--find total no. of employee in each department.
+
+create function total_employee(@post nvarchar(100))
+returns table
+as 
+return (select * from tbl_Employee where post=@post)
+select * from total_employee('Clerk')
+--------------------------------------------------------------------------------------------------------------------------
+Views -- PENDING
+Trigger
+Database Backup and Restore
+----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
