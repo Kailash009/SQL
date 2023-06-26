@@ -1,0 +1,127 @@
+Case in Sql Server:-
+--------------------------------------
+>> It is used to provide condition in a query.
+----------------------------------------------------------------------------
+Syntax:-
+-----------------
+case
+when condition1 then statement1
+when condition2 then statement2
+when condition3 then statement3
+when condition4 then statement4
+when condition5 then statement5
+else
+when condition6 then statement6 
+end
+--------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+select ename,salary,
+case
+when salary>10000 then 'Salary is Greater than 100000'
+when salary>20000 then 'Salary is Greater than 20000'
+when salary<10000 then 'Salary is less than 10000'
+when salary<20000 then 'Salary is less than 20000'
+when salary>20000 then 'Salary is Greater than 20000'
+else 
+'Salary is Greater than 2000'
+end as 'Result'
+from tbl_Employee
+-------------------------------------------------------------------------------------------------------
+CTE:-
+----------------
+>> CTE act as virtual tables that are created during query execution.
+>> It is a one  time result set that only exists for the duration of the query.
+>> CTE stands for Common table expression.
+>> It can be thought of as temporary result set that is defined within the execution scope of a single select,insert,update,delete or create statements.
+>> Easy to maintain you query.
+>> Improved redability.
+>> Performance is very high.
+-------------------------------------------------------------------------------------------
+Syntax:-
+------------------------
+with Cte_Name(column_List)
+as
+(
+Query Expression
+)
+---------------------------------------------------
+select * from tbl_Employee
+with EmployeeList(ename,eaddress,salary)
+as
+(
+select ename,eaddress,salary from tbl_Employee
+)
+select * from EmployeeList
+-------------------------------------------------------------------
+sum of digit of 10 number
+declare @i int,@sm int
+set @i=1
+set @sm=0
+while(@i<=10) --1<=10 2<=10 3<=10 4<=10 5<=10 6<=10
+begin
+print(@i) --1 2 3 4 5 6
+set @sm=@sm+@i -- sm=0+1 -> 1 ->sm=3+3=6+4=10+5 => 15+6 =21
+set @i=@i+1 -- i=2 3 4 5 6
+end
+print('Sum='+cast(@sm as nvarchar(50)))
+------------------------------------------------------------------------------------------------------------------------------
+XML :-
+--------------
+>> It stands for Extensible Markup Language.
+>> Here we can create our predefined tags.
+>> it is used to store data.
+>> it is case-senstive.
+>> it is a type of data representation technique.
+--------------------------------------------------------------------------------
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>  -> XML FORMAT
+----------------------------------------------------------------------------
+JSON -> Java Script Object Notation.
+>> Fast.
+{
+"id":101,
+"name":"vijay",
+"age":20
+}  ->>> JSON FORMAT.
+-----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
