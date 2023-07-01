@@ -1,0 +1,249 @@
+Create a Single Procedure that perform all these task -
+----------------------------------------------------------------------------------------
+1. Show All employee
+2. Insert an Employee.
+3. Update an Employee.
+4. Delete an Employee.
+5. Select Specific Employee.
+----------------------------------------------------------------------------------------
+Output Parameter:-
+-------------------------------------
+>> When we want to return value from the Stored procedure then we use the concept of Output Parameter.
+---------------------------------------------------------------
+waq to input eid and find the PF and PT on the following condition - 
+PF(Provident Fund) -> 10%  of bs
+PT(Professional Tax) -> 20% of bs
+----------------------------------------------------------------------------------------------------------
+Steps to execute Output Parameter:-
+----------------------------------------------------------------
+1. Declaring Bind Variable.
+2. Adding/Executing Bind Variable.
+3. Prind Bind Variable.
+------------------------------------------------------------
+Views:-
+--------------------
+>> It is a virtual table.
+>> It is used to retreive record from table in a fast manner.
+>> It works only select statement.
+>> view store your data into Ram.(Temporarily Memory)
+------------------------------------------------------------------------------------------------
+Types of View:-
+---------------------------
+>> There are two types of View:-
+1. Simple View.
+2. Complex View.
+-------------------------------------------------------------
+1. Simple View.
+>> It is used to reteive data from a single base table.
+>> It is also known as 'Updatable View'.
+---------------------------------------------------------------------------
+Syntax:-
+---------------------
+create view view_name as select * from <TableName>
+---------------------------------------------------------------------------------
+2. Complex View.
+>> When we want to retreive data from multiple base table.
+>> It is also known as 'Non-Updatable View'.
+------------------------------------------------------------------------------------------
+Syntax:
+-----------------
+create view view_name as 
+select * from tablename1
+union
+select * from tablename2
+---------------------------------------------------------------------
+alter procedure sp_Employee
+(
+@action nvarchar(50)=null,
+@eid int=0,
+@name nvarchar(50)=null,
+@age int=0,
+@address nvarchar(50)=null,
+@salary money=0,
+@post nvarchar(50)=null
+)
+as begin
+if(@action='Create')
+begin
+insert into tbl_Employee(ename,eage,eaddress,esalary,epost) values(@name,@age,@address,@salary,@post)
+select 1 as result
+end
+else if(@action='Update')
+begin
+update tbl_Employee set ename=@name,eage=@age,eaddress=@address,esalary=@salary,epost=@post where eid=@eid
+select 1 as result
+end
+else if(@action='Delete')
+begin
+delete from tbl_Employee where eid=@eid
+select 1 as result
+end
+else if(@action='SelectAll')
+begin
+select * from tbl_Employee
+end
+else if(@action='Select_Single')
+begin
+select * from tbl_Employee where eid=@eid
+end
+else
+begin
+print('No Procedure Found!!')
+end
+end
+--------------------------------------------------
+-- Run/Test your Procedure:-
+execute sp_Employee 'SelectAll'
+execute sp_Employee 'Select_Single',6
+execute sp_Employee 'Create',0,'Rajesh',12,'Preet Vihar',34030.23,'Mrkt'
+execute sp_Employee 'Update',2,'Subham Singh',18,'Noida sec-34',2300.23,'Mrkt'
+execute sp_Employee 'Delete',8
+execute sp_Employee 'Creat'
+
+-- OutPut Parameter:-
+create proc sp_Emp
+(
+@eid int,   -- Input Parameter
+@pf money out,  --- Output Parameter
+@pt money out
+)
+as begin
+declare @sal money
+select @sal=esalary from tbl_Employee where eid=@eid
+set @pf=@sal*0.1
+set @pt=@sal*0.2 
+end
+
+-- Step to Run Output Parameter.
+-- Declaring Bind Variable.
+declare @bpf money,@bpt money
+--Adding/Executing Bind Variable.
+exec sp_Emp 4,@bpf out,@bpt out
+-- Print Bind Variables.
+print('Provident Fund='+cast(@bpf as nvarchar(50)))
+print('Professional Tax='+cast(@bpt as nvarchar(50)))
+
+-- Views in SQL Server
+-- Simple View  --- Updatable View.
+
+create view vw_emp as select * from tbl_Employee
+
+select * from vw_emp
+
+-- Updatable View  - DML Operation
+select * from tbl_Employee
+select * from vw_emp
+insert into vw_emp (ename,eage,eaddress,esalary,epost) values('subham',34,'noida sec-23',3434,'TL')
+update vw_emp set ename='yash mishra',eage=23 where eid=4
+delete from vw_emp
+
+-- Complex View -- Non-Updatable View.
+create view vw_complexemp 
+as
+select * from tbl_hyd
+union
+select * from tbl_chennai
+
+select * from vw_complexemp
+-- DML
+insert into vw_complexemp values(445,'PNB','Lucknow')
+update vw_complexemp set bname='SBI' where bid=101
+delete from vw_complexemp
+------------------------------------------------------------------------------------------------------------------------
+Nested Queries:-  Pending
+-----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
