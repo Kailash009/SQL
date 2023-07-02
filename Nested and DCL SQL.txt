@@ -1,0 +1,233 @@
+Nested Query:-
+------------------------------
+>> When a simple query doesn't give relevant result then we go for Nested query.
+>> A Query with in another Query is called Nested Query.
+Syntax:-
+--------------------
+(Outer Query)                                                                          (Inner Query)
+select * from <TN1> where colname=(select * from TN where colname=(select * from TN where colname=(select * from TN)))
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+On the basis of execution process it can be divided into two categories which are as follows:-
+1. Non-Corelated SubQuery.
+>> First Inner Query will executed and later on outer Query will execute.
+>> Outer Query result depends upon inner Query.
+	It can further divided into two parts:-
+	a) Single/Simple Row SubQuery.
+>> When a Query give single row from the table it is known as Single Row SubQuery.
+ForEx:- waq to get the employee details who are the getting the first highest salary.
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee)
+	b) Multiple Row SubQuery.
+>> When a query returns multiple row from the table then it is known as Multiple Row SubQuery.
+-- waq to get all the employee details who belongs to the same department as subham,rajesh and kamlesh.
+select * from tbl_Employee where epost in(select epost from tbl_Employee where ename='subham' or ename='rajesh' or ename='kamlesh')
+-- or
+select * from tbl_Employee where epost in(select epost from tbl_Employee where ename in('subham','rajesh','kamlesh'))
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Co-related SubQuery.
+>> First Outer Query will executed and later on inner Query will execute.
+>> Inner Query result depend upon Outer Query.
+------------------------------------------------------------------------------------------------------------------------------------
+Comparision Between Non-Corelated and Co-related:-
+---------------------------------------------------------------------------------------
+Non-Corelated:-
+------------------------------------
+N=1 -> No. of SubQuery.  -> N+1 => 2
+N=2 -> No. of SubQuery.  -> N+1 => 3
+N=3 -> No. of SubQuery.  -> N+1 => 4
+N=15 15th highest salary of an employee -> N+1 => 16 SubQuery.
+-------------------------------------------------------------------------------------------------------------------------
+Co-related SubQuery:-
+---------------------------------------------------------
+Syntax:-
+--------------------
+select * from <TN> t1
+where N-1=(select count(colname) from TN t2
+where t2.colname(</>)t1.colname)
+------------------------------------------------------------------
+> -> Highest Salary.
+< -> Lowest Salary.
+------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- waq to get the employee details who are the getting the first highest salary.
+select  max(esalary) from tbl_Employee  -- this query will not give complete employee details
+
+-- Non-Corelated
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee)
+--waq to get all the employee details who belongs to the same department as subham,rajesh and kamlesh.
+select * from tbl_Employee where ename='subham' or ename='rajesh' or ename='kamlesh'  -- Dept Not Given.
+select * from tbl_Employee where epost in(select epost from tbl_Employee where ename='subham' or ename='rajesh' or ename='kamlesh')
+-- or
+select * from tbl_Employee where epost in(select epost from tbl_Employee where ename in('subham','rajesh','kamlesh'))
+
+-- Non-Corelated:-
+------------------------------
+-- First Highest Salary of an Employee. (N=1) => 2
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee)
+-- Second Highest Salary of an Employee. (N=2) => 3
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee where esalary<(select max(esalary)from tbl_Employee))  --56000<87000 - True
+-- Third Highest Salary of an Employee. (N=3) => 4
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee where esalary<(select max(esalary)from tbl_Employee where esalary<(select max(esalary) from tbl_Employee)))
+
+-- Co-Related SubQuery
+--select * from <TN> t1
+--where N-1=(select count(colname) from TN t2
+--where t2.colname(</>)t1.colname)
+-- First Highest Salary (N=1)
+select * from tbl_Employee t1
+where 0=(select count(esalary) from tbl_Employee t2
+where t2.esalary>t1.esalary)
+-- Second Highest Salary (N=2)
+select * from tbl_Employee t1
+where 1=(select count(esalary) from tbl_Employee t2
+where t2.esalary>t1.esalary)
+
+-- Third Highest Salary (N=3)
+select * from tbl_Employee t1
+where 2=(select count(esalary) from tbl_Employee t2
+where t2.esalary>t1.esalary)
+
+-- Fourth Highest Salary (N=4)
+select * from tbl_Employee t1
+where 3=(select count(esalary) from tbl_Employee t2
+where t2.esalary>t1.esalary)
+
+-- Fivth Highest Salary (N=5)
+select * from tbl_Employee t1
+where 4=(select count(esalary) from tbl_Employee t2
+where t2.esalary>t1.esalary)
+
+-- First Lowest Salary (N=1)
+select * from tbl_Employee t1
+where 0=(select count(esalary) from tbl_Employee t2
+where t2.esalary<t1.esalary)
+-- Second Lowest Salary (N=2)
+select * from tbl_Employee t1
+where 1=(select count(esalary) from tbl_Employee t2
+where t2.esalary<t1.esalary)
+
+-- Third Lowest Salary (N=3)
+select * from tbl_Employee t1
+where 2=(select count(esalary) from tbl_Employee t2
+where t2.esalary<t1.esalary)
+
+-- Fourth Lowest Salary (N=4)
+select * from tbl_Employee t1
+where 3=(select count(esalary) from tbl_Employee t2
+where t2.esalary<t1.esalary)
+
+-- Fivth Lowest Salary (N=5)
+select * from tbl_Employee t1
+where 4=(select count(esalary) from tbl_Employee t2
+where t2.esalary<t1.esalary)
+-----------------------------------------------------------------------------------------------------------------------------------------
+DCL - (Data Control Language):-
+-----------------------------------------------------------------
+>> it is used to give or take the permission from the user.
+------------------------------------------------------------------------------------------
+It has following two commands -
+1. Grant.
+>> To give the permission to the User.
+Syntax:-
+-------------------
+Grant <Priviledge List> on tableName to User
+---------------------------------------------------------------------------------------
+2. Revoke.
+>> To take out the permission from the User.
+Syntax:-
+-------------------
+Revoke <Priviledge List> on tableName from User
+-----------------------------------------------------------------------------------------------------------
+There are two types of Authentication in Sql Server -
+a) Windows Authentication
+>> It works like an Admin.
+>> It doesn't require UserName and Password.
+---------------------------------------------------------------------------------------------- 
+b) Sql Server Authentication.
+>> It works like a Normal User.
+>> It must require UserName and Password.
+----------------------------------------------------------------------------------------------
+Command to Create Login:-
+-------------------------------------------------
+create login loginName with Password='givepassword'
+create login pawan with password='123'
+----------------------------------------------------------------------------------------------
+Command to Create User:-
+--------------------------------------------------------------
+create user username for login loginname
+------------------------------------------------------------------
+Command to Grant Permission for  table:-
+-----------------------------------------------------------------------
+grant select,update on tbl_Employee to pawan
+revoke select,update on tbl_Employee from pawan
+------------------------------------------------------------------------------------
+Command to Grant Permission for  Whole Database:-
+-----------------------------------------------------------------------------------
+create login pawan with password='123'
+create user pawan for login pawan
+--Grant <Priviledge List> on tableName to User
+grant select,update on tbl_Employee to pawan
+revoke select,update on tbl_Employee from pawan
+-- Whole Database
+grant select,update on database::BatchPawan to pawan
+revoke select,update on database::BatchPawan from pawan
+--------------------------------------------------------------------------------------------------------------
+TCL -- Transaction Control Language:-  PENDING
+--------------------------------------------------------------------------------------------
+In TCL we have following fourt commands-
+1. Begin Transaction.
+2. Commit.
+3. Rollback.
+4. SavePoint.
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
