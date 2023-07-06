@@ -1,0 +1,365 @@
+How to Perform CRUD using CUI:-
+------------------------------------------------------------
+1. Create Database.
+2. Create table.
+3. Insert,update,delete,select.
+4. Delete Table.
+5. Delete Database.
+-------------------------------------------------
+1. Command to create database :-
+create database databaseName
+-------------------------------------------------------
+2. Command to Select your database.
+use DatabaseName
+-------------------------------------------------------------
+3. Command to Create Table-
+create table tableName
+(
+colname1 datatype,
+colname2 datatype(size),
+.
+.
+.
+colnameN datatypeN
+)
+---------------------------------------------------------------
+identity(seed,inc)
+-----------------------------
+Seed -> Starting value.
+Inc -> How many inc you want.
+------------------------------------------------------
+command to insert record:-
+------------------------------------------------
+1. Insert into all Column.
+Syntax:-
+insert into tablename values(value1,value2,value3.....valueN)
+2. Insert into specific Column.
+insert into tablename(col1,col3,col5,col7) values(value1,value3,value5,value7)
+-------------------------------------------------------------------------------------------------------------------------
+Select:-
+--------------------
+1. See all rows and column.
+select * from tablename
+2. See specific row and all column.
+select * from tablename where colname=value
+3. See specific column and all rows.
+select col1,col4,col6 from tablename
+4. See specific column and row.
+select col1,col4,col6 from tablename where colname=value
+-----------------------------------------------------------------------------------------
+Update:-
+------------------
+1. Update specific column.
+update tablename set colname=newvalue where colname=oldvalue
+2. Update all column.
+update tablename set colname1=newvalue1,colname2=newvalue2,colname3=newvalue3, where colname=oldvalue
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Delete:-
+----------------------
+1. Delete specific row.
+delete from tablename where colname=value
+2. Delete all rows.
+delete from tablename
+----------------------------------------------------------------------------------------
+DELETE ,DROP and Truncate:-
+--------------------------------------------------------------
+Truncate:-
+----------------------
+Syntax:-
+-----------------
+truncate table tableName
+-----------------------------------------------
+>> it also delete all rows.
+>> In truncate where clause is not allowed.
+----------------------------------------------------------------------------------
+Drop:-
+-------------------
+>> It delete table schema and database schema.
+Table:-
+----------------
+drop table tablename
+-----------------------------------------------------------------------
+Database:-
+----------------
+drop database databasename
+-----------------------------------------------------------------------
+create database BatchAsgar
+use BatchAsgar
+create table tbl_Employee
+(
+eid int primary key identity(1,3),
+ename nvarchar(50),
+dob date,
+age int,
+eaddress nvarchar(50),
+mobileno nvarchar(20),
+post nvarchar(49),
+salary money,
+)
+select * from tbl_Employee
+insert into tbl_Employee(ename,dob,age,eaddress,mobileno,post,salary) values('Rahul','2023-07-06',18,'new ashok nagar','343434','SE',34032)
+insert into tbl_Employee(ename,dob,age,eaddress,mobileno,post,salary) values('Shivam','2023-07-08',28,'kirti nagar','43434','TL',24032)
+insert into tbl_Employee(ename,dob,age,eaddress,mobileno,post,salary) values('Pranjul','2023-07-09',38,'uttam nagar','943434','Clerk',14032)
+insert into tbl_Employee(ename,dob,age,eaddress,mobileno,post,salary) values('Arun','2023-07-03',48,'preet vihar','843434','Mrkt',54032)
+insert into tbl_Employee(ename,dob,age,eaddress,mobileno,post,salary) values('Deepak','2023-07-10',58,'yamuna bank','743434','Manager',64032)
+
+select * from tbl_Employee
+select * from tbl_Employee where eid=10
+select ename,eaddress,mobileno,salary from tbl_Employee
+select ename,eaddress,mobileno,salary from tbl_Employee where eid=7
+
+update tbl_Employee set ename='Shivam Singh' where eid=4
+update tbl_Employee set ename='Pranjul singh',dob='2020-02-09',age=12,eaddress='Noida Sec-34',mobileno='909883',post='Advocate',salary=11223 where eid=7
+
+delete from tbl_Employee where eid=10
+delete from tbl_Employee
+truncate table tbl_Employee
+
+select * from tbl_Employee
+
+drop table tbl_Employee
+drop database BatchAsgar
+-----------------------------------------------------------------------------------------------
+SQL Operator:-
+-----------------------------
+1. Arithmetic Operator.  -> + , - , * , /
+2. Relational Operator.
+> , >=  <  <=  <>
+3. Logical
+and -> Both condition must be true. 
+or  -> Either one of the condition is true then result is true.
+not -> If input is 0 then 1 and vice-versa.
+------------------------------------------------------------------------------------------
+Special Operator-
+------------------------------------
+1. Between
+2. Not Between.
+3. In.
+4. Not In.
+5. Order By. -> it is used to get the column data in ascending or descending order.
+asc -> Not Mandatory
+desc -> Mandatory.
+---------------------------------------------------------
+6. Top. -> it return top record from the table.
+7. Like. -> it is used for searching purpose.
+It has two symbol -
+	a) Underscore.(_) -> It read one character at a time.
+	b) Percentage.(%) -> It read multiple character at a time.
+-----------------------------------------------------------------------------------------------------------------
+select 10+5 as 'Addition'
+select 10-5 as 'Subtraction'
+select 10*5 as 'Multiplication'
+select 10/5 as 'Divide'
+select * from tbl_Employee
+select ename+ ' = '+post as 'Name+POST' from tbl_Employee
+-- waq to get all the employee whose salary is less than 20000.
+select * from tbl_Employee where salary<20000
+-- waq to get all the employee whose name not pranjul.
+select * from tbl_Employee where ename <> 'pranjul'
+
+-- waq to get all the employee details whose name is shivam and post is TL.
+select * from tbl_Employee where ename='Shivam' and post='TL'
+-- waq to get all the employee details whose name is shivam and post is Mrkt.
+select * from tbl_Employee where ename='Shivam' or post='Mrkt'
+-- waq to get all the employee details whose name is not shivam and post is not Mrkt.
+select * from tbl_Employee where not(ename='Shivam' or post='Mrkt')
+-- waq to get all the employee details whose salary is between 20000 to 40000.
+select * from tbl_Employee where salary between 20000 and 40000
+-- waq to get all the employee details whose salary is not between 20000 to 40000.
+select * from tbl_Employee where salary not between 20000 and 40000
+-- waq to get all the employee details whose name is Pranjul , Shivam and Deepak
+select * from tbl_Employee where ename in('Pranjul','Shivam','Deepak')
+-- waq to get all the employee details whose name is not Pranjul , Shivam and Deepak
+select * from tbl_Employee where ename not in('Pranjul','Shivam','Deepak')
+-- waq to get all the employee name in ascending order.
+select * from tbl_Employee order by ename asc
+-- waq to get all the employee name in descending order.
+select * from tbl_Employee order by ename desc
+
+-- waq to get the top 3 employee records.
+select top 3 * from tbl_Employee
+
+-- waq to get the top 3 latest employee records.
+select top 3 * from tbl_Employee order by eid desc
+
+-- waq to get the employee details whose name is S_i_a_
+select * from tbl_Employee where ename like 'S_i_a_'
+
+-- waq to get the employee details whose name start from a.
+-- If you Know the First Character
+select * from tbl_Employee where ename like 'a%'
+-- waq to get the employee details whose name end from l.
+-- If you know the Last Character
+select * from tbl_Employee where ename like '%l'
+-- waq to get the employee details whose name contains from a.
+-- IF you Don't Know Fist and Last Character.
+select * from tbl_Employee where ename like '%a%'
+--------------------------------------------------------------------------------------------------------
+JOIN IN SQL SERVER :-   Pending
+-----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
