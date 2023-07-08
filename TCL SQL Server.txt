@@ -1,0 +1,139 @@
+TCL -- Transaction Control Language:- 
+--------------------------------------------------------------------------------------------
+Transaction -> To perform some operation.
+Note: When you perform any DML operation all DML operations are autocommited.(which is permanently save into hardisk.)
+>> It means we don't rollback these transactions. 
+--------------------------------------------------------------------------------------------
+In TCL we have following four commands-
+1. Begin Transaction.
+Syntax:-
+-------------------
+begin transaction 
+<Query Statements>
+-----------------------------------------------
+2. Commit.
+>> Once you commit your transaction you can't rollback those transactions.
+Syntax:-
+-------------------
+begin transaction 
+<Query Statements>
+commit
+----------------------------------------------
+3. Rollback.
+Syntax:-
+-------------------
+begin transaction rollback
+---------------------------------------------------------
+4. SavePoint.
+-----------------------------------------------------------------------------------
+>> It is used to work with multiple transaction.
+>> if you want some transaction need to be rollback and some of them are not, then we use savepoint.
+Syntax:-
+---------------------
+save transaction <pointer_Name>
+-------------------------------------------------------------------
+begin transaction 
+<Query Statement1>
+<Query Statement3>
+<Query Statement2>
+save transaction <PointerName>
+<Query Statement4>
+<Query Statement6>
+<Query Statement7>
+-------------------------------------------------------------------------
+Syntax:-
+-------------------
+begin transaction rollback transaction <PointerName>
+--------------------------------------------------------------------------------------------
+create table tbl_bank
+(
+bid int,
+bname nvarchar(50),
+amount money
+)
+select * from tbl_bank
+-- DML Operation -> autocommited. (we can't rollback)
+insert into tbl_bank values(101,'SBI',45000)
+update tbl_bank set bname='PNB' where bid=101
+delete from tbl_bank
+select * from tbl_bank
+begin transaction rollback
+------------------------------------------------------------------
+-- TCL Commands
+begin transaction
+insert into tbl_bank values(101,'SBI',45000)
+commit
+
+select * from tbl_bank
+begin transaction rollback
+
+-- Update
+begin transaction
+update tbl_bank set bname='PNB' where bid=101
+commit
+
+select * from tbl_bank
+begin transaction rollback
+
+-- DELETE
+begin transaction
+delete from tbl_bank where bid=101
+commit
+select * from tbl_bank
+begin transaction rollback
+
+-- Save POINT
+begin transaction 
+delete from tbl_bank where bid=101
+delete from tbl_bank where bid=104
+delete from tbl_bank where bid=106
+save transaction pawan
+delete from tbl_bank where bid=102
+delete from tbl_bank where bid=103
+delete from tbl_bank where bid=105
+
+begin transaction rollback transaction pawan 
+select * from tbl_bank
+----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
