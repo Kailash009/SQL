@@ -1,0 +1,148 @@
+Functions in Sql Server:-
+----------------------------------------------------------------
+>> Function is a building block of any language.
+>> It provide re-usablity (write once and call multiple times) of any language.
+>> Easy to provide code-readability and maintenance.
+>> it is used to divide the work of a task.
+-------------------------------------------------------------------------------------------------------------------------
+There are two types of function:-
+1. Library Function/Built-in. => which is defined by the system.
+string function,datetimefunction,aggregate function,mathmatical function etc.
+2. User Defined Function. => which is defined by the user according to the requirement of a program.
+Here we focus on how to create user defined function - There are two ways to create user defined function -
+a) Scalar Valued Function.
+>> A function which return only single row known as scalar valued function.
+Syntax:-
+----------------------
+create/alter function functionname(@parameter1 datatype(size))
+returns datatype/variablename
+as begin
+<Query Statements>
+return final_value
+end
+---------------------
+How to Run/Execute Function:-
+-----------------------------------------------------------
+select function_name(@parameterList)
+------------------------------------------------------------
+waf that perform sum of two number.
+---------------------------------------------------------------
+waf to calculate gross salary of an employee on the following below condition:-
+bs => 13000
+da=10% of bs => 1300
+ta=8% of bs  =>  1040
+hra = 12% of bs => 1560
+gs = bs+da+ta+hra => 16,900
+------------------------------------------------------------------------------------------------------
+b) Table Valued Function.
+>> A function which returns multiple rows from the table.
+>> A function which return whole table.
+>> Begin and End is not required.
+----------------------------------------------------------------------------------------------
+Syntax:-
+------------------
+create function function_name(@paramerlist datatype(size))
+returns table
+as 
+return <Query Statements>
+----------------------------------------------------------------------------------------------
+How to Run/Execute:-
+-------------------------------------
+select * from Function_Name(parameter)
+------------------------------------------------------------------
+-- waf to accept deparment name as input and find total no. employee in this department.
+---------------------------------------------------------------------------------------------------------------------------------------
+select GETDATE()
+select LEN('pawan')
+-- Scalar Valued Function
+create function addition(@a int,@b int,@c int,@e int)  -- Function Defination
+returns int
+as begin
+declare @d int
+set @d=@a+@b+@c+@e
+return @d
+end
+
+select dbo.addition(100,400,89,5) as 'Addition'
+select dbo.addition(30,400,56,6) as 'Addition'-- Function Calling
+------------------------------------------------------------------------------
+select * from tbl_Employee
+---------------------------------------
+alter function calc_grosssalary(@eid int)
+returns money
+as begin
+declare @bs money, @da money,@ta money,@hra money,@gs money
+select @bs=esalary from tbl_Employee where eid=@eid
+set @da=@bs*0.1
+set @ta=@bs*0.08
+set @hra=@bs*0.12
+set @gs=@bs+@da+@ta+@hra
+return @gs
+end
+
+select dbo.calc_grosssalary(13) as 'Total_Gross'
+select dbo.calc_grosssalary(12) as 'Total_Gross'
+select dbo.calc_grosssalary(14) as 'Total_Gross'
+---------------------------------------------------------------
+select * from tbl_Employee
+-- Table Valued Function
+create function calc_Employee(@departmentname nvarchar(50))  -- Function Defination
+returns table
+as 
+return (select * from tbl_Employee where epost=@departmentname)
+
+-- Execute
+select * from calc_Employee('SE')
+select * from calc_Employee('TL')
+select * from calc_Employee('Clerk')
+==========================================================================
+Assignment Task:-
+--------------------------------
+1. waf to calculate gross salary of an employee on the following below condition:-  scalar
+bs => 13000
+da=10% of bs => 1300
+ta=8% of bs  =>  1040
+hra = 12% of bs => 1560
+PF= 15% of bs.
+gs = bs+da+ta+hra - PF 
+--------------------------------------------------------------
+2. waf to calculate add,sub,mult,div two no.  -- scalar
+3. waf to input as gender and calculate male and female.  --  male - tablevalued
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
