@@ -1,234 +1,204 @@
-SELECT:-
--------------------------
-1. select all rows and columns.
-Syntax:-
------------------------------
-select * from tablename
-----------------------------------------------
-2. select specific row and all column.
-Syntax:-
---------------------
-select * from tablename where colname=value
-------------------------------------------------------------------------------------
-3. select speciific column and all rows.
-Syntax:-
--------------------------
-select col1,col5,col7 from tablename
------------------------------------------------------------------
-4. select specific column and row.
-Syntax:-
-select col1,col4,col8 from tablename where colname=value
---------------------------------------------------------------------------------------------
-Update:-
-----------------------------
+SQL SERVER:-
+--------------------------------
+1. Create Database.
+2. Create Table.
+3. Inserting data into table.
+----------------------------------------------------------------
+4. Update:-
+---------------------------
 a) Update into specific column.
+Syntax:-
+------------------
+update tablename set colname=newvalue where colname=oldvalue
+------------------------------------------------------------------------------------------------------------
 b) Update into all column.
------------------------------------------------------------------------
-a) Update into specific column.
-update tablename set colname1= new value1 where colname1=oldvalue
-----------------------------------------------------------------------------------------------------------------------------
-b) Update into all column.
-update tablename set colname1= new value1,colname2=newvalue2,colname3=newvalue3 where colname1=oldvalue
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DELETE :- (DML)
+----------------------------------------------------------------
+Syntax:-
 ----------------------
-a) Delete all record.
-delete from tablename
-b) Delete specific record.
+update tablename set colname1=newvalue1,colname2=newvalue2,colname3=newvalue3, where colname=oldvalue
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Delete:-
+------------------
+a) Delete specific record.
+Syntax:-
+-----------------
 delete from tablename where colname=value
---------------------------------------------------------------------------------------------------
-DELETE / Truncate / drop
---------------------------------------------------------------
-truncate :-
-----------------------
->> DDL.
->> truncate remove all the records from the table but it can't delete specific record.(where is not allowed)
->> truncate can't delete table schema.
+------------------------------------------------------------------------------
+b) Delete all Record.
+------------------------------------------------------------------
 Syntax:-
-truncate table tablename
--------------------------------------------------
-DROP :-
----------------------
+-----------------
+delete from tablename
+------------------------------------------------------------------
+Delete,Truncate,Drop:-
+--------------------------------------------------------
+a) Delete
+>> DML
+>> with the help of delete we can delete specific row as well as all rows from the table.
+>> you can't delete table schema.
+----------------------------------------------------------------------------------------------------------------------------
+b) Truncate.
 >> DDL
->> drop delete table records as well as table schema.
-Drop:-
-----------------------------
-drop table tableName
--------------------------------------
-Drop - Database -
+>> Truncate can't delete specific record.
+>> you can delete all record.
+>> you can't delete table schema.
+>> where condition is not allowed.
+Syntax:-
+----------------
+truncate table tablename
+---------------------------------------------------------------------------------------
+c) Drop
+>> DDL
+>> Drop delete whole table record as well as table schema and whole database.
+>> In Drop where condition is not allowed.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+-------------------
+DROP Table:-
+--------------------------
+drop table tablename
+------------------------------------
+DROP Database:-
+-------------------------------
+drop database databaseName
+--------------------------------------------------------------
+SQL OPERATORS:-
+========================
+>> It is special symbol that is used to perform some operation.
+Types of Operator:-
 ---------------------------------
-drop database DatabaseName
----------------------------------------------------------
-Operator:-
-----------------------------
 1. Arithmetic Operator.
-+, - , * , /
-2. Relational Operator.
->
->=
+   + , - , * , / , %
+-----------------------------------------------
+How to give temporarily column name.
+>> In sql server to provide temporary column name we have 'as'  keyword.
+-------------------------------------------------------------------------------------------------------------------
+2. Relational Operator-
 <
 <=
+>
+>=
 <>
-3. Logical Operator-
-and -> both condition must be true.
-or -> Either one of the condition is true then the result is true.
-not -> if condition is true then result is false and vice-versa.
-------------------------------------------------------------------------------------------------------------
-Special Operator:-
--------------------------------------
-1. in.
-2. not in.
-3. between.
-4. not between.
-5. order by.
->> It is used to perform your query in ascending or descending order.
-asc  -> no need to write.
-desc -> you have to write.
-6. top. -> it retrieve top records from the table.
-7. Like. -> it is used for pattern matching/searching.
-it has two symbols -
-	Underscore  _  -> It read one character at a time.
-	Percentage  % -> It read all character once.
-a) if you know the first character.
-
-b) if you know the last character.
-c) if you don't know first and last character.
----------------------------------------------------------------------------------------------------------------
-select * from tbl_Employee
-insert into tbl_Employee(ename,age,eaddress,post,salary) values('arun',23,'mayur vihar','TL',34594)
-insert into tbl_Employee(ename,age,eaddress,post,salary) values('yogesh',12,'rojouri garden','tl',14594)
-
-select * from tbl_Employee
-select * from tbl_Employee where eid=3
-select ename,eaddress,post from tbl_Employee
-select ename,post,salary from tbl_Employee where eid=7
---update tablename set colname1= new value1 where colname1=oldvalue
-update tbl_Employee set ename='arun mishra' where eid=5
-update tbl_Employee set ename='subham yadav',age=11,eaddress='MAYUR CHAWK',post='PO',salary=11122 where eid=7
-delete from tbl_Employee where eid=7
-select * from tbl_Employee
-truncate table tbl_Employee 
-drop table tbl_Employee
-drop database Batchsonam
-------------------------------------------------------------------------
-use Batch10AMWE
-select * from tbl_Employee
-delete from tbl_employee
-insert into tbl_Employee(ename,age,eaddress,post,salary) values('ravi',12,'ashok nagar','SE',34000)
-dbcc checkident('tbl_Employee',reseed,0) --> Reset your identity from 0.
-
-select 10+5 as 'Addition'
-select 10-5 as 'Subtraction'
-select 10*5 as 'Multiplication'
-select 10/5 as 'Divide'
-select * from tbl_Employee
-select ename+ '= ' +post as 'Name+Post' from tbl_Employee
-
+-----------------------------------------------------------------------------------------------------
+3. Logical Operator:-
+-------------------------------
+and => Both condition must be true.
+or => Either one of the condition is true then result is true else false.
+not => If condition is true then result is False and vice-versa.
+----------------------------------------------------------------------------------------------------
+4. Special Operator:-
+------------------------------------
+a) Between.
+b) Not Between.
+c) In.
+d) Not In.
+e) Order By.
+>> It is used to perform ascending or desceding order in a column.
+asc ->  Not mandatory.
+desc -> Mandatory.
+-----------------------------------------------------------------------------------------------------
+f) Top. 
+>> it return top record from the table.
+---------------------------------------------------------
+g) Like.
+>> It is used for Searching purpose.
+>> It is also known as 'Pattern Matching'.
+It has two symbol -
+	i) Underscore ( _ ) => It read one character at a time.
+	ii) Percentage ( % ) => It read multiple character at the same time.
+	Note :-    % has three situation which are as follows :-
+	a) If you known the first character.
+	b) if you known the last character.
+	c) if you don't known the first and last character.
+-------------------------------------------------------------------------------------------------------------------------------------------
+SQL Queries:-
+------------------------------------
 select * from tbl_Employee
 
--- waq to get all the employee whose salary is greater than 20000.
-select * from tbl_Employee where salary>20000
-select * from tbl_Employee where salary<20000
+-- waq to update name subham to subham singh
+--update tablename set colname=newvalue where colname=oldvalue
+update tbl_Employee set ename='Subham Singh' where eid=7
+-- waq to update employee name,age,address,salary ,post whose id is 10.
+update tbl_Employee set ename='Ronit Mishra',eage=10,eaddress='Uttam Nagar',salary=34000,post='SE' where eid=10
+select * from tbl_Employee
 
--- waq to get all the employee except kamlesh.
-select * from tbl_Employee where ename <> 'kamlesh'
+-- waq to delete an employee record whose id is 4.
+delete from tbl_Employee where eid=4
+truncate table tbl_Employee
 
--- waq to get all the employee whose name is sumit and post is Clerk
-select * from tbl_Employee where ename='sumit' and post='Clerk'
+drop table tbl_Employee 
+drop database batchHaris
+-----------------------------------------------------------------------------
+create database BatchRahul
+use BatchRahul
+create table tbl_Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+eage int,
+eaddress nvarchar(100),
+esalary money,
+epost nvarchar(50),
+doj date
+)
+insert into tbl_Employee(ename,eage,eaddress,esalary,epost,doj) values('Sameer',22,'rajiv chawk',64000,'DA','2017-03-16')
+select * from tbl_Employee
+select 10+4 as 'Addition'
+select 10-4 as 'Subtraction'
+select 10*4 as 'Multiplication'
+select 10/4 as 'Divide'
+select 10%4 as 'Remainder'
+select * from tbl_Employee
+select ename+'='+epost as 'Name+Post' from tbl_Employee
+-- Relational Operator
+select * from tbl_Employee
+-- waq to get all the employee details whose salary is less than 20000.
+select * from tbl_Employee where esalary<20000
+-- waq to get all the employee details whose salary is greater than 20000.
+select * from tbl_Employee where esalary>20000
+-- waq to get all the employee details whose name is not shivam.
+select * from tbl_Employee where ename <> 'shivam' 
+-- waq to get all the employee details whose name is rajesh and post is Mrkt.
+select * from tbl_Employee where ename='rajesh' and epost='Mrkt'
+-- waq to get all the employee details whose name is rajesh or post is SE.
+select * from tbl_Employee where ename='rajesh' or epost='SE'
+-- waq to get all the employee details whose name is not rajesh or post is not SE.
+select * from tbl_Employee where not(ename='rajesh' or epost='SE')
 
--- waq to get all the employee whose name is sumit or post is SE
-select * from tbl_Employee where ename='sumit' or post='SE'
--- waq to get all the employee except kamlesh.
-select * from tbl_Employee where not ename='kamlesh'
-
--- waq to get all employee whose name is pawan,rajan and yogita.
-select * from tbl_Employee where ename='pawan' or ename='rajan' or ename='yogita'
+-- waq to get all the employee details whose salary is between 20000 to 40000.
+select * from tbl_Employee where esalary between 20000 and 40000
+-- waq to get all the employee details whose salary is not between 20000 to 40000.
+select * from tbl_Employee where esalary  not between 20000 and 40000
+-- waq to get all the employee details whose name is subham,rajesh and hardik.
+select * from tbl_Employee where ename='subham' or ename='rajesh' or ename='hardik'
 --or
-select * from tbl_Employee where ename in('pawan','rajan','yogita')
-select * from tbl_Employee where ename not in('pawan','rajan','yogita')
+select * from tbl_Employee where ename in('subham','rajesh','hardik') -- follow this.
+-- waq to get all the employee details whose name is not subham,rajesh and hardik.
+select * from tbl_Employee where ename not in('subham','rajesh','hardik') -- follow this.
+-- waq to get all the employee name in ascending order.
+select * from tbl_Employee order by ename asc  -- asc is Optional Here.
+-- waq to get all the employee name in descending order.
+select * from tbl_Employee order by ename desc   -- desc is not Optional Here.
 
--- waq to get all the employees whose salary is between 10000 to 30000.
-select * from tbl_Employee where salary between 10000 and 30000
--- waq to get all the employees whose salary is not between 10000 to 30000.
-select * from tbl_Employee where salary not between 10000 and 30000
-
--- waq to get all the employee records in ascending order.
-select * from tbl_Employee order by ename asc
--- waq to get all the employee records in descending order.
-select * from tbl_Employee order by ename desc
-
--- waq to get top 3 record from the table.
+-- waq to get top 3 record of an employee table.
 select top 3 * from tbl_Employee
-
--- waq to get top 3 latest record from the table.
+-- waq to get top 3 record of an employee table.
 select top 3 * from tbl_Employee order by eid desc
-
-select * from tbl_Employee where ename like 's_m_t'
-
--- waq to get all the employee details whose name start from p.
-select * from tbl_Employee where ename like 'p%'
-
--- waq to get all the employee details whose name ends from i.
-select * from tbl_Employee where ename like '%i'
-
--- waq to get all the employee details whose name contains a.
+-- waq to get all the employee details whose name is s_i_a_ .
+select * from tbl_Employee where ename like 's_i_a_'
+--a) If you known the first character.
+-- waq to get the employee details whose name start from a.
+select * from tbl_Employee where ename like 'a%'
+--b) If you known the last character.
+-- waq to get the employee details whose name ends from m.
+select * from tbl_Employee where ename like '%m'
+-- c) if you don't known the first and last character.
+--waq to get the employee details whose name contains a .
 select * from tbl_Employee where ename like '%a%'
-------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---------------------------------------------------------------
+Constraint in SQL Server -- Pending
+Clauses in SQL Server - Pending
+--------------------------------------------------------------------------------------------------------------------------
 
 
 
