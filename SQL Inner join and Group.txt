@@ -1,0 +1,200 @@
+Course  
+Student
+---------------------
+1 C -> Many Student
+1 S -> Many Course
+---------------------------------------
+Student:-
+------------------
+sid(P.K) sname age city course
+------------------------------------------
+1    ajay  12     luknow  python
+1     ajay  12   lucknow  dot net -> We are unable to maintain mutiple course of one student in a single table.
+-----------------------------------------------------------------------------------
+JOIN IN SQL SERVER :--
+----------------------------------------------
+>> It is used to combine two or more tables.
+>> when we are not able to fetch data from simple query then we need to take data from more than one table then we use the concept of Join.
+----------------------------------------------------------
+Foreign Key:-
+---------------------------
+>> It is used to conduct relationship among table.
+>> First table P.K work as F.K of another table.
+---------------------------------------------------------------------------------------------------------
+Types of Join:-
+---------------------------
+1. Inner Join.
+>> It is used to fetch common/matching record from multiple tables.
+Syntax:-
+-----------------
+select * from TN1 inner join TN2 on <Joining_Condition>
+--------------------------------------------------------------------------------------------------
+2. Outer Join.
+>> It returns matching and unmatching record form the table.
+a) Left Outer
+>> It returns all record from the left table,matching record from the right table and unmatched return NULL.
+Syntax:-
+----------------
+select * from TN1 left outer join TN2 on <Joining_condition>
+b) Right Outer 
+>> It returns all record from the right table,matching record from the left table and unmatched return NULL.
+Syntax:-
+----------------
+select * from TN1 right outer join TN2 on <Joining_condition>
+c) Full Outer.
+>> It returns all record from both the table, wherever find unmatched return NULL.
+Syntax:-
+----------------
+select * from TN1 full outer join TN2 on <Joining_condition>
+------------------------------------------------------------------------------------------------------------------------------------
+3. Cross Join.
+>>  It calculate the product of multiple tables.
+Syntax:-
+-----------------
+select * from <TN1> cross join <TN2>
+---------------------------------------------------------------------------------
+4. Self Join.
+--------------------------------------------------------------------------------
+>> Joining a table itself.
+>> In self join we join one table (no requirement of another tables).
+>> In self to perform replication in table we create no. of aliases.
+--------------------------------------------------------------------------------------------------------
+create table tbl_Course
+(
+cid int primary key identity(1,1),
+cname nvarchar(50)
+)
+
+create table tbl_Student
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+sage int,
+scity nvarchar(50),
+sfee money,
+smobileno nvarchar(20),
+cid int foreign key references tbl_Course(cid)
+)
+select * from tbl_Course
+select * from tbl_Student
+
+-- INNER JOIN
+---------------------------
+-- waq to get total no. student enrolled in python course.
+select sname,sage,scity,sfee,smobileno,cname from tbl_Course inner join tbl_Student on tbl_Course.cid=tbl_Student.cid and cname='Python'
+-- or
+select s1.sname,s1.sage,s1.scity,s1.sfee,s1.smobileno,c1.cname from tbl_Course c1 inner join tbl_Student s1 on c1.cid=s1.cid and c1.cname='python'
+-- Outer Join
+--Left
+select * from tbl_Course left outer join tbl_Student on tbl_Course.cid=tbl_Student.cid
+--Right
+select * from tbl_Student right outer join tbl_Course on tbl_Course.cid=tbl_Student.cid
+--Full
+select * from tbl_Course full outer  join tbl_Student on tbl_Course.cid=tbl_Student.cid
+
+-- CROSS JOIN
+select * from tbl_Course  -- 8 row
+select * from tbl_Student -- 9
+select * from tbl_course cross join tbl_Student
+-- SELF JOIN
+select * from tbl_Employee
+-- waq to get all the employee details who are getting the same salary as Rahul is getting.
+select * from tbl_Employee where ename='Rahul'
+select * from tbl_Employee where salary=34000 -- Salary is not Given in your Query.
+select e1.ename,e1.salary from tbl_Employee e1,tbl_Employee e2 where e1.salary=e2.salary and e2.ename='Rahul'
+-----------------------------------------------------------------------------------
+Aggregate Function:-
+----------------------------------
+1. max()
+2. min()
+3. sum()
+4. avg()
+5. count()
+------------------------------------------------------------------------------
+Clauses in Sql Server:-
+----------------------------------
+1. Where.  -> Done.
+2. Order By -> Done.
+Note: - In Group by and Having Aggregate function must be used.
+-----------------------------------------------------------------------------------------------------------------
+3. Group By.  -> group of rows.
+4. Having. -> it work with group by to provide condition.
+---------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+-- Aggregate Function
+select max(salary) as 'Max_Salary' from tbl_Employee
+select min(salary) as 'Min_Salary' from tbl_Employee
+select sum(salary) as 'Total Salary' from tbl_Employee
+select avg(salary) as 'Avg_Salary' from tbl_Employee
+select count(*) as 'Total Employee' from tbl_Employee
+
+-- GROUP BY
+-- waq to get total no. of employee in each department.
+select * from tbl_Employee
+select post,count(eid) as 'Total Employee' from tbl_Employee group by post
+-- waq to get total salary in each department.
+select post,count(*) as 'Total Employee',sum(salary) as 'total Salary' from tbl_Employee group by post
+-- waq to get total no. employee in each department where total employee is greater than 2.
+select post,count(eid) as 'Total Employee' from tbl_Employee  group by post having count(eid)>2
+---------------------------------------------------------------------------------------------------------------------------------------------
+Stored Procedure -- PENDING
+------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

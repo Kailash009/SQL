@@ -1,0 +1,194 @@
+Stored Procedure -
+-----------------------------------------
+>> SP is a pre-compile database object.
+>> SP reduce network traffic.
+>> SP performance is very high.
+>> It provide security to our database.
+--------------------------------------------------------------------------
+Types  of Parameter in SP:-
+------------------------------------------------
+1. Without Prameter. 
+>> In it, we don't pass any parameter.
+Syntax:-
+----------------
+create procedure/proc proc_Name
+as begin
+<Query Statement>
+end
+--------------------------------------------------------
+Run / Execute:-
+------------------------
+Command to Run Procedure:-
+--------------------------------------------------
+exec/execute proc_Name
+----------------------------------------
+2. With Parameter.
+>> In it, we pass parameter.
+Syntax:-
+---------------------
+create proc procedure_Name
+(
+@parameter1 datatype,
+@parameter2 datatype(size),
+@parameter3 datatype,
+.
+.
+.
+@parameterN datatype
+)
+as begin
+<Query Statements>
+end
+--------------------------------------------------------------------------
+select * from tbl_Employee
+create proc sp_showemp
+as begin
+select * from tbl_Employee
+end
+exec sp_showemp
+-- with parameter
+-- insert employee record using SP
+create procedure sp_insertemp
+(
+@name nvarchar(50),
+@dob date,
+@age int,
+@address nvarchar(50),
+@mobile nvarchar(50),
+@post nvarchar(60),
+@sal money
+)
+as begin
+insert into tbl_Employee(ename,dob,age,eaddress,mobileno,post,salary) values(@name,@dob,@age,@address,@mobile,@post,@sal)
+end
+create proc sp_updatemp
+(
+@eid int,
+@name nvarchar(50),
+@dob date,
+@age int,
+@address nvarchar(50),
+@mobile nvarchar(40),
+@post nvarchar(40),
+@salary money
+)
+as begin
+update tbl_Employee set ename=@name,dob=@dob,age=@age,eaddress=@address,mobileno=@mobile,post=@post,salary=@salary where eid=@eid 
+end
+create proc sp_delemp
+(
+@eid int
+)
+as begin
+delete from tbl_Employee where eid=@eid
+end
+
+create proc sp_singleemp
+(
+@eid int
+)
+as begin
+select * from tbl_Employee where eid=@eid
+end
+exec sp_showemp
+exec sp_insertemp 'asgar','2023-09-03',22,'mayur vihar','787980345','Manager',890493
+exec sp_updatemp 7,'PRANJUL SINGH','2021-09-23',12,'NOIDA SEC-45','9099493','Designer',11223
+exec sp_delemp 3007
+exec sp_singleemp 3004
+------------------------------------------------------------------
+1. Show all Employee.
+2. Show Single Employee
+3. Insert an Employee.
+4. Update an Employee.
+5. Delete an Employee.
+----------------------------------------------------------
+Create a Single Procedure and perform all these operations.
+1. Show all Employee.
+2. Show Single Employee
+3. Insert an Employee.
+4. Update an Employee.
+5. Delete an Employee.
+---------------------------------------------------------------------------------------------------------------
+create/alter proc sp_Employee
+(
+@action nvarchar(50)=null,
+@eid int=0,
+@name nvarchar(50)=null,
+@dob date=null,
+@age int=0,
+@address nvarchar(50)=null,
+@mobile nvarchar(18)=null,
+@post nvarchar(50)=null,
+@salary money=0
+)
+as begin
+if(@action='Create')
+begin 
+insert into tbl_Employee(ename,dob,age,eaddress,mobileno,post,salary)values(@name,@dob,@age,@address,@mobile,@post,@salary)
+select 1 as result
+end
+else if(@action='Update')
+begin
+update tbl_Employee set ename=@name,dob=@dob,age=@age,eaddress=@address,mobileno=@mobile,post=@post,salary=@salary where eid=@eid
+select 1 as result
+end
+else if(@action='Delete')
+begin
+delete from tbl_Employee where eid=@eid
+select 1 as result
+end
+else if(@action='Show')
+begin
+select * from tbl_Employee
+end
+else if(@action='Show_Single')
+begin
+select * from tbl_Employee where eid=@eid
+end
+else 
+begin
+print('No Action Performed')
+end
+end
+-- Test/Run Procedure
+exec sp_Employee 'Show'
+exec sp_Employee 'Create',0,'SHYAM','2003-09-12',23,'RAJIV CHAWK','97990842','TL',34023
+exec sp_Employee 'Update',13,'DEEPAK CHAUHAN','1992-09-23',3,'TILAK NAGAR','3039933','HR',12000
+exec sp_Employee 'Delete',4
+exec sp_Employee 'Show_Single',13
+exec sp_Employee 'Hello'
+-------------------------------------------------------------------------------------------------------------------------------
+View:-  PENDING
+-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
