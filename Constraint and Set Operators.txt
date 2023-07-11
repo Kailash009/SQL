@@ -1,0 +1,288 @@
+Constraint in SQL Server:-
+---------------------------------------------
+>> Constraint is a condition that must be follow before entering data into column.
+Types of constraint in sql server:-
+-----------------------------------------------------
+1. Unique.
+>> it doesn't accept duplicate value.
+>> it allow only one NULL value.
+------------------------------------------------------------------------
+create table tbl_test1
+(
+tid int unique,
+tname nvarchar(50) unique
+)
+select * from tbl_test1
+insert into tbl_test1 values(null,null)
+-----------------------------------------------------------
+2. Not Null.
+>> it doesn't allow null value.
+>> it accept duplicate value.
+--------------------------------------------------------------
+create table tbl_test2
+(
+tid int not null,
+tname nvarchar(50) not null
+)
+select * from tbl_test2
+insert into tbl_test2 values(null,null)
+insert into tbl_test2 values(101,'ram')
+----------------------------------------------------------------
+3. Check.
+>> Make a check constraint column doesn't take 10,000 greater salary.
+create table tbl_test3
+(
+tid int not null,
+tname nvarchar(50) not null,
+tsalary money check(tsalary<=10000)
+)
+select * from tbl_test3
+insert into tbl_test3 values(100,'rohit',10001)
+-----------------------------------------------------------------------------------
+4. Default.
+>> when all employee belong to the same city.
+create table tbl_test4
+(
+tid int not null,
+tname nvarchar(50) not null,
+tcity nvarchar(60) default 'Noida'
+)
+select * from tbl_test4
+insert into tbl_test4(tid,tname) values(101,'shyam')
+insert into tbl_test4(tid,tname) values(102,'rohit')
+insert into tbl_test4(tid,tname) values(103,'ajay')
+insert into tbl_test4(tid,tname) values(104,'sonali')
+insert into tbl_test4(tid,tname) values(105,'ritik')
+insert into tbl_test4(tid,tname) values(106,'yogesh')
+----------------------------------------------------------------------------------
+5. P.K. (Primary Key)
+>> Unique (Not Duplicate)+Not NULL.
+-------------------------------------------------------------------
+6. F.K. (Foreign Key)  -->> PENDING.
+----------------------------------------------------------------------
+Clauses in SQL Server - 
+---------------------------------------------------
+a) Where.  -- done.
+b) Order BY. -- done.
+--------------------------------------------------
+c) Group BY.
+d) Having.
+>> if you want to provide condition with group by then we use having. 'where is not allowed after group by'.
+-----------------------------------------------------
+NOTE: - if you implement group by and having in your query then it must be work with aggregate function.
+-------------------------------------------------------------
+Aggregate Function:-
+--------------------------------------
+1. max()
+2. min()
+3. sum()
+4. avg()
+5. count()
+-----------------------------------------------------
+create table tbl_test1
+(
+tid int unique,
+tname nvarchar(50) unique
+)
+select * from tbl_test1
+insert into tbl_test1 values(null,null)
+create table tbl_test2
+(
+tid int not null,
+tname nvarchar(50) not null
+)
+select * from tbl_test2
+insert into tbl_test2 values(null,null)
+insert into tbl_test2 values(101,'ram')
+
+create table tbl_test3
+(
+tid int not null,
+tname nvarchar(50) not null,
+tsalary money check(tsalary<=10000)
+)
+select * from tbl_test3
+insert into tbl_test3 values(100,'rohit',10001)
+insert into tbl_test3 values(null,'rohit',9999)
+
+select * from tbl_Employee
+select max(esalary) as 'Max_Salary' from tbl_Employee
+select min(esalary) as 'Min_Salary' from tbl_Employee
+select sum(esalary) as 'Total Salary' from tbl_Employee
+select avg(esalary) as 'Avg Salary' from tbl_Employee
+select count(*) as 'Total Employee' from tbl_Employee
+
+-- GROUP BY AND HAVING ALWAYS USED WITH AGGREGATE FUNCTION.
+SELECT * FROM tbl_Employee
+-- waq to get total no. of employee in each department.
+select epost,count(eid) as 'Total Employee' from tbl_Employee group by epost
+-- waq to get total salary of an employee in each department.
+select epost,sum(esalary) as 'Total Salary' from tbl_Employee group by epost
+-- waq to get total salary and total employee in each department.
+select epost,count(eid) as 'Total Employee',sum(esalary) as 'Total Salary' from tbl_Employee group by epost
+-- waq to get total avg salary in each department.
+select epost,AVG(esalary) as 'Avg_Salary' from tbl_Employee group by epost
+-- waq to get total no. of employee in each department where employee is grearter than or equal to 2.
+select epost,count(eid) as 'Total Employee' from tbl_Employee group by epost having count(eid)>=2
+----------------------------------------------------------------------------------------------------
+SET Operator:-
+---------------------------------
+>> It is used to combine two or more table records.
+There are four types of Set Operator which are as follows :- 
+1. UNION.
+2. UNION ALL.
+3. INTERSECT.
+4. EXCEPT.
+------------------------------------------------------------------------------------------------------
+Before going to perform set operator we need to follow following conditions -
+a) Column name must be same of both the table.
+b) Order of column must be same of both the table.
+c) Data Type must be same of both the table.
+-----------------------------------------------------------------------------------------------------
+1. UNION.
+>> It doesn't return duplicate value from the table.
+Syntax:-
+---------------
+select * from <TN1>
+union
+select * from <TN2>
+-----------------------------------------------------------------------------------------
+2. UNION ALL.
+>> It return duplicate value from the table.
+Syntax:-
+---------------
+select * from <TN1>
+union all
+select * from <TN2>
+--------------------------------------------------------------------------------
+3. INTERSECT.
+>> It return common record from the table.
+Syntax:-
+---------------
+select * from <TN1>
+intersect
+select * from <TN2>
+----------------------------------------------------------------------------
+4. EXCEPT.
+>> It return all record from table1 which doesn't exist in table2. --- Table1-table2
+>> It return all record from table2 which doesn't exist in table1. --- Table2-table1
+Syntax:-
+---------------
+select * from <TN1>
+except
+select * from <TN2>
+---------------------------------------------------------------------------------
+create table tbl_hyd
+(
+bid int,
+bname nvarchar(50),
+blocation nvarchar(50),
+)
+create table tbl_chennai
+(
+bid int,
+bname nvarchar(50),
+blocation nvarchar(50),
+)
+select * from tbl_chennai
+select * from tbl_hyd
+
+-- UNION
+select * from tbl_chennai
+union
+select * from tbl_hyd
+-- UNION ALL
+select * from tbl_chennai
+union all
+select * from tbl_hyd
+-- Intersect
+select * from tbl_chennai
+intersect
+select * from tbl_hyd
+-- Except
+select * from tbl_chennai
+except
+select * from tbl_hyd
+
+select * from tbl_hyd
+except
+select * from tbl_chennai
+------------------------------------------------------------------------------------------------
+Relationship among tables:-
+-----------------------------------------------------
+There are three types of relationship -
+1. One to One.   Student  - PersonalDetail
+2. One to Many. or Many to One.   -> Student - PaymentDetails
+3. Many to Many.  Student  <==> Course
+1S => Many Courses.
+1C => Many Student.
+--------------------------------------------------------------------------------------------------
+What is the need to make relationship:-
+-------------------------------------------------------------------
+Student:-
+-----------------
+sid(P.K)  sname  age  mobileno    city      
+1            ajay       19     89797       lku        
+1             ajay      19      ""             ""            sql  -> Data Redundancy/Duplicacy.
+--------------------------------------------------------------------------------------------------------------------
+Note:= when we are unable to maintain all record into one table, then we need to create separate table to maintain
+the information, Hence we use the concept of JOIN.
+>> To solve this problem create course and student table separately.
+-------------------------------------------------------------------------------------------------------------------
+JOINS IN SQL SERVER:-   PENDING
+-----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
