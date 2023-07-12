@@ -1,0 +1,208 @@
+JOINS IN SQL SERVER:-
+--------------------------------------------------------------------------------
+>> It is used to combine more than one table.
+---------------------------------------------------------------------------------
+It can be broadly classifed into the following two categories:-
+a) ANSI (American National Stanadard Institution) Format. => New Style Format. (With On Condition)
+	i) Inner Join.
+	ii) Outer Join. 
+		a) Left Outer    b) Right Outer   c) Full Outer.
+	iii) Cross Join.
+	iv) Natural Join.
+b) Non-ANSI Format.  => Old Style Format. (With Where Condition).
+	i) Equi-Join.
+	ii) Non-Equi Join.
+	iii) Self join.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+a) ANSI (American National Stanadard Institution) Format. => New Style Format. (With On Condition)
+	i) Inner Join.
+>> It is used to fetch only matching/common record from multiple table.
+Syntax:-
+----------------
+select <ColName_List> from TableName1 inner join TableName2 on <Joining_Condition>
+--------------------------------------------------------------------------------------------------------------------------------------
+Rules to create Foreign Key:-
+-----------------------------------------------------------
+F.K => First table P.K work as F.K in another tables.
+-----------------------------------------------------------------------------------
+1. Parent table P.K column name must be same in second table.
+2. Data must be same.
+-------------------------------------------------------------------------------------------------
+	ii) Outer Join. 
+>> It retreive matching and unmatching record from multiple tables.
+a) Left Outer  
+>> It returns all record from left table, matching record from right table and unmatched return NULL. 
+Syntax:-
+--------------------
+select <Colname_List> from tableName1 left outer join tableName2 on <Joining_Condition>
+-------------------------------------------------------------
+b) Right Outer   
+>> It returns all record from right table, matching record from left table and unmatched return NULL.
+Syntax:-
+--------------------
+select <Colname_List> from tableName1 right outer join tableName2 on <Joining_Condition>
+----------------------------------------------------------------------------------------------------------------------------
+c) Full Outer.
+>> It returns all record from both the table wherever find unmatched return NULL.
+Syntax:-
+--------------------
+select <Colname_List> from tableName1 full outer join tableName2 on <Joining_Condition>
+----------------------------------------------------------------------------------------------------------------------------------------------
+	iii) Cross Join.    (M*N)
+>> It find the product of multiple table.
+Syntax:-
+--------------------
+select * from tableName1 cross join tableName2 
+--------------------------------------------------------------------------------
+	iv) Natural Join.
+Note:-> Natural join doesn't support in sql server, it will support in Oracle, but if you want to support in Sql server then we use the
+concept of Equi Join. Here Equi join is similar to Natural join.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+b) Non-ANSI Format.  => Old Style Format. (With Where Condition).
+	i) Equi-Join.
+	ii) Non-Equi Join.
+	iii) Self join.
+------------------------------------------------------------------------------------------------------------------------
+i) Equi-Join.
+>> It support only ( = ) operator.
+>> In Equi join we can't use these operators Like ->   [ <   <=     >    >=   <>    ]
+------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+--------------------------
+select <List of colname> from tablename1 tablenamealias1,tablename2 tablenamealias2 where <Conditions>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ii) Non-Equi Join.
+>> It doesn't support only ( = ) operator.
+>> In Non-Equi join we can use these operators Like ->   [ <   <=     >    >=   <>    ]
+------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+--------------------------
+select <List of colname> from tablename1 tablenamealias1,tablename2 tablenamealias2 where <Conditions>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+iii) Self join:-
+---------------------------------
+>> In self join we need to perform operation only single table.
+>> A self join is a join where we join table itself.
+------------------------------------------------------------------------------------------------------
+****-- Course  --- Student--********
+create table tbl_Course  -- Parent Table
+(
+cid int primary key identity(1,1),
+cname nvarchar(50)
+)
+create table tbl_Student  -- Child Table
+(
+sid int primary key identity(1,1),
+sname nvarchar(50),
+sage int,
+smobile nvarchar(20),
+saddress nvarchar(100),
+sfee decimal(22,2),
+cid int foreign key references tbl_Course(cid) -- Syntax to Create F.K.
+)
+select * from tbl_Course
+select * from tbl_Student
+-- waq to get no. of students enrolled in sql course.
+select sname,sage,smobile,sfee,cname from tbl_Student inner join tbl_Course on tbl_Student.cid=tbl_Course.cid and cname='sql'
+--or
+select s1.sname,s1.sage,s1.smobile,s1.sfee,c1.cname from tbl_Student s1 inner join tbl_Course c1 on s1.cid=c1.cid and (c1.cname in('sql','python'))
+
+-- OUTER JOIN
+-- LEFT OUTER.
+select * from tbl_Course left outer join tbl_Student on tbl_Course.cid=tbl_Student.cid
+-- Right OUTER.
+select * from tbl_Student right outer join tbl_Course on tbl_Student.cid=tbl_Course.cid
+-- Full OUTER.
+select * from tbl_Student full outer join tbl_Course on tbl_Student.cid=tbl_Course.cid
+select * from tbl_Course full outer join tbl_Student on tbl_Student.cid=tbl_Course.cid
+-- CROSS JOIN
+select * from tbl_Course  -- 9 rows
+select * from tbl_Student -- 9 rows -- 81 Rows
+select * from tbl_Course cross join tbl_Student
+
+-- Equi Join
+-- waq to get no. of student enrolled in sql course.
+select sname,sage,sfee,cname from tbl_Student s1,tbl_Course c1 where s1.cid=c1.cid and c1.cname='sql'
+-- Non-Equi Join
+select sname,sage,sfee,cname from tbl_Student s1,tbl_Course c1 where s1.cid<c1.cid
+select sname,sage,sfee,cname from tbl_Student s1,tbl_Course c1 where s1.cid<=c1.cid
+select sname,sage,sfee,cname from tbl_Student s1,tbl_Course c1 where s1.cid>c1.cid
+select sname,sage,sfee,cname from tbl_Student s1,tbl_Course c1 where s1.cid>=c1.cid
+select sname,sage,sfee,cname from tbl_Student s1,tbl_Course c1 where s1.cid<>c1.cid
+---------------------------------------------------------------------------------------
+-- SELF JOIN
+---------------------------
+select * from tbl_Employee
+-- WAQ TO GET ALL THE EMPLOYEE DETAILS WHO ARE GETTING THE SAME SALARY AS HARDIK IS GETTING.
+select * from tbl_Employee where esalary=34000 -- WRONG(SALARY IS NOT GIVEN IN QUERY)
+select * from tbl_Employee where ename='hardik' -- WRONG.
+
+select e1.ename,e1.esalary,e1.eage from tbl_Employee e1,tbl_Employee e2 where e1.esalary=e2.esalary and e2.ename='hardik'
+-- or
+select e2.ename,e2.esalary,e2.eage from tbl_Employee e1,tbl_Employee e2 where e1.esalary=e2.esalary and e1.ename='hardik'
+-------------------------------------------------------------------------------------------------------------------------
+STORED PROCEDURE --- PENDING
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
