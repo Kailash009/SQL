@@ -1,0 +1,194 @@
+View:- 
+------------------
+>> Select statement is used with view.
+>> View is a virtual table, that is used to retreive your data from RAM.
+>> Searching Performance of view is very high.
+--------------------------------------------------------------------------------------------------------------
+Syntax:--
+-------------------------
+create view view_name as select * from <TN>
+----------------------------------------------------------------------------------------
+Functions in Sql Server:-
+--------------------------------------
+>> Function is basic building block.
+Types of Function-
+1. Library.
+2. Userdefined.
+---------------------------------------
+Here we focus on user defined function -
+--------------------------------------------------------------
+To create user defined function in sql server we have 
+Scalar Valued Function --
+>> A function which return single value/row.
+----------------------------------------------------------------------------------
+Syntax:-
+----------------
+create function functionName(@parameter1 datatype,@parameter2 datatype)
+returns datatype/varname
+as begin
+<Query Statements>
+return finalvalue
+end
+-----------------------------------------------------------
+How to Execute Function:-
+--------------------------------------------
+select FunctionName(parameter1,parameter2)
+-------------------------------------------------------------------------------------------
+-- waf to create scalar valued function to perform addition of two number.
+-- waf to create scalar valued function to perform average of five number.
+------------------------------------------------------------------------------------------------------------
+WAF to calculate Gross Salary of an Employee -
+bs => 34000
+da=10% of bs => 3400
+ta = 8% of bs =>  2720
+hra = 6% of bs  => 2040
+gs=bs+da+ta+hra => 42,160
+------------------------------------------------------------------------------
+WAF to calculate Gross Salary of an Employee -
+da=12% of bs 
+ta = 4% of bs 
+hra = 9% of bs
+pf= 5% of bs
+gs=bs+da+ta+hra-pf 
+------------------------------------------------------------------------------
+create function calc_grosssalary(@eid int)
+returns money
+as begin
+declare @bs money,@da money,@ta money,@hra money,@gs money
+select @bs=salary from tbl_Employee where eid=@eid
+set @da=@bs*0.10
+set @ta=@bs*0.08
+set @hra=@bs*0.06
+set @gs=@bs+@da+@ta+@hra
+return @gs
+end
+-------------------------------------------------------------------------
+select * from tbl_Employee
+create view vw_emp as select * from tbl_Employee
+select * from vw_emp
+
+--- Functions
+select GETDATE()
+select len('sudhir')
+-- Sum of two no.
+create function addition(@a int,@b int)  -- Function Defination
+returns int
+as begin
+declare @res int
+set @res=@a+@b
+return @res
+end
+-- waf to create scalar valued function to perform average of five number.
+select dbo.addition(10,23) as 'Addition'  -- Function Calling
+select dbo.addition(34,23) as 'Addition'
+select dbo.addition(45,23) as 'Addition'
+
+create function calc_Average(@a int,@b int,@c int,@d int,@e int)
+returns int
+as begin
+declare @res int,@avg int
+set @res=@a+@b+@c+@d+@e
+set @avg=@res/5
+return @avg
+end
+
+select dbo.calc_average(12,13,14,15,16) as 'Average'
+-- waf to find them v=u+at.
+create function speed(@u int,@a int,@t int)
+returns int
+as begin
+declare @v int
+set @v=@u+@a*@t
+return @v
+end
+
+select dbo.speed(10,4,5)
+
+-- waf to print welcome to sql server
+create function welcome()
+returns nvarchar(50)
+as begin
+declare @msg nvarchar(50)
+set @msg='Welcomt to Sql Server'
+return @msg
+end
+select dbo.welcome()
+select * from tbl_Employee
+
+create function calc_grosssalary(@eid int)
+returns money
+as begin
+declare @bs money,@da money,@ta money,@hra money,@gs money
+select @bs=salary from tbl_Employee where eid=@eid
+set @da=@bs*0.10
+set @ta=@bs*0.08
+set @hra=@bs*0.06
+set @gs=@bs+@da+@ta+@hra
+return @gs
+end
+
+select dbo.calc_grosssalary(1) as 'Gross Salary'
+select * from tbl_Employee
+select getdate()
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
