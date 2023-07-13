@@ -1,0 +1,167 @@
+STORED PROCEDURE:-
+------------------------------------------------------------
+>> SP is a pre-compile database object.
+>> SP is used to increase our database performance.
+>> SP provide security to our database.
+>> SP reduced network traffic.
+>> SP prevent Sql Injection. (No body can destroy database.)
+>> Sp have input and output parameter.
+>> Sp doesn't return any value.
+------------------------------------------------------------------------------------
+Types of Parameter in SP:-
+--------------------------------------------------
+1. Input Parameter.
+	a) Without Parameter.  
+>> In this type of Procedure we don't pass any parameter.
+Syntax:-
+--------------------
+create/alter proc/procedure procedureName
+as begin
+<Query Statements.>
+end
+----------------------------------------------------------
+How to execute Procedure:-
+---------------------------------------------------
+exec/execute procedureName
+-----------------------------------------------------
+	b) With Parameter.
+>>  In this ,we can pass parameter.
+Syntax:-
+---------------------
+create/alter proc/procedure procedureName
+(
+@parameter1 datatype,
+@parameter2 datatype(size),
+.
+.
+.
+@parameterN datatype
+)
+as begin
+<Query Statements>
+end
+--------------------------------------------------------------------------------------
+Create a Procedure of an Employee- 
+1. Show All Employee.
+2. Create an Employee.
+3. Update an Employee.
+4. Delete an Employee.
+5. Select specific Employee.
+--------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- Without Parameter
+create procedure sp_allemp
+as begin
+select * from tbl_Employee
+end
+-- Run
+execute sp_allemp
+-------------------------------------------
+-- With Parameter -> Input parameter is used to provide value to the procedure.
+create proc sp_insertemp
+(
+@name nvarchar(50),
+@age int,
+@address nvarchar(40),
+@salary money,
+@post nvarchar(40),
+@doj date
+)
+as begin
+insert into tbl_Employee(ename,eage,eaddress,esalary,epost,doj) values(@name,@age,@address,@salary,@post,@doj)
+end
+
+create proc sp_updateemp
+(
+@eid int,
+@name nvarchar(50),
+@age int,
+@address nvarchar(50),
+@salary money,
+@post nvarchar(40),
+@doj date
+)
+as begin
+update tbl_Employee set ename=@name,eage=@age,eaddress=@address,esalary=@salary,epost=@post,doj=@doj where eid=@eid
+end
+
+create proc sp_delemp
+(
+@eid int
+)
+as begin
+delete from tbl_Employee where eid=@eid
+end
+
+create proc sp_selectemp
+(
+@eid int
+)
+as begin
+select * from tbl_Employee where eid=@eid
+end
+
+exec sp_allemp
+exec sp_insertemp 'ritik',12,'patek chawk',43023.3,'Mrkt','2021-03-12'
+exec sp_updateemp 6,'Piyush Goyal',19,'Preet Vihar',45000,'TL','2014-09-23'
+exec sp_delemp 5
+exec sp_selectemp 9
+-----------------------------------------------------------------------------------------------------------------------------
+Create a Single Procedure and Peform all these below operations:-
+1. Show All Employee.
+2. Create an Employee.
+3. Update an Employee.
+4. Delete an Employee.
+5. Select specific Employee.
+--------------------------------------------------------------------------------------------------------------
+alter proc Sp_Employee
+(
+@action nvarchar(50)=null,
+@eid int=0,
+@name nvarchar(50)=null,
+@age int=0,
+@address nvarchar(50)=null,
+@salary money=0,
+@post nvarchar(39)=null,
+@doj date=null
+)
+as begin
+if(@action='Create')
+begin
+insert into tbl_Employee(ename,eage,eaddress,esalary,epost,doj) values(@name,@age,@address,@salary,@post,@doj)
+select 1 as Result
+end
+else if(@action='Update')
+begin
+update tbl_Employee set ename=@name,eage=@age,eaddress=@address,esalary=@salary,epost=@post,doj=@doj where eid=@eid
+select 1 as Result
+end
+else if(@action='Delete')
+begin
+delete from tbl_Employee where eid=@eid
+select 1 as Result
+end
+else if(@action='Show')
+begin
+select * from tbl_Employee
+end
+else if(@action='Show_Single')
+begin
+select * from tbl_Employee where eid=@eid
+end
+else
+begin
+print('No Action Found!!')
+end
+end
+
+-- Test/Run Procedure
+exec sp_Employee 'Show'
+exec Sp_Employee 'Show_Single',9
+exec Sp_Employee 'Create',0,'Manish',12,'noida sec-34',21002,'Clerk','2009-09-23'
+exec sp_Employee 'Delete',8
+exec sp_Employee 'Update',3,'Rajesh Yadav',28,'Laxmi Nagar',30923,'SEO','2003-09-18'
+exec Sp_Employee 'Shw'
+-----------------------------------------------------------------------------------------------------------------------------------
+2. Output Parameter.  ==>> PENDING.
+---------------------------------------------------------------------------------------------------------
