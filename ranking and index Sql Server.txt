@@ -1,0 +1,145 @@
+Ranking Function:-
+---------------------------------------
+>> It is used to provide rank on each row wise and group of row wise.
+>> In ranking function we use two clauses -
+	a) Order By. (Mandatory Clause) => Row wise or Group of Row wise.
+	b) Partition By. => It is not an Mandatory clause. It only used when we work on group of row wise.
+------------------------------------------------------------------------------------------------------------------------
+There are three types of Ranking Function which are as given below:-
+1. Row_Number().
+Note:- If two employee having same salary then it assign different ranks.
+2. Rank().
+Note:- if two employee having same salary it assign same rank but it skip rank to the next employee.
+3. Dense_rank().
+Note: if two employee having same it assign same rank and it doesn't skip to the next rank of an employee.
+--------------------------------------------
+Here we demonstrate an example to assign rank on a salary basis.
+Syntax:-
+-----------------
+RankingFunction() over(partition by<colname>) order by <colname>
+-------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- ROW WISE
+select ename,esalary,ROW_NUMBER() over(order by esalary desc) as 'Ranks' from tbl_Employee
+
+select ename,esalary,RANK() over(order by esalary desc) as 'Ranks' from tbl_Employee
+
+select ename,esalary,DENSE_RANK() over (order by esalary desc) as 'Ranks'  from tbl_Employee
+
+--Group of ROW WISE  -- Partition By and Order By.
+select * from tbl_Employee
+select ename,esalary,did, ROW_NUMBER() over(partition by did order by esalary desc) as 'Ranks' from tbl_Employee
+select ename,esalary,did,RANK() over (partition by did order by esalary desc) as 'Ranks' from tbl_Employee
+select ename,esalary,did,DENSE_RANK() over(partition by did order by esalary desc) as 'Ranks' from tbl_Employee
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Indexes in Sql Server:-
+--------------------------------------
+>> Indexes is a RDBMS i.e. to retrieve your data from the table in a fast manner.
+>> It improves searching performance of a table.
+-----------------------------------------------------------------------------------------------------------------------
+>> without index it scan whole table i.e. known as table Scan.
+>> 'Table Scan' is a bad Practice.
+a,b,c,d,    p -> 
+------------------------------------------------------------------------------------------------------------------
+Types of Indexes in Sql Server:-
+------------------------------------------------
+1. Clustered Index.
+>> There is only one clustered index in a table.
+>> It created automatically when you make any column as P.K.
+For Ex -> Arranging contact list in your Mobile directory.
+----------------------------------------------------------------------------------------------------
+Command to see How Many Clustered/Non-Clustered index in a table:-
+---------------------------------------------------------------------------------------------------
+exec sp_helpindex tablename
+----------------------------------------------------------------
+Syntax to create Clustered Index:-
+--------------------------------------------------
+create clustered index index_Name on tableName(colname asc/desc)
+-----------------------------------------------------------------------------------------------------------
+2. Non-Clustered Index.
+--------------------------------------------------------
+>> There is more than on Non-Clustered Index in a table.
+For Example:-
+--------------------------------
+>> Index at one place and data at another place. (Like in our book index at one place and content in another place).
+-------------------------------------
+Syntax:-
+----------------------
+create nonclustered index index_Name on tableName(colname asc/desc)
+------------------------------------------------------------------------------------------------------------
+-- INDEXES IN SQL SERVER
+select * from tbl_Employee
+sp_helpindex tbl_Employee
+-- Creating Clustered Index
+create clustered index in_sal on tbl_Employee(esalary desc)
+create clustered index in_age on tbl_Employee(eage asc) -- Not run already we have one clustered Index.
+
+-- Creating Non-Clustered Index
+create nonclustered index in_age on tbl_Employee(eage asc)
+create nonclustered index in_name on tbl_Employee(ename desc)
+exec sp_helpindex tbl_Employee
+----------------------------------------------------------------------------------------------------------------------------------
+Trigger in Sql Server:- Pending
+----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
