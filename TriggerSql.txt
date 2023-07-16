@@ -1,0 +1,121 @@
+Trigger in Sql Server:-
+-----------------------------------------
+>> A trigger is special kind of stored procedure that automatically fired or executed when an event has occured.
+>> It enhance the performance of our database.
+>> It increases database security.
+----------------------------------------------------------------------------------------------------------------------------
+Database Event:-
+-----------------------------------------------------
+Event -> create,drop,insert,update,select,delete and many more.
+-----------------------------------------------------------------------------------------------------------------
+Employee -> When a new employee has been inserted just after in tbl_msg automatically one record has been inserted.
+tbl_msg ->  (I don't want to insert record Manually in this table).
+-------------------------------------------------------------------------------------------------------------------------------
+Types of Trigger:-
+--------------------------------
+a) DDL Trigger.  => create,alter,rename,drop etc.
+b) DML Trigger. => insert,update,delete etc.
+-----------------------------------------------------------------------------------------------------
+Syntax:-
+-----------------
+create trigger triggerName
+on TableName 
+for insert
+as begin
+<Query Statement>
+end
+-------------------------------------------------------------------------
+select * from tbl_Employee
+create table Employee
+(
+eid int primary key identity(1,1),
+ename nvarchar(50),
+eage int,
+eaddress nvarchar(50),
+salary money
+)
+create table tbl_msg
+(
+msg_id int primary key identity(1,1),
+msg_name nvarchar(400)
+)
+select * from Employee
+select * from tbl_msg
+
+-- Trigger for Insert
+create trigger tg_insert
+on Employee
+for insert  --- After Timing
+as begin
+declare @eid int
+select @eid=eid from inserted  -- It keeps EID behind the scene.
+insert into tbl_msg(msg_name) values('The Employee has been added with id'+cast(@eid as nvarchar(50))+'at the following'+cast(GETDATE() as nvarchar(100)))
+print('Employee Added SuccessFully!!!')
+end
+
+insert into Employee values('rajat',19,'new ashok nagar',23000)
+
+-- Trigger for Update
+-- create a trigger to change salary 23000 to 45000 of an employee
+create trigger tg_update
+on Employee
+for update  --- After Timing
+as begin
+declare @name nvarchar(50)
+declare @OSal money,@NSal money
+select @OSal=salary from deleted --- It remove the old record which has deleted.
+select @name=ename,@NSal=salary from inserted  -- It keeps name,new salary behind the scene.
+insert into tbl_msg(msg_name) values('The Employee name'+@name+'its salary has been changed from'+cast(@OSal as nvarchar(50))+'to'+cast(@NSal as nvarchar(50))+'at the following'+cast(GETDATE() as nvarchar(100)))
+print('Employee Updated SuccessFully!!!')
+end
+
+select * from Employee
+select * from tbl_msg
+update Employee set salary=45000 where eid=1
+
+-- Trigger for Delete
+create trigger tg_delete
+on Employee
+for delete  --- After Timing
+as begin
+declare @eid int
+select @eid=eid from deleted  -- It keeps EID behind the scene.
+insert into tbl_msg(msg_name) values('The Employee has been deleted with id'+cast(@eid as nvarchar(50))+'at the following'+cast(GETDATE() as nvarchar(100)))
+print('Employee Deleted SuccessFully!!!')
+end
+
+select * from Employee
+select * from tbl_msg
+
+delete from Employee where eid=1
+select * from Employee
+----------------------------------------------------------------------------------
+Pending Topics:-
+------------------------------
+1) PL/SQL.
+2) Case. 
+3)  CTE.
+4) Backup and Recovery
+--------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
