@@ -1,0 +1,303 @@
+2. Output Parameter. 
+>> When user want to return value from the procedure then we use OutPut Parameter.
+>> out keyword is used to create output parameter.
+---------------------------------------------------------------------------------
+For Ex:- Create procedure that is used to calculate Provident Fund and Professional Tax of an Employee -
+PF -> 10% of bs
+PT -> 20% of bs.
+----------------------------------------------------------------------------------------
+Steps to execute OutPut Parameter:-
+-----------------------------------------------------------
+1. Declare Bind Variable.
+2. Adding/Executing Bind Variable.
+3. Print Bind Variables.
+-------------------------------------------------------------------------
+select * from tbl_Employee
+create proc sp_Emp
+(
+@eid int,
+@pf money out,
+@pt money out
+)
+as begin
+declare @bs money
+select @bs=esalary from tbl_Employee where eid=@eid
+set @pf=@bs*0.1
+set @pt=@bs*0.2
+end
+
+select * from tbl_Employee
+-- Execute
+declare @bpf money,@bpt money  -- Declare Bind Variable.
+exec Sp_Emp 1,@bpf out,@bpt out  -- Add Bind Variable
+print('Provident Fund='+cast(@bpf as nvarchar(50)))  -- Print Bind Variable.
+print('Professional Tax='+cast(@bpt as nvarchar(50)))
+-------------------------------------------------------------------------------------------------------------------------------
+View:-
+-----------------
+>> View create temporarily table, ie. used to fetch your record from the table in a fast manner.
+>> In view we used only select statement.
+---------------------------------------------------------------------------
+Types of View:-
+---------------------------
+There are two types of view in Sql Server:-
+1. Simple View.
+2. Complex View.
+---------------------------------------------------------------------
+1.  Simple View:-
+-----------------------------
+>> It is also known as 'Updatable View'.
+>> DML operations are performed in this view.
+>> It is used to fetch the data only single table.
+----------------------------------------------------------------------------
+Syntax:-
+--------------------
+create view view_Name as select * from <TN>
+---------------------------------------------------------------------------------
+2. Complex View:-
+-------------------------------
+>> It is also known as Non-Updatable View.
+>> Whenever user want to retreive data from mutiple tables then we use the concept of Complex View.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+----------------
+create view view_Name
+as
+select * from <TN1>
+join / set operator
+select * from <TN2>
+------------------------------------------------------
+select * from tbl_Employee
+-- Simple View
+create view vw_emp as select * from tbl_Employee
+select * from vw_emp
+-- DML Operations
+insert into vw_emp values('harshit',19,'punjab',90342,'SE','2005-09-23')
+update vw_emp set ename='Harshit Arora' where eid=13
+delete from vw_emp where eid=3
+--------------------------------------------------------------------------------
+-- Complex View:-
+------------------------
+select * from tbl_hyd
+select * from tbl_chennai
+
+create view vw_complex
+as
+select * from tbl_chennai
+union
+select * from tbl_hyd
+
+select * from vw_complex
+-- DML Operation
+insert into vw_complex values(123,'SBI','Mathura')
+update vw_complex set bname='PNB' where bid=101
+delete from vw_complex where bid=101
+------------------------------------------------------------------------------------------------------------
+Functions in Sql Server:-
+-----------------------------------------------
+>> when we have complex problem then that complex will be divided into sub-problem ie. known as Module.
+>> Function is basic building block of program.
+>> Function is used to divide the work of program.
+>> Function provide the idea of Re-usablity.
+>> Easy to manage and maintain your code.
+>> Function must return value.
+-------------------------------------------------------------------------------------------
+Types of Functions:-
+-------------------------------------
+1. Library / Built-in Function.
+>> A Function which is defined by the system.
+	math,string,datetimefunction etc.
+select GETDATE()
+select len('harshit')
+select SQRT(25)
+---------------------------------------------------------------------
+2. User defined Function.
+>> A function which is defined by the user.
+Here we focus on how to create User Defined Function ----
+Types of User Defined Function:-
+-----------------------------------------------------
+There are two types of User Defined function which is given below:-
+a) Scalar Valued Function.
+b) Table Valued Function.
+------------------------------------------------------
+a) Scalar Valued Function:-
+------------------------------------------
+>> A function which return only single value commonly known as Scalar Valued Function.
+-----------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+----------------------
+create Function Function_Name(@parameter datatype,@parameter nvarchar(50))
+returns datatype/varname
+as begin
+<Query Statements> // Logic of Code
+return Final_Value
+end
+------------------------------------------------------------------------------------------
+Command to execute Function:-
+-------------------------------------------------------------
+select FunctionName(No. of parameter)
+-------------------------------------------------------------
+-- waf to find the sum of two number.
+-- waf to print welcome to SQL Server.
+-- waf to find the avg of three no.
+--------------------------------------------------------------
+-- Find the Sum of Two Number
+create function addition(@a int,@b int)  -- Function Defination
+returns int
+as begin
+declare @c int
+set @c=@a+@b  --- set keyword is used to set a value into variable
+return @c
+end
+
+select dbo.addition(100,400) as 'Sum of Two Number'  -- Function Calling
+
+alter function welcome()
+returns nvarchar(100)
+as begin
+declare @a nvarchar(50)
+set @a='WELCOME TO SQL SERVER'
+return @a
+end
+select dbo.welcome() as 'MSG'
+
+create function calc_avg(@a int,@b int,@c int)
+returns int
+as begin
+declare @avg int
+set @avg=(@a+@b+@c)/3
+return @avg
+end
+
+select dbo.calc_avg(10,20,30) as 'Total Average'
+---------------------------------------------------------------------------------
+Assignment Function(Scalar Valued)
+--------------------------------------------------------------
+1. waf to find the area of rectangle.
+2. waf to find the area of circle.
+3. waf to find the perimeter of rectangle.
+4. waf to find the total Gross Salary of an Employee on the basis of employee id and follow the following below condition-
+bs - 20000
+da -> bs of 10%
+ta ->  bs of 8%
+hra -> bs of 5%
+gs => bs+da+ta+hra
+5. waf to check character is vowel or constant.
+-----------------------------------------------------------------------------------
+2. MultiValued Function ==>>> PENDING.
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
