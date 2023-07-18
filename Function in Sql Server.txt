@@ -1,0 +1,153 @@
+Assignment Function(Scalar Valued)
+--------------------------------------------------------------
+1. waf to find the area of rectangle.
+2. waf to find the area of circle.
+3. waf to find the perimeter of rectangle.
+4. waf to find the total Gross Salary of an Employee on the basis of employee id and follow the following below condition-
+bs - 20000
+da -> bs of 10%
+ta ->  bs of 8%
+hra -> bs of 5%
+gs => bs+da+ta+hra
+5. waf to check character is vowel or constant.
+---------------------------------------------------
+2. waf to find the area of circle.
+---------------------------------------------------
+Table Valued Function:-
+>> A function which returns whole table.
+>> Begin and end is not required.
+----------------------------------------------------------------------------------------
+Syntax:-
+--------------------
+create function function_Name(@parameter datatype)
+returns table
+as
+return <Query Statements>
+----------------------------------------------------------------------------------------
+-- waf to find the no. employee working in SE department.
+select * from tbl_Employee
+
+--bs - 34000
+--da -> bs of 10%  -> 3400
+--ta ->  bs of 8%  -> 2720
+--hra -> bs of 5% -> 1700
+--gs => bs+da+ta+hra -> 41,820
+create function calc_gross(@eid int)
+returns int
+as begin
+declare @gs money,@bs money,@da money,@ta money,@hra money
+select @bs=esalary from tbl_Employee where eid=@eid
+set @da=@bs*0.1
+set @ta=@bs*0.08
+set @hra=@bs*0.05
+set @gs=@bs+@da+@ta+@hra
+return @gs
+end
+select dbo.calc_gross(1) as 'Total_GrossSalary'
+
+-- Area of Rectangle.
+alter function calc_rect(@l money,@b money)
+returns money
+as begin
+declare @ar money
+set @ar=@l*@b
+return @ar
+end
+select dbo.calc_rect(4.8,5.9) as 'Area'
+-- Perimeter of Rectangle:- per = 2*(Length+Breadth)
+create function calc_per(@l int,@b int)
+returns int
+as begin
+declare @per int
+set @per=2*(@l+@b)
+return @per
+end
+
+select dbo.calc_per(4,5) as 'Perimeter'
+
+-- Calc Area of Circle.
+create function calc_circle(@r money)
+returns money
+as begin
+declare @ar money
+set @ar=3.14*@r*@r
+return @ar
+end
+select dbo.calc_circle(5) as 'Area of Circle'
+--5.waf to check character is vowel or constant.
+create function calc_Vowel(@ch nvarchar(60))
+returns nvarchar(100)
+as begin
+declare @msg nvarchar(200)
+if(@ch='a' or @ch='e' or @ch='i' or @ch='o' or @ch='u')
+set @msg='Character is Vowel'
+else
+set @msg='Character is Consonant'
+return @msg
+end
+select dbo.calc_Vowel('i') as 'Check'
+
+-- Table Valued Function
+create function calc_Employee(@dept nvarchar(60))
+returns table
+as
+return(select * from tbl_Employee where epost=@dept)
+
+select * from dbo.calc_Employee('SE')
+-----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
