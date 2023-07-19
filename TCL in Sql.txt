@@ -1,0 +1,277 @@
+TCL:-
+------------------
+>> It stands for Transaction Control Language.
+------------------------------
+Transaction-
+-------------------------------
+>> To perform some action.
+Bank => withdraw,deposit,accout close,account open.
+------------------------------------------------------------------------------------------------
+ATM -> 2000 withdraw.
+--------------------------------------------
+WHY TCL ??
+====================
+>> Whenever we are going to perform DML (insert,update,delete) operations, all DML operations are auto-committed(Permanently executed in your PC). 
+>> we are unable to rollback our transactions.
+>> we are unable to reach our previous state even after running rollback command.
+NOTE :- With the help of TCL we can rollback our transaction whenever we want.
+--------------------------------------------------------------------------------------------------------------------------------
+In TCL we have following commands:-
+---------------------------------------------------------------
+a) Begin Transaction.
+b) commit.
+c) rollback.
+d) savepoint.
+--------------------------------------------------------------
+a) Begin Transaction.
+-----------------------------------------
+Syntax:-
+-----------------------------------------------
+begin transaction
+<Query Statements>
+---------------------------------------------------
+b) commit.
+------------------------
+>> Once you commit your transactions,you can't rollback.
+>> commit save your transaction permanently in your database.
+----------------------------------------------------------------------------------------------------------
+c) rollback.
+Syntax:-
+-----------------
+begin transaction rollback
+--------------------------------------------------
+Working with Multiple Transactions:-
+-------------------------------------------------------------
+>> Sometimes user want to rollback some transactions and some of them are not.
+>> To handle these types of situation we use the concept of SavePoint.
+-------------------------------------------------------------------------------------------------------------------------------
+SavePoint:-
+--------------------------------
+>> SavePoint creates temporarily memory/area for your transaction in which you can save your transactions.
+>> When you have multiple transaction those transaction which you need to rollback put it into savepoint.
+------------------------------------------------------------------------
+Syntax:-
+----------------------------
+save transaction <PointerName>
+----------------------------------------------------------------
+Syntax to Call Savepoint:-
+---------------------------------------------
+begin transaction rollback transaction <PointerName>
+----------------------------------------------------------------------------------------
+create table tbl_bank
+(
+bid int,
+bname nvarchar(50),
+bmoney money
+)
+select * from tbl_bank
+-- WITHOUT TCL-:
+--------------------------
+--DML
+insert into tbl_bank values(101,'SBI',456000)
+begin transaction rollback
+-- waq to change bname SBI to PNB.
+update tbl_bank set bname='PNB' where bid=101
+delete from tbl_bank
+-----------------------------------------------------
+-- WITH TCL:-
+--------------------
+select * from tbl_bank
+
+begin transaction
+insert into tbl_bank values(101,'SBI',890843.34)
+commit
+
+begin transaction rollback
+
+-- waq to update your bname SBI to PNB.
+begin transaction
+update tbl_bank set bname='PNB' where bid=101
+commit
+
+select * from tbl_bank
+begin transaction rollback
+
+-- Delete 101 bid record
+begin transaction 
+delete from tbl_bank where bid=101
+commit
+
+begin transaction rollback
+select * from tbl_bank
+-----------------------------------------
+-- SavePoint
+-- Working With Multiple Transactions.
+select * from tbl_bank
+-- 7,3,5,6,8
+begin transaction
+delete from tbl_bank where bid=104
+delete from tbl_bank where bid=102
+delete from tbl_bank where bid=101
+save transaction p1 -- SAVE POINT
+delete from tbl_bank where bid=107
+delete from tbl_bank where bid=103
+delete from tbl_bank where bid=105
+delete from tbl_bank where bid=106
+delete from tbl_bank where bid=108
+begin transaction rollback transaction p1
+-------------------------------------------------------------------------
+DDL -> create,alter,drop,truncate,rename,comment.
+ALTER:-
+------------------------------
+a) ADD new column.
+Syntax:-
+------------------
+alter table tablename add column columnName datatype(size)
+----------------------------------------------------------------------------------------------
+b) Drop Column:-
+-------------------------------------
+alter table tablename drop column colName
+-----------------------------------------------------------------------
+Comment:-
+---------------------------
+>> In sql comment is represented by two times hyphen -- .
+>> Comment can't be executed by SQL server.
+--------------------------------------------------------------------------------------------------- 
+Rename:-
+----------------------------
+a) Rename ColName:-
+----------------------------------------
+sp_rename 'TableName.oldcolname','newcolname'
+------------------------------------------------------------------------------------
+b) Rename TableName:-
+-----------------------------------------------------
+sp_rename 'OldTableName','NewTableName'
+------------------------------------------------------------------------------
+alter table tbl_bank add city nvarchar(50)
+
+select * from tbl_bank
+
+alter table tbl_bank drop column city
+
+select * from tbl_bank
+
+sp_rename  'tbl_bank.bname','BRANCH_NAME'
+sp_rename 'tbl_bank','tbl_Banking'
+
+select * from tbl_Banking
+---------------------------------------------
+DCL :- PENDING
+------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
