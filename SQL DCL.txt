@@ -1,0 +1,189 @@
+DCL:-
+----------------
+>> It stands for Data Control Language.
+>> It is used to give or take permission from the database as well as table.
+>> It restrict to the user to access any database or table directly.
+------------------------------------------------------------------------------------------------------------------
+DCL has two Commands:-
+------------------------------------------
+1. Grant.
+>> To give the permission to the User.
+2. Revoke.
+>> To take out the permission from the User.
+-----------------------------------------------------------------------------------------------------
+Authentication:- 
+>> To check the identity of a user whether the user is valid or not.
+Authorization:-
+>> To give the access or priviledges to the user.
+----------------------------------------------------------------------------------------------------
+Types of Authentication in SQL SERVER:-
+---------------------------------------------------------------------
+1. Windows Authentication.
+>> It works like an Admin.
+>> It doesn't require UserName and Password for login.
+>> It can access any database or tables directly.
+----------------------------------------------------------------------------------
+2. SQL Server Authentication.
+>> It works like a Normal User.
+>> It require UserName and Password for login.
+>> It can't access any Database or tables directly.
+---------------------------------------------------------------------------------
+1. Create Login:-
+-------------------------------------------
+Syntax:-
+-----------------------
+create login loginName with password='give password'
+-------------------------------------------------------------------------------------------
+2. Create User:-
+------------------------------------------
+Syntax:-
+-------------------------------
+create User UserName for LoginName
+----------------------------------------------------------------------------------
+How to give or take permission on Table:-
+-----------------------------------------------------------------------
+Grant:-
+-----------------
+Syntax:-
+----------------------
+grant <Privledge_List> on object::tableName to userName
+------------------------------------------------------------------------------------------
+Revoke:-
+-----------------
+Syntax:-
+----------------------
+revoke <Privledge_List> on object::tableName from userName
+--------------------------------------------------------------------------------------------
+How to give or take permission on Whole Database:-
+-----------------------------------------------------------------------
+Grant:-
+-----------------
+Syntax:-
+----------------------
+grant <Privledge_List> on database::DatabaseName to userName
+------------------------------------------------------------------------------------------
+Revoke:-
+-----------------
+Syntax:-
+----------------------
+revoke <Privledge_List> on database::DatabaseName from userName
+--------------------------------------------------------------------------------------------------------
+create login abhishek with password='12345'
+create User abhishek for login abhishek
+-- Permission give or take on specific table.
+grant select,update on object::tbl_Employee to abhishek
+revoke select,update on object::tbl_Employee from abhishek
+
+-- Permission give or take on Whole Database
+grant select,update on database::BatchRahul to abhishek
+revoke select,update on database::BatchRahul from abhishek
+--------------------------------------------------------------------------------------------------------------
+Pending:-
+-----------------------------------------
+Ranking Function.
+Nested Query.
+Trigger.
+Indexes.
+CTE.
+CASE.
+while,if-else.
+-------------------------------------------------
+SQL - TEST:  1 Hour
+-----------------------------------------------
+Create database -> DbTest
+Create Table Employee - eid (P.K) auto_inc , ename,age,mobileno,post,salary , did (F.K.) -> insert 10 record of an employee
+Create Table Department -> did , dname  -> insert 5 department.
+------------------------------------------------------------------------------------------------------------------------------------------
+1. waq to get top 3 latest employee from employee table
+2. waq to get salary in desc order of Employee table.
+3. waq to get all the employee whose name start from i.
+4. waq to get all the employee whose name contains r.
+5. waq to get no. of employee working in each Department.
+6. waq to find the total sum of SE department.
+7. waq to find the complete details of employee whose working in SE department.
+8. waq to find total total no. of employees working in IT department where deparment is greater than 2.
+9. waq to find who are getting the same salary as employee1 or employee 5 is getting.
+10. waq to find the all the employee whose salary is between 10000 to 45000.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
