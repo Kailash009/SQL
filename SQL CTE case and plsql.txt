@@ -1,0 +1,260 @@
+CTE:-
+------------------
+>> It stands for "Common Table Expression".
+>> CTE act as a virtual tables that are created during query execution.
+>> It is a one time result set that only exists for the duration of the query.
+>> It can be thought as a temporary result set that is defined within the execution scope of single select,insert,update delete or create statements.
+>> Easy to maintain your query.
+>> Improved Redability.
+-----------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+-----------------------
+With CTE_Name(column_List)
+as
+(
+Query Expression.
+)
+---------------------------------------------------------------------------
+Example:-
+---------------------
+select * from tbl_Employee	   
+
+with EmployeeList(ename,eaddress,esalary)
+as
+(
+select ename,eaddress,esalary from tbl_Employee
+)
+select * from EmployeeList
+--------------------------------------------------------------------------------------------
+CASE:-
+-------------------
+>> It is used to provide multiple condition in your query.
+Syntax:-
+-----------------
+select <Column_List>
+case
+when condition1 then statement1
+when condition2 then statement2
+when condition3 then statement3
+when condition4 then statement4
+when condition5 then statement5
+when condition6 then statement6
+else
+when condition7 then statement7
+end
+from TableName
+---------------------------------------------------------------------------------
+For Example:-
+----------------------------
+select * from tbl_Employee
+
+select ename,esalary,
+case 
+when esalary>20000 then 'Salary is Greater than 20000'
+when esalary>10000 then 'Salary is Greater than 10000'
+when esalary>23000 then 'Salary is Greater than 23000'
+when esalary<10000 then 'Salary is Less than 10000'
+when esalary>40000 then 'Salary is Greater than 40000'
+else 
+'Salary is Greater than 800'
+end as 'EmployeeCondition'
+from tbl_Employee
+-----------------------------------------------------------------------------------
+PL/SQL:-
+--------------------
+>> It stands for Procedural Language/Structured Query Language.
+>> when you want to provide programming in your query then we use the concept of PL/SQL.
+---------------------------------------------------------------------------------------------------------------------------------------------
+Variable:-
+-----------------------
+>> it is used to hold value in which we perform some operation.
+>> In PL/SQL variable can be defined using 'declare' keyword.
+>> variable must be prefix with @ symbol.
+Syntax:-
+-----------------
+declare @var_name datatype
+datatype -> It identifies that which type of value a variable can hold.
+----------------------------------------------------------------------------------------------------------
+Variable Initialization:-
+---------------------------------------
+>> It is used to assign value into a variable.
+>> set keyword is used to assign value into a variable.
+For Ex:-
+----------------
+declare @var_name datatype
+set @var_name=value
+-----------------------------------------------------------------
+Variable Declaration:-
+----------------------------------------
+>> don't provide any value to the variable.
+declare @var_name datatype  // Declaration
+------------------------------------------------------------------
+For Example:-
+-------------------------
+declare @a int
+set @a=100
+print('a='+cast(@a as nvarchar(50)))
+-------------------------------------------------------------------------
+wap to find the sum of two number.
+declare @a int,@b int,@c int
+set @a=10
+set @b=50
+set @c=@a+@b
+print('Sum of Two Number='+cast(@c as nvarchar(50)))
+-------------------------------------------------------------------------------------------
+wap to find add,sub,mult,div of two number.
+---------------------------------------------------------------------------
+declare @a int,@b int,@sm int,@sb int,@mt int,@div int
+set @a=50
+set @b=30
+set @sm=@a+@b
+set @sb=@a-@b
+set @mt=@a*@b
+set @div=@a/@b
+print('Addition='+cast(@sm as nvarchar(50)))
+print('Subtraction='+cast(@sb as nvarchar(50)))
+print('Multiplication='+cast(@mt as nvarchar(50)))
+print('Divide='+cast(@div as nvarchar(40)))
+--------------------------------------------------------------------------------------------------------------
+wap to swap(Interchange) two number without using third variable:-
+-------------------------------------------------------------------------------------------------
+a=10
+b=20
+output:-
+a=20
+b=10
+--------------------------
+declare @a int,@b int
+set @a=10 set @b=20
+print('Original Value')
+print('a='+cast(@a as nvarchar(50))+' , '+'b='+cast(@b as nvarchar(50)))
+set @a=@a+@b -- 30
+set @b=@a-@b -- 30-20 = 10
+set @a=@a-@b -- 30-10 = 20
+print('Swap Value')
+print('a='+cast(@a as nvarchar(50))+' , '+'b='+cast(@b as nvarchar(50)))
+------------------------------------------------------------------------------------------------------------------
+wap to swap(Interchange) two number using third variable:-
+declare @a int,@b int,@temp int
+set @a=10 set @b=20
+print('Original Value')
+print('a='+cast(@a as nvarchar(50))+' , '+'b='+cast(@b as nvarchar(50)))
+set @temp=@a
+set @a=@b
+set @b=@temp
+print('Swap Value')
+print('a='+cast(@a as nvarchar(50))+' , '+'b='+cast(@b as nvarchar(50)))
+--------------------------------------------------------------------------------------------------------------
+Assignment:-
+-----------------------------------
+>> wap to find the area and perimeter of rectangle.
+>> wap to find the area and circumference of circle.
+>> wap to find the average of five number.
+>> wap to find the sum and average of six number.
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
