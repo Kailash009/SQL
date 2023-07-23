@@ -1,0 +1,135 @@
+SQL - TEST: 20 Marks:-
+---------------------------------------------
+Create database -> DbTest
+Create Table Employee - eid (P.K) auto_inc , ename,age,mobileno,post,salary , did (F.K.) -> insert 10 record of an employee
+Create Table Department -> did , dname  -> insert 5 department.
+------------------------------------------------------------------------------------------------------------------------------------------
+1. waq to get top 3 latest employee from employee table
+2. waq to get salary in desc order of Employee table.
+3. waq to get all the employee whose name start from i.
+4. waq to get all the employee whose name contains r.
+5. waq to get no. of employee working in each Department.
+6. waq to find the total sum of SE department.
+7. waq to find the complete details of employee whose working in SE department.
+8. waq to find total total no. of employees working in IT departement where deparment is greater than 2.
+9. waq to find who are getting the same salary as employee1 or employee 5 is getting.
+10. waq to find the all the employee whose salary is between 10000 to 45000.
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+IF-Else in SQL Server:-
+--------------------------------------
+wap to check the greastest in two number.
+declare @a int ,@b int
+set @a=100
+set @b=20
+if(@a>@b) -- if the condition is true the if statement will be executed otherwise else part will execute.
+begin
+print(cast(@a as nvarchar(20))+' is Greater')
+end
+else
+begin
+print(cast(@b as nvarchar(50))+' is Greater')
+end
+----------------------------------------------------------------------------------------
+wap to check no. is positive or negative.
+declare @a int
+set @a=-34
+if(@a>0)
+begin
+print('Number is Positive')
+end
+else
+begin
+print('Number is Negative')
+end
+----------------------------------------------------------------------------------------
+If-else-if:-
+--------------------
+1 -> sum
+2 -> sub
+3 -> mult
+4 -> div
+------------------
+declare @a int,@b int,@ch int,@sm int,@sb int,@mt int,@div int
+set @a=10
+set @b=5
+set @ch=5
+if(@ch=1)
+begin
+set @sm=@a+@b
+print('Sum='+cast(@sm as nvarchar(40)))
+end
+else if(@ch=2)
+begin
+set @sb=@a-@b
+print('Sub='+cast(@sb as nvarchar(40)))
+end
+else if(@ch=3)
+begin
+set @mt=@a*@b
+print('Mult='+cast(@mt as nvarchar(40)))
+end
+else if(@ch=4)
+begin
+set @div=@a/@b
+print('Div='+cast(@div as nvarchar(40)))
+end
+else
+begin
+print('Wrong Input Choice')
+end
+-----------------------------------------------------------------------------------------------------
+Assignment:-
+--------------------------
+>> wap to find the greatest number among three no.
+>> wap to check character is vowel or consonant.
+>> wap to check year is leap or not.
+-----------------------------------------------------------------------------------
+Loop:-
+--------------
+>> When a user want to print one statement multiple times then we use the concept of loop.
+>> In sql while loop is used.
+----------------------------------------------------------------------------------------------------------------------------------
+wap to print happy birthday 10 times.
+declare @a int
+set @a=1
+while(@a<=10) -- 1<=10 2<=10 3<=10 4<=10 10<=10 - T  11<=10 -> False
+begin
+print('HAPPY BIRTHDAY')
+set @a=@a+1  -- a=1+1 a=2a=3 4  10 11
+end
+---------------------------------------------------------------
+wap to print 1 to 15 numbers.
+declare @a int
+set @a=1
+while(@a<=15) -- 1<=10 2<=10 3<=10 4<=10 10<=10 - T  11<=10 -> False
+begin
+print(@a)
+set @a=@a+1  -- a=1+1 a=2a=3 4  10 11
+end
+-------------------------------------------------------------------
+wap to find the factorial of a given no.
+5! => 5*4*3*2*1  => 120
+4! => 4*3*2*1  => 24
+6! => 720
+----------------------------------------------------------------
+declare @a int,@f int
+set @a=5
+set @f=1
+while(@a>0)  -- 5>0 4>0 3>0 2>0 1>0 0>0 -> False
+begin
+set @f=@f*@a  -- f=1*5 f=5 f=5*4 =20 f=20*3= 60 => f=60*2=> 120 f=120*1 =120
+set @a=@a-1  -- a=4 a=3 a=2 a=1 a=0
+end
+print('Factorial='+cast(@f as nvarchar(50)))
+---------------------------------------------------------------------------------------
+Assignment Question of Loop in Sql Server:- 
+-----------------------------------------------------------------------------
+>> wap to print even number between 1 to 40.
+>> wap to print odd number between 1 to 50.
+>> wap to find the sum and average between 1 to 15.
+>> wap to print the square between 1 to 10 -> 1 4 9 16 25 36 etc.
+>> wap to print the table of a given no. 
+>> wap to print sum of its digit of a given no.
+n=123 => 6
+n=5674 => 22 
+-----------------------------------------------------------------------------------------------------------
