@@ -1,0 +1,188 @@
+Ranking Function:
+---------------------------------------
+>> It is used to provide rank row wise and group of row wise.
+In Ranking Function we have two clauses:-
+a) Order By. (Mandatory Clause) => [ Row Wise + Group of Row Wise ]
+b) Partition By. (Optional Clause) => [ Group of Row Wise ].
+--------------------------------------------------------------------------------------------------------------
+In Sql we have three types of Ranking Function:-
+a) Row_Number().
+>> If two employee having same salary then it assign different ranks.
+b) Rank().
+>> If two employee having same salary then it assign same ranks but it skip next rank for next employee.
+c) Dense_Rank(). (BEST)
+>> If two employee having same salary then it assign same ranks but it doesn't skip next rank for next employee.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+-----------------
+select <List_of_Column>,RankingFunctionName() over(order by <Colname> partitionby <colname>) from tablename
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+-- Row Wise - Rank on the basis of Salary
+select ename,esalary,ROW_NUMBER() over(order by esalary desc) as 'Ranks' from tbl_Employee
+select ename,esalary,RANK() over(order by esalary desc) as 'Ranks' from tbl_Employee
+select ename,esalary,DENSE_RANK() over(order by esalary desc) as 'Ranks' from tbl_Employee
+-- Group of Row Wise - Rank on the basis of Salary and Group.
+select ename,esalary,did,ROW_NUMBER() over(partition by did order by esalary desc) as 'Ranks' from tbl_Employee
+select ename,esalary,did,Rank() over(partition by did order by esalary desc) as 'Ranks' from tbl_Employee
+select ename,esalary,did,DENSE_RANK() over(partition by did order by esalary desc) as 'Ranks' from tbl_Employee
+---------------------------------------------------------------------------------------------------------------------------
+Nested Query :-
+------------------------------
+>> Query with in Query is called Nested Query.
+>> when simple query doesn't retreive relevant data then we need to write nested Query.
+Syntax:-
+------------------
+     (Outer Query)                                                                                          (Inner Query)
+select * from TN where colname=(select * from TN where colname=(Select * from TN where colname=(select * from tableName)))
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+On the basis of Query Execution it can be divided into the following two categories:-
+a) Non-Corelated Query.
+>> First Inner Query will Execute and then outer Query will execute.
+>> Outer Query result depend upon inner Query.
+--------------------------------------------------------------------------------------------------------------------
+b) Co-related Query.
+>> First Outer Query will Execute and then Inner Query will execute.
+>> Inner Query result depend upon Outer Query.
+-------------------------------------------------------------------------------------------------------------------
+a) Non-Corelated Query.
+------------------------------------------------
+i) Single Row SubQuery.
+>> A query which return only single row.
+For Example:-
+--------------------------------------
+-- Non-Corelated  / Single Row SubQuery
+-- waq to get the highest salary of an Employee.
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee)
+--------------------------------------------------------------------------------------------------------------------------
+ii) Multiple Row SubQuery.
+>> A query which return multiple row.
+------------------------------------------------------------------
+-- Non-Corelated  / Multiple Row SubQuery
+-- waq to get all the employee records whose department is same as hardik,subham,abhimanyu
+select * from tbl_Employee where epost in(select epost from tbl_Employee where ename='hardik' or ename='subham' or ename='abhimanyu')
+select * from tbl_Employee where epost in(select epost from tbl_Employee where ename in('hardik','subham','abhimanyu'))
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Comparison Between Non-Corelated vs Corelated:-
+--------------------------------------------------------------------------------
+First Highest       N=1  -> No. of SubQuery => N+1  => 2
+Second Highest  N=2  -> No. of SubQuery => N+1  => 3
+Third Highest      N=3  -> No. of SubQuery => N+1  => 4
+N=99 -> 100 SubQuery.
+------------------------------------------------------------------------------------------------
+-- First Highest Salary N=1 -- Non-Corelated 
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee)
+-- Second Highest Salary N=2 -- Non-Corelated 
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee where esalary<(select max(esalary) from tbl_Employee)) --83842<90342
+-- Third Highest Salary N=3 -- Non-Corelated 
+select * from tbl_Employee where esalary=(select max(esalary) from tbl_Employee where esalary<(select max(esalary) from tbl_Employee where esalary<(select max(esalary) from tbl_Employee)))
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Co-related SubQuery:-
+-------------------------------------------------
+Syntax:-
+---------------------
+select * from <TN> tablenamealias1
+where  N-1=(select count(colname) from tablename tablenamealias2
+where tablenamealias2.colname (>/<) tablenamealias1.colname)
+-----------------------------------------------------------------------------------------------------------
+  > -> Highest Salary
+  < -> Lowest Salary
+------------------------------------------------------------------------------------------------------------
+ -- Co-related Query
+--select * from <TN> tablenamealias1
+--where  N-1=(select count(colname) from tablename tablenamealias2
+--where tablenamealias2.colname (>/<) tablenamealias1.colname)
+-- First Highest Salary N=1
+select * from tbl_Employee t1
+where 0=(select count(esalary) from tbl_Employee t2
+where t2.esalary>t1.esalary)
+-- Second Highest Salary N=2
+select * from tbl_Employee t1
+where 1=(select count(esalary) from tbl_Employee t2
+where t2.esalary>t1.esalary)
+-- Second Highest Salary N=3
+select * from tbl_Employee t1
+where 2=(select count(esalary) from tbl_Employee t2
+where t2.esalary>t1.esalary)
+------------------------------------------------------------------------------------------
+-- First Lowest Salary N=1
+select * from tbl_Employee t1
+where 0=(select count(esalary) from tbl_Employee t2
+where t2.esalary<t1.esalary)
+-- Second Lowest Salary N=2
+select * from tbl_Employee t1
+where 1=(select count(esalary) from tbl_Employee t2
+where t2.esalary<t1.esalary)
+-----------------------------------------------------------------------------------------------------------------
+CASE:-
+---------------------
+>> It is used to provide multiple condition in a table.
+>> with the help of case we can provide condition in each row.
+-----------------------------------------------------------------------------------------------------
+Syntax:-
+-------------------
+case
+when condition1 then statement1
+when condition2 then statement2
+when condition3 then statement3
+when condition4 then statement4
+when condition5 then statement5
+when condition6 then statement6
+else 
+when condition7 then statement7
+end
+-------------------------------------------------------------------------
+select * from tbl_Employee
+select ename,esalary,
+case 
+when esalary<500 then 'Salary is Less than 500'
+when esalary>4000 then 'Salary is Greater than 4000'
+when esalary>3000 then 'Salary is Greater than 3000'
+when esalary<24000 then 'Salary is Less than 24000'
+when esalary<10000 then 'Salary is Less than 10000'
+else
+'Salary is Less than 1000'
+end as 'Conditions'
+from tbl_Employee 
+
+select * from tbl_Employee
+--Waq to find who are getting the same salary as employee 1 or employee 6 is getting. (Self Join)
+select e1.ename,e1.esalary from tbl_employee e1,tbl_employee e2 where e1.esalary=e2.esalary and (e2.eid=1 or e2.eid=6)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+CTE:-
+-------------------
+>> It stands for Common table Expression.
+>> CTE is one time query execution.
+>> CTE is a temporary table that can be executed during query execution.
+>> It doesn't exist physically in your database.
+-----------------------------------------------------------------------------------------------------------
+Syntax:-
+---------------------
+with CTE_Name(expression)
+as
+(
+<Query Statements> // Logic of your Query
+)
+select * from CTE_Name
+-------------------------------------------------
+with EmployeeList(ename,esalary,epost)
+as
+(
+select ename,esalary,epost from tbl_Employee
+)
+select * from EmployeeList
+------------------------------------------------------------------------
+with EmployeeList(ename,esalary)
+as
+(
+select e1.ename,e1.esalary from tbl_employee e1,tbl_employee e2 where e1.esalary=e2.esalary and (e2.eid=1 or e2.eid=6)
+)
+select * from EmployeeList
+-------------------------------------------------------------------
+Pending Topics:-
+--------------------------------
+Trigger.
+Indexes.
+Variable,while,if-else.
+Database Backup and Recovery
+--------------------------------------------------------
