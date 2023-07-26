@@ -1,0 +1,120 @@
+Indexes in Sql Server:-
+-----------------------------------------
+>> Indexing is used to make your query performance faster.
+>> Indexing is used for fast searching.
+>> With the help of index we can directly retrieve our data.
+>> Without indexing it scan whole table it is known as 'Table Scan'.
+>> Table scan is a bad performance.
+--------------------------------------------------------------------------------------------------
+Types of Indexing:-
+---------------------------------
+a) Clustered Index.
+>> It created automatically,when you make any column P.K.
+>> There is only one clustered index in a table.
+For Ex:- Mobile Phone contact list arranging all the names in ascending order.
+How to manually create Clustered Index:-
+--------------------------------------------------------------------------------------------------------------
+create clustered index index_Name on TableName(colname asc/desc)
+------------------------------------------------------------------------------------------------------------------------
+Command to see how many indexes in your table:-
+-------------------------------------------------------------------------------
+sp_helpindex tableName
+---------------------------------------------------------------------------
+b) Non-Clustered Index.
+>> There is more than one Non-Clustered index in a table.
+For Ex -> In Book we have index at one side and content at another side.
+How to create Non-Clustered Index:-
+--------------------------------------------------------------------------------------------------------------
+create nonclustered index index_Name on TableName(colname asc/desc)
+------------------------------------------------------------------------------------------------------------------------
+select * from tbl_Employee
+
+-- Clustered Index
+create clustered index in_Name on tbl_Employee(ename asc)
+sp_helpindex tbl_Employee
+select * from tbl_Employee
+
+-- Non-Clustered Index
+create nonclustered index in_age on tbl_Employee(eage desc)
+create nonclustered index in_salary on tbl_Employee(esalary asc)
+sp_helpindex tbl_Employee
+------------------------------------------------------------------------------------------------------------------
+PL/SQL:-
+---------------------
+>> It stands for Procedural Language / Structured Query Language.
+>> PL/SQL is used when you want some programming in your query.
+----------------------------------------------------------------------------------------------------------
+Variable:-
+---------------------
+>> To provide data in your query.
+>> It is used to hold a value in which we can perform some operation.
+>> declare keyword is used to create variable.
+>> @ symbol as a prefix is used to create variable.
+-----------------------------------------------------------------------------------------------------------
+Syntax to create a variable:-
+------------------------------------------------------
+declare @variableName datatype(size);
+-----------------------------------------------------------------
+Syntax to set value into a variable:-
+--------------------------------------------------------------
+>> 'set'  keyword is used to set value into a variable.
+set @varname=value;
+----------------------------------------------------
+Syntax to print variable value:-
+--------------------------------------------------
+>> print() statement is used to print variable value.
+------------------------------------------------------------------------------
+declare @a int
+set @a=200
+print('a='+cast(@a as nvarchar(30)))
+----------------------------------------------------------------------
+wap to find sum of two no.
+--------------------------------------------
+declare @a int,@b int,@sm int
+set @a=200
+set @b=400
+set @sm=@a+@b
+print('Sum='+cast(@sm as nvarchar(30)))
+---------------------------------------------------------------------
+wap to find sum ,sub ,mult,div of two no.
+--------------------------------------------------------------------- 
+declare @a int,@b int,@sm int,@sb int,@mt int,@div int
+set @a=600
+set @b=400
+set @sm=@a+@b
+set @sb=@a-@b
+set @mt=@a*@b
+set @div=@a/@b
+print('Sum='+cast(@sm as nvarchar(30)))
+print('Sub='+cast(@sb as nvarchar(30)))
+print('Mult='+cast(@mt as nvarchar(30)))
+print('Div='+cast(@div as nvarchar(30)))
+-------------------------------------------------------------------------------
+Assignment Question of Variable  :-
+--------------------------------------------------------
+1. wap to find the area,perimeter and diagonal of rectangle.
+2. wap to find the area and cirumference of circle.
+3. wap to find the sum and average of five numbers.
+4. wap to find  the swap (Interchange) between two number using third variable.
+a=10
+b=20
+-----------------
+output:-
+----------------
+a=20
+b=10
+---------------------
+5. wap to find  the swap (Interchange) between two number without using third variable.
+a=10
+b=20
+-----------------
+output:-
+----------------
+a=20
+b=10
+----------------------------------------------------------------------------------------
+Pending Topics:-
+--------------------------------
+if-else,while.
+Database Backup and Recovery
+-------------------------------------------------------------
