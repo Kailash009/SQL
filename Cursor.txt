@@ -15,7 +15,7 @@ Types of Cursors:-
 >> Fetch data from table in Row-by-Row manner.
 ---------------------------------------------------------------------------------
 Work with Explicit Cursors-
----------------------------------------
+-----------------------------------------------
 Step1: DECLARE CURSOR OBJECT.
 Syntax-
 --------------

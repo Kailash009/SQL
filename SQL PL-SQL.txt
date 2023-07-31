@@ -1,0 +1,148 @@
+Pending Topics:-
+--------------------------------
+If-else:-
+------------------
+if(condition)
+statement1
+else
+statement2
+----------------------------------------------------
+-- IF Condition
+-- wap to find greatest of two no.
+declare @a int,@b int
+set @a=100
+set @b=20
+if(@a>@b)
+print(cast(@a as nvarchar(50))+' is Greater')
+else
+print(cast(@b as nvarchar(50))+' is Greater')
+------------------------------------------------------------------------
+if-else-if:-
+--------------------
+>> It is used to check mutiple condition in a program.
+if(condition1)
+statement1
+else if(condition2)
+statement2
+else if(condition3)
+statement3
+else if(condition3)
+statement3
+else 
+statement4
+---------------------------------------------------
+-- wap to find the smallest in three no.
+declare @a int,@b int,@c int
+set @a=100
+set @b=20
+set @c=4
+if(@a<@b and @a<@c)
+print('A is Smallest')
+else if(@b<@a and @b<@c)
+print('B is Smallest')
+else
+print('C is Smallest')
+----------------------------------------------------------------------------------
+-- wap to check character is vowel or consonant
+----------------------------------------------------------------------------
+declare @ch char
+set @ch='k'
+if(@ch='a' or @ch='e' or @ch='i' or @ch='o' or @ch='u')
+print(@ch+' is a Vowel')
+else
+print(@ch+' is a Consonant')
+-----------------------------------------------------------------------------------
+-- wap to check no. is positive,zero or negative. 
+declare @a int
+set @a=5
+if(@a>0)
+print('POSITIVE')
+else if(@a=0)
+print('ZERO')
+else
+print('NEGATIVE')
+-------------------------------------------------------------------------------------
+Assignment of Conditional Statement:-
+-----------------------------------------------------------------
+1. wap to check year is Leap or not.
+2. wap to check no. is even or odd
+3. wap to find the sum and percentage of five subjects and find the following Grade given below.
+100%-90%  -> S
+90%-80%  -> A
+80%-70%  -> B
+70%-60%  -> C
+60%-50%  -> D
+<50%  -> F
+4. wap to find the follwing operation -
++  => add
+- => sub
+* => mult
+/ => div
+------------------------------------------------------------------------------------------
+Loop/Iterative/Control :-
+------------------------------------------------------
+>> When a user want to print one statement several times then we use the concept of Loop.
+>> In sql mostly we prefer while loop in our query.
+---------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:-
+--------------------
+Initialization
+while(condition)
+begin
+statement
+Inc/Dec
+end
+-----------------------------------
+wap to print welcome to sql server 10 times.
+declare @a int
+set @a=1
+while(@a<11) -- 1<=10 ,2<=10 10<=10 ,11<=10 -> False
+begin
+print('WELCOME TO SQL SERVER') --1 2
+set @a=@a+1 -- 2 3
+end
+---------------------------------------------------------------
+wap to print 15 to 1 number.
+-----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
