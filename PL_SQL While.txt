@@ -1,0 +1,129 @@
+While loop in Sql Server:-
+-------------------------------------------
+Syntax:-
+--------------------
+Initialization
+while(condition)
+begin
+statement
+Inc/Dec
+end
+---------------------------------
+-- wap to print 1 to 10 number.
+declare @a int 
+set @a=1
+while(@a<=10)
+begin
+print(@a)
+set @a=@a+1
+end
+-----------------------------------------------------------
+-- wap to print 15 to 1.
+declare @a int 
+set @a=15
+while(@a>1)
+begin
+print(@a)
+set @a=@a-1
+end
+----------------------------------------------------------------------------
+wap to print 1 to 10 no and find sum and avg.
+----------------------------------------------------------------------------
+-- wap to print 1 to 10 number.
+declare @a int,@sm int,@avg decimal(23,2)
+set @a=1
+set @sm=0
+set @avg=0
+while(@a<=10) -- 1<=10 2<=10 3<=10 4<=10 11<=10 -> False
+begin
+print(@a) -- 1 2 3 4
+set @sm=@sm+@a -- sm=1 sm=3 sm=6 sm=10  sm=55
+set @a=@a+1 -- 2 3 4
+end
+set @avg=cast(@sm as decimal)/10   -- 55/10
+print('Sum='+cast(@sm as nvarchar(40))) -- 55
+print('Average='+cast(@avg as nvarchar(40))) -- 5.50
+----------------------------------------------------------------------------------------------
+wap to print even no. between 1 to 30.
+-- 1 to 30 even no.
+declare @a int
+set @a=2
+while(@a<31)
+begin
+print(@a)
+set @a=@a+2
+end
+wap to odd even no. between 1 to 30.
+-----------------------------------------------------------------------------------------
+-- 1 to 30 odd no.
+declare @a int
+set @a=1
+while(@a<31)
+begin
+print(@a)
+set @a=@a+2
+end
+---------------------------------------------
+Assignment Question:-
+----------------------------------
+>> wap to find the factorial.
+5! => 5*4*3*2*1 =120
+>> wap to find the prime no.
+>> wap to find the armstrong no.
+>> wap to reverse no.
+>> wap to print the table.
+-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
