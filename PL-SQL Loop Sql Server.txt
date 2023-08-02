@@ -1,0 +1,109 @@
+1. wap to check year is Leap or not.
+declare @year int
+set @year=2022
+if(@year%4=0)
+print('Year is Leap')
+else
+print('Year is Not Leap')
+-----------------------------------------------------------
+2. wap to check no. is even or odd.
+-------------------------------------------------------
+declare @a int
+set @a=223
+if(@a%2=0)
+print('Even')
+else
+print('ODD')
+-----------------------------
+3. wap to find the sum and percentage of five subjects and find the following Grade given below.
+100%-90%  -> S
+90%-80%  -> A
+80%-70%  -> B
+70%-60%  -> C
+60%-50%  -> D
+<50%  -> F
+---------------------------------
+declare @h int,@e int,@m int,@ph int,@ch int,@sum int,@per int
+set @h=76
+set @e=46
+set @m=46
+set @ph=66
+set @ch=56
+set @sum=@h+@e+@m+@ph+@ch
+print('Total Marks='+cast(@sum as nvarchar(50)))
+set @per=@sum/5
+print('Percentage='+cast(@per as nvarchar(49)))
+if(@per>90 and @per<100)
+print('S')
+else if(@per>80 and @per<90)
+print('A')
+else if(@per>70 and @per<80)
+print('B')
+else if(@per>60 and @per<70)
+print('C')
+else if(@per>50 and @per<60)
+print('D')
+else
+print('Failed')
+-----------------------------------------------------------------------
+4. wap to find the follwing operation -
++  => add
+- => sub
+* => mult
+/ => div
+--------------------------------------------------------
+>> wap to find the factorial.
+5! => 5*4*3*2*1 =120
+>> wap to find the prime no.
+>> wap to find the armstrong no.
+no -> 153 -> 
+ 1    5     3
+ 1*1*1  +  5*5*5 +  3*3*3
+1 + 125 + 27  => 153   armstrong
+-----------------------
+143
+1+64+27 => 92 ==143 -> Not Armstrong
+------------------------------------------------------------
+declare @temp int,@a int,@b int,@c int,@sm int
+set @a=123
+set @temp=@a
+set @sm=0
+while(@a>0)
+begin
+set @b=@a%10
+set @c=@b*@b*@b
+set @sm=@sm+@c
+set @a=@a/10
+end
+print('Sum='+cast(@sm as nvarchar(50)))
+print('Temp='+cast(@temp as nvarchar(40)))
+if(@sm=@temp)
+print('Number is Armstrong')
+else
+print('Number is Not Armstrong')
+----------------------------------------------------------
+>> wap to reverse no.
+>> wap to print the table.
+---------------------------------------------------
+declare @a int,@f int,@temp int
+set @a=5
+set @temp=@a
+set @f=1
+while(@a>0)
+begin
+set @f=@f*@a
+set @a=@a-1
+end
+print('The Factorial of '+cast(@temp as nvarchar(50))+' is '+cast(@f as nvarchar(45)))
+-------------------------------------------------------------------------------------------------------------------------------------
+Pending:-
+--------------------
+1. Import Excel File in Sql server.
+2. Backup and Recovery.
+-----------------------------------------------------
+
+
+
+
+
+
