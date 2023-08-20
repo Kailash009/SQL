@@ -1,0 +1,199 @@
+SQL Operators:-
+------------------
+1. Arithmetic Operator.
++,-,*,/
+2. Relational Operator.
+3. Logical Operator.
+--------------------------
+Special Operator-
+---------------------
+1. Between.
+2. not Between.
+3. in 
+4. not in
+5. like. -> It is used for searching purpose.
+It has two symbol.
+_ -> it read one character at a time.
+% -> it read multiple character at a time.
+a) IF you know the first charater.
+b) IF you know the last character.
+c) If you don't know first and last character.
+---------------------------------------------------
+6. top.
+7. order by. -> it is used to get the record in ascending or descending order.
+asc ->(By Default) Optional
+desc -> you have to write.[Mandatory]
+--------------------------------------------
+create database BatchDivakar
+use BatchDivakar
+create table tbl_Employee
+(
+eid int primary key identity(101,2),
+ename nvarchar(50),
+eage int,
+eaddress nvarchar(100),
+epost nvarchar(50),
+esalary decimal(23,2)
+)
+select * from tbl_Employee
+-- insert into specific column
+insert into tbl_Employee(ename,eage,eaddress,epost,esalary) values('vaibhav',18,'noida sec-34','SE',34993.34)
+insert into tbl_Employee(ename,eage,eaddress,epost,esalary) values('ritesh',28,'noida sec-56','Manager',24993.34)
+insert into tbl_Employee(ename,eage,eaddress,epost,esalary) values('sunil',38,'noida sec-656','TL',14993.34)
+insert into tbl_Employee(ename,eage,eaddress,epost,esalary) values('laxmi',48,'noida sec-24','DA',44993.34)
+insert into tbl_Employee(ename,eage,eaddress,epost,esalary) values('tikam',58,'noida sec-14','DS',54993.34)
+select * from tbl_Employee
+-- arith
+select 10+3 as 'Add'
+select 10-3 as 'SUB'
+select 10*3 as 'MULT'
+select 10/3 as 'DIV'
+select 10%3 as 'REM'
+select * from tbl_Employee
+select ename+'='+epost as 'Name+POST' from tbl_Employee
+-- relational Operator
+-- > >= < <= <>
+-- waq to get all the employee whose salary is greater then 20000.
+select * from tbl_Employee where esalary>20000
+select * from tbl_Employee where esalary<20000
+--select * from tbl_Employee where esalary<>44993.34
+--Logical operator
+--and or not
+-- waq to get all the employee whose salary is greater than 10000 and less than 30000.
+select * from tbl_Employee where esalary>10000 and esalary<30000
+-- waq to get all the employee whose name is sunil and age is 28.
+select * from tbl_Employee where  ename='sunil' and eage=38
+-- waq to get all the employee whose name is sunil and age is 28.
+select * from tbl_Employee where  ename='sunil' or eage=28
+-- waq to get all the employee whose name is not sunil and age is not 28.
+select * from tbl_Employee where  not (ename='sunil' or eage=28)
+-- waq to get all employee whose salary is between 20000 and 30000.
+select * from tbl_Employee where esalary between 20000 and 30000
+-- waq to get all employee whose salary is not between 20000 and 30000.
+select * from tbl_Employee where esalary not between 20000 and 30000
+-- waq to get all the employee whose name is sunil,laxmi and tikam
+select * from tbl_Employee where ename='sunil' or ename='laxmi' or ename='tikam'
+select * from tbl_Employee where ename in('sunil','laxmi','tikam')
+select * from tbl_Employee where ename not in('sunil','laxmi','tikam')
+-- Like Operator.
+select * from tbl_Employee where ename  like 'r_t_s_'
+-- waq to get all the employee whose name start from l.
+select * from tbl_Employee where ename like 'l%'
+-- waq to get all the employee whose name end from h.
+select * from tbl_Employee where ename like '%h'
+-- waq to get all the employee whose name contains h.
+select * from tbl_Employee where ename like '%h%'
+-- TOP
+-- waq to get top 3 employee 
+select top 3 * from tbl_Employee
+-- waq to get top 3 latest employee 
+select top 3 * from tbl_Employee order by eid desc
+-- ORDER BY
+-- waq to get all the employee name in ascending order.
+select * from tbl_Employee order by ename asc
+-- waq to get all the employee name in descending order.
+select * from tbl_Employee order by ename desc
+------------------------------------------------------------------
+Clauses in SQL SERVER:-
+-----------------------------
+1. GROUP BY.
+2. HAVING.
+3. ORDER BY. - done
+4. Where. - done
+------------------------------------------
+NOTE:- Group by and having work with Aggregate Function.
+----------------------------------------------------------------
+Aggregate Function:-
+-----------------------------
+1. max()
+2. min()
+3. sum()
+4. avg()
+5. count()
+----------------------------
+-- Aggregate Functions.
+select max(esalary) as 'Max_Salary' from tbl_Employee
+select min(esalary) as 'Min_Salary' from tbl_Employee
+select sum(esalary)  as 'Total_Salary' from tbl_Employee
+select avg(esalary)  as 'Avg_Salary' from tbl_Employee
+select count(*) as 'Total Employee' from tbl_Employee
+-- Group by and Having
+select * from tbl_Employee
+-- waq to get total no. of employee in each department.
+select epost, count(eid) as 'total Employee' from tbl_Employee group by epost
+-- waq to get total salary of employee in each department.
+select epost, sum(esalary) as 'total Salary' from tbl_Employee group by epost
+-- waq to get total salary of employee in each department and total employee.
+select epost, sum(esalary) as 'total Salary',count(*) as 'total Employee' from tbl_Employee group by epost
+-- waq to get total no. of employee in each department where Employee is greater than 2.
+select epost, count(eid) as 'total Employee' from tbl_Employee group by epost having count(eid)>2 
+-----------------------------------------------------------------------
+SET OPERATOR:- PENDING.
+------------------------------
+>> it is used to combine two or more table together.
+---------------------------------------------------------
+Before going to use set operator in your query you have to follow the following conditions which is listed below:-
+a) Column name must be same of both the table.
+b) Data type must be same of both the table.
+c) Order of Column must be match of both the table.
+-----------------------------------------------------------
+1. UNION.
+2. UNION ALL.
+3. INTERSECT.
+4. EXCEPT.
+----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
