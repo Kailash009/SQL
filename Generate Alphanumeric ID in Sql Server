@@ -1,0 +1,41 @@
+drop table tbl_demo
+
+create table tbl_demo
+(
+Empid NVARCHAR(100),
+Empname nvarchar(80),
+empage int,
+empmobile nvarchar(20),
+email nvarchar(50),
+epassword nvarchar(50),
+empaddress nvarchar(100)
+)
+alter proc Sp_Demo 
+     @EmployeeName nVARCHAR(50),
+	 @age int,
+	 @mobile nvarchar(50),
+	 @email nvarchar(50),
+	 @pasword nvarchar(50),
+	 @address nvarchar(80)
+AS BEGIN
+SET NOCOUNT ON;
+declare @alphanumericID nvarchar(80)
+set @alphanumericID=Left(Upper(@EmployeeName),3)+'000000'+left(@age,2)+left(NEWID(),8)
+insert into tbl_demo(Empid,Empname,empage,empmobile,email,epassword,empaddress) values(@alphanumericID,@EmployeeName,@age,@mobile,@email,@pasword,@address)
+set NOCOUNT OFF;
+END 
+
+truncate table tbl_demo
+select * from tbl_demo
+exec sp_Demo 'kailash',25,'98979701','abc@gmail.com,','joshi@123','mayur vihar'
+
+
+
+
+
+
+
+
+
+
+
