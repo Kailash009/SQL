@@ -1,0 +1,376 @@
+System Functions:-
+---------------------
+a. Aggregate Functions.
+AVG: Returns the average value of a numeric column.
+COUNT: Returns the number of rows that match a specified condition.
+MAX: Returns the maximum value in a set of values.
+MIN: Returns the minimum value in a set of values.
+SUM: Returns the sum of all or distinct values in a set.
+STDEV: Returns the statistical standard deviation of all values in the specified expression.
+Calculates the standard deviation of salaries in the employees table.
+SELECT STDEV(Salary) AS SalaryStandardDeviation
+FROM Employees;
+VAR: Returns the statistical variance of all values in the specified expression.
+Calculates the variance of salaries in the employees table.
+SELECT VAR(Salary) AS SalaryVariance
+FROM Employees;
+--------------------------------------------------------------------------------------------------
+b. Configuration Functions.
+Configuration functions in SQL Server provide essential information about the server's settings, helping database administrators and developers understand the current environment and make informed decisions. 
+These functions are especially useful for monitoring, debugging, and configuring SQL Server instances.
+@@OPTIONS: Returns the current SET options for the session.
+@@LANGUAGE: Returns the name of the language currently in use.
+@@SERVICENAME: Returns the name of the SQL Server service.
+@@VERSION: Returns the SQL Server version, including the operating system.
+SERVERPROPERTY: Returns property information about the server.
+DBCC USEROPTIONS: Returns the SET options active for the current connection.
+SELECT @@OPTIONS AS CurrentSetOptions; --5496
+SELECT @@LANGUAGE AS CurrentLanguage;
+SELECT @@SERVICENAME AS ServiceName;
+SELECT @@VERSION AS SQLServerVersion;
+SELECT 
+    SERVERPROPERTY('ProductVersion') AS ProductVersion, 
+    SERVERPROPERTY('ProductLevel') AS ProductLevel,
+    SERVERPROPERTY('Edition') AS Edition,
+    SERVERPROPERTY('EngineEdition') AS EngineEdition,
+    SERVERPROPERTY('MachineName') AS MachineName,
+    SERVERPROPERTY('IsClustered') AS IsClustered;
+-------------------------------------------------------------------------------------------------------------------------
+c. Cursor Functions.
+Cursors in SQL Server allow you to fetch and process individual rows of a result set, providing a way to handle row-by-row operations. 
+SQL Server provides several cursor functions that allow you to work with cursors effectively. 
+Cursors are useful when you need to perform row-by-row processing in SQL Server, although they should be used sparingly as they can be less efficient than set-based operations.
+The cursor functions (@@CURSOR_ROWS, @@FETCH_STATUS, CURSOR_STATUS, and DEALLOCATE) provide control and information about the state and operation of cursors. 
+Proper handling of cursors involves declaring, opening, fetching, closing, and deallocating them to manage resources effectively.
+Cursors are powerful tools in SQL Server for row-by-row processing, but they should be used judiciously due to potential performance impacts. 
+Understanding the different types of cursors and how to properly manage them can help you make the most of this feature when necessary.
+Common Cursor Functions:-
+@@CURSOR_ROWS: Returns the number of qualifying rows currently in the last opened cursor.
+@@FETCH_STATUS: Returns the status of the last cursor FETCH statement issued against any cursor currently opened by the connection.
+CURSOR_STATUS: Returns the status information about a cursor.
+DEALLOCATE: Releases a cursor's resources.
+---------------------------------------------------------------------------------------------------------------------------
+d. Date and Time Functions.
+SQL Server provides a comprehensive set of date and time functions to handle various date and time operations. These functions help you to 
+manipulate, format, and calculate dates and times in your SQL queries.
+GETDATE: Returns the current date and time.
+SELECT GETDATE() AS CurrentDateTime;
+SYSDATETIME: Returns the current date and time with more precision than GETDATE.
+Returns the current date and time with higher precision.
+SELECT SYSDATETIME() AS CurrentDateTimeHighPrecision;
+CURRENT_TIMESTAMP: Equivalent to GETDATE.
+DATEADD: Adds a specified number of units to a date.
+Adds a specified number of days to a date.
+SELECT DATEADD(DAY, 10, '2023-06-18') AS NewDate; =>> 2023-06-28 00:00:00.000
+DATEDIFF: Calculates the difference between two dates.
+SELECT DATEDIFF(DAY, '2023-01-01', '2023-06-18') AS DayDifference; =>> 168
+DATEPART: Returns a specified part of a date (year, month, day, etc.).
+SELECT DATEPART(YEAR, '2023-06-18') AS YearPart; => 2023
+DATENAME: Returns a specified part of a date as a string.
+SELECT DATENAME(MONTH, '2023-06-18') AS MonthName; =>> June
+CONVERT: Converts a date to a different format.
+SELECT CONVERT(VARCHAR, GETDATE(), 101) AS FormattedDate;  -- MM/DD/YYYY format => 06/24/2024
+FORMAT: Formats a date/time value based on a format string.
+SELECT FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss') AS FormattedDateTime; =>> 2024-06-24 15:11:17
+EOMONTH: Returns the last day of the month for the specified date.
+SELECT EOMONTH('2023-06-18') AS EndOfMonth; =>> 2023-06-30
+DATEFROMPARTS: Returns a date from the specified year, month, and day.
+SELECT DATEFROMPARTS(2023, 6, 18) AS ConstructedDate; =>> 2023-06-18
+YEAR():- select YEAR(GETDATE())
+---------------------------------------------------------------------------------
+e. Mathematical Functions.
+	Basic Arithmetic Functions:-
+ABS: Returns the absolute value of a number.
+SELECT ABS(-123) AS AbsoluteValue; => 123
+CEILING: Returns the smallest integer greater than or equal to the specified numeric.
+SELECT CEILING(123.45) AS CeilingValue; => 124
+FLOOR: Returns the largest integer less than or equal to the specified numeric expression.
+SELECT FLOOR(123.45) AS FloorValue; =>> 123
+POWER: Returns the value of a specified expression raised to the specified power.
+SELECT POWER(2, 3) AS PowerValue;  -- 2 raised to the power of 3 => 8
+ROUND: Rounds a numeric field to the nearest value, optionally specifying the number of decimal places.
+SELECT ROUND(123.456, 2) AS RoundedValue;  -- Rounds to 2 decimal places => 123.460
+SIGN: Returns the sign of a number. Returns -1 for negative numbers, 0 for zero, and 1 for positive numbers.
+SELECT SIGN(-123) AS SignValue;  ==>> -1
+SQRT: Returns the square root of a number.
+SELECT SQRT(16) AS SquareRoot;  -- 4
+Trigonometric Functions
+SIN: Returns the sine of the specified angle, in radians.
+SELECT SIN(PI() / 2) AS SineValue;  -- PI()/2 radians is 90 degrees =>> 1
+COS: Returns the cosine of the specified angle, in radians.
+SELECT COS(PI() / 2) AS CosineValue;  -- PI()/2 radians is 90 degrees =>> 6.12323399573677E-17
+TAN: Returns the tangent of the specified angle, in radians.
+SELECT TAN(PI() / 4) AS TangentValue;  -- PI()/4 radians is 45 degrees =>> 1
+ASIN: Returns the arcsine (inverse sine) of a number.
+SELECT ASIN(1) AS ArcSineValue;  -- Result in radians => 1.5707963267949
+ACOS: Returns the arccosine (inverse cosine) of a number.
+SELECT ACOS(1) AS ArcCosineValue;  -- Result in radians => 0
+ATAN: Returns the arctangent (inverse tangent) of a number.
+SELECT ATAN(1) AS ArcTangentValue;  -- Result in radians => 0.785398163397448
+Logarithmic Functions
+LOG: Returns the natural logarithm (base e) of a number.
+SELECT LOG(10) AS NaturalLog;  -- Natural logarithm of 10 => 2.30258509299405
+LOG10: Returns the base-10 logarithm of a number.
+SELECT LOG10(100) AS LogBase10;  -- Base-10 logarithm of 100 =>> 2
+EXP: Returns the exponential value of a number.
+SELECT EXP(1) AS ExponentialValue;  -- e raised to the power of 1 =>2.71828182845905
+Other Mathematical Functions
+PI: Returns the constant value of PI.
+SELECT PI() AS PiValue;  -- 3.141592653589793
+RADIANS: Converts degrees to radians.
+SELECT RADIANS(180) AS RadianValue;  -- Converts 180 degrees to radians =>> 3
+DEGREES: Converts radians to degrees.
+SELECT DEGREES(PI()) AS DegreeValue;  -- Converts PI radians to degrees =>> 180
+RAND: Returns a random float value between 0 and 1.
+SELECT RAND() AS RandomValue;  -- Random number between 0 and 1
+TRUNCATE: Truncates a number to the specified number of decimal places (not directly available in SQL Server, but can be achieved using ROUND).
+SELECT ROUND(123.4567, 2, 1) AS TruncatedValue;  -- Truncates to 2 decimal places =>> 123.4500
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+f. MetaData Functions.
+In SQL Server, metadata functions provide information about the database schema, objects, and their properties. 
+They are useful for querying details about tables, columns, indexes, constraints, and other database objects without needing to manually inspect system tables. 
+These functions simplify tasks such as generating reports, understanding database structure, and dynamically constructing SQL queries based on database schema.
+Common Metadata Functions
+Here are some of the commonly used metadata functions in SQL Server:
+OBJECT_ID: Returns the object identifier (ID) of a database object (e.g., table, view, stored procedure).
+SELECT OBJECT_ID('dbo.tbl_test') AS TableID; -- 1205579333
+OBJECT_NAME: Returns the name of an object given its object ID.
+SELECT OBJECT_NAME(1205579333) AS ObjectName; -- tbl_test
+OBJECT_SCHEMA_NAME: Returns the schema name of an object given its object ID.
+SELECT OBJECT_SCHEMA_NAME(1205579333) AS SchemaName; -- dbo
+OBJECTPROPERTY: Returns properties of a database object (e.g., IsIndexed, IsPrimaryKey).
+SELECT OBJECTPROPERTY(OBJECT_ID('dbo.tbl_test'), 'TableHasPrimaryKey') AS HasPrimaryKey;--1
+COLUMNPROPERTY: Returns properties of a column (e.g., IsIdentity, DataType).
+SELECT COLUMNPROPERTY(OBJECT_ID('dbo.tbl_test'), 'eid', 'IsIdentity') AS IsIdentityColumn; --1
+INDEXPROPERTY: Returns properties of an index (e.g., IsUnique, IndexDepth).
+SELECT INDEXPROPERTY(OBJECT_ID('dbo.tbl_test'), 'IndexName', 'IsUnique') AS IsUniqueIndex;-- NULL
+TYPEPROPERTY: Returns properties of a user-defined type (e.g., MaxLength, Precision).
+SELECT TYPEPROPERTY('TypeName', 'MaxLength') AS MaxLength; -- NULL
+SCHEMA_ID: Returns the ID of a schema given its name.
+SELECT SCHEMA_ID('dbo') AS SchemaID; --1
+SCHEMA_NAME: Returns the name of a schema given its ID.
+SELECT SCHEMA_NAME(1) AS SchemaName;  -- dbo
+Retrieving Table Columns and Properties:-
+SELECT 
+    c.name AS ColumnName,
+    t.name AS DataType,
+    COLUMNPROPERTY(c.object_id, c.name, 'IsIdentity') AS IsIdentity,
+    COLUMNPROPERTY(c.object_id, c.name, 'IsComputed') AS IsComputed,
+    COLUMNPROPERTY(c.object_id, c.name, 'MaxLength') AS MaxLength
+FROM 
+    sys.columns c
+JOIN 
+    sys.types t ON c.user_type_id = t.user_type_id
+WHERE 
+    c.object_id = OBJECT_ID('dbo.tbl_test');
+----------------------------------------------------------------------------
+-- Check if an index is unique
+SELECT 
+    i.name AS IndexName,
+    INDEXPROPERTY(i.object_id, i.name, 'IsUnique') AS IsUnique
+FROM 
+    sys.indexes i
+WHERE 
+    i.object_id = OBJECT_ID('dbo.tbl_test');
+Metadata functions in SQL Server provide a way to query and retrieve information about database objects, schemas, columns, indexes, and more. 
+They are essential for tasks such as database administration, schema exploration, 
+and dynamic SQL generation based on database structure. By leveraging metadata functions, developers and administrators can automate tasks that require understanding and querying 
+the database schema without relying on direct access to system tables.
+--------------------------------------------------------------------------------------------------------
+g. Other Functions.
+App_Name(),Cast(),Convert(),@@Error,@@identity,Isnull(),Host_id(),Host_Name(),Ident_Current(),Ident_Seed(),
+Isnull(),Isnumeric(),Newid(),Nullif(),Parsename(),Permission(),Scope_identity(),serverproperty(),Session_user(),Update(),User_Name(),
+Datalength(),Coalesce(),Formatmessage(),Stats_Date(),@@Trancount,sessionproperty() etc..
+-------------------------------------------------------------------------------------------------------------------------------------------------
+h. Hierarchy Id Functions.
+The HierarchyID data type in SQL Server represents a position in a hierarchy. It stores a variable-length, system-defined binary string that reflects the position of each node in a tree. 
+The hierarchy is represented by paths, where each level in the hierarchy is separated by a backslash (\).
+Parse(): Converts a string representation of a hierarchy ID into a HierarchyID value.
+DECLARE @hid HierarchyID;
+SET @hid = HierarchyID::Parse('/1/1/');
+SELECT @hid AS HierarchyIDValue; --0x5AC0
+GetRoot(): Returns the root node of a hierarchy.
+DECLARE @hid HierarchyID;
+SET @hid = HierarchyID::Parse('/1/1/');
+SELECT @hid.GetRoot() AS RootNode;
+GetAncestor(): Returns the ancestor of a node at a specified level.
+DECLARE @hid HierarchyID;
+SET @hid = HierarchyID::Parse('/1/3/1/');
+SELECT @hid.GetAncestor(1) AS AncestorLevel1; --0x5BC0
+GetDescendant(): Returns a descendant of a node at a specified position.
+DECLARE @hid HierarchyID;
+SET @hid = HierarchyID::Parse('/1/3/');
+SELECT @hid.GetDescendant(NULL, NULL) AS Descendant;--0x5BD6
+IsDescendantOf(): Checks if one hierarchy ID is a descendant of another.
+DECLARE @hid1 HierarchyID, @hid2 HierarchyID;
+SET @hid1 = HierarchyID::Parse('/1/1/');
+SET @hid2 = HierarchyID::Parse('/1/');
+SELECT @hid1.IsDescendantOf(@hid2) AS IsDescendant; --1
+ToString(): Converts a HierarchyID value to its string representation.
+DECLARE @hid HierarchyID;
+SET @hid = HierarchyID::Parse('/1/1/');
+SELECT @hid.ToString() AS HierarchyString; --/1/1/
+HierarchyID functions in SQL Server provide robust support for managing hierarchical data structures directly within the database. 
+They allow you to efficiently work with parent-child relationships and navigate through hierarchical data using methods like Parse(), 
+GetRoot(), GetAncestor(), GetDescendant(), IsDescendantOf(), and ToString(). 
+Using HierarchyID can simplify the storage and querying of hierarchical data, making it easier to manage tree-like structures in relational databases.
+--------------------------------------------------------------
+i. Rowset Functions.
+In SQL Server, rowset functions are used to return a result set as a rowset data type. 
+These functions can be especially useful when you need to work with the results of a query as if it were a table or a view. 
+They provide flexibility in querying and manipulating data in various scenarios. Here are some common rowset functions in SQL Server:
+OPENQUERY: Executes the specified pass-through query on the specified linked server and returns the results as a rowset.
+SELECT *
+FROM OPENQUERY(MyLinkedServer, 'SELECT * FROM MyRemoteTable');
+OPENROWSET: Provides ad-hoc access to remote data sources using OLE DB. It can be used to execute a query against a remote data source or to directly access remote tables.
+SELECT *
+FROM OPENROWSET('SQLNCLI', 'Server=RemoteServer;Trusted_Connection=yes;', 'SELECT * FROM RemoteDatabase.dbo.RemoteTable');
+OPENXML: Provides a rowset view over an XML document. It parses an XML document, retrieves values from it, and stores the result in a rowset format.
+DECLARE @xml XML = '<root><person><name>John</name><age>30</age></person></root>';
+SELECT *
+FROM OPENXML(@xml, '/root/person', 2)
+WITH (
+    Name VARCHAR(50) 'name',
+    Age INT 'age'
+);
+OPENDATASOURCE: Provides access to remote data sources by specifying the data source as a provider string and a fully qualified table name.
+SELECT *
+FROM OPENDATASOURCE('SQLNCLI', 'Data Source=RemoteServer;Integrated Security=SSPI')
+.RemoteDatabase.dbo.RemoteTable;
+OPENQUERY with Linked Servers: Executes the specified pass-through query on the specified linked server and returns the results as a rowset.
+SELECT *
+FROM OPENQUERY(MyLinkedServer, 'SELECT * FROM RemoteDatabase.dbo.RemoteTable');
+Rowset functions in SQL Server provide a flexible way to work with data from various sources, including remote databases and XML documents. 
+They allow you to treat query results as if they were tables or views, enabling dynamic and ad-hoc access to data stored in different formats or locations. 
+Understanding and using these functions effectively can enhance your ability to integrate and manipulate data within SQL Server environments.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+j. Security Functions.
+In SQL Server, security functions are used to manage and enforce security measures within the database environment. 
+These functions help in controlling access, auditing activities, and ensuring data integrity. Here are some important security-related functions in SQL Server:
+Common Security Functions
+HAS_DBACCESS(): Checks whether the current user has access to a specified database.
+SELECT HAS_DBACCESS('dbDemo') AS HasAccess; --1
+IS_MEMBER(): Checks if the current user is a member of a specified database role or Windows group.
+SELECT IS_MEMBER('db_datareader') AS IsDataReaderMember; --1
+SESSION_USER: Returns the name of the current user.
+SELECT SESSION_USER AS CurrentUser; --dbo
+SYSTEM_USER: Returns the login name of the current user.
+SELECT SYSTEM_USER AS CurrentLogin; --DESKTOP-0VCBJTA\admin
+USER_NAME(): Returns the database user name for a specified user ID.
+SELECT USER_NAME() AS CurrentUserName; --dbo
+CURRENT_USER: Returns the name of the current user and the name of the login that the user used to connect to SQL Server.
+SELECT CURRENT_USER AS CurrentUser; -- dbo
+SUSER_SNAME(): Returns the login name associated with a specified security identification number (SID).
+SELECT SUSER_SNAME(0x01) AS LoginName;--sa
+Security functions in SQL Server provide essential tools for managing access control, user authentication, and auditing within the database environment. 
+They allow administrators and developers to enforce security policies, verify user permissions, and monitor user activities effectively. 
+By leveraging these functions, SQL Server environments can maintain data integrity and protect against unauthorized access or malicious activities.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+k. String Functions.
+LEN: Returns the length of a string.
+SELECT LEN('Hello, World!') AS StringLength;
+LEFT: Returns the left part of a string with the specified number of characters.
+SELECT LEFT('Hello, World!', 5) AS LeftString;  -- 'Hello'
+RIGHT: Returns the right part of a string with the specified number of characters.
+SELECT RIGHT('Hello, World!', 6) AS RightString;  -- 'World!'
+SUBSTRING: Returns a part of a string starting at a specified position.
+SELECT SUBSTRING('Hello, World!', 8, 5) AS SubString;  -- 'World'
+CHARINDEX: Returns the position of a substring in a string.
+SELECT CHARINDEX('World','Hello,World!') AS SubStringPosition;  -- 7
+select CHARINDEX('c','abc') --3
+SELECT CHARINDEX('mer', 'Customer', 3) AS MatchPosition; --6
+PATINDEX: Returns the starting position of a pattern in a string.
+SELECT PATINDEX('%World%', 'Hello,World!') AS PatternPosition;  -- 8
+SELECT PATINDEX('%schools%', 'W3Schools.com'); --3
+SELECT PATINDEX('%[z]%', 'W3Schools.com'); --0
+REPLACE: Replaces occurrences of a specified substring with another substring.
+SELECT REPLACE('Hello, World!', 'World', 'SQL') AS ReplacedString;  -- 'Hello, SQL!'
+REPLICATE: Repeats a string a specified number of times.
+SELECT REPLICATE('Hello', 3) AS ReplicatedString; 
+LTRIM: Removes leading spaces from a string.
+SELECT LTRIM('   Hello, World!') AS TrimmedString;  -- 'Hello, World!'
+RTRIM: Removes trailing spaces from a string.
+SELECT RTRIM('Hello, World!   ') AS TrimmedString;  -- 'Hello, World!'
+UPPER: Converts a string to uppercase.
+SELECT UPPER('Hello, World!') AS UpperString;  -- 'HELLO, WORLD!'
+LOWER: Converts a string to lowercase.
+SELECT LOWER('Hello, World!') AS LowerString;  -- 'hello, world!'
+CONCAT: Concatenates two or more strings.
+SELECT CONCAT('Hello', ', ', 'World', '!') AS ConcatenatedString;  -- 'Hello, World!'
+FORMAT: Formats a string based on a specified format.
+SELECT FORMAT(123456789, '###-###-####') AS FormattedString;  -- '12-345-6789'
+STUFF: Deletes a part of a string and then inserts another part into the string at a specified starting position.
+SELECT STUFF('Hello,World!', 7, 5, 'SQL') AS StuffedString;  -- 'Hello, SQL!'
+STRING_AGG: Concatenates values from multiple rows into a single string with a specified separator.
+The STRING_AGG() is an aggregate function that concatenates rows of strings into a single string, separated by a specified separator. It does not add the separator at the end of the result string.
+Use the STRING_AGG() function to concatenate rows of strings into one string with a specified separator.
+l. System Statistical Functions.
+In SQL Server, system statistical functions provide information and statistical summaries about the database, server, and query performance. 
+These functions are useful for monitoring and optimizing database performance, analyzing query execution plans, and troubleshooting performance issues. 
+Here are some commonly used system statistical functions in SQL Server:
+@@ROWCOUNT: Returns the number of rows affected by the last executed statement.
+SELECT @@ROWCOUNT AS NumberOfRowsAffected; --1
+@@IDENTITY: Returns the last identity value generated for any table in the current session.
+SELECT @@IDENTITY AS LastIdentityValue; -- NULL
+SCOPE_IDENTITY(): Returns the last identity value generated for any table in the current scope (current session and current scope of statement).
+SELECT SCOPE_IDENTITY() AS LastIdentityValue; -- NULL
+@@ERROR: Returns the error number of the last Transact-SQL statement executed.
+SELECT @@ERROR AS LastErrorNumber; --0
+@@CPU_BUSY: Returns the amount of CPU time (in milliseconds) that SQL Server has used since it was started.
+SELECT @@CPU_BUSY AS CPUUsageInMilliseconds; --23507
+@@TOTAL_READ, @@TOTAL_WRITE: Returns the total number of disk reads or writes performed by SQL Server since it was started.
+SELECT @@TOTAL_READ AS TotalDiskReads,@@TOTAL_WRITE AS TotalDiskWrites;
+@@PACK_RECEIVED, @@PACK_SENT: Returns the total number of network packets received or sent by SQL Server since it was started.
+SELECT @@PACK_RECEIVED AS TotalPacketsReceived,@@PACK_SENT AS TotalPacketsSent;
+-- Retrieve CPU usage and disk I/O statistics
+SELECT 
+    @@CPU_BUSY AS CPUUsageInMilliseconds,
+    @@TOTAL_READ AS TotalDiskReads,
+    @@TOTAL_WRITE AS TotalDiskWrites;
+System statistical functions in SQL Server offer valuable insights into server-level and session-level statistics, such as CPU usage, disk I/O, query execution results, and error handling. 
+By leveraging these functions, administrators and developers can monitor performance, diagnose issues, and optimize SQL Server databases effectively. 
+Understanding their usage and implications is crucial for maintaining efficient and reliable database operations.
+-------------------------------------------------------------------------------------
+m. Text and Image Functions.
+In SQL Server, text and image functions are used to manipulate and work with large objects (LOBs) such as text and binary data stored in text, ntext, and image data types 
+(deprecated in favor of varchar(max), nvarchar(max), and varbinary(max) since SQL Server 2005). 
+These functions allow for operations such as extracting portions of text or binary data, searching within them, 
+and converting between different data types. Here are some commonly image functions in SQL Server:
+TEXTPTR(): Returns a text pointer to the text, ntext, or image value in the specified column of a table.
+SELECT TEXTPTR(TextColumn) AS TextPointer
+FROM MyTable
+WHERE ID = 1;
+UPDATETEXT(): Updates a text, ntext, or image column in place without reading the existing data into memory.
+DECLARE @ptrval VARBINARY(16);
+SELECT @ptrval = TEXTPTR(TextColumn)
+FROM MyTable
+WHERE ID = 1;
+UPDATETEXT MyTable.TextColumn @ptrval NULL 0 'UpdatedText';
+WRITETEXT(): Writes text or image data to a text, ntext, or image column.
+DECLARE @ptrval VARBINARY(16);
+SELECT @ptrval = TEXTPTR(TextColumn)
+FROM MyTable
+WHERE ID = 1;
+WRITETEXT MyTable.TextColumn @ptrval 'NewText';
+READTEXT(): Retrieves text, ntext, or image data from a text, ntext, or image column.
+DECLARE @ptrval VARBINARY(16);
+SELECT @ptrval = TEXTPTR(TextColumn)
+FROM MyTable
+WHERE ID = 1;
+DECLARE @textData VARCHAR(MAX);
+READTEXT MyTable.TextColumn @ptrval 0 NULL @textData;
+Text and image functions in SQL Server provide essential tools for manipulating and working with character and binary large objects (LOBs). 
+These functions allow for substring extraction, searching, case conversion, and updating large object data efficiently. 
+Understanding and utilizing these functions effectively can enhance your ability to manage and manipulate text and image data within SQL Server databases.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
